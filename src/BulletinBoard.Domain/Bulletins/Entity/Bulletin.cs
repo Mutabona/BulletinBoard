@@ -1,4 +1,5 @@
 ﻿using BulletinBoard.Domain.Base;
+using BulletinBoard.Domain.Categories.Entity;
 using BulletinBoard.Domain.Files.Images.Entity;
 using BulletinBoard.Domain.Users.Entity;
 
@@ -17,20 +18,32 @@ public class Bulletin : BaseEntity
     /// <summary>
     /// Сущность владельца.
     /// </summary>
-    public User Owner { get; set; }
+    public virtual User Owner { get; set; }
     
     /// <summary>
     /// Название объявления.
     /// </summary>
     public string Title { get; set; }
-    
+
     /// <summary>
     /// Описание объявления.
     /// </summary>
     public string Description { get; set; }
-    
+
     /// <summary>
     /// Фото из объявления.
     /// </summary>
-    public ICollection<Image> Images { get; set; }
+    public virtual ICollection<Image> Images { get; set; }
+
+    /// <summary>
+    /// Идентификатор категории товара.
+    /// </summary>
+    public Guid CategoryId { get; set; }
+    
+    /// <summary>
+    /// Категория товара.
+    /// </summary>
+    public virtual Category Category { get; set; }
+    
+    
 }

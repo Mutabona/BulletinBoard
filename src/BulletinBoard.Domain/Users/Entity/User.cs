@@ -1,4 +1,5 @@
 ﻿using BulletinBoard.Domain.Base;
+using BulletinBoard.Domain.Bulletins.Entity;
 
 namespace BulletinBoard.Domain.Users.Entity;
 
@@ -47,4 +48,9 @@ public class User : BaseEntity
     /// Роль в системе.
     /// </summary>
     public string Role { get; set; }
+    
+    /// <summary>
+    /// Объявления пользователя.
+    /// </summary>
+    public virtual ICollection<Bulletin> Bulletins { get; set; }
 }
