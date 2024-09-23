@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulletinBoard.API.Controllers;
 
+/// <summary>
+/// Учетные записи.
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
@@ -23,7 +26,7 @@ public class AccountsController : ControllerBase
     /// <param name="model">Модель регистрации пользователя.</param>
     /// <param name="cancellationToken">Токен отмены операции.</param>
     /// <returns>Идентификатор нового пользователя.</returns>
-    [HttpPost]
+    [HttpPost("register")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterUserRequest model, CancellationToken cancellationToken)
@@ -44,7 +47,7 @@ public class AccountsController : ControllerBase
     /// <param name="model">Запрос на аутентификацию.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>JWT</returns>
-    [HttpPost]
+    [HttpPost("login")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> LoginAsync([FromBody] LoginUserRequest model, CancellationToken cancellationToken)
