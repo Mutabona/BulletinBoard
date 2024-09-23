@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using BulletinBoard.Domain.Base;
 
 namespace BulletinBoard.Infrastructure.Repository;
 
@@ -6,7 +7,7 @@ namespace BulletinBoard.Infrastructure.Repository;
     /// Репозиторий.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         /// <summary>
         /// Возвращает все элементы сущности <see cref="TEntity"/>
@@ -19,14 +20,14 @@ namespace BulletinBoard.Infrastructure.Repository;
         /// </summary>
         /// <param name="predicate">Предикат</param>
         /// <returns>Все элементы сущности <see cref="TEntity"/> по предикату</returns>
-        IQueryable<TEntity> GetFiltered(Expression<Func<TEntity, bool>> predicate);
+        IQueryable<TEntity> GetByPredicate(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Возвращает элемент сущности <see cref="TEntity"/> по идентификатору
         /// </summary>
         /// <param name="id">Идентификатор сущности</param>
         /// <returns>Элемент сущности <see cref="TEntity"/> по идентификатору</returns>
-        ValueTask<TEntity> GetByIdAsync(Guid id);
+        Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Добавление элемента в репозиторий.
@@ -34,7 +35,7 @@ namespace BulletinBoard.Infrastructure.Repository;
         /// <param name="entity">Сущность <see cref="TEntity"/></param>
         /// <param name="cancellationToken">Токен отмены.</param>
         /// <returns></returns>
-        Task AddAsync(TEntity entity, CancellationToken cancellationToken);
+        Task<Guid> AddAsync(TEntity entity, CancellationToken cancellationToken);
 
         /// <summary>
         /// Обновление сущности в репозитории.

@@ -1,10 +1,11 @@
 ﻿using System.Linq.Expressions;
+using BulletinBoard.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace BulletinBoard.Infrastructure.Repository;
 
 ///<inheritdoc cref="IRepository{TEntity}"/>
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
 {
     protected DbContext DbContext { get; }
 
@@ -21,7 +22,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     }
 
     ///<inheritdoc/>
-    public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
+    public async Task<Guid> AddAsync(TEntity entity, CancellationToken cancellationToken)
     {
         if (entity == null)
         {
@@ -30,20 +31,20 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
         await DbSet.AddAsync(entity, cancellationToken);
         await DbContext.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
     }
 
     ///<inheritdoc/>
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var entity = await GetByIdAsync(id);
-        if (entity == null)
+        var entity = await GetByIdAsync(id, cancellationToken);
+        if (entity != null)
         {
-            throw new ArgumentNullException(nameof(entity));
+            DbSet.Remove(entity);
+
+            await DbContext.SaveChangesAsync(cancellationToken);
         }
-
-        DbSet.Remove(entity);
-
-        await DbContext.SaveChangesAsync(cancellationToken);
     }
 
     ///<inheritdoc/>
@@ -53,13 +54,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     }
 
     ///<inheritdoc/>
-    public ValueTask<TEntity?> GetByIdAsync(Guid id)
+    public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return DbSet.FindAsync(id);
+        return await DbSet.FindAsync(id, cancellationToken);
     }
 
     ///<inheritdoc/>
-    public IQueryable<TEntity> GetFiltered(Expression<Func<TEntity, bool>> predicate)
+    public IQueryable<TEntity> GetByPredicate(Expression<Func<TEntity, bool>> predicate)
     {
         if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
