@@ -26,7 +26,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .IsRequired();
 
         builder
-            .HasMany(c => c.SubCategories)
+            .HasMany(c => c.Subcategories)
             .WithOne(c => c.ParentCategory)
             .HasForeignKey(c => c.ParentCategoryId);
     }

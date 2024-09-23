@@ -7,18 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BulletinBoard.AppServices\BulletinBoard.AppServices.csproj" />
     <ProjectReference Include="..\BulletinBoard.Domain\BulletinBoard.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Bulletins\Repository\" />
-    <Folder Include="Categories\Repository\" />
-    <Folder Include="Users\Repository\" />
+    <ProjectReference Include="..\BulletinBoard.Infrastructure\BulletinBoard.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
