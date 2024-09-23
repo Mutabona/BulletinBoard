@@ -26,7 +26,7 @@ public class Category : BaseEntity
     /// <summary>
     /// Дочерние категории.
     /// </summary>
-    public virtual ICollection<Category> SubCategories { get; set; }
+    public virtual ICollection<Category> Subcategories { get; set; }
     
     /// <summary>
     /// Объявления в категории.

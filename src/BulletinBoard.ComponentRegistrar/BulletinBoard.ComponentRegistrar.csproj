@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BulletinBoard.AppServices\BulletinBoard.AppServices.csproj" />
+    <ProjectReference Include="..\BulletinBoard.Contracts\BulletinBoard.Contracts.csproj" />
+    <ProjectReference Include="..\BulletinBoard.DataAccess\BulletinBoard.DataAccess.csproj" />
+    <ProjectReference Include="..\BulletinBoard.Domain\BulletinBoard.Domain.csproj" />
+    <ProjectReference Include="..\BulletinBoard.Infrastructure\BulletinBoard.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
