@@ -56,4 +56,12 @@ public interface IBulletinRepository
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
     Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Удаляет объявление по идентификатору..
+    /// </summary>
+    /// <param name="id">Идентификатор.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns></returns>
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

@@ -5,18 +5,27 @@ using BulletinBoard.Contracts.Users;
 namespace BulletinBoard.AppServices.Contexts.Users.Services;
 
 ///<inheritdoc cref="IUserService"/>
-public class UserService(IUserRepository repository, IJwtService jwtService) : IUserService
+public class UserService : IUserService
 {
+    private readonly IUserRepository _repository;
+    private readonly IJwtService _jwtService;
+
+    public UserService(IUserRepository repository, IJwtService jwtService)
+    {
+        _repository = repository;
+        _jwtService = jwtService;
+    }
+    
     ///<inheritdoc/>
     public async Task<ICollection<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
     {
-        return await repository.GetAllAsync(cancellationToken);
+        return await _repository.GetAllAsync(cancellationToken);
     }
 
     ///<inheritdoc/>
     public async Task<UserDto> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)
     {
-        return await repository.GetByIdAsync(userId, cancellationToken);
+        return await _repository.GetByIdAsync(userId, cancellationToken);
     }
 
     ///<inheritdoc/>
@@ -25,7 +34,7 @@ public class UserService(IUserRepository repository, IJwtService jwtService) : I
         if (await IsUniqueLoginAsync(request.Login, cancellationToken))
         {
             request.Password = CryptoHelper.GetBase64Hash(request.Password);
-            return await repository.AddAsync(request, cancellationToken);
+            return await _repository.AddAsync(request, cancellationToken);
         }
 
         return Guid.Empty;
@@ -35,11 +44,11 @@ public class UserService(IUserRepository repository, IJwtService jwtService) : I
     public async Task<string> LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)
     {
         request.Password = CryptoHelper.GetBase64Hash(request.Password);
-        var user = await repository.LoginAsync(request, cancellationToken);
+        var user = await _repository.LoginAsync(request, cancellationToken);
 
         if (user != null)
         {
-            return await jwtService.GetToken(request, user.Id, user.Role);
+            return await _jwtService.GetToken(request, user.Id, user.Role);
         }
         
         return null;
@@ -48,19 +57,19 @@ public class UserService(IUserRepository repository, IJwtService jwtService) : I
     ///<inheritdoc/>
     public async Task UpdateUserAsync(UserDto user, CancellationToken cancellationToken)
     {
-        await repository.UpdateAsync(user, cancellationToken);
+        await _repository.UpdateAsync(user, cancellationToken);
     }
 
     ///<inheritdoc/>
     public async Task DeleteUserAsync(Guid userId, CancellationToken cancellationToken)
     {
-        await repository.DeleteAsync(userId, cancellationToken);
+        await _repository.DeleteAsync(userId, cancellationToken);
     }
 
     ///<inheritdoc/>
     public async Task<bool> IsUniqueLoginAsync(string login, CancellationToken cancellationToken)
     {
-        var user = await repository.GetByLoginAsync(login, cancellationToken);
+        var user = await _repository.GetByLoginAsync(login, cancellationToken);
         if (user == null) return true;
         return false;
     }

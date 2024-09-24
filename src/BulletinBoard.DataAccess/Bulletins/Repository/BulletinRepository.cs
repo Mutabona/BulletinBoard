@@ -24,6 +24,7 @@ public class BulletinRepository : IBulletinRepository
         _mapper = mapper;
     }
 
+    ///<inheritdoc/>
     public async Task<ICollection<BulletinDto>> GetBySpecificationWithPaginationAsync(ISpecification<Bulletin> specification, int take, int? skip, CancellationToken cancellationToken)
     {
         var query = _repository
@@ -42,6 +43,7 @@ public class BulletinRepository : IBulletinRepository
             .ToArrayAsync(cancellationToken);
     }
 
+    ///<inheritdoc/>
     public async Task<ICollection<BulletinDto>> GetBySpecificationAsync(ISpecification<Bulletin> specification, CancellationToken cancellationToken)
     {
         return await _repository
@@ -50,6 +52,7 @@ public class BulletinRepository : IBulletinRepository
             .ToArrayAsync(cancellationToken);
     }
 
+    ///<inheritdoc/>
     public async Task<BulletinDto> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         return await _repository
@@ -58,6 +61,7 @@ public class BulletinRepository : IBulletinRepository
             .FirstOrDefaultAsync(cancellationToken);
     }
 
+    ///<inheritdoc/>
     public async Task<Guid> CreateAsync(CreateBulletinRequest bulletin, CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<Bulletin>(bulletin);
@@ -67,9 +71,16 @@ public class BulletinRepository : IBulletinRepository
         return entity.Id;
     }
 
+    ///<inheritdoc/>
     public async Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<Bulletin>(bulletin);
         await _repository.UpdateAsync(entity, cancellationToken);
+    }
+
+    ///<inheritdoc/>
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        await _repository.DeleteAsync(id, cancellationToken); 
     }
 }

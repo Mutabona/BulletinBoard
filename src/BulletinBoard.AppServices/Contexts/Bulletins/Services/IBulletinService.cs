@@ -38,4 +38,20 @@ public interface IBulletinService
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор созданного объявления.</returns>
     Task<Guid> CreateAsync(CreateBulletinRequest request, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Обновляет объявление.
+    /// </summary>
+    /// <param name="bulletin">Объявление.</param>
+    /// <param name="cancellationToken">Токен отменыю</param>
+    /// <returns></returns>
+    Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Удаляет объявление по идентификатору.
+    /// </summary>
+    /// <param name="id">Идентификатор.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns></returns>
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

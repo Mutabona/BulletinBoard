@@ -11,11 +11,11 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class AccountsController : ControllerBase
+public class AccountController : ControllerBase
 {
     private readonly IUserService _userService;
 
-    public AccountsController(IUserService userService)
+    public AccountController(IUserService userService)
     {
         _userService = userService;
     }

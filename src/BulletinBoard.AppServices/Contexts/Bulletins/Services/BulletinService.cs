@@ -6,8 +6,20 @@ using BulletinBoard.Contracts.Bulletins;
 namespace BulletinBoard.AppServices.Contexts.Bulletins.Services;
 
 ///<inheritdoc cref="IBulletinService"/>
-public class BulletinService(IBulletinRepository _repository, IBulletinSpecificationBuilder _specificationBuilder, ICategoryService _categoryService) : IBulletinService
+public class BulletinService : IBulletinService
 {
+    private readonly IBulletinRepository _repository;
+    private readonly IBulletinSpecificationBuilder _specificationBuilder;
+    private readonly ICategoryService _categoryService;
+
+    public BulletinService(IBulletinRepository repository, IBulletinSpecificationBuilder specificationBuilder,
+        ICategoryService categoryService)
+    {
+        _repository = repository;
+        _specificationBuilder = specificationBuilder;
+        _categoryService = categoryService;
+    }
+
     /// <inheritdoc />
     public async Task<ICollection<BulletinDto>> SearchBulletinsAsync(SearchBulletinRequest request, CancellationToken cancellationToken)
     {
@@ -37,5 +49,17 @@ public class BulletinService(IBulletinRepository _repository, IBulletinSpecifica
     public async Task<Guid> CreateAsync(CreateBulletinRequest request, CancellationToken cancellationToken)
     {
         return await _repository.CreateAsync(request, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken)
+    {
+        await _repository.UpdateAsync(bulletin, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        await _repository.DeleteAsync(id, cancellationToken);
     }
 }

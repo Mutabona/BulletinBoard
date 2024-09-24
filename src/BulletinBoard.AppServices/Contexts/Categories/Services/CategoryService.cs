@@ -4,8 +4,14 @@ using BulletinBoard.Contracts.Categories;
 namespace BulletinBoard.AppServices.Contexts.Categories.Services;
 
 ///<inheritdoc cref="ICategoryService"/>
-public class CategoryService(ICategoryRepository _repository) : ICategoryService
+public class CategoryService : ICategoryService
 {
+    private readonly ICategoryRepository _repository;
+
+    public CategoryService(ICategoryRepository repository)
+    {
+        _repository = repository;
+    }
     /// <inheritdoc />
     public async Task<Guid> CreateCategoryAsync(CreateCategoryRequest createCategoryRequest, CancellationToken cancellationToken)
     {

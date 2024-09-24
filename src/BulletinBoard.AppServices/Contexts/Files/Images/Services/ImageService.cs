@@ -4,8 +4,15 @@ using BulletinBoard.Contracts.Files.Images;
 namespace BulletinBoard.AppServices.Contexts.Files.Images.Services;
 
 ///<inheritdoc cref="IImageService"/>
-public class ImageService(IImageRepository _repository) : IImageService
+public class ImageService : IImageService
 {
+    private readonly IImageRepository _repository;
+
+    public ImageService(IImageRepository repository)
+    {
+        _repository = repository;
+    }
+    
     /// <inheritdoc />
     public async Task<Guid> AddImageAsync(AddImageRequest request, CancellationToken cancellationToken)
     {

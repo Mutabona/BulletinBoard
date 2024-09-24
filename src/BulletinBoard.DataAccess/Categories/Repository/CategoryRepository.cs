@@ -7,8 +7,17 @@ using BulletinBoard.Infrastructure.Repository;
 namespace BulletinBoard.DataAccess.Categories.Repository;
 
 ///<inheritdoc cref="ICategoryRepository"/>
-public class CategoryRepository(IRepository<Category> _repository, IMapper _mapper) : ICategoryRepository
+public class CategoryRepository : ICategoryRepository
 {
+    private readonly IRepository<Category> _repository;
+    private readonly IMapper _mapper;
+
+    public CategoryRepository(IRepository<Category> repository, IMapper mapper)
+    {
+        _repository = repository;
+        _mapper = mapper;
+    }
+    
     ///<inheritdoc/>
     public async Task<Guid> AddCategoryAsync(CreateCategoryRequest category, CancellationToken cancellationToken)
     {

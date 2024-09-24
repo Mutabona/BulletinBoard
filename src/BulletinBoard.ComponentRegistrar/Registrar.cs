@@ -9,11 +9,13 @@ using BulletinBoard.AppServices.Contexts.Files.Images.Services;
 using BulletinBoard.AppServices.Contexts.Users.Repositories;
 using BulletinBoard.AppServices.Contexts.Users.Services;
 using BulletinBoard.ComponentRegistrar.MapProfiles;
+using BulletinBoard.DataAccess;
 using BulletinBoard.DataAccess.Bulletins.Repository;
 using BulletinBoard.DataAccess.Categories.Repository;
 using BulletinBoard.DataAccess.Files.Images.Repository;
 using BulletinBoard.DataAccess.Users.Repository;
 using BulletinBoard.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BulletinBoard.ComponentRegistrar;
@@ -22,22 +24,24 @@ public static class Registrar
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IJwtService, JwtService> ();
-        services.AddScoped<IBulletinService, BulletinService>();
-        services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IImageService, ImageService>();
+        services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IJwtService, JwtService> ();
+        services.AddTransient<IBulletinService, BulletinService>();
+        services.AddTransient<ICategoryService, CategoryService>();
+        services.AddTransient<IImageService, ImageService>();
         
-        services.AddSingleton<IUserRepository, UserRepository>();
-        services.AddSingleton<IBulletinRepository, BulletinRepository>();
-        services.AddSingleton<ICategoryRepository, CategoryRepository>();
-        services.AddSingleton<IImageRepository, ImageRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IBulletinRepository, BulletinRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IImageRepository, ImageRepository>();
 
         services.AddScoped<IBulletinSpecificationBuilder, BulletinSpecificationBuilder>();
         
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        
         services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
+        
+        services.AddScoped<DbContext>(s => s.GetRequiredService<ApplicationDbContext>());
         
         return services;
     }

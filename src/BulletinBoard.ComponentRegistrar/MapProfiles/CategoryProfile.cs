@@ -8,9 +8,10 @@ public class CategoryProfile : Profile
 {
     public CategoryProfile()
     {
-        CreateMap<CreateCategoryRequest, Category>()
-            .ForMember(x => x.Id, map => map.MapFrom(src => Guid.NewGuid()));
+        CreateMap<CreateCategoryRequest, Category>(MemberList.None)
+            .ForMember(x => x.Id, map => map.MapFrom(src => Guid.NewGuid()))
+            .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
         
-        CreateMap<Category, CategoryDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>(MemberList.None).ReverseMap();
     }
 }
