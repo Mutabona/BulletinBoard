@@ -1,0 +1,51 @@
+﻿services:
+  bulletinboard.api:
+    image: bulletinboard.api
+    build:
+      context: .
+      dockerfile: src/BulletinBoard.API/Dockerfile
+    environment:
+      - ConnectionStrings__DbConnection=Server=postgres;Database=BulletinDb;Username=postgres;Password=password;Port=5432
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:8080"
+    networks:
+      - bulletinboard-network
+
+  bulletinboard.dbmigrator:
+    image: bulletinboard.dbmigrator
+    build:
+      context: .
+      dockerfile: src/BulletinBoard.DbMigrator/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__DbConnection=Server=postgres;Database=BulletinDb;Username=postgres;Password=password;Port=5432
+    networks:
+      - bulletinboard-network
+  
+  postgres:
+    image: postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1000M
+        reservations:
+          cpus: '0.25'
+          memory: 500M
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - bulletinboard-network
+  
+volumes:
+  pg-data:
+
+networks:
+  bulletinboard-network:
