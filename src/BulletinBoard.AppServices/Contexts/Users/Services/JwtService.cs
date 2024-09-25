@@ -22,7 +22,7 @@ public class JwtService : IJwtService
     }
 
     ///<inheritdoc/>
-    public async Task<string> GetToken(LoginUserRequest userData, Guid id, string role)
+    public string GetToken(LoginUserRequest userData, Guid id, string role)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);

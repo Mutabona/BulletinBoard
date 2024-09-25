@@ -42,4 +42,10 @@ public class CategoryService : ICategoryService
         var categories = await _repository.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
         return categories;
     }
+
+    /// <inheritdoc />
+    public async Task<ICollection<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
+    {
+        return await _repository.GetAllCategoriesAsync(cancellationToken); 
+    }
 }

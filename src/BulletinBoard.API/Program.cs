@@ -1,6 +1,10 @@
 using System.Text;
 using BulletinBoard.API.Controllers;
 using BulletinBoard.ComponentRegistrar;
+using BulletinBoard.Contracts.Bulletins;
+using BulletinBoard.Contracts.Categories;
+using BulletinBoard.Contracts.Files.Images;
+using BulletinBoard.Contracts.Users;
 using BulletinBoard.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +20,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "BulletinBoard API", Version = "V1" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "BulletinBoard API", Version = "V1.1" });
     options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(AccountController).Assembly.GetName().Name}.xml")));
     options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(BulletinController).Assembly.GetName().Name}.xml")));
     options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(FileController).Assembly.GetName().Name}.xml")));
     options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(CategoryController).Assembly.GetName().Name}.xml")));
     options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(UserController).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(BulletinDto).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(CategoryDto).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(CreateBulletinRequest).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(CreateCategoryRequest).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(LoginUserRequest).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(RegisterUserRequest).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(SearchBulletinRequest).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(AddImageRequest).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(ImageDto).Assembly.GetName().Name}.xml")));
+    options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $"{typeof(UserDto).Assembly.GetName().Name}.xml")));
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme",

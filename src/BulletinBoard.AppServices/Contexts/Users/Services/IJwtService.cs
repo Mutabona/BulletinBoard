@@ -14,5 +14,5 @@ public interface IJwtService
     /// <param name="id">Идентификатор польззователя.</param>
     /// <param name="role">Роль пользоваетеля.</param>
     /// <returns>Токен в виде строки.</returns>
-    Task<string> GetToken(LoginUserRequest userData, Guid id, string role);
+    string GetToken(LoginUserRequest userData, Guid id, string role);
 }

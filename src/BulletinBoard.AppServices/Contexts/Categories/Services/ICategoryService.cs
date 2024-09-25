@@ -46,4 +46,11 @@ public interface ICategoryService
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекия категорий.</returns>
     Task<ICollection<CategoryDto>> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Возвращает все категории.
+    /// </summary>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>Коллекция категорий.</returns>
+    Task<ICollection<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken);
 }

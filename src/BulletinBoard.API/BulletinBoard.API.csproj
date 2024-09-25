@@ -32,4 +32,10 @@
     <ProjectReference Include="..\BulletinBoard.ComponentRegistrar\BulletinBoard.ComponentRegistrar.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+  </ItemGroup>
+
 </Project>

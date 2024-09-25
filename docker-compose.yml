@@ -11,6 +11,7 @@
       - "5000:8080"
     networks:
       - bulletinboard-network
+    
 
   bulletinboard.dbmigrator:
     image: bulletinboard.dbmigrator

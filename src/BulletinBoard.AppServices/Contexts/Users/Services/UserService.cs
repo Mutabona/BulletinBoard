@@ -48,7 +48,7 @@ public class UserService : IUserService
 
         if (user != null)
         {
-            return await _jwtService.GetToken(request, user.Id, user.Role);
+            return _jwtService.GetToken(request, user.Id, user.Role);
         }
         
         return null;

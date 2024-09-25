@@ -1,5 +1,8 @@
 ﻿namespace BulletinBoard.Contracts.Categories;
 
+/// <summary>
+/// Модель запроса на создание категории.
+/// </summary>
 public class CreateCategoryRequest
 {
     /// <summary>
