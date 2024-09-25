@@ -8,12 +8,12 @@ public class RegisterUserRequest
     /// <summary>
     /// Почта.
     /// </summary>
-    public string Email { get; set; }
+    public string? Email { get; set; }
     
     /// <summary>
     /// Номер телефона.
     /// </summary>
-    public string Phone { get; set; }
+    public string? Phone { get; set; }
     
     /// <summary>
     /// Логин.
@@ -38,5 +38,5 @@ public class RegisterUserRequest
     /// <summary>
     /// Отчество. 
     /// </summary>
-    public string Lastname { get; set; }
+    public string? Lastname { get; set; }
 }

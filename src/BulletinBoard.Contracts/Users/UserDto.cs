@@ -18,12 +18,12 @@ public class UserDto
     /// <summary>
     /// Почта.
     /// </summary>
-    public string Email { get; set; }
+    public string? Email { get; set; }
     
     /// <summary>
     /// Номер телефона.
     /// </summary>
-    public string Phone { get; set; }
+    public string? Phone { get; set; }
     
     /// <summary>
     /// Логин.
@@ -48,7 +48,7 @@ public class UserDto
     /// <summary>
     /// Отчество. 
     /// </summary>
-    public string Lastname { get; set; }
+    public string? Lastname { get; set; }
     
     /// <summary>
     /// Роль в системе.

@@ -37,7 +37,7 @@ public class BulletinDto
     /// <summary>
     /// Отчество владельца. 
     /// </summary>
-    public string OwnerLastname { get; set; }
+    public string? OwnerLastname { get; set; }
     
     /// <summary>
     /// Название объявления.
@@ -47,7 +47,7 @@ public class BulletinDto
     /// <summary>
     /// Описание объявления.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Идентификатор категории товара.
@@ -58,4 +58,9 @@ public class BulletinDto
     /// Категория товара.
     /// </summary>
     public string CategoryName { get; set; }
+    
+    /// <summary>
+    /// Цена товара.
+    /// </summary>
+    public decimal Price { get; set; }
 }

@@ -20,10 +20,15 @@ public class CreateBulletinRequest
     /// <summary>
     /// Описание объявления.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
     
     /// <summary>
     /// Идентификатор категории товара.
     /// </summary>
     public Guid CategoryId { get; set; }
+    
+    /// <summary>
+    /// Цена товара.
+    /// </summary>
+    public decimal Price { get; set; }
 }

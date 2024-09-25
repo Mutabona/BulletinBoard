@@ -28,7 +28,7 @@ public class Bulletin : BaseEntity
     /// <summary>
     /// Описание объявления.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Фото из объявления.
@@ -45,5 +45,8 @@ public class Bulletin : BaseEntity
     /// </summary>
     public virtual Category Category { get; set; }
     
-    
+    /// <summary>
+    /// Цена товара.
+    /// </summary>
+    public decimal Price { get; set; }
 }

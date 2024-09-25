@@ -10,5 +10,5 @@ public class CreateCategoryRequest
     /// <summary>
     /// Идентификатор материнской категории.
     /// </summary>
-    public Guid ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
 }

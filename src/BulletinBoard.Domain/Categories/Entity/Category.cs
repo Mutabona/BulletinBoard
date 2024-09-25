@@ -16,12 +16,12 @@ public class Category : BaseEntity
     /// <summary>
     /// Идентификатор материнской категории.
     /// </summary>
-    public Guid ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
     
     /// <summary>
     /// Материнская категория.
     /// </summary>
-    public virtual Category ParentCategory { get; set; }
+    public virtual Category? ParentCategory { get; set; }
     
     /// <summary>
     /// Дочерние категории.
