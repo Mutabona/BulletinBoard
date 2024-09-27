@@ -10,7 +10,7 @@ public class CreateBulletinRequest
     /// <summary>
     /// Идентификатор владельца.
     /// </summary>
-    public Guid OwnerId { get; set; }
+    public Guid? OwnerId { get; set; }
     
     /// <summary>
     /// Название объявления.
@@ -25,10 +25,10 @@ public class CreateBulletinRequest
     /// <summary>
     /// Идентификатор категории товара.
     /// </summary>
-    public Guid CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
     
     /// <summary>
     /// Цена товара.
     /// </summary>
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 }

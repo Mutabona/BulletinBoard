@@ -12,7 +12,7 @@ public class BulletinDto
     /// <summary>
     /// Идентификатор.
     /// </summary>
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
    
     /// <summary>
     /// Дата создания сущности.
@@ -22,7 +22,7 @@ public class BulletinDto
     /// <summary>
     /// Идентификатор владельца.
     /// </summary>
-    public Guid OwnerId { get; set; }
+    public Guid? OwnerId { get; set; }
     
     /// <summary>
     /// Имя владельца.
@@ -52,7 +52,7 @@ public class BulletinDto
     /// <summary>
     /// Идентификатор категории товара.
     /// </summary>
-    public Guid CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
     
     /// <summary>
     /// Категория товара.
@@ -62,5 +62,5 @@ public class BulletinDto
     /// <summary>
     /// Цена товара.
     /// </summary>
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 }

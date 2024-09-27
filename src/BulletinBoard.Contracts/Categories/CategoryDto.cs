@@ -8,7 +8,7 @@ public class CategoryDto
     /// <summary>
     /// Идентификатор.
     /// </summary>
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
    
     /// <summary>
     /// Дата создания сущности.
@@ -23,5 +23,5 @@ public class CategoryDto
     /// <summary>
     /// Идентификатор материнской категории.
     /// </summary>
-    public Guid ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
 }

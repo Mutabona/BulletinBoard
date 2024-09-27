@@ -15,5 +15,5 @@ public class AddImageRequest
     /// <summary>
     /// Идентификатор объявления с изображением.
     /// </summary>
-    public Guid BulletinId { get; set; }
+    public Guid? BulletinId { get; set; }
 }
