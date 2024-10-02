@@ -13,7 +13,7 @@ public class SearchStringSpecification : Specification<Bulletin>
     private readonly string _searchString;
 
     /// <summary>
-    /// Создаёт спецификацию поиска объявлений по поисковой строке.
+    /// Создаёт спецификацию поиска объявлений по поисковой строке <see cref="SearchStringSpecification"/>.
     /// </summary>
     /// <param name="searchString">Поисковая строка.</param>
     public SearchStringSpecification(string searchString)

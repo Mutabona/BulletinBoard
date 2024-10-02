@@ -29,7 +29,7 @@ public interface IUserRepository
     /// <param name="login">Логин.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Данные пользователя <see cref="UserDto"/></returns>
-    Task<UserDto> GetByLoginAsync(string login, CancellationToken cancellationToken);
+    Task<UserDto> GetByEmailAsync(string email, CancellationToken cancellationToken);
     
     /// <summary>
     /// Получает пользователя по айди.
@@ -45,14 +45,6 @@ public interface IUserRepository
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция пользователей.</returns>
     Task<ICollection<UserDto>> GetAllAsync(CancellationToken cancellationToken);
-    
-    /// <summary>
-    /// Обновляет пользователя.
-    /// </summary>
-    /// <param name="user">Пользователь.</param>
-    /// <param name="cancellationToken">Токен отмены.</param>
-    /// <returns></returns>
-    Task UpdateAsync(UserDto user, CancellationToken cancellationToken);
     
     /// <summary>
     /// Удаляет пользователя по айди.

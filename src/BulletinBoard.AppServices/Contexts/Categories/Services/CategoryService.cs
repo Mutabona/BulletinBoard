@@ -48,4 +48,12 @@ public class CategoryService : ICategoryService
     {
         return await _repository.GetAllCategoriesAsync(cancellationToken); 
     }
+
+    /// <inheritdoc />
+    public async Task<bool> IsCategoryExistsAsync(Guid categoryId, CancellationToken cancellationToken)
+    {
+        var category = await _repository.GetByIdAsync(categoryId, cancellationToken);
+        if (category is null) return false;
+        return true;
+    }
 }

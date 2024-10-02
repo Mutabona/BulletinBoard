@@ -13,11 +13,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder
             .HasKey(x => x.Id);
-
-        builder
-            .Property(x => x.Login)
-            .IsRequired()
-            .HasMaxLength(50);
         
         builder
             .Property(x => x.Password)
@@ -31,11 +26,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder
             .Property(x => x.Name)
-            .HasMaxLength(50)
-            .IsRequired();
-
-        builder
-            .Property(x => x.Surname)
             .HasMaxLength(50)
             .IsRequired();
     }

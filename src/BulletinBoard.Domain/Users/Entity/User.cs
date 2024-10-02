@@ -1,5 +1,6 @@
 ﻿using BulletinBoard.Domain.Base;
 using BulletinBoard.Domain.Bulletins.Entity;
+using BulletinBoard.Domain.Comments.Entity;
 
 namespace BulletinBoard.Domain.Users.Entity;
 
@@ -15,29 +16,14 @@ public class User : BaseEntity
     public string Name { get; set; }
     
     /// <summary>
-    /// Фамилия.
-    /// </summary>
-    public string Surname { get; set; }
-    
-    /// <summary>
-    /// Отчество. 
-    /// </summary>
-    public string? Lastname { get; set; }
-    
-    /// <summary>
     /// Почта.
     /// </summary>
-    public string? Email { get; set; }
+    public string Email { get; set; }
     
     /// <summary>
     /// Номер телефона.
     /// </summary>
     public string? Phone { get; set; }
-    
-    /// <summary>
-    /// Логин.
-    /// </summary>
-    public string Login { get; set; }
     
     /// <summary>
     /// Пароль.
@@ -53,4 +39,9 @@ public class User : BaseEntity
     /// Объявления пользователя.
     /// </summary>
     public virtual ICollection<Bulletin> Bulletins { get; set; }
+    
+    /// <summary>
+    /// Комментарии пользователя.
+    /// </summary>
+    public virtual ICollection<Comment> Comments { get; set; }
 }

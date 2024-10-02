@@ -23,6 +23,14 @@ public interface IUserService
     Task<UserDto> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken);
     
     /// <summary>
+    /// Получает пользователя по логину.
+    /// </summary>
+    /// <param name="login">Логин.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>Модель пользователя.</returns>
+    Task<UserDto> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
+    
+    /// <summary>
     /// Регистрирует пользователя.
     /// </summary>
     /// <param name="request">Запрос на регистрацию.</param>
@@ -39,26 +47,18 @@ public interface IUserService
     Task<string> LoginAsync(LoginUserRequest request, CancellationToken cancellationToken);
     
     /// <summary>
-    /// Обновляет пользователя.
-    /// </summary>
-    /// <param name="user">Пользователь.</param>
-    /// <param name="cancellationToken">Токен отмены.</param>
-    /// <returns></returns>
-    Task UpdateUserAsync(UserDto user, CancellationToken cancellationToken);
-    
-    /// <summary>
     /// Удаляет пользователя по идентификатору.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
     Task DeleteUserAsync(Guid userId, CancellationToken cancellationToken);
-    
+
     /// <summary>
-    /// Проверяет логин на уникальность.
+    /// Проверяет уникальность почты.
     /// </summary>
-    /// <param name="login">Логин.</param>
+    /// <param name="email">Почта.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
-    /// <returns>True, если логин уникальный, false, если нет</returns>
-    Task<bool> IsUniqueLoginAsync(string login, CancellationToken cancellationToken);
+    /// <returns>True, если почта уникальная, иначе false.</returns>
+    Task<bool> IsUniqueEmailAsync(string email, CancellationToken cancellationToken);
 }

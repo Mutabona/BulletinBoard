@@ -53,4 +53,12 @@ public interface ICategoryService
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция категорий.</returns>
     Task<ICollection<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Определяет существование категории в БД.
+    /// </summary>
+    /// <param name="categoryId">Идентификатор категории.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>>True - категория есть в БД, false - нет.</returns>
+    Task<bool> IsCategoryExistsAsync(Guid categoryId, CancellationToken cancellationToken);
 }

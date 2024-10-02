@@ -18,16 +18,18 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .Property(c => c.Name)
             .IsRequired()
             .HasMaxLength(50);
-        
+
         builder
             .HasMany(c => c.Bulletins)
             .WithOne(c => c.Category)
             .HasForeignKey(c => c.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
 
         builder
             .HasMany(c => c.Subcategories)
             .WithOne(c => c.ParentCategory)
-            .HasForeignKey(c => c.ParentCategoryId);
+            .HasForeignKey(c => c.ParentCategoryId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

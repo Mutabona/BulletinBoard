@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using BulletinBoard.API.Controllers.Base;
 using BulletinBoard.AppServices.Contexts.Users.Services;
 using BulletinBoard.Contracts.Users;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class AccountController(IUserService userService) : ControllerBase
+public class AccountController(IUserService userService) : BaseController
 {
     /// <summary>
     /// Регистрация пользователя.

@@ -30,7 +30,7 @@ public class JwtService : IJwtService
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, userData.Login),
+                new Claim(ClaimTypes.Name, userData.Email),
                 new Claim(ClaimTypes.NameIdentifier, id.ToString()),
                 new Claim(ClaimTypes.Role, role),
             }),

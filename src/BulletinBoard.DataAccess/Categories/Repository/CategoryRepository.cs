@@ -51,7 +51,7 @@ public class CategoryRepository : ICategoryRepository
         var category = await _repository.GetByIdAsync(categoryId, cancellationToken); //Получаем корневую категорию.
         
         var subcategories = new List<Category>(); //Категории, которые будем возвращать.
-        var subsubcategories = new List<Category>(category.Subcategories); //Категории, которые сейчас будем обрабатывать.
+        var subsubcategories = new List<Category>(await _repository.GetAll().Where(c => c.ParentCategoryId == category.Id).ToListAsync(cancellationToken)); //Категории, которые сейчас будем обрабатывать.
         var tempcategories = new List<Category>(); //Категории, которые будем обрабатывать следующими.
         
         subcategories.Add(category);
@@ -60,10 +60,7 @@ public class CategoryRepository : ICategoryRepository
         {
             foreach (var subsubcategory in subsubcategories) //Проходимся по категориям.
             {
-                foreach (var subsubsubcategory in subsubcategory.Subcategories) //Проходимся по их дочерним категориям.
-                {
-                    tempcategories.Add(subsubsubcategory); //Добавляем каждую дочернюю категорию в список категорий, которые будут обработаны позже.
-                }
+                tempcategories.AddRange(await _repository.GetAll().Where(c => c.ParentCategoryId == subsubcategory.Id).ToListAsync(cancellationToken)); //Добавляем каждую дочернюю категорию в список категорий, которые будут обработаны позже.
             }
             subcategories.AddRange(subsubcategories); //Добавляем обработанные категории к тем, что будем возвращать.
             subsubcategories.Clear(); //Очищаем список обработанных категорий.

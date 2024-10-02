@@ -26,11 +26,6 @@ public class UserDto
     public string? Phone { get; set; }
     
     /// <summary>
-    /// Логин.
-    /// </summary>
-    public string Login { get; set; }
-    
-    /// <summary>
     /// Пароль.
     /// </summary>
     public string Password { get; set; }
@@ -41,17 +36,7 @@ public class UserDto
     public string Name { get; set; }
     
     /// <summary>
-    /// Фамилия.
-    /// </summary>
-    public string Surname { get; set; }
-    
-    /// <summary>
-    /// Отчество. 
-    /// </summary>
-    public string? Lastname { get; set; }
-    
-    /// <summary>
     /// Роль в системе.
     /// </summary>
-    public string Role { get; set; }
+    public string Role { get; private set; }
 }

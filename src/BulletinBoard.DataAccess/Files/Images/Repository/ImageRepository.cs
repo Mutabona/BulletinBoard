@@ -4,6 +4,7 @@ using BulletinBoard.AppServices.Contexts.Files.Images.Repositories;
 using BulletinBoard.Contracts.Files.Images;
 using BulletinBoard.Domain.Files.Images.Entity;
 using BulletinBoard.Infrastructure.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace BulletinBoard.DataAccess.Files.Images.Repository;
@@ -26,9 +27,10 @@ public class ImageRepository : IImageRepository
     }
     
     ///<inheritdoc/>
-    public async Task<Guid> AddAsync(AddImageRequest image, CancellationToken cancellationToken)
+    public async Task<Guid> AddAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)
     {
         var imageEntity = _mapper.Map<Image>(image);
+        imageEntity.BulletinId = bulletinId;
         return await _repository.AddAsync(imageEntity, cancellationToken);
     }
 
@@ -39,12 +41,9 @@ public class ImageRepository : IImageRepository
     }
 
     ///<inheritdoc/>
-    public async Task<ICollection<ImageDto>> GetByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)
+    public async Task<ICollection<Guid>> GetImageIdByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        return await _repository.GetAll()
-            .Where(i => i.BulletinId == bulletinId)
-            .ProjectTo<ImageDto>(_mapper.ConfigurationProvider)
-            .ToListAsync(cancellationToken);
+        return await _repository.GetAll().Where(i => i.BulletinId == bulletinId).Select(i => i.Id).ToListAsync(cancellationToken);
     }
 
     ///<inheritdoc/>

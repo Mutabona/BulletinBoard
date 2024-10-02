@@ -1,5 +1,6 @@
 ﻿using BulletinBoard.AppServices.Contexts.Files.Images.Repositories;
 using BulletinBoard.Contracts.Files.Images;
+using Microsoft.AspNetCore.Http;
 
 namespace BulletinBoard.AppServices.Contexts.Files.Images.Services;
 
@@ -12,11 +13,10 @@ public class ImageService : IImageService
     {
         _repository = repository;
     }
-    
-    /// <inheritdoc />
-    public async Task<Guid> AddImageAsync(AddImageRequest request, CancellationToken cancellationToken)
+
+    public async Task<Guid> AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)
     {
-       return await _repository.AddAsync(request, cancellationToken);
+        return await _repository.AddAsync(bulletinId, image, cancellationToken);
     }
 
     /// <inheritdoc />
@@ -25,10 +25,9 @@ public class ImageService : IImageService
         await _repository.DeleteAsync(imageId, cancellationToken);
     }
 
-    /// <inheritdoc />
-    public async Task<ICollection<ImageDto>> GetByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)
+    public async Task<ICollection<Guid>> GetImageIdsByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        return await _repository.GetByBulletinIdAsync(bulletinId, cancellationToken); 
+        return await _repository.GetImageIdByBulletinIdAsync(bulletinId, cancellationToken);
     }
 
     /// <inheritdoc />

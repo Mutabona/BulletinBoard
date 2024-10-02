@@ -17,7 +17,7 @@ public class BulletinDto
     /// <summary>
     /// Дата создания сущности.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     /// <summary>
     /// Идентификатор владельца.
@@ -28,16 +28,6 @@ public class BulletinDto
     /// Имя владельца.
     /// </summary>
     public string OwnerName { get; set; }
-    
-    /// <summary>
-    /// Фамилия владельца.
-    /// </summary>
-    public string OwnerSurname { get; set; }
-    
-    /// <summary>
-    /// Отчество владельца. 
-    /// </summary>
-    public string? OwnerLastname { get; set; }
     
     /// <summary>
     /// Название объявления.

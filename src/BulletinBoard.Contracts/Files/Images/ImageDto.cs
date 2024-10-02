@@ -11,6 +11,11 @@ public class ImageDto
     public Guid Id { get; set; }
     
     /// <summary>
+    /// Идентификатор объявления с изображением.
+    /// </summary>
+    public Guid BulletinId { get; set; }
+    
+    /// <summary>
     /// Контент фото.
     /// </summary>
     public byte[] Content { get; set; }

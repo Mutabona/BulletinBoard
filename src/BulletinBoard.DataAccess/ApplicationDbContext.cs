@@ -18,5 +18,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new BulletinConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         modelBuilder.ApplyConfiguration(new ImageConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentConfiguration());
     }
 }

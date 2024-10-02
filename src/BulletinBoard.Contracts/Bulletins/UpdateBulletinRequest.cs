@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace BulletinBoard.Contracts.Bulletins;
+﻿namespace BulletinBoard.Contracts.Bulletins;
 
 /// <summary>
-/// Запрос на создание объявления.
+/// Запрос на обновление категории.
 /// </summary>
-public class CreateBulletinRequest
+public class UpdateBulletinRequest
 {
     /// <summary>
     /// Название объявления.
     /// </summary>
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     /// <summary>
     /// Описание объявления.

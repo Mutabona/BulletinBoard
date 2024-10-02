@@ -30,14 +30,14 @@ public class UserRepository : IUserRepository
 
     public async Task<UserDto> LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)
     { 
-        return await _repository.GetAll().Where(s => s.Login == request.Login && s.Password == request.Password)
+        return await _repository.GetAll().Where(s => s.Email == request.Email && s.Password == request.Password)
             .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    public async Task<UserDto> GetByLoginAsync(string login, CancellationToken cancellationToken)
+    public async Task<UserDto> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        return await _repository.GetAll().Where(u => u.Login == login).ProjectTo<UserDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+        return await _repository.GetAll().Where(u => u.Email == email).ProjectTo<UserDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
     }
 
     ///<inheritdoc/>
@@ -51,13 +51,6 @@ public class UserRepository : IUserRepository
     public async Task<ICollection<UserDto>> GetAllAsync(CancellationToken cancellationToken)
     {
         return await _repository.GetAll().ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-    }
-
-    ///<inheritdoc/>
-    public async Task UpdateAsync(UserDto user, CancellationToken cancellationToken)
-    {
-        var userEntity = _mapper.Map<User>(user);
-        await _repository.UpdateAsync(userEntity, cancellationToken); 
     }
 
     ///<inheritdoc/>

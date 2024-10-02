@@ -29,6 +29,8 @@ public class BulletinRepository : IBulletinRepository
     {
         var query = _repository
             .GetAll()
+            .Include(c => c.Owner)
+            .Include(c => c.Category)
             .OrderBy(bulletin => bulletin.Id)
             .Where(specification.PredicateExpression);
 
@@ -47,7 +49,10 @@ public class BulletinRepository : IBulletinRepository
     public async Task<ICollection<BulletinDto>> GetBySpecificationAsync(ISpecification<Bulletin> specification, CancellationToken cancellationToken)
     {
         return await _repository
-            .GetByPredicate(specification.PredicateExpression)
+            .GetAll()
+            .Include(c => c.Owner)
+            .Include(c => c.Category)
+            .Where(specification.PredicateExpression)
             .ProjectTo<BulletinDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);
     }
@@ -56,31 +61,45 @@ public class BulletinRepository : IBulletinRepository
     public async Task<BulletinDto> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         return await _repository
-            .GetByPredicate(adv => adv.Id == id)
+            .GetAll()
+            .Where(bulletin => bulletin.Id == id)
+            .Include(c => c.Owner)
+            .Include(c => c.Category)
             .ProjectTo<BulletinDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
     ///<inheritdoc/>
-    public async Task<Guid> CreateAsync(CreateBulletinRequest bulletin, CancellationToken cancellationToken)
+    public async Task<Guid> CreateAsync(Guid ownerId, CreateBulletinRequest bulletin,
+        CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<Bulletin>(bulletin);
-        
+        entity.OwnerId = ownerId;
         await _repository.AddAsync(entity, cancellationToken);
 
         return entity.Id;
     }
 
     ///<inheritdoc/>
-    public async Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
-        var entity = _mapper.Map<Bulletin>(bulletin);
-        await _repository.UpdateAsync(entity, cancellationToken);
+        var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);
+        bulletin.Title = request.Title;
+        bulletin.Description = request.Description;
+        bulletin.CategoryId = request.CategoryId.Value;
+        bulletin.Price = request.Price.Value;
+        await _repository.UpdateAsync(bulletin, cancellationToken);
     }
 
     ///<inheritdoc/>
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         await _repository.DeleteAsync(id, cancellationToken); 
+    }
+
+    ///<inheritdoc/>
+    public async Task<ICollection<BulletinDto>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        return await _repository.GetAll().Include(b => b.Owner).Include(b => b.Category).ProjectTo<BulletinDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 }

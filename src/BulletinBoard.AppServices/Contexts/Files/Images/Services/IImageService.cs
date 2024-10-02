@@ -1,4 +1,5 @@
 ﻿using BulletinBoard.Contracts.Files.Images;
+using Microsoft.AspNetCore.Http;
 
 namespace BulletinBoard.AppServices.Contexts.Files.Images.Services;
 
@@ -13,7 +14,7 @@ public interface IImageService
     /// <param name="request">Изображение.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор добавленного изображения</returns>
-    Task<Guid> AddImageAsync(AddImageRequest request, CancellationToken cancellationToken);
+    Task<Guid> AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken);
     
     /// <summary>
     /// Удаляет изображение.
@@ -29,7 +30,7 @@ public interface IImageService
     /// <param name="bulletinId">Идентификатор объявления.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция изображений.</returns>
-    Task<ICollection<ImageDto>> GetByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken);
+    Task<ICollection<Guid>> GetImageIdsByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken);
     
     /// <summary>
     /// Возвращает изображение по идентификатору.

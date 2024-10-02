@@ -29,9 +29,15 @@ public class UserService : IUserService
     }
 
     ///<inheritdoc/>
+    public async Task<UserDto> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return await _repository.GetByEmailAsync(email, cancellationToken);
+    }
+
+    ///<inheritdoc/>
     public async Task<Guid> RegisterAsync(RegisterUserRequest request, CancellationToken cancellationToken)
     {
-        if (await IsUniqueLoginAsync(request.Login, cancellationToken))
+        if (await IsUniqueEmailAsync(request.Email, cancellationToken))
         {
             request.Password = CryptoHelper.GetBase64Hash(request.Password);
             return await _repository.AddAsync(request, cancellationToken);
@@ -55,21 +61,15 @@ public class UserService : IUserService
     }
 
     ///<inheritdoc/>
-    public async Task UpdateUserAsync(UserDto user, CancellationToken cancellationToken)
-    {
-        await _repository.UpdateAsync(user, cancellationToken);
-    }
-
-    ///<inheritdoc/>
     public async Task DeleteUserAsync(Guid userId, CancellationToken cancellationToken)
     {
         await _repository.DeleteAsync(userId, cancellationToken);
     }
 
     ///<inheritdoc/>
-    public async Task<bool> IsUniqueLoginAsync(string login, CancellationToken cancellationToken)
+    public async Task<bool> IsUniqueEmailAsync(string email, CancellationToken cancellationToken)
     {
-        var user = await _repository.GetByLoginAsync(login, cancellationToken);
+        var user = await _repository.GetByEmailAsync(email, cancellationToken);
         if (user == null) return true;
         return false;
     }

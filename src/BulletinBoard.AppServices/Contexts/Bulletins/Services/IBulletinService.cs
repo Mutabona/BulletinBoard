@@ -34,18 +34,20 @@ public interface IBulletinService
     /// <summary>
     /// Создаёт объявление.
     /// </summary>
+    /// <param name="ownerId">Идентификатор владельца.</param>
     /// <param name="request">Запрос создания.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор созданного объявления.</returns>
-    Task<Guid> CreateAsync(CreateBulletinRequest request, CancellationToken cancellationToken);
-    
+    Task<Guid> CreateAsync(Guid ownerId, CreateBulletinRequest request, CancellationToken cancellationToken);
+
     /// <summary>
     /// Обновляет объявление.
     /// </summary>
-    /// <param name="bulletin">Объявление.</param>
-    /// <param name="cancellationToken">Токен отменыю</param>
+    /// <param name="request">Запрос на обновление объявления.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <param name="bulletinId">Идентификатор объявления.</param>
     /// <returns></returns>
-    Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken);
+    Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken);
     
     /// <summary>
     /// Удаляет объявление по идентификатору.
@@ -54,4 +56,11 @@ public interface IBulletinService
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Получает все объявления.
+    /// </summary>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>Коллекция моделей объявлений.</returns>
+    Task<ICollection<BulletinDto>> GetAllAsync(CancellationToken cancellationToken);
 }

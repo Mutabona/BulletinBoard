@@ -1,6 +1,8 @@
 ﻿using System.Net;
+using BulletinBoard.API.Controllers.Base;
 using BulletinBoard.AppServices.Contexts.Categories.Services;
 using BulletinBoard.Contracts.Categories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulletinBoard.API.Controllers;
@@ -11,7 +13,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class CategoryController(ICategoryService categoryService) : ControllerBase
+public class CategoryController(ICategoryService categoryService) : BaseController
 {
     /// <summary>
     /// Создаёт категорию по модели запроса.
@@ -20,7 +22,10 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор созданной категории.</returns>
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> AddCategoryAsync(CreateCategoryRequest request, CancellationToken cancellationToken)
     {
         var categoryId =  await categoryService.CreateCategoryAsync(request, cancellationToken);
@@ -47,32 +52,20 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     }
 
     /// <summary>
-    /// Удаляет категори. по идентификатору.
+    /// Удаляет категорию по идентификатору.
     /// </summary>
     /// <param name="categoryId">Идентификатор.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
     [HttpDelete("{categoryId}")]
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
     {
         await categoryService.DeleteCategoryAsync(categoryId, cancellationToken);
 
-        return Ok();
-    }
-
-    /// <summary>
-    /// Обновляет категорию.
-    /// </summary>
-    /// <param name="categoryDto">Модель категории.</param>
-    /// <param name="cancellationToken">Токен отмены.</param>
-    /// <returns></returns>
-    [HttpPut("{categoryId}")]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdateCategoryAsync(CategoryDto categoryDto, CancellationToken cancellationToken)
-    {
-        await categoryService.UpdateCategoryAsync(categoryDto, cancellationToken);
-        
         return Ok();
     }
 

@@ -19,7 +19,7 @@ public interface IBulletinSpecificationBuilder
     /// <summary>
     /// Строит спецификацию по категории.
     /// </summary>
-    /// <param name="categoryId">Идентификаторы категорий.</param>
+    /// <param name="categoriesIds">Идентификаторы категорий.</param>
     /// <returns>Спецификация.</returns>
-    ISpecification<Bulletin> Build(ICollection<Guid> categoriesIds);
+    ISpecification<Bulletin> Build(ICollection<Guid?> categoriesIds);
 }

@@ -8,7 +8,7 @@ public class LoginUserRequest
     /// <summary>
     /// Логин.
     /// </summary>
-    public string Login { get; set; }
+    public string Email { get; set; }
     
     /// <summary>
     /// Пароль.

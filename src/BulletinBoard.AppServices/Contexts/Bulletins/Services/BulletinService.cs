@@ -46,20 +46,27 @@ public class BulletinService : IBulletinService
     }
 
     /// <inheritdoc />
-    public async Task<Guid> CreateAsync(CreateBulletinRequest request, CancellationToken cancellationToken)
+    public async Task<Guid> CreateAsync(Guid ownerId, CreateBulletinRequest request,
+        CancellationToken cancellationToken)
     {
-        return await _repository.CreateAsync(request, cancellationToken);
+        return await _repository.CreateAsync(ownerId, request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
-        await _repository.UpdateAsync(bulletin, cancellationToken);
+        await _repository.UpdateAsync(bulletinId, request, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         await _repository.DeleteAsync(id, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<ICollection<BulletinDto>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        return await _repository.GetAllAsync(cancellationToken);
     }
 }
