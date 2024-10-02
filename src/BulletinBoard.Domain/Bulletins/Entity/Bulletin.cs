@@ -1,5 +1,6 @@
 ﻿using BulletinBoard.Domain.Base;
 using BulletinBoard.Domain.Categories.Entity;
+using BulletinBoard.Domain.Comments.Entity;
 using BulletinBoard.Domain.Files.Images.Entity;
 using BulletinBoard.Domain.Users.Entity;
 
@@ -44,6 +45,11 @@ public class Bulletin : BaseEntity
     /// Категория товара.
     /// </summary>
     public virtual Category Category { get; set; }
+    
+    /// <summary>
+    /// Комменатрии.
+    /// </summary>
+    public virtual ICollection<Comment> Comments { get; set; }
     
     /// <summary>
     /// Цена товара.

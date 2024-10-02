@@ -31,5 +31,9 @@ public class BulletinConfiguration : IEntityTypeConfiguration<Bulletin>
             .WithOne(x => x.Bulletin)
             .HasForeignKey(x => x.BulletinId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .Property(x => x.Description)
+            .HasMaxLength(1500);
     }
 }
