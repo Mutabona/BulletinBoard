@@ -7,12 +7,12 @@ namespace BulletinBoard.AppServices.Contexts.Bulletins.Specifications;
 
 public class ByCategorySpecification : Specification<Bulletin>
 {
-    private readonly ICollection<Guid> _categoriesIds;
+    private readonly ICollection<Guid?> _categoriesIds;
 
     /// <summary>
     /// Инициализирует экземпляр <see cref="ByCategorySpecification"/>.
     /// </summary>
-    public ByCategorySpecification(ICollection<Guid> categoriesIds)
+    public ByCategorySpecification(ICollection<Guid?> categoriesIds)
     {
         _categoriesIds = categoriesIds;
     }

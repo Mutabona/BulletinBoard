@@ -11,11 +11,27 @@ public class BulletinSpecificationBuilder : IBulletinSpecificationBuilder
     /// <inheritdoc />
     public ISpecification<Bulletin> Build(SearchBulletinRequest request)
     {
-        return new SearchStringSpecification(request.Search);
+        var specification = Specification<Bulletin>.FromPredicate(bulletin => bulletin.CategoryId != null);
+
+        if (!string.IsNullOrWhiteSpace(request.Search))
+        {
+            specification = specification.And(new SearchStringSpecification(request.Search));
+        }
+
+        if (request.MinPrice.HasValue)
+        {
+            specification = specification.And(new MinPriceSpecification(request.MinPrice.Value));
+        }
+
+        if (request.MaxPrice.HasValue)
+        {
+            specification = specification.And(new MaxPriceSpecification(request.MaxPrice.Value));
+        }
+        return specification;
     }
 
     /// <inheritdoc />
-    public ISpecification<Bulletin> Build(ICollection<Guid> categoriesIds)
+    public ISpecification<Bulletin> Build(ICollection<Guid?> categoriesIds)
     {
         return new ByCategorySpecification(categoriesIds);
     }
