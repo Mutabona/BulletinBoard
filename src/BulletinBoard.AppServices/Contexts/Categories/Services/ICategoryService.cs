@@ -32,14 +32,6 @@ public interface ICategoryService
     Task DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken);
     
     /// <summary>
-    /// Обновляет категорию.
-    /// </summary>
-    /// <param name="category">Категория.</param>
-    /// <param name="cancellationToken">Токен отмены.</param>
-    /// <returns></returns>
-    Task UpdateCategoryAsync(CategoryDto category, CancellationToken cancellationToken);
-    
-    /// <summary>
     /// Получает дочерние категории.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>

@@ -40,12 +40,6 @@ public class CategoryRepository : ICategoryRepository
     }
 
     ///<inheritdoc/>
-    public async Task UpdateCategoryAsync(CategoryDto category, CancellationToken cancellationToken)
-    {
-        await _repository.UpdateAsync(_mapper.Map<Category>(category), cancellationToken);
-    }
-
-    ///<inheritdoc/>
     public async Task<ICollection<CategoryDto>> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)
     {
         var category = await _repository.GetByIdAsync(categoryId, cancellationToken); //Получаем корневую категорию.

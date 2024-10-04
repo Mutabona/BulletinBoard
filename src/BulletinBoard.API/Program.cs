@@ -72,6 +72,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));
 });
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.InstanceName = "BulletinBoard_";
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
 builder.Services.AddAuthentication(x => 
     {
         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -32,14 +32,6 @@ public interface ICategoryRepository
     Task DeleteAsync(Guid categoryId, CancellationToken cancellationToken);
     
     /// <summary>
-    /// Обновляет категорию.
-    /// </summary>
-    /// <param name="category">Категория.</param>
-    /// <param name="cancellationToken">Токен отмены.</param>
-    /// <returns></returns>
-    Task UpdateCategoryAsync(CategoryDto category, CancellationToken cancellationToken);
-    
-    /// <summary>
     /// Возвращает все вложенные категории по идентификатору.
     /// </summary>
     /// <param name="categoryId">Идентификатор корневой категории.</param>

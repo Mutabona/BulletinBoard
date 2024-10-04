@@ -1,5 +1,7 @@
-﻿using BulletinBoard.AppServices.Contexts.Categories.Repositories;
+﻿using System.Text.Json;
+using BulletinBoard.AppServices.Contexts.Categories.Repositories;
 using BulletinBoard.Contracts.Categories;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace BulletinBoard.AppServices.Contexts.Categories.Services;
 
@@ -7,14 +9,19 @@ namespace BulletinBoard.AppServices.Contexts.Categories.Services;
 public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _repository;
+    private readonly IDistributedCache _cache;
+    
+    private const string key = "all_categories";
 
-    public CategoryService(ICategoryRepository repository)
+    public CategoryService(ICategoryRepository repository, IDistributedCache cache)
     {
         _repository = repository;
+        _cache = cache;
     }
     /// <inheritdoc />
     public async Task<Guid> CreateCategoryAsync(CreateCategoryRequest createCategoryRequest, CancellationToken cancellationToken)
     {
+        await _cache.RemoveAsync(key, cancellationToken);
         return await _repository.AddCategoryAsync(createCategoryRequest, cancellationToken);
     }
 
@@ -27,13 +34,8 @@ public class CategoryService : ICategoryService
     /// <inheritdoc />
     public async Task DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
     {
+        await _cache.RemoveAsync(key, cancellationToken);
         await _repository.DeleteAsync(categoryId, cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async Task UpdateCategoryAsync(CategoryDto category, CancellationToken cancellationToken)
-    {
-        await _repository.UpdateCategoryAsync(category, cancellationToken);
     }
 
     /// <inheritdoc />
@@ -46,7 +48,26 @@ public class CategoryService : ICategoryService
     /// <inheritdoc />
     public async Task<ICollection<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
     {
-        return await _repository.GetAllCategoriesAsync(cancellationToken); 
+        ICollection<CategoryDto> categories;
+        
+        var serializedCategories = await _cache.GetStringAsync(key, cancellationToken);
+
+        if (!string.IsNullOrEmpty(serializedCategories))
+        {
+            categories =  JsonSerializer.Deserialize<ICollection<CategoryDto>>(serializedCategories);
+            return categories;
+        }
+        
+        categories = await _repository.GetAllCategoriesAsync(cancellationToken);
+
+        serializedCategories = JsonSerializer.Serialize(categories);
+        await _cache.SetStringAsync(key, serializedCategories, 
+            new DistributedCacheEntryOptions
+            {
+                SlidingExpiration = TimeSpan.FromHours(1)
+            }, cancellationToken);
+        
+        return categories;
     }
 
     /// <inheritdoc />
