@@ -18,12 +18,11 @@ public class CreateCategoryValidator : AbstractValidator<CreateCategoryRequest>
     public CreateCategoryValidator(ICategoryService categoryService)
     {
         _categoryService = categoryService;
-        
+
         RuleFor(x => x.Name)
             .NotEmpty()
             .MaximumLength(50)
-            .MinimumLength(2)
-            .WithMessage("Невозможное имя категории.");
+            .MinimumLength(2);
         
         RuleFor(x => x.ParentCategoryId)
             .Must((id) => ParentCategoryIdIsValid(id))
@@ -34,9 +33,6 @@ public class CreateCategoryValidator : AbstractValidator<CreateCategoryRequest>
     {
         if (parentCategoryId == null) return true;
         
-        var parentCategory = _categoryService.IsCategoryExistsAsync(parentCategoryId.Value, CancellationToken.None).GetAwaiter().GetResult();
-        
-        if (parentCategory == null) return false;
-        return true;
+        return _categoryService.IsCategoryExistsAsync(parentCategoryId.Value, CancellationToken.None).GetAwaiter().GetResult();
     }
 }

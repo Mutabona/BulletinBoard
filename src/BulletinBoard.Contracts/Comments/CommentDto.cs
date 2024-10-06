@@ -8,15 +8,20 @@ public class CommentDto
     /// <summary>
     /// Идентификатор автора комментария.
     /// </summary>
-    public Guid? AuthorId { get; private set; }
+    public Guid? AuthorId { get; set; }
+    
+    /// <summary>
+    /// Имя автора.
+    /// </summary>
+    public string AuthorName { get; set; }
     
     /// <summary>
     /// Идентификатор объявления с комментарием.
     /// </summary>
-    public Guid? BulletinId { get; private set; }
+    public Guid? BulletinId { get; set; }
     
     /// <summary>
     /// Содержание комментария.
     /// </summary>
-    public string Text { get; private set; }
+    public string Text { get; set; }
 }

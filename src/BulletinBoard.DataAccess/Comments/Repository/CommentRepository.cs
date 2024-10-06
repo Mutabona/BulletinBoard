@@ -30,13 +30,13 @@ public class CommentRepository(IRepository<Comment> repository, IMapper mapper) 
     ///<inheritdoc/>
     public async Task<ICollection<CommentDto>> GetCommentsByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        return await repository.GetAll().Where(c => c.BulletinId == bulletinId).ProjectTo<CommentDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+        return await repository.GetAll().Where(c => c.BulletinId == bulletinId).Include(x => x.Author).ProjectTo<CommentDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 
     ///<inheritdoc/>
     public async Task<CommentDto> GetCommentByIdAsync(Guid commentId, CancellationToken cancellationToken)
     {
-        var comment =  await repository.GetAll().Where(c => c.Id == commentId).FirstOrDefaultAsync(cancellationToken);
+        var comment =  await repository.GetAll().Where(c => c.Id == commentId).Include(x => x.Author).FirstOrDefaultAsync(cancellationToken);
         return mapper.Map<CommentDto>(comment);
     }
 }

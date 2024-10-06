@@ -1,0 +1,287 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (5/5)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">70,00 % (7/10)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.Domain.Base;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.Domain.Bulletins.Entity;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">namespace BulletinBoard.Domain.Categories.Entity;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">/// Сущность категории.</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">public class Category : BaseEntity</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">    /// Название категории.</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line hit"><div class="line-number">14</div><div class="line-content">    public string Name { <div data-hover-target=".s-714" data-activate-target=".s-714" class="statement s-714 hit"><div class="statement-info s-714"><div>Id: 714</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li><li>BulletinBoard.Tests.MapProfilesTests.BulletinProfileTests.BulletinProfile_Bulletin_To_BulletinDto: 1 hit</li></ul></div></div>get;</div> <div data-hover-target=".s-715" data-activate-target=".s-715" class="statement s-715 hit"><div class="statement-info s-715"><div>Id: 715</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_CreateCategoryRequest_To_Category: 1 hit</li><li>BulletinBoard.Tests.MapProfilesTests.BulletinProfileTests.BulletinProfile_Bulletin_To_BulletinDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    /// Идентификатор материнской категории.</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line hit"><div class="line-number">19</div><div class="line-content">    public Guid? ParentCategoryId { <div data-hover-target=".s-716" data-activate-target=".s-716" class="statement s-716 hit"><div class="statement-info s-716"><div>Id: 716</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li></ul></div></div>get;</div> <div data-hover-target=".s-717" data-activate-target=".s-717" class="statement s-717 hit"><div class="statement-info s-717"><div>Id: 717</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_CreateCategoryRequest_To_Category: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    /// Материнская категория.</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">24</div><div class="line-content">    public virtual Category? ParentCategory { <div data-hover-target=".s-718" data-activate-target=".s-718" class="statement s-718 not-hit"><div class="statement-info s-718"><div>Id: 718</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-719" data-activate-target=".s-719" class="statement s-719 hit"><div class="statement-info s-719"><div>Id: 719</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    /// Дочерние категории.</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">29</div><div class="line-content">    public virtual ICollection&lt;Category&gt; Subcategories { <div data-hover-target=".s-720" data-activate-target=".s-720" class="statement s-720 not-hit"><div class="statement-info s-720"><div>Id: 720</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-721" data-activate-target=".s-721" class="statement s-721 hit"><div class="statement-info s-721"><div>Id: 721</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">31</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">    /// Объявления в категории.</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">34</div><div class="line-content">    public virtual ICollection&lt;Bulletin&gt; Bulletins { <div data-hover-target=".s-722" data-activate-target=".s-722" class="statement s-722 not-hit"><div class="statement-info s-722"><div>Id: 722</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-723" data-activate-target=".s-723" class="statement s-723 hit"><div class="statement-info s-723"><div>Id: 723</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.CategoryProfileTests.CategoryProfile_Category_To_CategoryDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

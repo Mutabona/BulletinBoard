@@ -10,7 +10,7 @@ public class CreateBulletinRequest
     /// <summary>
     /// Название объявления.
     /// </summary>
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     /// <summary>
     /// Описание объявления.

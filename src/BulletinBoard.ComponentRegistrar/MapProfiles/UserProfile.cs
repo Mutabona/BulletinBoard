@@ -12,7 +12,7 @@ public class UserProfile : Profile
             .ForMember(s => s.Id, map => map.MapFrom(src => Guid.NewGuid()))
             .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
         
-        CreateMap<User, UserDto>(MemberList.None).ReverseMap();
+        CreateMap<User, UserDto>(MemberList.None);
 
     }
 }

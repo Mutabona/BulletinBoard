@@ -15,7 +15,7 @@ public class AddCommentValidator : AbstractValidator<AddCommentRequest>
     {
         RuleFor(x => x.Text)
             .NotEmpty()
-            .WithMessage("Комментарий не может быть пустым")
+            .WithMessage("Комментарий не может быть пустым.")
             .MaximumLength(1500)
             .WithMessage("Максимальная длинна комментария 1500 символов.");
     }

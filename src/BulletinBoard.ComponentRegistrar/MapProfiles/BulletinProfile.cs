@@ -14,9 +14,7 @@ public class BulletinProfile : Profile
 
         CreateMap<Bulletin, BulletinDto>(MemberList.None)
             .ForMember(s => s.CategoryName, map => map.MapFrom(src => src.Category.Name))
-            .ForMember(s => s.CategoryId, map => map.MapFrom(src => src.Category.Id))
+            .ForMember(s => s.CategoryId, map => map.MapFrom(src => src.CategoryId))
             .ForMember(s => s.OwnerName, map => map.MapFrom(src => src.Owner.Name));
-
-        CreateMap<BulletinDto, Bulletin>(MemberList.None);
     }
 }

@@ -1,0 +1,293 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (7/7)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">50,00 % (7/14)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">namespace BulletinBoard.Contracts.Users;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">/// Пользователь.</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">public class UserDto</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">    /// Идентификатор.</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">11</div><div class="line-content">    public Guid Id { <div data-hover-target=".s-483" data-activate-target=".s-483" class="statement s-483 not-hit"><div class="statement-info s-483"><div>Id: 483</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-484" data-activate-target=".s-484" class="statement s-484 hit"><div class="statement-info s-484"><div>Id: 484</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">   </div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">    /// Дата создания пользователя.</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">16</div><div class="line-content">    public DateTime CreatedAt { <div data-hover-target=".s-485" data-activate-target=".s-485" class="statement s-485 not-hit"><div class="statement-info s-485"><div>Id: 485</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-486" data-activate-target=".s-486" class="statement s-486 hit"><div class="statement-info s-486"><div>Id: 486</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    /// Почта.</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">21</div><div class="line-content">    public string? Email { <div data-hover-target=".s-487" data-activate-target=".s-487" class="statement s-487 not-hit"><div class="statement-info s-487"><div>Id: 487</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-488" data-activate-target=".s-488" class="statement s-488 hit"><div class="statement-info s-488"><div>Id: 488</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    /// Номер телефона.</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">26</div><div class="line-content">    public string? Phone { <div data-hover-target=".s-489" data-activate-target=".s-489" class="statement s-489 not-hit"><div class="statement-info s-489"><div>Id: 489</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-490" data-activate-target=".s-490" class="statement s-490 hit"><div class="statement-info s-490"><div>Id: 490</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">    /// Пароль.</div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">31</div><div class="line-content">    public string Password { <div data-hover-target=".s-491" data-activate-target=".s-491" class="statement s-491 not-hit"><div class="statement-info s-491"><div>Id: 491</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-492" data-activate-target=".s-492" class="statement s-492 hit"><div class="statement-info s-492"><div>Id: 492</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    /// Имя.</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">36</div><div class="line-content">    public string Name { <div data-hover-target=".s-493" data-activate-target=".s-493" class="statement s-493 not-hit"><div class="statement-info s-493"><div>Id: 493</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-494" data-activate-target=".s-494" class="statement s-494 hit"><div class="statement-info s-494"><div>Id: 494</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>set;</div> }</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    /// Роль в системе.</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line partial"><div class="line-number">41</div><div class="line-content">    public string Role { <div data-hover-target=".s-495" data-activate-target=".s-495" class="statement s-495 not-hit"><div class="statement-info s-495"><div>Id: 495</div><div>Hits: 0</div></div>get;</div> <div data-hover-target=".s-496" data-activate-target=".s-496" class="statement s-496 hit"><div class="statement-info s-496"><div>Id: 496</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests.UserProfile_User_To_UserDto: 1 hit</li></ul></div></div>private set;</div> }</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

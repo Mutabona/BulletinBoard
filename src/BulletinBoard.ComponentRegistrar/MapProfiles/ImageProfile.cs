@@ -17,7 +17,7 @@ public class ImageProfile : Profile
             .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
             
         
-        CreateMap<Image, ImageDto>(MemberList.None).ReverseMap();
+        CreateMap<Image, ImageDto>(MemberList.None);
     }
     
     /// <summary>

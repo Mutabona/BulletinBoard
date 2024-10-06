@@ -1,0 +1,366 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/41)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/21)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using AutoMapper;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using AutoMapper.QueryableExtensions;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Bulletins.Repositories;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.AppServices.Specifications;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.Contracts.Bulletins;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">using BulletinBoard.Domain.Bulletins.Entity;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">using BulletinBoard.Infrastructure.Repository;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">using Microsoft.EntityFrameworkCore;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">namespace BulletinBoard.DataAccess.Bulletins.Repository;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">///&lt;inheritdoc cref=&quot;IBulletinRepository&quot;/&gt;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">public class BulletinRepository : IBulletinRepository</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    private readonly IRepository&lt;Bulletin&gt; _repository;</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    private readonly IMapper _mapper;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    /// Инициализирует экземпляр &lt;see cref=&quot;BulletinRepository&quot;/&gt;.</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line not-hit"><div class="line-number">21</div><div class="line-content">    <div data-hover-target=".s-658" data-activate-target=".s-658" class="statement s-658 not-hit"><div class="statement-info s-658"><div>Id: 658</div><div>Hits: 0</div></div>public BulletinRepository(IRepository&lt;Bulletin&gt; repository, IMapper mapper)</div></div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content">        <div data-hover-target=".s-659" data-activate-target=".s-659" class="statement s-659 not-hit"><div class="statement-info s-659"><div>Id: 659</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
+<div class="line not-hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-660" data-activate-target=".s-660" class="statement s-660 not-hit"><div class="statement-info s-660"><div>Id: 660</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    public async Task&lt;ICollection&lt;BulletinDto&gt;&gt; GetBySpecificationWithPaginationAsync(ISpecification&lt;Bulletin&gt; specification, int take, int? skip, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-669" data-activate-target=".s-669" class="statement s-669 not-hit">var query = _repository</div></div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content"><div data-hover-target=".s-669" data-activate-target=".s-669" class="statement s-669 not-hit">            .GetAll()</div></div></div>
+<div class="line not-hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-669" data-activate-target=".s-669" class="statement s-669 not-hit">            .Include(c =&gt; c.Owner)</div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content"><div data-hover-target=".s-669" data-activate-target=".s-669" class="statement s-669 not-hit">            .Include(c =&gt; c.Category)</div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content"><div data-hover-target=".s-669" data-activate-target=".s-669" class="statement s-669 not-hit">            .OrderBy(bulletin =&gt; bulletin.Id)</div></div></div>
+<div class="line not-hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-669" data-activate-target=".s-669" class="statement s-669 not-hit"><div class="statement-info s-669"><div>Id: 669</div><div>Hits: 0</div></div>            .Where(specification.PredicateExpression);</div></div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content">        <div data-hover-target=".s-670" data-activate-target=".s-670" class="statement s-670 not-hit"><div class="statement-info s-670"><div>Id: 670</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (skip.HasValue)</div></div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">39</div><div class="line-content">            <div data-hover-target=".s-673" data-activate-target=".s-673" class="statement s-673 not-hit"><div class="statement-info s-673"><div>Id: 673</div><div>Hits: 0</div></div>query = query.Skip(skip.Value);</div></div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">            </div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-672" data-activate-target=".s-672" class="statement s-672 not-hit">return await query</div></div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content"><div data-hover-target=".s-672" data-activate-target=".s-672" class="statement s-672 not-hit">            .Take(take)</div></div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content"><div data-hover-target=".s-672" data-activate-target=".s-672" class="statement s-672 not-hit">            .ProjectTo&lt;BulletinDto&gt;(_mapper.ConfigurationProvider)</div></div></div>
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content"><div data-hover-target=".s-672" data-activate-target=".s-672" class="statement s-672 not-hit"><div class="statement-info s-672"><div>Id: 672</div><div>Hits: 0</div></div>            .ToArrayAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">48</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">    public async Task&lt;ICollection&lt;BulletinDto&gt;&gt; GetBySpecificationAsync(ISpecification&lt;Bulletin&gt; specification, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">51</div><div class="line-content">        <div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit">return await _repository</div></div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content"><div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit">            .GetAll()</div></div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content"><div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit">            .Include(c =&gt; c.Owner)</div></div></div>
+<div class="line not-hit"><div class="line-number">54</div><div class="line-content"><div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit">            .Include(c =&gt; c.Category)</div></div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content"><div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit">            .Where(specification.PredicateExpression)</div></div></div>
+<div class="line not-hit"><div class="line-number">56</div><div class="line-content"><div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit">            .ProjectTo&lt;BulletinDto&gt;(_mapper.ConfigurationProvider)</div></div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content"><div data-hover-target=".s-668" data-activate-target=".s-668" class="statement s-668 not-hit"><div class="statement-info s-668"><div>Id: 668</div><div>Hits: 0</div></div>            .ToArrayAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">    public async Task&lt;BulletinDto&gt; GetByIdAsync(Guid id, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">63</div><div class="line-content">        <div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit">return await _repository</div></div></div>
+<div class="line not-hit"><div class="line-number">64</div><div class="line-content"><div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit">            .GetAll()</div></div></div>
+<div class="line not-hit"><div class="line-number">65</div><div class="line-content"><div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit">            .Where(bulletin =&gt; bulletin.Id == id)</div></div></div>
+<div class="line not-hit"><div class="line-number">66</div><div class="line-content"><div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit">            .Include(c =&gt; c.Owner)</div></div></div>
+<div class="line not-hit"><div class="line-number">67</div><div class="line-content"><div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit">            .Include(c =&gt; c.Category)</div></div></div>
+<div class="line not-hit"><div class="line-number">68</div><div class="line-content"><div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit">            .ProjectTo&lt;BulletinDto&gt;(_mapper.ConfigurationProvider)</div></div></div>
+<div class="line not-hit"><div class="line-number">69</div><div class="line-content"><div data-hover-target=".s-667" data-activate-target=".s-667" class="statement s-667 not-hit"><div class="statement-info s-667"><div>Id: 667</div><div>Hits: 0</div></div>            .FirstOrDefaultAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">70</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">71</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">72</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">73</div><div class="line-content">    public async Task&lt;Guid&gt; CreateAsync(Guid ownerId, CreateBulletinRequest bulletin,</div></div>
+<div class="line"><div class="line-number">74</div><div class="line-content">        CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">75</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">76</div><div class="line-content">        <div data-hover-target=".s-661" data-activate-target=".s-661" class="statement s-661 not-hit"><div class="statement-info s-661"><div>Id: 661</div><div>Hits: 0</div></div>var entity = _mapper.Map&lt;Bulletin&gt;(bulletin);</div></div></div>
+<div class="line not-hit"><div class="line-number">77</div><div class="line-content">        <div data-hover-target=".s-662" data-activate-target=".s-662" class="statement s-662 not-hit"><div class="statement-info s-662"><div>Id: 662</div><div>Hits: 0</div></div>entity.OwnerId = ownerId;</div></div></div>
+<div class="line not-hit"><div class="line-number">78</div><div class="line-content">        <div data-hover-target=".s-663" data-activate-target=".s-663" class="statement s-663 not-hit"><div class="statement-info s-663"><div>Id: 663</div><div>Hits: 0</div></div>await _repository.AddAsync(entity, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">79</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">80</div><div class="line-content">        <div data-hover-target=".s-664" data-activate-target=".s-664" class="statement s-664 not-hit"><div class="statement-info s-664"><div>Id: 664</div><div>Hits: 0</div></div>return entity.Id;</div></div></div>
+<div class="line"><div class="line-number">81</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">82</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">83</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">84</div><div class="line-content">    public async Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">85</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">86</div><div class="line-content">        <div data-hover-target=".s-674" data-activate-target=".s-674" class="statement s-674 not-hit"><div class="statement-info s-674"><div>Id: 674</div><div>Hits: 0</div></div>var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">87</div><div class="line-content">        <div data-hover-target=".s-675" data-activate-target=".s-675" class="statement s-675 not-hit"><div class="statement-info s-675"><div>Id: 675</div><div>Hits: 0</div></div>bulletin.Title = request.Title;</div></div></div>
+<div class="line not-hit"><div class="line-number">88</div><div class="line-content">        <div data-hover-target=".s-676" data-activate-target=".s-676" class="statement s-676 not-hit"><div class="statement-info s-676"><div>Id: 676</div><div>Hits: 0</div></div>bulletin.Description = request.Description;</div></div></div>
+<div class="line not-hit"><div class="line-number">89</div><div class="line-content">        <div data-hover-target=".s-677" data-activate-target=".s-677" class="statement s-677 not-hit"><div class="statement-info s-677"><div>Id: 677</div><div>Hits: 0</div></div>bulletin.CategoryId = request.CategoryId.Value;</div></div></div>
+<div class="line not-hit"><div class="line-number">90</div><div class="line-content">        <div data-hover-target=".s-678" data-activate-target=".s-678" class="statement s-678 not-hit"><div class="statement-info s-678"><div>Id: 678</div><div>Hits: 0</div></div>bulletin.Price = request.Price.Value;</div></div></div>
+<div class="line not-hit"><div class="line-number">91</div><div class="line-content">        <div data-hover-target=".s-679" data-activate-target=".s-679" class="statement s-679 not-hit"><div class="statement-info s-679"><div>Id: 679</div><div>Hits: 0</div></div>await _repository.UpdateAsync(bulletin, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">92</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">93</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">94</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">95</div><div class="line-content">    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">96</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">97</div><div class="line-content">        <div data-hover-target=".s-665" data-activate-target=".s-665" class="statement s-665 not-hit"><div class="statement-info s-665"><div>Id: 665</div><div>Hits: 0</div></div>await _repository.DeleteAsync(id, cancellationToken);</div> </div></div>
+<div class="line"><div class="line-number">98</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">99</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">100</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">101</div><div class="line-content">    public async Task&lt;ICollection&lt;BulletinDto&gt;&gt; GetAllAsync(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">102</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">103</div><div class="line-content">        <div data-hover-target=".s-666" data-activate-target=".s-666" class="statement s-666 not-hit"><div class="statement-info s-666"><div>Id: 666</div><div>Hits: 0</div></div>return await _repository.GetAll().Include(b =&gt; b.Owner).Include(b =&gt; b.Category).ProjectTo&lt;BulletinDto&gt;(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">104</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">105</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

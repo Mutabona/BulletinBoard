@@ -12,6 +12,7 @@ public class CommentProfile : Profile
             .ForMember(x => x.Id, map => map.MapFrom(src => Guid.NewGuid()))
             .ForMember(x => x.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
         
-        CreateMap<Comment, CommentDto>();
+        CreateMap<Comment, CommentDto>()
+            .ForMember(x => x.AuthorName, map => map.MapFrom(src => src.Author.Name));
     }
 }

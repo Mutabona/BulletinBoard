@@ -1,0 +1,380 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/84)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/45)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using System.Text;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.API.Controllers;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.ComponentRegistrar;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Bulletins;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.Contracts.Categories;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">using BulletinBoard.Contracts.Comments;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">using BulletinBoard.Contracts.Files.Images;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">using BulletinBoard.DataAccess;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">using Microsoft.AspNetCore.Authentication.JwtBearer;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">using Microsoft.EntityFrameworkCore;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">using Microsoft.IdentityModel.Tokens;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">using Microsoft.OpenApi.Models;</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">15</div><div class="line-content"><div data-hover-target=".s-1" data-activate-target=".s-1" class="statement s-1 not-hit"><div class="statement-info s-1"><div>Id: 1</div><div>Hits: 0</div></div>var builder = WebApplication.CreateBuilder(args);</div></div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">// Add services to the container.</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content"><div data-hover-target=".s-2" data-activate-target=".s-2" class="statement s-2 not-hit"><div class="statement-info s-2"><div>Id: 2</div><div>Hits: 0</div></div>builder.Services.AddControllers();</div></div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle</div></div>
+<div class="line not-hit"><div class="line-number">21</div><div class="line-content"><div data-hover-target=".s-3" data-activate-target=".s-3" class="statement s-3 not-hit"><div class="statement-info s-3"><div>Id: 3</div><div>Hits: 0</div></div>builder.Services.AddEndpointsApiExplorer();</div></div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">builder.Services.AddSwaggerGen(options =&gt;</div></div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">{</div></div></div>
+<div class="line not-hit"><div class="line-number">24</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-19" data-activate-target=".s-19" class="statement s-19 not-hit"><div class="statement-info s-19"><div>Id: 19</div><div>Hits: 0</div></div>options.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo { Title = &quot;BulletinBoard API&quot;, Version = &quot;V1.1&quot; });</div></div></div></div>
+<div class="line not-hit"><div class="line-number">25</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-20" data-activate-target=".s-20" class="statement s-20 not-hit"><div class="statement-info s-20"><div>Id: 20</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(AccountController).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">26</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-21" data-activate-target=".s-21" class="statement s-21 not-hit"><div class="statement-info s-21"><div>Id: 21</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(BulletinController).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">27</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-22" data-activate-target=".s-22" class="statement s-22 not-hit"><div class="statement-info s-22"><div>Id: 22</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(ImageController).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">28</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-23" data-activate-target=".s-23" class="statement s-23 not-hit"><div class="statement-info s-23"><div>Id: 23</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(CategoryController).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">29</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-24" data-activate-target=".s-24" class="statement s-24 not-hit"><div class="statement-info s-24"><div>Id: 24</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(UserController).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-25" data-activate-target=".s-25" class="statement s-25 not-hit"><div class="statement-info s-25"><div>Id: 25</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(BulletinDto).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-26" data-activate-target=".s-26" class="statement s-26 not-hit"><div class="statement-info s-26"><div>Id: 26</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(CategoryDto).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-27" data-activate-target=".s-27" class="statement s-27 not-hit"><div class="statement-info s-27"><div>Id: 27</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(CreateBulletinRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-28" data-activate-target=".s-28" class="statement s-28 not-hit"><div class="statement-info s-28"><div>Id: 28</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(UpdateBulletinRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-29" data-activate-target=".s-29" class="statement s-29 not-hit"><div class="statement-info s-29"><div>Id: 29</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(CreateCategoryRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-30" data-activate-target=".s-30" class="statement s-30 not-hit"><div class="statement-info s-30"><div>Id: 30</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(LoginUserRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">36</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-31" data-activate-target=".s-31" class="statement s-31 not-hit"><div class="statement-info s-31"><div>Id: 31</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(RegisterUserRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-32" data-activate-target=".s-32" class="statement s-32 not-hit"><div class="statement-info s-32"><div>Id: 32</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(SearchBulletinRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">38</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-33" data-activate-target=".s-33" class="statement s-33 not-hit"><div class="statement-info s-33"><div>Id: 33</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(ImageDto).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">39</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-34" data-activate-target=".s-34" class="statement s-34 not-hit"><div class="statement-info s-34"><div>Id: 34</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(UserDto).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-35" data-activate-target=".s-35" class="statement s-35 not-hit"><div class="statement-info s-35"><div>Id: 35</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(AddCommentRequest).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">41</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-36" data-activate-target=".s-36" class="statement s-36 not-hit"><div class="statement-info s-36"><div>Id: 36</div><div>Hits: 0</div></div>options.IncludeXmlComments(Path.Combine(Path.Combine(AppContext.BaseDirectory, $&quot;{typeof(CommentDto).Assembly.GetName().Name}.xml&quot;)));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit">options.AddSecurityDefinition(&quot;Bearer&quot;, new OpenApiSecurityScheme</div></div></div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit">    {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit">        Description = &quot;JWT Authorization header using the Bearer scheme&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit">        Name = &quot;Authorization&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit">        In = ParameterLocation.Header,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">47</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit">        Scheme = &quot;Bearer&quot;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-37" data-activate-target=".s-37" class="statement s-37 not-hit"><div class="statement-info s-37"><div>Id: 37</div><div>Hits: 0</div></div>    });</div></div></div></div>
+<div class="line not-hit"><div class="line-number">49</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit">    <div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">options.AddSecurityRequirement(new OpenApiSecurityRequirement()</div></div></div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">    {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">51</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">        {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">            new OpenApiSecurityScheme</div></div></div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">            {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">54</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                Reference = new OpenApiReference</div></div></div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">56</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                    Type = ReferenceType.SecurityScheme,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                    Id = &quot;Bearer&quot;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">58</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                },</div></div></div></div>
+<div class="line not-hit"><div class="line-number">59</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                Scheme = &quot;oauth2&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">60</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                Name = &quot;Bearer&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">61</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">                In = ParameterLocation.Header</div></div></div></div>
+<div class="line not-hit"><div class="line-number">62</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">            },</div></div></div></div>
+<div class="line not-hit"><div class="line-number">63</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">            new List&lt;string&gt;()</div></div></div></div>
+<div class="line not-hit"><div class="line-number">64</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit">        }</div></div></div></div>
+<div class="line not-hit"><div class="line-number">65</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div data-hover-target=".s-38" data-activate-target=".s-38" class="statement s-38 not-hit"><div class="statement-info s-38"><div>Id: 38</div><div>Hits: 0</div></div>    });</div></div></div></div>
+<div class="line not-hit"><div class="line-number">66</div><div class="line-content"><div data-hover-target=".s-4" data-activate-target=".s-4" class="statement s-4 not-hit"><div class="statement-info s-4"><div>Id: 4</div><div>Hits: 0</div></div>});</div></div></div>
+<div class="line"><div class="line-number">67</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">68</div><div class="line-content"><div data-hover-target=".s-5" data-activate-target=".s-5" class="statement s-5 not-hit"><div class="statement-info s-5"><div>Id: 5</div><div>Hits: 0</div></div>builder.Services.AddServices();</div></div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">70</div><div class="line-content"><div data-hover-target=".s-6" data-activate-target=".s-6" class="statement s-6 not-hit">builder.Services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;</div></div></div>
+<div class="line not-hit"><div class="line-number">71</div><div class="line-content"><div data-hover-target=".s-6" data-activate-target=".s-6" class="statement s-6 not-hit">{</div></div></div>
+<div class="line not-hit"><div class="line-number">72</div><div class="line-content"><div data-hover-target=".s-6" data-activate-target=".s-6" class="statement s-6 not-hit">    <div data-hover-target=".s-41" data-activate-target=".s-41" class="statement s-41 not-hit"><div class="statement-info s-41"><div>Id: 41</div><div>Hits: 0</div></div>options.UseNpgsql(builder.Configuration.GetConnectionString(&quot;DbConnection&quot;));</div></div></div></div>
+<div class="line not-hit"><div class="line-number">73</div><div class="line-content"><div data-hover-target=".s-6" data-activate-target=".s-6" class="statement s-6 not-hit"><div class="statement-info s-6"><div>Id: 6</div><div>Hits: 0</div></div>});</div></div></div>
+<div class="line"><div class="line-number">74</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">75</div><div class="line-content"><div data-hover-target=".s-7" data-activate-target=".s-7" class="statement s-7 not-hit">builder.Services.AddStackExchangeRedisCache(options =&gt;</div></div></div>
+<div class="line not-hit"><div class="line-number">76</div><div class="line-content"><div data-hover-target=".s-7" data-activate-target=".s-7" class="statement s-7 not-hit">{</div></div></div>
+<div class="line not-hit"><div class="line-number">77</div><div class="line-content"><div data-hover-target=".s-7" data-activate-target=".s-7" class="statement s-7 not-hit">    <div data-hover-target=".s-42" data-activate-target=".s-42" class="statement s-42 not-hit"><div class="statement-info s-42"><div>Id: 42</div><div>Hits: 0</div></div>options.InstanceName = &quot;BulletinBoard_&quot;;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">78</div><div class="line-content"><div data-hover-target=".s-7" data-activate-target=".s-7" class="statement s-7 not-hit">    <div data-hover-target=".s-43" data-activate-target=".s-43" class="statement s-43 not-hit"><div class="statement-info s-43"><div>Id: 43</div><div>Hits: 0</div></div>options.Configuration = builder.Configuration.GetConnectionString(&quot;Redis&quot;);</div></div></div></div>
+<div class="line not-hit"><div class="line-number">79</div><div class="line-content"><div data-hover-target=".s-7" data-activate-target=".s-7" class="statement s-7 not-hit"><div class="statement-info s-7"><div>Id: 7</div><div>Hits: 0</div></div>});</div></div></div>
+<div class="line"><div class="line-number">80</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">81</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">builder.Services.AddAuthentication(x =&gt; </div></div></div>
+<div class="line not-hit"><div class="line-number">82</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">    {</div></div></div>
+<div class="line not-hit"><div class="line-number">83</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">        <div data-hover-target=".s-39" data-activate-target=".s-39" class="statement s-39 not-hit"><div class="statement-info s-39"><div>Id: 39</div><div>Hits: 0</div></div>x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">84</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">        <div data-hover-target=".s-40" data-activate-target=".s-40" class="statement s-40 not-hit"><div class="statement-info s-40"><div>Id: 40</div><div>Hits: 0</div></div>x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">85</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">    })</div></div></div>
+<div class="line not-hit"><div class="line-number">86</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">    .AddJwtBearer(options =&gt;</div></div></div>
+<div class="line not-hit"><div class="line-number">87</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">    {</div></div></div>
+<div class="line not-hit"><div class="line-number">88</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">        <div data-hover-target=".s-44" data-activate-target=".s-44" class="statement s-44 not-hit"><div class="statement-info s-44"><div>Id: 44</div><div>Hits: 0</div></div>options.RequireHttpsMetadata = false;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">89</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">        <div data-hover-target=".s-45" data-activate-target=".s-45" class="statement s-45 not-hit"><div class="statement-info s-45"><div>Id: 45</div><div>Hits: 0</div></div>options.SaveToken = true;</div></div></div></div>
+<div class="line not-hit"><div class="line-number">90</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit">        <div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit">options.TokenValidationParameters = new TokenValidationParameters()</div></div></div></div>
+<div class="line not-hit"><div class="line-number">91</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit">        {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">92</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit">            ValidateIssuerSigningKey = true,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">93</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit">            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration[&quot;Jwt:Key&quot;])),</div></div></div></div>
+<div class="line not-hit"><div class="line-number">94</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit">            ValidateIssuer = false,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">95</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit">            ValidateAudience = false</div></div></div></div>
+<div class="line not-hit"><div class="line-number">96</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div data-hover-target=".s-46" data-activate-target=".s-46" class="statement s-46 not-hit"><div class="statement-info s-46"><div>Id: 46</div><div>Hits: 0</div></div>        };</div></div></div></div>
+<div class="line not-hit"><div class="line-number">97</div><div class="line-content"><div data-hover-target=".s-8" data-activate-target=".s-8" class="statement s-8 not-hit"><div class="statement-info s-8"><div>Id: 8</div><div>Hits: 0</div></div>    });</div></div></div>
+<div class="line"><div class="line-number">98</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">99</div><div class="line-content"><div data-hover-target=".s-9" data-activate-target=".s-9" class="statement s-9 not-hit"><div class="statement-info s-9"><div>Id: 9</div><div>Hits: 0</div></div>builder.Services.AddAuthorization();</div></div></div>
+<div class="line"><div class="line-number">100</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">101</div><div class="line-content"><div data-hover-target=".s-10" data-activate-target=".s-10" class="statement s-10 not-hit"><div class="statement-info s-10"><div>Id: 10</div><div>Hits: 0</div></div>var app = builder.Build();</div></div></div>
+<div class="line"><div class="line-number">102</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">103</div><div class="line-content">// Configure the HTTP request pipeline.</div></div>
+<div class="line not-hit"><div class="line-number">104</div><div class="line-content"><div data-hover-target=".s-11" data-activate-target=".s-11" class="statement s-11 not-hit"><div class="statement-info s-11"><div>Id: 11</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (app.Environment.IsDevelopment())</div></div></div>
+<div class="line"><div class="line-number">105</div><div class="line-content">{</div></div>
+<div class="line not-hit"><div class="line-number">106</div><div class="line-content">    <div data-hover-target=".s-14" data-activate-target=".s-14" class="statement s-14 not-hit"><div class="statement-info s-14"><div>Id: 14</div><div>Hits: 0</div></div>app.UseSwagger();</div></div></div>
+<div class="line not-hit"><div class="line-number">107</div><div class="line-content">    <div data-hover-target=".s-15" data-activate-target=".s-15" class="statement s-15 not-hit"><div class="statement-info s-15"><div>Id: 15</div><div>Hits: 0</div></div>app.UseSwaggerUI();</div></div></div>
+<div class="line"><div class="line-number">108</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">109</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">110</div><div class="line-content"><div data-hover-target=".s-13" data-activate-target=".s-13" class="statement s-13 not-hit"><div class="statement-info s-13"><div>Id: 13</div><div>Hits: 0</div></div>app.UseHttpsRedirection();</div></div></div>
+<div class="line"><div class="line-number">111</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">112</div><div class="line-content"><div data-hover-target=".s-16" data-activate-target=".s-16" class="statement s-16 not-hit"><div class="statement-info s-16"><div>Id: 16</div><div>Hits: 0</div></div>app.UseAuthorization();</div></div></div>
+<div class="line"><div class="line-number">113</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">114</div><div class="line-content"><div data-hover-target=".s-17" data-activate-target=".s-17" class="statement s-17 not-hit"><div class="statement-info s-17"><div>Id: 17</div><div>Hits: 0</div></div>app.MapControllers();</div></div></div>
+<div class="line"><div class="line-number">115</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">116</div><div class="line-content"><div data-hover-target=".s-18" data-activate-target=".s-18" class="statement s-18 not-hit"><div class="statement-info s-18"><div>Id: 18</div><div>Hits: 0</div></div>app.Run();</div></div></div>
+</div>
+</body>
+</html>

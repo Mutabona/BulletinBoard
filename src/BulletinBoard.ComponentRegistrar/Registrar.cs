@@ -68,6 +68,8 @@ public static class Registrar
 
     private static MapperConfiguration GetMapperConfiguration()
     {
+        TimeProvider timeProvider = TimeProvider.System;
+        
         var configuration = new MapperConfiguration(cfg =>
         {
             cfg.AddProfile<BulletinProfile>();

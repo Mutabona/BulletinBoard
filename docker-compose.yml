@@ -60,9 +60,12 @@
       - "6379:6379"
     networks:
       - bulletinboard-network
+    volumes:
+      - redis-data:/var/lib/redis/data
   
 volumes:
   pg-data:
+  redis-data:
 
 networks:
   bulletinboard-network:

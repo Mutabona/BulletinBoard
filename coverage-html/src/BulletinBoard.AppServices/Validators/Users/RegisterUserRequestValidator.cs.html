@@ -1,0 +1,321 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (29/29)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (14/14)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (6/6)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using System.Data;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using System.Text.RegularExpressions;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using FluentValidation;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">namespace BulletinBoard.AppServices.Validators.Users;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">/// Валидатор запроса на создание пользователя.</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">public class RegisterUserRequestValidator : AbstractValidator&lt;RegisterUserRequest&gt;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">    private readonly IUserService _userService;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    /// Создаёт экземпляр &lt;see cref=&quot;RegisterUserRequestValidator&quot;/&gt;.</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    /// &lt;param name=&quot;userService&quot;&gt;Сервис для работы с пользователями.&lt;/param&gt;</div></div>
+<div class="line hit"><div class="line-number">20</div><div class="line-content">    <div data-hover-target=".s-175" data-activate-target=".s-175" class="statement s-175 hit"><div class="statement-info s-175"><div>Id: 175</div><div>Hits: 8</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests..ctor: 8 hits</li></ul></div></div>public RegisterUserRequestValidator(IUserService userService)</div></div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-176" data-activate-target=".s-176" class="statement s-176 hit"><div class="statement-info s-176"><div>Id: 176</div><div>Hits: 8</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests..ctor: 8 hits</li></ul></div></div>_userService = userService;</div></div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-177" data-activate-target=".s-177" class="statement s-177 hit">RuleFor(x =&gt; x.Password)</div></div></div>
+<div class="line hit"><div class="line-number">25</div><div class="line-content"><div data-hover-target=".s-177" data-activate-target=".s-177" class="statement s-177 hit">            .NotEmpty()</div></div></div>
+<div class="line hit"><div class="line-number">26</div><div class="line-content"><div data-hover-target=".s-177" data-activate-target=".s-177" class="statement s-177 hit">            .WithMessage(&quot;Пароль не может быть пустым.&quot;)</div></div></div>
+<div class="line hit"><div class="line-number">27</div><div class="line-content"><div data-hover-target=".s-177" data-activate-target=".s-177" class="statement s-177 hit">            .MinimumLength(2)</div></div></div>
+<div class="line hit"><div class="line-number">28</div><div class="line-content"><div data-hover-target=".s-177" data-activate-target=".s-177" class="statement s-177 hit"><div class="statement-info s-177"><div>Id: 177</div><div>Hits: 8</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests..ctor: 8 hits</li></ul></div></div>            .MaximumLength(50);</div></div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">RuleFor(x =&gt; x.Email)</div></div></div>
+<div class="line hit"><div class="line-number">31</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .NotEmpty()</div></div></div>
+<div class="line hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .WithMessage(&quot;Логин не может быть пустым.&quot;)</div></div></div>
+<div class="line hit"><div class="line-number">33</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .EmailAddress()</div></div></div>
+<div class="line hit"><div class="line-number">34</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .WithMessage(&quot;Некорректный адрес.&quot;)</div></div></div>
+<div class="line hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .MinimumLength(2)</div></div></div>
+<div class="line hit"><div class="line-number">36</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .MaximumLength(50)</div></div></div>
+<div class="line hit"><div class="line-number">37</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit">            .Must(ValidEmail)</div></div></div>
+<div class="line hit"><div class="line-number">38</div><div class="line-content"><div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 hit"><div class="statement-info s-178"><div>Id: 178</div><div>Hits: 8</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests..ctor: 8 hits</li></ul></div></div>            .WithMessage(&quot;Адрес уже зарегистрирован&quot;);</div></div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-179" data-activate-target=".s-179" class="statement s-179 hit">RuleFor(x =&gt; x.Name)</div></div></div>
+<div class="line hit"><div class="line-number">41</div><div class="line-content"><div data-hover-target=".s-179" data-activate-target=".s-179" class="statement s-179 hit">            .NotEmpty()</div></div></div>
+<div class="line hit"><div class="line-number">42</div><div class="line-content"><div data-hover-target=".s-179" data-activate-target=".s-179" class="statement s-179 hit">            .WithMessage(&quot;Имя не может быть пустым.&quot;)</div></div></div>
+<div class="line hit"><div class="line-number">43</div><div class="line-content"><div data-hover-target=".s-179" data-activate-target=".s-179" class="statement s-179 hit">            .MinimumLength(1)</div></div></div>
+<div class="line hit"><div class="line-number">44</div><div class="line-content"><div data-hover-target=".s-179" data-activate-target=".s-179" class="statement s-179 hit"><div class="statement-info s-179"><div>Id: 179</div><div>Hits: 8</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests..ctor: 8 hits</li></ul></div></div>            .MaximumLength(50);</div></div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-180" data-activate-target=".s-180" class="statement s-180 hit">RuleFor(x =&gt; x.Phone)</div></div></div>
+<div class="line hit"><div class="line-number">47</div><div class="line-content"><div data-hover-target=".s-180" data-activate-target=".s-180" class="statement s-180 hit">            .Must(ValidPhone)</div></div></div>
+<div class="line hit"><div class="line-number">48</div><div class="line-content"><div data-hover-target=".s-180" data-activate-target=".s-180" class="statement s-180 hit"><div class="statement-info s-180"><div>Id: 180</div><div>Hits: 8</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests..ctor: 8 hits</li></ul></div></div>            .WithMessage(&quot;Некорректный телефон&quot;);</div></div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">    private bool ValidPhone(string? phone)</div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-181" data-activate-target=".s-181" class="statement s-181 hit"><div class="statement-info s-181"><div>Id: 181</div><div>Hits: 8</div><div>Condition 1:<ul><li>Branch 1: 1 hit</li><li>Branch 2: 7 hits</li></ul></div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmailAlreadyExists_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_ValidData_ShouldReturnTrue: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullName_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidPhone_ShouldReturnFalse: 1 hit</li></ul></div></div>if (phone is null)</div> <div data-hover-target=".s-182" data-activate-target=".s-182" class="statement s-182 hit"><div class="statement-info s-182"><div>Id: 182</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullName_ShouldReturnFalse: 1 hit</li></ul></div></div>return true;</div></div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">55</div><div class="line-content">        <div data-hover-target=".s-183" data-activate-target=".s-183" class="statement s-183 hit"><div class="statement-info s-183"><div>Id: 183</div><div>Hits: 7</div><div>Condition 1:<ul><li>Branch 1: 6 hits</li><li>Branch 2: 1 hit</li></ul></div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmailAlreadyExists_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_ValidData_ShouldReturnTrue: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidPhone_ShouldReturnFalse: 1 hit</li></ul></div></div>if (Regex.IsMatch(phone, &quot;[0-9]{11}&quot;))</div> <div data-hover-target=".s-184" data-activate-target=".s-184" class="statement s-184 hit"><div class="statement-info s-184"><div>Id: 184</div><div>Hits: 6</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmailAlreadyExists_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_ValidData_ShouldReturnTrue: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidEmail_ShouldReturnFalse: 1 hit</li></ul></div></div>return true;</div></div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">57</div><div class="line-content">        <div data-hover-target=".s-185" data-activate-target=".s-185" class="statement s-185 hit"><div class="statement-info s-185"><div>Id: 185</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidPhone_ShouldReturnFalse: 1 hit</li></ul></div></div>return false;</div></div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    private bool ValidEmail(string? email)</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">62</div><div class="line-content">        <div data-hover-target=".s-186" data-activate-target=".s-186" class="statement s-186 hit"><div class="statement-info s-186"><div>Id: 186</div><div>Hits: 8</div><div>Condition 1:<ul><li>Branch 1: 1 hit</li><li>Branch 2: 7 hits</li></ul></div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmailAlreadyExists_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_ValidData_ShouldReturnTrue: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullName_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidPhone_ShouldReturnFalse: 1 hit</li></ul></div></div>if (string.IsNullOrEmpty(email))</div> <div data-hover-target=".s-187" data-activate-target=".s-187" class="statement s-187 hit"><div class="statement-info s-187"><div>Id: 187</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyEmail_ShouldReturnFalse: 1 hit</li></ul></div></div>return false;</div></div></div>
+<div class="line hit"><div class="line-number">63</div><div class="line-content">        <div data-hover-target=".s-188" data-activate-target=".s-188" class="statement s-188 hit"><div class="statement-info s-188"><div>Id: 188</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmptyPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullPassword_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_EmailAlreadyExists_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_ValidData_ShouldReturnTrue: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidEmail_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_NullName_ShouldReturnFalse: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Users.RegisterUserRequestValidatorTests.ValidateRegisterUserRequest_InvalidPhone_ShouldReturnFalse: 1 hit</li></ul></div></div>return _userService.IsUniqueEmailAsync(email, CancellationToken.None).GetAwaiter().GetResult();</div></div></div>
+<div class="line"><div class="line-number">64</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">65</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

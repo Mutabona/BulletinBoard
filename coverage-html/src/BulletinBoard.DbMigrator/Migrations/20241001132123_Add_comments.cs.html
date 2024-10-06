@@ -1,0 +1,452 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/138)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/26)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using System;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using Microsoft.EntityFrameworkCore.Migrations;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">#nullable disable</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">namespace BulletinBoard.DbMigrator.Migrations</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">    public partial class Add_comments : Migration</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">    {</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">        /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">        protected override void Up(MigrationBuilder migrationBuilder)</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">14</div><div class="line-content">            <div data-hover-target=".s-1018" data-activate-target=".s-1018" class="statement s-1018 not-hit">migrationBuilder.DropForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">15</div><div class="line-content"><div data-hover-target=".s-1018" data-activate-target=".s-1018" class="statement s-1018 not-hit">                name: &quot;FK_Bulletins_Categories_CategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content"><div data-hover-target=".s-1018" data-activate-target=".s-1018" class="statement s-1018 not-hit"><div class="statement-info s-1018"><div>Id: 1018</div><div>Hits: 0</div></div>                table: &quot;Bulletins&quot;);</div></div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">18</div><div class="line-content">            <div data-hover-target=".s-1019" data-activate-target=".s-1019" class="statement s-1019 not-hit">migrationBuilder.DropForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content"><div data-hover-target=".s-1019" data-activate-target=".s-1019" class="statement s-1019 not-hit">                name: &quot;FK_Categories_Categories_ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content"><div data-hover-target=".s-1019" data-activate-target=".s-1019" class="statement s-1019 not-hit"><div class="statement-info s-1019"><div>Id: 1019</div><div>Hits: 0</div></div>                table: &quot;Categories&quot;);</div></div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content">            <div data-hover-target=".s-1020" data-activate-target=".s-1020" class="statement s-1020 not-hit">migrationBuilder.DropColumn(</div></div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content"><div data-hover-target=".s-1020" data-activate-target=".s-1020" class="statement s-1020 not-hit">                name: &quot;Lastname&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">24</div><div class="line-content"><div data-hover-target=".s-1020" data-activate-target=".s-1020" class="statement s-1020 not-hit"><div class="statement-info s-1020"><div>Id: 1020</div><div>Hits: 0</div></div>                table: &quot;Users&quot;);</div></div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">26</div><div class="line-content">            <div data-hover-target=".s-1021" data-activate-target=".s-1021" class="statement s-1021 not-hit">migrationBuilder.DropColumn(</div></div></div>
+<div class="line not-hit"><div class="line-number">27</div><div class="line-content"><div data-hover-target=".s-1021" data-activate-target=".s-1021" class="statement s-1021 not-hit">                name: &quot;Login&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">28</div><div class="line-content"><div data-hover-target=".s-1021" data-activate-target=".s-1021" class="statement s-1021 not-hit"><div class="statement-info s-1021"><div>Id: 1021</div><div>Hits: 0</div></div>                table: &quot;Users&quot;);</div></div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content">            <div data-hover-target=".s-1022" data-activate-target=".s-1022" class="statement s-1022 not-hit">migrationBuilder.DropColumn(</div></div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content"><div data-hover-target=".s-1022" data-activate-target=".s-1022" class="statement s-1022 not-hit">                name: &quot;Surname&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-1022" data-activate-target=".s-1022" class="statement s-1022 not-hit"><div class="statement-info s-1022"><div>Id: 1022</div><div>Hits: 0</div></div>                table: &quot;Users&quot;);</div></div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content">            <div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit">migrationBuilder.AlterColumn&lt;Guid&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit">                name: &quot;ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">36</div><div class="line-content"><div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit">                table: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content"><div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit">                type: &quot;uuid&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">38</div><div class="line-content"><div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit">                nullable: true,</div></div></div>
+<div class="line not-hit"><div class="line-number">39</div><div class="line-content"><div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit">                oldClrType: typeof(Guid),</div></div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content"><div data-hover-target=".s-1023" data-activate-target=".s-1023" class="statement s-1023 not-hit"><div class="statement-info s-1023"><div>Id: 1023</div><div>Hits: 0</div></div>                oldType: &quot;uuid&quot;);</div></div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content">            <div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">migrationBuilder.AlterColumn&lt;string&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                name: &quot;Description&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                table: &quot;Bulletins&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                type: &quot;character varying(1500)&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                maxLength: 1500,</div></div></div>
+<div class="line not-hit"><div class="line-number">47</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                nullable: true,</div></div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                oldClrType: typeof(string),</div></div></div>
+<div class="line not-hit"><div class="line-number">49</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit">                oldType: &quot;text&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content"><div data-hover-target=".s-1024" data-activate-target=".s-1024" class="statement s-1024 not-hit"><div class="statement-info s-1024"><div>Id: 1024</div><div>Hits: 0</div></div>                oldNullable: true);</div></div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">            <div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">migrationBuilder.CreateTable(</div></div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                name: &quot;Comments&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">54</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                columns: table =&gt; <div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">new</div></div></div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">                {</div></div></div></div>
+<div class="line not-hit"><div class="line-number">56</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">                    Id = table.Column&lt;Guid&gt;(type: &quot;uuid&quot;, nullable: false),</div></div></div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">                    AuthorId = table.Column&lt;Guid&gt;(type: &quot;uuid&quot;, nullable: false),</div></div></div></div>
+<div class="line not-hit"><div class="line-number">58</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">                    BulletinId = table.Column&lt;Guid&gt;(type: &quot;uuid&quot;, nullable: false),</div></div></div></div>
+<div class="line not-hit"><div class="line-number">59</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">                    Text = table.Column&lt;string&gt;(type: &quot;character varying(1500)&quot;, maxLength: 1500, nullable: false),</div></div></div></div>
+<div class="line not-hit"><div class="line-number">60</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit">                    CreatedAt = table.Column&lt;DateTime&gt;(type: &quot;timestamp with time zone&quot;, nullable: false)</div></div></div></div>
+<div class="line not-hit"><div class="line-number">61</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1054" data-activate-target=".s-1054" class="statement s-1054 not-hit"><div class="statement-info s-1054"><div>Id: 1054</div><div>Hits: 0</div></div>                }</div>,</div></div></div>
+<div class="line not-hit"><div class="line-number">62</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                constraints: table =&gt;</div></div></div>
+<div class="line not-hit"><div class="line-number">63</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                {</div></div></div>
+<div class="line not-hit"><div class="line-number">64</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                    <div data-hover-target=".s-1055" data-activate-target=".s-1055" class="statement s-1055 not-hit"><div class="statement-info s-1055"><div>Id: 1055</div><div>Hits: 0</div></div>table.PrimaryKey(&quot;PK_Comments&quot;, x =&gt; x.Id);</div></div></div></div>
+<div class="line not-hit"><div class="line-number">65</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                    <div data-hover-target=".s-1056" data-activate-target=".s-1056" class="statement s-1056 not-hit">table.ForeignKey(</div></div></div></div>
+<div class="line not-hit"><div class="line-number">66</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1056" data-activate-target=".s-1056" class="statement s-1056 not-hit">                        name: &quot;FK_Comments_Bulletins_BulletinId&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">67</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1056" data-activate-target=".s-1056" class="statement s-1056 not-hit">                        column: x =&gt; x.BulletinId,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">68</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1056" data-activate-target=".s-1056" class="statement s-1056 not-hit">                        principalTable: &quot;Bulletins&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">69</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1056" data-activate-target=".s-1056" class="statement s-1056 not-hit">                        principalColumn: &quot;Id&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">70</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1056" data-activate-target=".s-1056" class="statement s-1056 not-hit"><div class="statement-info s-1056"><div>Id: 1056</div><div>Hits: 0</div></div>                        onDelete: ReferentialAction.Cascade);</div></div></div></div>
+<div class="line not-hit"><div class="line-number">71</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit">                    <div data-hover-target=".s-1057" data-activate-target=".s-1057" class="statement s-1057 not-hit">table.ForeignKey(</div></div></div></div>
+<div class="line not-hit"><div class="line-number">72</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1057" data-activate-target=".s-1057" class="statement s-1057 not-hit">                        name: &quot;FK_Comments_Users_AuthorId&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">73</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1057" data-activate-target=".s-1057" class="statement s-1057 not-hit">                        column: x =&gt; x.AuthorId,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">74</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1057" data-activate-target=".s-1057" class="statement s-1057 not-hit">                        principalTable: &quot;Users&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">75</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1057" data-activate-target=".s-1057" class="statement s-1057 not-hit">                        principalColumn: &quot;Id&quot;,</div></div></div></div>
+<div class="line not-hit"><div class="line-number">76</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div data-hover-target=".s-1057" data-activate-target=".s-1057" class="statement s-1057 not-hit"><div class="statement-info s-1057"><div>Id: 1057</div><div>Hits: 0</div></div>                        onDelete: ReferentialAction.Cascade);</div></div></div></div>
+<div class="line not-hit"><div class="line-number">77</div><div class="line-content"><div data-hover-target=".s-1025" data-activate-target=".s-1025" class="statement s-1025 not-hit"><div class="statement-info s-1025"><div>Id: 1025</div><div>Hits: 0</div></div>                });</div></div></div>
+<div class="line"><div class="line-number">78</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">79</div><div class="line-content">            <div data-hover-target=".s-1026" data-activate-target=".s-1026" class="statement s-1026 not-hit">migrationBuilder.CreateIndex(</div></div></div>
+<div class="line not-hit"><div class="line-number">80</div><div class="line-content"><div data-hover-target=".s-1026" data-activate-target=".s-1026" class="statement s-1026 not-hit">                name: &quot;IX_Comments_AuthorId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">81</div><div class="line-content"><div data-hover-target=".s-1026" data-activate-target=".s-1026" class="statement s-1026 not-hit">                table: &quot;Comments&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">82</div><div class="line-content"><div data-hover-target=".s-1026" data-activate-target=".s-1026" class="statement s-1026 not-hit"><div class="statement-info s-1026"><div>Id: 1026</div><div>Hits: 0</div></div>                column: &quot;AuthorId&quot;);</div></div></div>
+<div class="line"><div class="line-number">83</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">84</div><div class="line-content">            <div data-hover-target=".s-1027" data-activate-target=".s-1027" class="statement s-1027 not-hit">migrationBuilder.CreateIndex(</div></div></div>
+<div class="line not-hit"><div class="line-number">85</div><div class="line-content"><div data-hover-target=".s-1027" data-activate-target=".s-1027" class="statement s-1027 not-hit">                name: &quot;IX_Comments_BulletinId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">86</div><div class="line-content"><div data-hover-target=".s-1027" data-activate-target=".s-1027" class="statement s-1027 not-hit">                table: &quot;Comments&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">87</div><div class="line-content"><div data-hover-target=".s-1027" data-activate-target=".s-1027" class="statement s-1027 not-hit"><div class="statement-info s-1027"><div>Id: 1027</div><div>Hits: 0</div></div>                column: &quot;BulletinId&quot;);</div></div></div>
+<div class="line"><div class="line-number">88</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">89</div><div class="line-content">            <div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit">migrationBuilder.AddForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">90</div><div class="line-content"><div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit">                name: &quot;FK_Bulletins_Categories_CategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">91</div><div class="line-content"><div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit">                table: &quot;Bulletins&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">92</div><div class="line-content"><div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit">                column: &quot;CategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">93</div><div class="line-content"><div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit">                principalTable: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">94</div><div class="line-content"><div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit">                principalColumn: &quot;Id&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">95</div><div class="line-content"><div data-hover-target=".s-1028" data-activate-target=".s-1028" class="statement s-1028 not-hit"><div class="statement-info s-1028"><div>Id: 1028</div><div>Hits: 0</div></div>                onDelete: ReferentialAction.SetNull);</div></div></div>
+<div class="line"><div class="line-number">96</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">97</div><div class="line-content">            <div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit">migrationBuilder.AddForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">98</div><div class="line-content"><div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit">                name: &quot;FK_Categories_Categories_ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">99</div><div class="line-content"><div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit">                table: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">100</div><div class="line-content"><div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit">                column: &quot;ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">101</div><div class="line-content"><div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit">                principalTable: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">102</div><div class="line-content"><div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit">                principalColumn: &quot;Id&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">103</div><div class="line-content"><div data-hover-target=".s-1029" data-activate-target=".s-1029" class="statement s-1029 not-hit"><div class="statement-info s-1029"><div>Id: 1029</div><div>Hits: 0</div></div>                onDelete: ReferentialAction.SetNull);</div></div></div>
+<div class="line"><div class="line-number">104</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">105</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">106</div><div class="line-content">        /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">107</div><div class="line-content">        protected override void Down(MigrationBuilder migrationBuilder)</div></div>
+<div class="line"><div class="line-number">108</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">109</div><div class="line-content">            <div data-hover-target=".s-1030" data-activate-target=".s-1030" class="statement s-1030 not-hit">migrationBuilder.DropForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">110</div><div class="line-content"><div data-hover-target=".s-1030" data-activate-target=".s-1030" class="statement s-1030 not-hit">                name: &quot;FK_Bulletins_Categories_CategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">111</div><div class="line-content"><div data-hover-target=".s-1030" data-activate-target=".s-1030" class="statement s-1030 not-hit"><div class="statement-info s-1030"><div>Id: 1030</div><div>Hits: 0</div></div>                table: &quot;Bulletins&quot;);</div></div></div>
+<div class="line"><div class="line-number">112</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">113</div><div class="line-content">            <div data-hover-target=".s-1031" data-activate-target=".s-1031" class="statement s-1031 not-hit">migrationBuilder.DropForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">114</div><div class="line-content"><div data-hover-target=".s-1031" data-activate-target=".s-1031" class="statement s-1031 not-hit">                name: &quot;FK_Categories_Categories_ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">115</div><div class="line-content"><div data-hover-target=".s-1031" data-activate-target=".s-1031" class="statement s-1031 not-hit"><div class="statement-info s-1031"><div>Id: 1031</div><div>Hits: 0</div></div>                table: &quot;Categories&quot;);</div></div></div>
+<div class="line"><div class="line-number">116</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">117</div><div class="line-content">            <div data-hover-target=".s-1032" data-activate-target=".s-1032" class="statement s-1032 not-hit">migrationBuilder.DropTable(</div></div></div>
+<div class="line not-hit"><div class="line-number">118</div><div class="line-content"><div data-hover-target=".s-1032" data-activate-target=".s-1032" class="statement s-1032 not-hit"><div class="statement-info s-1032"><div>Id: 1032</div><div>Hits: 0</div></div>                name: &quot;Comments&quot;);</div></div></div>
+<div class="line"><div class="line-number">119</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">120</div><div class="line-content">            <div data-hover-target=".s-1033" data-activate-target=".s-1033" class="statement s-1033 not-hit">migrationBuilder.AddColumn&lt;string&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">121</div><div class="line-content"><div data-hover-target=".s-1033" data-activate-target=".s-1033" class="statement s-1033 not-hit">                name: &quot;Lastname&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">122</div><div class="line-content"><div data-hover-target=".s-1033" data-activate-target=".s-1033" class="statement s-1033 not-hit">                table: &quot;Users&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">123</div><div class="line-content"><div data-hover-target=".s-1033" data-activate-target=".s-1033" class="statement s-1033 not-hit">                type: &quot;text&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">124</div><div class="line-content"><div data-hover-target=".s-1033" data-activate-target=".s-1033" class="statement s-1033 not-hit"><div class="statement-info s-1033"><div>Id: 1033</div><div>Hits: 0</div></div>                nullable: true);</div></div></div>
+<div class="line"><div class="line-number">125</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">126</div><div class="line-content">            <div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit">migrationBuilder.AddColumn&lt;string&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">127</div><div class="line-content"><div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit">                name: &quot;Login&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">128</div><div class="line-content"><div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit">                table: &quot;Users&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">129</div><div class="line-content"><div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit">                type: &quot;character varying(50)&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">130</div><div class="line-content"><div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit">                maxLength: 50,</div></div></div>
+<div class="line not-hit"><div class="line-number">131</div><div class="line-content"><div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit">                nullable: false,</div></div></div>
+<div class="line not-hit"><div class="line-number">132</div><div class="line-content"><div data-hover-target=".s-1034" data-activate-target=".s-1034" class="statement s-1034 not-hit"><div class="statement-info s-1034"><div>Id: 1034</div><div>Hits: 0</div></div>                defaultValue: &quot;&quot;);</div></div></div>
+<div class="line"><div class="line-number">133</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">134</div><div class="line-content">            <div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit">migrationBuilder.AddColumn&lt;string&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">135</div><div class="line-content"><div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit">                name: &quot;Surname&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">136</div><div class="line-content"><div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit">                table: &quot;Users&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">137</div><div class="line-content"><div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit">                type: &quot;character varying(50)&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">138</div><div class="line-content"><div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit">                maxLength: 50,</div></div></div>
+<div class="line not-hit"><div class="line-number">139</div><div class="line-content"><div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit">                nullable: false,</div></div></div>
+<div class="line not-hit"><div class="line-number">140</div><div class="line-content"><div data-hover-target=".s-1035" data-activate-target=".s-1035" class="statement s-1035 not-hit"><div class="statement-info s-1035"><div>Id: 1035</div><div>Hits: 0</div></div>                defaultValue: &quot;&quot;);</div></div></div>
+<div class="line"><div class="line-number">141</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">142</div><div class="line-content">            <div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">migrationBuilder.AlterColumn&lt;Guid&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">143</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                name: &quot;ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">144</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                table: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">145</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                type: &quot;uuid&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">146</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                nullable: false,</div></div></div>
+<div class="line not-hit"><div class="line-number">147</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                defaultValue: new Guid(&quot;00000000-0000-0000-0000-000000000000&quot;),</div></div></div>
+<div class="line not-hit"><div class="line-number">148</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                oldClrType: typeof(Guid),</div></div></div>
+<div class="line not-hit"><div class="line-number">149</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit">                oldType: &quot;uuid&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">150</div><div class="line-content"><div data-hover-target=".s-1036" data-activate-target=".s-1036" class="statement s-1036 not-hit"><div class="statement-info s-1036"><div>Id: 1036</div><div>Hits: 0</div></div>                oldNullable: true);</div></div></div>
+<div class="line"><div class="line-number">151</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">152</div><div class="line-content">            <div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">migrationBuilder.AlterColumn&lt;string&gt;(</div></div></div>
+<div class="line not-hit"><div class="line-number">153</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                name: &quot;Description&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">154</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                table: &quot;Bulletins&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">155</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                type: &quot;text&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">156</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                nullable: true,</div></div></div>
+<div class="line not-hit"><div class="line-number">157</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                oldClrType: typeof(string),</div></div></div>
+<div class="line not-hit"><div class="line-number">158</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                oldType: &quot;character varying(1500)&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">159</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit">                oldMaxLength: 1500,</div></div></div>
+<div class="line not-hit"><div class="line-number">160</div><div class="line-content"><div data-hover-target=".s-1037" data-activate-target=".s-1037" class="statement s-1037 not-hit"><div class="statement-info s-1037"><div>Id: 1037</div><div>Hits: 0</div></div>                oldNullable: true);</div></div></div>
+<div class="line"><div class="line-number">161</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">162</div><div class="line-content">            <div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit">migrationBuilder.AddForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">163</div><div class="line-content"><div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit">                name: &quot;FK_Bulletins_Categories_CategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">164</div><div class="line-content"><div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit">                table: &quot;Bulletins&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">165</div><div class="line-content"><div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit">                column: &quot;CategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">166</div><div class="line-content"><div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit">                principalTable: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">167</div><div class="line-content"><div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit">                principalColumn: &quot;Id&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">168</div><div class="line-content"><div data-hover-target=".s-1038" data-activate-target=".s-1038" class="statement s-1038 not-hit"><div class="statement-info s-1038"><div>Id: 1038</div><div>Hits: 0</div></div>                onDelete: ReferentialAction.Cascade);</div></div></div>
+<div class="line"><div class="line-number">169</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">170</div><div class="line-content">            <div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit">migrationBuilder.AddForeignKey(</div></div></div>
+<div class="line not-hit"><div class="line-number">171</div><div class="line-content"><div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit">                name: &quot;FK_Categories_Categories_ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">172</div><div class="line-content"><div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit">                table: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">173</div><div class="line-content"><div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit">                column: &quot;ParentCategoryId&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">174</div><div class="line-content"><div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit">                principalTable: &quot;Categories&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">175</div><div class="line-content"><div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit">                principalColumn: &quot;Id&quot;,</div></div></div>
+<div class="line not-hit"><div class="line-number">176</div><div class="line-content"><div data-hover-target=".s-1039" data-activate-target=".s-1039" class="statement s-1039 not-hit"><div class="statement-info s-1039"><div>Id: 1039</div><div>Hits: 0</div></div>                onDelete: ReferentialAction.Cascade);</div></div></div>
+<div class="line"><div class="line-number">177</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">178</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">179</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

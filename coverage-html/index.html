@@ -1,0 +1,1389 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+tr.root {
+    font-weight: bold;
+}
+
+tr.folder .name::before, tr.file .name::before {
+    content: ' ';
+    width: 16px;
+    height: 14px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: contain;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    vertical-align: middle;
+}
+
+tr.folder .name::before {
+    background-image: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="folder-open" class="svg-inline--fa fa-folder-open fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M572.694 292.093L500.27 416.248A63.997 63.997 0 0 1 444.989 448H45.025c-18.523 0-30.064-20.093-20.731-36.093l72.424-124.155A64 64 0 0 1 152 256h399.964c18.523 0 30.064 20.093 20.73 36.093zM152 224h328v-48c0-26.51-21.49-48-48-48H272l-64-64H48C21.49 64 0 85.49 0 112v278.046l69.077-118.418C86.214 242.25 117.989 224 152 224z"></path></svg>');
+}
+
+tr.file .name::before {
+    background-image: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file" class="svg-inline--fa fa-file fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg>');
+}
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Source Files</h2>
+<table border="1" cellpadding="5">
+<tr>
+<th>File</th>
+<th class="value">Lines</th>
+<th class="value">% Lines</th>
+<th class="value">Stmts</th>
+<th class="value">% Stmts</th>
+<th class="value">Branches</th>
+<th class="value">% Branches</th>
+</tr>
+<tr class="root">
+<td>
+<span class="name" style="margin-left: 0px">All Files</span
+</td>
+<td class="value red">219 / 2445</td>
+<td class="value red">8,96 %</td>
+<td class="value red">199 / 1241</td>
+<td class="value red">16,04 %</td>
+<td class="value red">12 / 130</td>
+<td class="value red">9,23 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 0px">src</span
+</td>
+<td class="value red">219 / 2445</td>
+<td class="value red">8,96 %</td>
+<td class="value red">199 / 1241</td>
+<td class="value red">16,04 %</td>
+<td class="value red">12 / 130</td>
+<td class="value red">9,23 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.API</span
+</td>
+<td class="value red">0 / 176</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 155</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 52</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Controllers</span
+</td>
+<td class="value red">0 / 92</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 110</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 50</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Controllers\AccountController.cs.html" style="margin-left: 60px">AccountController.cs</a>
+</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Controllers\Base\BaseController.cs.html" style="margin-left: 60px">Base\BaseController.cs</a>
+</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Controllers\BulletinController.cs.html" style="margin-left: 60px">BulletinController.cs</a>
+</td>
+<td class="value red">0 / 56</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 71</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 40</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Controllers\CategoryController.cs.html" style="margin-left: 60px">CategoryController.cs</a>
+</td>
+<td class="value red">0 / 12</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 13</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Controllers\ImageController.cs.html" style="margin-left: 60px">ImageController.cs</a>
+</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Controllers\UserController.cs.html" style="margin-left: 60px">UserController.cs</a>
+</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.API\Program.cs.html" style="margin-left: 40px">Program.cs</a>
+</td>
+<td class="value red">0 / 84</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 45</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.AppServices</span
+</td>
+<td class="value red">108 / 291</td>
+<td class="value red">37,11 %</td>
+<td class="value red">47 / 219</td>
+<td class="value red">21,46 %</td>
+<td class="value red">12 / 60</td>
+<td class="value red">20,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Contexts</span
+</td>
+<td class="value red">0 / 113</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 98</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 16</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 60px">Bulletins</span
+</td>
+<td class="value red">0 / 41</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 38</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Bulletins\Builders\BulletinSpecificationBuilder.cs.html" style="margin-left: 80px">Builders\BulletinSpecificationBuilder.cs</a>
+</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Bulletins\Services\BulletinService.cs.html" style="margin-left: 80px">Services\BulletinService.cs</a>
+</td>
+<td class="value red">0 / 17</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 17</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 80px">Specifications</span
+</td>
+<td class="value red">0 / 15</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 12</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Bulletins\Specifications\ByCategorySpecification.cs.html" style="margin-left: 100px">ByCategorySpecification.cs</a>
+</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Bulletins\Specifications\MaxPriceSpecification.cs.html" style="margin-left: 100px">MaxPriceSpecification.cs</a>
+</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Bulletins\Specifications\MinPriceSpecification.cs.html" style="margin-left: 100px">MinPriceSpecification.cs</a>
+</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Bulletins\Specifications\SearchStringSpecification.cs.html" style="margin-left: 100px">SearchStringSpecification.cs</a>
+</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Categories\Services\CategoryService.cs.html" style="margin-left: 60px">Categories\Services\CategoryService.cs</a>
+</td>
+<td class="value red">0 / 25</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 22</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Comments\Services\CommentService.cs.html" style="margin-left: 60px">Comments\Services\CommentService.cs</a>
+</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Files\Images\Services\ImageService.cs.html" style="margin-left: 60px">Files\Images\Services\ImageService.cs</a>
+</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 60px">Users</span
+</td>
+<td class="value red">0 / 36</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 27</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 80px">Services</span
+</td>
+<td class="value red">0 / 36</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 27</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Users\Services\JwtService.cs.html" style="margin-left: 100px">JwtService.cs</a>
+</td>
+<td class="value red">0 / 17</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 7</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Contexts\Users\Services\UserService.cs.html" style="margin-left: 100px">UserService.cs</a>
+</td>
+<td class="value red">0 / 19</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 20</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Helpers\CryptoHelper.cs.html" style="margin-left: 40px">Helpers\CryptoHelper.cs</a>
+</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Specifications</span
+</td>
+<td class="value red">0 / 66</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 70</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 32</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 60px">Extensions</span
+</td>
+<td class="value red">0 / 17</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 16</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Extensions\ExpressionExtensions.cs.html" style="margin-left: 80px">ExpressionExtensions.cs</a>
+</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Extensions\ParameterRebinderExpressionVisitor.cs.html" style="margin-left: 80px">ParameterRebinderExpressionVisitor.cs</a>
+</td>
+<td class="value red">0 / 10</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 11</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Extensions\PredicateExpressionExtensions.cs.html" style="margin-left: 80px">PredicateExpressionExtensions.cs</a>
+</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 60px">Internal</span
+</td>
+<td class="value red">0 / 17</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 22</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 12</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Internal\AndSpecification.cs.html" style="margin-left: 80px">AndSpecification.cs</a>
+</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 7</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Internal\ExpressionSpecification.cs.html" style="margin-left: 80px">ExpressionSpecification.cs</a>
+</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Internal\NotSpecification.cs.html" style="margin-left: 80px">NotSpecification.cs</a>
+</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Internal\OrSpecification.cs.html" style="margin-left: 80px">OrSpecification.cs</a>
+</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 7</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\Specification.cs.html" style="margin-left: 60px">Specification.cs</a>
+</td>
+<td class="value red">0 / 13</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 13</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Specifications\SpecificationExtensions.cs.html" style="margin-left: 60px">SpecificationExtensions.cs</a>
+</td>
+<td class="value red">0 / 19</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 19</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 14</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Validators</span
+</td>
+<td class="value green">108 / 108</td>
+<td class="value green">100,00 %</td>
+<td class="value green">47 / 47</td>
+<td class="value green">100,00 %</td>
+<td class="value green">12 / 12</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 60px">Bulletins</span
+</td>
+<td class="value green">49 / 49</td>
+<td class="value green">100,00 %</td>
+<td class="value green">20 / 20</td>
+<td class="value green">100,00 %</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Validators\Bulletins\CreateBulletinRequestValidator.cs.html" style="margin-left: 80px">CreateBulletinRequestValidator.cs</a>
+</td>
+<td class="value green">25 / 25</td>
+<td class="value green">100,00 %</td>
+<td class="value green">10 / 10</td>
+<td class="value green">100,00 %</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Validators\Bulletins\UpdateBulletinValidator.cs.html" style="margin-left: 80px">UpdateBulletinValidator.cs</a>
+</td>
+<td class="value green">24 / 24</td>
+<td class="value green">100,00 %</td>
+<td class="value green">10 / 10</td>
+<td class="value green">100,00 %</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Validators\Categories\CreateCategoryValidator.cs.html" style="margin-left: 60px">Categories\CreateCategoryValidator.cs</a>
+</td>
+<td class="value green">11 / 11</td>
+<td class="value green">100,00 %</td>
+<td class="value green">8 / 8</td>
+<td class="value green">100,00 %</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Validators\Comments\AddCommentValidator.cs.html" style="margin-left: 60px">Comments\AddCommentValidator.cs</a>
+</td>
+<td class="value green">6 / 6</td>
+<td class="value green">100,00 %</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 60px">Users</span
+</td>
+<td class="value green">42 / 42</td>
+<td class="value green">100,00 %</td>
+<td class="value green">17 / 17</td>
+<td class="value green">100,00 %</td>
+<td class="value green">6 / 6</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Validators\Users\LoginUserRequestValidator.cs.html" style="margin-left: 80px">LoginUserRequestValidator.cs</a>
+</td>
+<td class="value green">13 / 13</td>
+<td class="value green">100,00 %</td>
+<td class="value green">3 / 3</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.AppServices\Validators\Users\RegisterUserRequestValidator.cs.html" style="margin-left: 80px">RegisterUserRequestValidator.cs</a>
+</td>
+<td class="value green">29 / 29</td>
+<td class="value green">100,00 %</td>
+<td class="value green">14 / 14</td>
+<td class="value green">100,00 %</td>
+<td class="value green">6 / 6</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.ComponentRegistrar</span
+</td>
+<td class="value red">32 / 69</td>
+<td class="value red">46,38 %</td>
+<td class="value red">32 / 68</td>
+<td class="value red">47,06 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">MapProfiles</span
+</td>
+<td class="value green">32 / 35</td>
+<td class="value green">91,43 %</td>
+<td class="value green">32 / 35</td>
+<td class="value green">91,43 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.ComponentRegistrar\MapProfiles\BulletinProfile.cs.html" style="margin-left: 60px">BulletinProfile.cs</a>
+</td>
+<td class="value green">8 / 8</td>
+<td class="value green">100,00 %</td>
+<td class="value green">8 / 8</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.ComponentRegistrar\MapProfiles\CategoryProfile.cs.html" style="margin-left: 60px">CategoryProfile.cs</a>
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.ComponentRegistrar\MapProfiles\CommentProfile.cs.html" style="margin-left: 60px">CommentProfile.cs</a>
+</td>
+<td class="value green">6 / 6</td>
+<td class="value green">100,00 %</td>
+<td class="value green">6 / 6</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.ComponentRegistrar\MapProfiles\ImageProfile.cs.html" style="margin-left: 60px">ImageProfile.cs</a>
+</td>
+<td class="value red">8 / 11</td>
+<td class="value red">72,73 %</td>
+<td class="value red">8 / 11</td>
+<td class="value red">72,73 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.ComponentRegistrar\MapProfiles\UserProfile.cs.html" style="margin-left: 60px">UserProfile.cs</a>
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.ComponentRegistrar\Registrar.cs.html" style="margin-left: 40px">Registrar.cs</a>
+</td>
+<td class="value red">0 / 34</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 33</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.Contracts</span
+</td>
+<td class="value green">46 / 51</td>
+<td class="value green">90,20 %</td>
+<td class="value red">63 / 102</td>
+<td class="value red">61,76 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Base\BasePaginationRequest.cs.html" style="margin-left: 40px">Base\BasePaginationRequest.cs</a>
+</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Bulletins</span
+</td>
+<td class="value red">17 / 20</td>
+<td class="value red">85,00 %</td>
+<td class="value red">25 / 40</td>
+<td class="value red">62,50 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Bulletins\BulletinDto.cs.html" style="margin-left: 60px">BulletinDto.cs</a>
+</td>
+<td class="value green">9 / 9</td>
+<td class="value green">100,00 %</td>
+<td class="value red">9 / 18</td>
+<td class="value red">50,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Bulletins\CreateBulletinRequest.cs.html" style="margin-left: 60px">CreateBulletinRequest.cs</a>
+</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value green">8 / 8</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Bulletins\SearchBulletinRequest.cs.html" style="margin-left: 60px">SearchBulletinRequest.cs</a>
+</td>
+<td class="value red">0 / 3</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Bulletins\UpdateBulletinRequest.cs.html" style="margin-left: 60px">UpdateBulletinRequest.cs</a>
+</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value green">8 / 8</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Categories</span
+</td>
+<td class="value green">6 / 6</td>
+<td class="value green">100,00 %</td>
+<td class="value red">8 / 12</td>
+<td class="value red">66,67 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Categories\CategoryDto.cs.html" style="margin-left: 60px">CategoryDto.cs</a>
+</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value red">4 / 8</td>
+<td class="value red">50,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Categories\CreateCategoryRequest.cs.html" style="margin-left: 60px">CreateCategoryRequest.cs</a>
+</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Comments</span
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value red">6 / 10</td>
+<td class="value red">60,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Comments\AddCommentRequest.cs.html" style="margin-left: 60px">AddCommentRequest.cs</a>
+</td>
+<td class="value green">1 / 1</td>
+<td class="value green">100,00 %</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Comments\CommentDto.cs.html" style="margin-left: 60px">CommentDto.cs</a>
+</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value red">4 / 8</td>
+<td class="value red">50,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Files\Images\ImageDto.cs.html" style="margin-left: 40px">Files\Images\ImageDto.cs</a>
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value red">5 / 10</td>
+<td class="value red">50,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Users</span
+</td>
+<td class="value green">13 / 13</td>
+<td class="value green">100,00 %</td>
+<td class="value red">19 / 26</td>
+<td class="value red">73,08 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Users\LoginUserRequest.cs.html" style="margin-left: 60px">LoginUserRequest.cs</a>
+</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Users\RegisterUserRequest.cs.html" style="margin-left: 60px">RegisterUserRequest.cs</a>
+</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value green">8 / 8</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Contracts\Users\UserDto.cs.html" style="margin-left: 60px">UserDto.cs</a>
+</td>
+<td class="value green">7 / 7</td>
+<td class="value green">100,00 %</td>
+<td class="value red">7 / 14</td>
+<td class="value red">50,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.DataAccess</span
+</td>
+<td class="value red">0 / 176</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 103</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 8</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\ApplicationDbContext.cs.html" style="margin-left: 40px">ApplicationDbContext.cs</a>
+</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Bulletins\Repository\BulletinRepository.cs.html" style="margin-left: 40px">Bulletins\Repository\BulletinRepository.cs</a>
+</td>
+<td class="value red">0 / 41</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 21</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Categories\Repository\CategoryRepository.cs.html" style="margin-left: 40px">Categories\Repository\CategoryRepository.cs</a>
+</td>
+<td class="value red">0 / 21</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 24</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Comments\Repository\CommentRepository.cs.html" style="margin-left: 40px">Comments\Repository\CommentRepository.cs</a>
+</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 9</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Configurations</span
+</td>
+<td class="value red">0 / 75</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 21</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Configurations\BulletinConfiguration.cs.html" style="margin-left: 60px">BulletinConfiguration.cs</a>
+</td>
+<td class="value red">0 / 22</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Configurations\CategoryConfiguration.cs.html" style="margin-left: 60px">CategoryConfiguration.cs</a>
+</td>
+<td class="value red">0 / 19</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Configurations\CommentConfiguration.cs.html" style="margin-left: 60px">CommentConfiguration.cs</a>
+</td>
+<td class="value red">0 / 18</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Configurations\UserConfiguration.cs.html" style="margin-left: 60px">UserConfiguration.cs</a>
+</td>
+<td class="value red">0 / 16</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Files\Images\Repository\ImageRepository.cs.html" style="margin-left: 40px">Files\Images\Repository\ImageRepository.cs</a>
+</td>
+<td class="value red">0 / 10</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 10</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DataAccess\Users\Repository\UserRepository.cs.html" style="margin-left: 40px">Users\Repository\UserRepository.cs</a>
+</td>
+<td class="value red">0 / 14</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 12</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.Domain</span
+</td>
+<td class="value green">33 / 33</td>
+<td class="value green">100,00 %</td>
+<td class="value red">57 / 66</td>
+<td class="value red">86,36 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Domain\Base\BaseEntity.cs.html" style="margin-left: 40px">Base\BaseEntity.cs</a>
+</td>
+<td class="value green">2 / 2</td>
+<td class="value green">100,00 %</td>
+<td class="value green">4 / 4</td>
+<td class="value green">100,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Domain\Bulletins\Entity\Bulletin.cs.html" style="margin-left: 40px">Bulletins\Entity\Bulletin.cs</a>
+</td>
+<td class="value green">9 / 9</td>
+<td class="value green">100,00 %</td>
+<td class="value red">16 / 18</td>
+<td class="value red">88,89 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Domain\Categories\Entity\Category.cs.html" style="margin-left: 40px">Categories\Entity\Category.cs</a>
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value red">7 / 10</td>
+<td class="value red">70,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Domain\Comments\Entity\Comment.cs.html" style="margin-left: 40px">Comments\Entity\Comment.cs</a>
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value green">9 / 10</td>
+<td class="value green">90,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Domain\Files\Images\Entity\Image.cs.html" style="margin-left: 40px">Files\Images\Entity\Image.cs</a>
+</td>
+<td class="value green">5 / 5</td>
+<td class="value green">100,00 %</td>
+<td class="value green">9 / 10</td>
+<td class="value green">90,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Domain\Users\Entity\User.cs.html" style="margin-left: 40px">Users\Entity\User.cs</a>
+</td>
+<td class="value green">7 / 7</td>
+<td class="value green">100,00 %</td>
+<td class="value red">12 / 14</td>
+<td class="value red">85,71 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.Infrastructure\Repository\Repository.cs.html" style="margin-left: 20px">BulletinBoard.Infrastructure\Repository\Repository.cs</a>
+</td>
+<td class="value red">0 / 22</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 23</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 8</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 20px">BulletinBoard.DbMigrator</span
+</td>
+<td class="value red">0 / 1627</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 505</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\MigrationDbContext.cs.html" style="margin-left: 40px">MigrationDbContext.cs</a>
+</td>
+<td class="value red">0 / 1</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 1</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\MigrationDbContextFactory.cs.html" style="margin-left: 40px">MigrationDbContextFactory.cs</a>
+</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="folder">
+<td>
+<span class="name" style="margin-left: 40px">Migrations</span
+</td>
+<td class="value red">0 / 1607</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 486</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20240920122008_Initial.cs.html" style="margin-left: 60px">20240920122008_Initial.cs</a>
+</td>
+<td class="value red">0 / 110</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 24</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20240920122008_Initial.Designer.cs.html" style="margin-left: 60px">20240920122008_Initial.Designer.cs</a>
+</td>
+<td class="value red">0 / 190</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 62</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20240925182143_Make_category_parentId_nullable.cs.html" style="margin-left: 60px">20240925182143_Make_category_parentId_nullable.cs</a>
+</td>
+<td class="value red">0 / 35</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20240925182143_Make_category_parentId_nullable.Designer.cs.html" style="margin-left: 60px">20240925182143_Make_category_parentId_nullable.Designer.cs</a>
+</td>
+<td class="value red">0 / 188</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 62</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20240925191142_Make_not_required_properties_nullable.cs.html" style="margin-left: 60px">20240925191142_Make_not_required_properties_nullable.cs</a>
+</td>
+<td class="value red">0 / 57</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 8</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20240925191142_Make_not_required_properties_nullable.Designer.cs.html" style="margin-left: 60px">20240925191142_Make_not_required_properties_nullable.Designer.cs</a>
+</td>
+<td class="value red">0 / 188</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 63</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20241001132123_Add_comments.cs.html" style="margin-left: 60px">20241001132123_Add_comments.cs</a>
+</td>
+<td class="value red">0 / 138</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 26</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20241001132123_Add_comments.Designer.cs.html" style="margin-left: 60px">20241001132123_Add_comments.Designer.cs</a>
+</td>
+<td class="value red">0 / 227</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 77</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20241002183820_Update_bulletin_delete_behavior.cs.html" style="margin-left: 60px">20241002183820_Update_bulletin_delete_behavior.cs</a>
+</td>
+<td class="value red">0 / 20</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 4</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\20241002183820_Update_bulletin_delete_behavior.Designer.cs.html" style="margin-left: 60px">20241002183820_Update_bulletin_delete_behavior.Designer.cs</a>
+</td>
+<td class="value red">0 / 227</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 77</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Migrations\MigrationDbContextModelSnapshot.cs.html" style="margin-left: 60px">MigrationDbContextModelSnapshot.cs</a>
+</td>
+<td class="value red">0 / 227</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 77</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\Program.cs.html" style="margin-left: 40px">Program.cs</a>
+</td>
+<td class="value red">0 / 8</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 2</td>
+<td class="value red">0,00 %</td>
+</tr>
+<tr class="file">
+<td>
+<a class="name" href="src\BulletinBoard.DbMigrator\ServiceCollectionExtensions.cs.html" style="margin-left: 40px">ServiceCollectionExtensions.cs</a>
+</td>
+<td class="value red">0 / 5</td>
+<td class="value red">0,00 %</td>
+<td class="value red">0 / 6</td>
+<td class="value red">0,00 %</td>
+<td class="value green">0 / 0</td>
+<td class="value green">100,00 %</td>
+</tr>
+</table>
+</body>
+</html>

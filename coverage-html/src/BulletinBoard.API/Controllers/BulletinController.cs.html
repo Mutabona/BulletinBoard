@@ -1,0 +1,561 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/56)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/71)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/40)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using System.Net;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using System.Security.Claims;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.API.Controllers.Base;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Bulletins.Services;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Comments.Services;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Files.Images.Services;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">using BulletinBoard.Contracts.Bulletins;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">using BulletinBoard.Contracts.Comments;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">using BulletinBoard.Contracts.Files.Images;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">using BulletinBoard.Domain.Bulletins.Entity;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">using Microsoft.AspNetCore.Authorization;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">using Microsoft.AspNetCore.Mvc;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">namespace BulletinBoard.API.Controllers;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">/// Объявления.</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">[ApiController]</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">[Route(&quot;[controller]&quot;)]</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">[ProducesResponseType((int)HttpStatusCode.InternalServerError)]</div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content">public class <div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit"><div class="statement-info s-58"><div>Id: 58</div><div>Hits: 0</div></div>BulletinController(IBulletinService bulletinService, IImageService imageService, ICommentService commentService)</div> : BaseController</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    /// Создаёт объявление по модели запроса.</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    /// &lt;param name=&quot;request&quot;&gt;Запрос.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">    /// &lt;returns&gt;Идентификатор созданного объявления.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">31</div><div class="line-content">    [HttpPost]</div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    public async Task&lt;IActionResult&gt; CreateBulletinAsync([FromBody] CreateBulletinRequest request, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">36</div><div class="line-content">        <div data-hover-target=".s-66" data-activate-target=".s-66" class="statement s-66 not-hit"><div class="statement-info s-66"><div>Id: 66</div><div>Hits: 0</div></div>var ownerId = GetCurrentUserIdAsync();</div></div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content">        <div data-hover-target=".s-67" data-activate-target=".s-67" class="statement s-67 not-hit"><div class="statement-info s-67"><div>Id: 67</div><div>Hits: 0</div></div>var bulletinId = await bulletinService.CreateAsync(ownerId, request, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">39</div><div class="line-content">        <div data-hover-target=".s-68" data-activate-target=".s-68" class="statement s-68 not-hit"><div class="statement-info s-68"><div>Id: 68</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created, bulletinId.ToString());</div></div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">43</div><div class="line-content">    /// Выполняет поиск объявления по идентификатору.</div></div>
+<div class="line"><div class="line-number">44</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">    /// &lt;returns&gt;Модель объявления.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">48</div><div class="line-content">    [HttpGet(&quot;{bulletinId}&quot;)]</div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">    [ProducesResponseType(typeof(Bulletin), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetBulletinByIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-101" data-activate-target=".s-101" class="statement s-101 not-hit"><div class="statement-info s-101"><div>Id: 101</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content">        <div data-hover-target=".s-102" data-activate-target=".s-102" class="statement s-102 not-hit"><div class="statement-info s-102"><div>Id: 102</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-103" data-activate-target=".s-103" class="statement s-103 not-hit"><div class="statement-info s-103"><div>Id: 103</div><div>Hits: 0</div></div>return NotFound();</div></div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content">        <div data-hover-target=".s-104" data-activate-target=".s-104" class="statement s-104 not-hit"><div class="statement-info s-104"><div>Id: 104</div><div>Hits: 0</div></div>return Ok(bulletin);</div></div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">    /// Изменяет объявление по модели.</div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">    /// &lt;param name=&quot;request&quot;&gt;Запрос на обновление объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">64</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">65</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">67</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">68</div><div class="line-content">    [HttpPut(&quot;{bulletinId}&quot;)]</div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">70</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">71</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">72</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">73</div><div class="line-content">    public async Task&lt;IActionResult&gt; UpdateBulletinAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">74</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">75</div><div class="line-content">        <div data-hover-target=".s-121" data-activate-target=".s-121" class="statement s-121 not-hit"><div class="statement-info s-121"><div>Id: 121</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">76</div><div class="line-content">        <div data-hover-target=".s-122" data-activate-target=".s-122" class="statement s-122 not-hit"><div class="statement-info s-122"><div>Id: 122</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-123" data-activate-target=".s-123" class="statement s-123 not-hit"><div class="statement-info s-123"><div>Id: 123</div><div>Hits: 0</div></div>return NotFound();</div></div></div>
+<div class="line"><div class="line-number">77</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">78</div><div class="line-content">        <div data-hover-target=".s-124" data-activate-target=".s-124" class="statement s-124 not-hit"><div class="statement-info s-124"><div>Id: 124</div><div>Hits: 0</div></div>var userId = GetCurrentUserIdAsync();</div></div></div>
+<div class="line"><div class="line-number">79</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">80</div><div class="line-content">        <div data-hover-target=".s-125" data-activate-target=".s-125" class="statement s-125 not-hit"><div class="statement-info s-125"><div>Id: 125</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin.OwnerId != userId)</div> <div data-hover-target=".s-128" data-activate-target=".s-128" class="statement s-128 not-hit"><div class="statement-info s-128"><div>Id: 128</div><div>Hits: 0</div></div>return Forbid();</div></div></div>
+<div class="line"><div class="line-number">81</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">82</div><div class="line-content">        <div data-hover-target=".s-129" data-activate-target=".s-129" class="statement s-129 not-hit"><div class="statement-info s-129"><div>Id: 129</div><div>Hits: 0</div></div>await bulletinService.UpdateAsync(bulletinId, request, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">83</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">84</div><div class="line-content">        <div data-hover-target=".s-130" data-activate-target=".s-130" class="statement s-130 not-hit"><div class="statement-info s-130"><div>Id: 130</div><div>Hits: 0</div></div>return Ok();</div></div></div>
+<div class="line"><div class="line-number">85</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">86</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">87</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">88</div><div class="line-content">    /// Удаляет объявление по идентификатору.</div></div>
+<div class="line"><div class="line-number">89</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">90</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">91</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">92</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">93</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">94</div><div class="line-content">    [HttpDelete(&quot;{bulletinId}&quot;)]</div></div>
+<div class="line"><div class="line-number">95</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NoContent)]</div></div>
+<div class="line"><div class="line-number">96</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">97</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">98</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">99</div><div class="line-content">    public async Task&lt;IActionResult&gt; DeleteBulletinAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">100</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">101</div><div class="line-content">        <div data-hover-target=".s-84" data-activate-target=".s-84" class="statement s-84 not-hit"><div class="statement-info s-84"><div>Id: 84</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">102</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">103</div><div class="line-content">        <div data-hover-target=".s-85" data-activate-target=".s-85" class="statement s-85 not-hit"><div class="statement-info s-85"><div>Id: 85</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-86" data-activate-target=".s-86" class="statement s-86 not-hit"><div class="statement-info s-86"><div>Id: 86</div><div>Hits: 0</div></div>return NotFound();</div></div></div>
+<div class="line"><div class="line-number">104</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">105</div><div class="line-content">        <div data-hover-target=".s-87" data-activate-target=".s-87" class="statement s-87 not-hit"><div class="statement-info s-87"><div>Id: 87</div><div>Hits: 0</div></div>var userId = GetCurrentUserIdAsync();</div></div></div>
+<div class="line"><div class="line-number">106</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">107</div><div class="line-content">        <div data-hover-target=".s-88" data-activate-target=".s-88" class="statement s-88 not-hit"><div class="statement-info s-88"><div>Id: 88</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (!(bulletin.OwnerId.Equals(userId) || HttpContext.User.Claims.First(c =&gt; <div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div class="statement-info s-59"><div>Id: 59</div><div>Hits: 0</div></div>c.Type == ClaimTypes.Role</div>).Value == &quot;Admin&quot;))</div> <div data-hover-target=".s-91" data-activate-target=".s-91" class="statement s-91 not-hit"><div class="statement-info s-91"><div>Id: 91</div><div>Hits: 0</div></div>return Forbid();</div></div></div>
+<div class="line"><div class="line-number">108</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">109</div><div class="line-content">        <div data-hover-target=".s-92" data-activate-target=".s-92" class="statement s-92 not-hit"><div class="statement-info s-92"><div>Id: 92</div><div>Hits: 0</div></div>await bulletinService.DeleteAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">110</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">111</div><div class="line-content">        <div data-hover-target=".s-93" data-activate-target=".s-93" class="statement s-93 not-hit"><div class="statement-info s-93"><div>Id: 93</div><div>Hits: 0</div></div>return NoContent();</div></div></div>
+<div class="line"><div class="line-number">112</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">113</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">114</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">115</div><div class="line-content">    /// Выполняет поиск объявления по запросу.</div></div>
+<div class="line"><div class="line-number">116</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">117</div><div class="line-content">    /// &lt;param name=&quot;request&quot;&gt;Запрос.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">118</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">119</div><div class="line-content">    /// &lt;returns&gt;Коллекция объявлений.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">120</div><div class="line-content">    [HttpPost(&quot;search&quot;)]</div></div>
+<div class="line"><div class="line-number">121</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;BulletinDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">122</div><div class="line-content">    public async Task&lt;IActionResult&gt; SearchBulletinsAsync(SearchBulletinRequest request,</div></div>
+<div class="line"><div class="line-number">123</div><div class="line-content">        CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">124</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">125</div><div class="line-content">        <div data-hover-target=".s-119" data-activate-target=".s-119" class="statement s-119 not-hit"><div class="statement-info s-119"><div>Id: 119</div><div>Hits: 0</div></div>var bulletins = await bulletinService.SearchBulletinsAsync(request, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">126</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">127</div><div class="line-content">        <div data-hover-target=".s-120" data-activate-target=".s-120" class="statement s-120 not-hit"><div class="statement-info s-120"><div>Id: 120</div><div>Hits: 0</div></div>return Ok(bulletins);</div></div></div>
+<div class="line"><div class="line-number">128</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">129</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">130</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">131</div><div class="line-content">    /// Выполняет поиск объявлений по идентификатору категории (включая дочерние категории)</div></div>
+<div class="line"><div class="line-number">132</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">133</div><div class="line-content">    /// &lt;param name=&quot;bulletinCategoryId&quot;&gt;Идентификатор категории.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">134</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">135</div><div class="line-content">    /// &lt;returns&gt;Коллекция объявлений.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">136</div><div class="line-content">    [HttpGet(&quot;by-category&quot;)]</div></div>
+<div class="line"><div class="line-number">137</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;BulletinDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">138</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetByCategoryAsync(Guid bulletinCategoryId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">139</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">140</div><div class="line-content">        <div data-hover-target=".s-112" data-activate-target=".s-112" class="statement s-112 not-hit"><div class="statement-info s-112"><div>Id: 112</div><div>Hits: 0</div></div>var bulletins = await bulletinService.GetByCategoryAsync(bulletinCategoryId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">141</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">142</div><div class="line-content">        <div data-hover-target=".s-113" data-activate-target=".s-113" class="statement s-113 not-hit"><div class="statement-info s-113"><div>Id: 113</div><div>Hits: 0</div></div>return Ok(bulletins);</div></div></div>
+<div class="line"><div class="line-number">143</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">144</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">145</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">146</div><div class="line-content">    /// Возвращает все объявления.</div></div>
+<div class="line"><div class="line-number">147</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">148</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">149</div><div class="line-content">    /// &lt;returns&gt;Коллекция объявлений.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">150</div><div class="line-content">    [HttpGet(&quot;all&quot;)]</div></div>
+<div class="line"><div class="line-number">151</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;BulletinDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">152</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetBulletinsAsync(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">153</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">154</div><div class="line-content">        <div data-hover-target=".s-105" data-activate-target=".s-105" class="statement s-105 not-hit"><div class="statement-info s-105"><div>Id: 105</div><div>Hits: 0</div></div>var bulletins =  await bulletinService.GetAllAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">155</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">156</div><div class="line-content">        <div data-hover-target=".s-106" data-activate-target=".s-106" class="statement s-106 not-hit"><div class="statement-info s-106"><div>Id: 106</div><div>Hits: 0</div></div>return Ok(bulletins);</div></div></div>
+<div class="line"><div class="line-number">157</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">158</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">159</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">160</div><div class="line-content">    /// Добавляет изображение к объявлению.</div></div>
+<div class="line"><div class="line-number">161</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">162</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">163</div><div class="line-content">    /// &lt;param name=&quot;file&quot;&gt;Изображение.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">164</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">165</div><div class="line-content">    /// &lt;returns&gt;Идентификатор добавленного изображения.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">166</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">167</div><div class="line-content">    [HttpPost(&quot;{bulletinId}/images/upload&quot;)]</div></div>
+<div class="line"><div class="line-number">168</div><div class="line-content">    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]</div></div>
+<div class="line"><div class="line-number">169</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">170</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">171</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">172</div><div class="line-content">    public async Task&lt;IActionResult&gt; UploadImageAsync(Guid bulletinId, IFormFile file, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">173</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">174</div><div class="line-content">        <div data-hover-target=".s-131" data-activate-target=".s-131" class="statement s-131 not-hit"><div class="statement-info s-131"><div>Id: 131</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">175</div><div class="line-content">        <div data-hover-target=".s-132" data-activate-target=".s-132" class="statement s-132 not-hit"><div class="statement-info s-132"><div>Id: 132</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-133" data-activate-target=".s-133" class="statement s-133 not-hit"><div class="statement-info s-133"><div>Id: 133</div><div>Hits: 0</div></div>return NotFound(&quot;Объявление не существует.&quot;);</div></div></div>
+<div class="line"><div class="line-number">176</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">177</div><div class="line-content">        <div data-hover-target=".s-134" data-activate-target=".s-134" class="statement s-134 not-hit"><div class="statement-info s-134"><div>Id: 134</div><div>Hits: 0</div></div>var userId = GetCurrentUserIdAsync();</div></div></div>
+<div class="line"><div class="line-number">178</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">179</div><div class="line-content">        <div data-hover-target=".s-135" data-activate-target=".s-135" class="statement s-135 not-hit"><div class="statement-info s-135"><div>Id: 135</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (userId != bulletin.OwnerId)</div> <div data-hover-target=".s-138" data-activate-target=".s-138" class="statement s-138 not-hit"><div class="statement-info s-138"><div>Id: 138</div><div>Hits: 0</div></div>return Forbid();</div></div></div>
+<div class="line"><div class="line-number">180</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">181</div><div class="line-content">        <div data-hover-target=".s-139" data-activate-target=".s-139" class="statement s-139 not-hit"><div class="statement-info s-139"><div>Id: 139</div><div>Hits: 0</div></div>var fileId = await imageService.AddImageAsync(bulletinId, file, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">182</div><div class="line-content">        <div data-hover-target=".s-140" data-activate-target=".s-140" class="statement s-140 not-hit"><div class="statement-info s-140"><div>Id: 140</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created, fileId.ToString());</div></div></div>
+<div class="line"><div class="line-number">183</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">184</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">185</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">186</div><div class="line-content">    /// Возвращает идентификаторы всех изображений по идентификатору объявления.</div></div>
+<div class="line"><div class="line-number">187</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">188</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">189</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">190</div><div class="line-content">    /// &lt;returns&gt;Коллекция идентификаторов изображений.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">191</div><div class="line-content">    [HttpGet(&quot;{bulletinId}/images&quot;)]</div></div>
+<div class="line"><div class="line-number">192</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;Guid&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">193</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">194</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetImagesAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">195</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">196</div><div class="line-content">        <div data-hover-target=".s-114" data-activate-target=".s-114" class="statement s-114 not-hit"><div class="statement-info s-114"><div>Id: 114</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">197</div><div class="line-content">        <div data-hover-target=".s-115" data-activate-target=".s-115" class="statement s-115 not-hit"><div class="statement-info s-115"><div>Id: 115</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-116" data-activate-target=".s-116" class="statement s-116 not-hit"><div class="statement-info s-116"><div>Id: 116</div><div>Hits: 0</div></div>return NotFound(&quot;Объявление не существует.&quot;);</div></div></div>
+<div class="line"><div class="line-number">198</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">199</div><div class="line-content">        <div data-hover-target=".s-117" data-activate-target=".s-117" class="statement s-117 not-hit"><div class="statement-info s-117"><div>Id: 117</div><div>Hits: 0</div></div>var imageIds = await imageService.GetImageIdsByBulletinIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">200</div><div class="line-content">        <div data-hover-target=".s-118" data-activate-target=".s-118" class="statement s-118 not-hit"><div class="statement-info s-118"><div>Id: 118</div><div>Hits: 0</div></div>return Ok(imageIds);</div></div></div>
+<div class="line"><div class="line-number">201</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">202</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">203</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">204</div><div class="line-content">    /// Удаляет изображние из объявления по идентификатору.</div></div>
+<div class="line"><div class="line-number">205</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">206</div><div class="line-content">    /// &lt;param name=&quot;imageId&quot;&gt;Идентификатор изображения.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">207</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">208</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления с изображением.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">209</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">210</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">211</div><div class="line-content">    [HttpDelete(&quot;{bulletinId}/images/{imageId}&quot;)]</div></div>
+<div class="line"><div class="line-number">212</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NoContent)]</div></div>
+<div class="line"><div class="line-number">213</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">214</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">215</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.BadRequest)]</div></div>
+<div class="line"><div class="line-number">216</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">217</div><div class="line-content">    public async Task&lt;IActionResult&gt; DeleteAsync(Guid bulletinId, Guid imageId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">218</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">219</div><div class="line-content">        <div data-hover-target=".s-69" data-activate-target=".s-69" class="statement s-69 not-hit"><div class="statement-info s-69"><div>Id: 69</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">220</div><div class="line-content">        <div data-hover-target=".s-70" data-activate-target=".s-70" class="statement s-70 not-hit"><div class="statement-info s-70"><div>Id: 70</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit"><div class="statement-info s-71"><div>Id: 71</div><div>Hits: 0</div></div>return NotFound(&quot;Объявление не существует.&quot;);</div></div></div>
+<div class="line"><div class="line-number">221</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">222</div><div class="line-content">        <div data-hover-target=".s-72" data-activate-target=".s-72" class="statement s-72 not-hit"><div class="statement-info s-72"><div>Id: 72</div><div>Hits: 0</div></div>var userId = GetCurrentUserIdAsync();</div></div></div>
+<div class="line not-hit"><div class="line-number">223</div><div class="line-content">        <div data-hover-target=".s-73" data-activate-target=".s-73" class="statement s-73 not-hit"><div class="statement-info s-73"><div>Id: 73</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (userId != bulletin.OwnerId)</div> <div data-hover-target=".s-76" data-activate-target=".s-76" class="statement s-76 not-hit"><div class="statement-info s-76"><div>Id: 76</div><div>Hits: 0</div></div>return Forbid();</div></div></div>
+<div class="line"><div class="line-number">224</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">225</div><div class="line-content">        <div data-hover-target=".s-77" data-activate-target=".s-77" class="statement s-77 not-hit"><div class="statement-info s-77"><div>Id: 77</div><div>Hits: 0</div></div>var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">226</div><div class="line-content">        <div data-hover-target=".s-78" data-activate-target=".s-78" class="statement s-78 not-hit"><div class="statement-info s-78"><div>Id: 78</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin.Id != image.BulletinId)</div> <div data-hover-target=".s-81" data-activate-target=".s-81" class="statement s-81 not-hit"><div class="statement-info s-81"><div>Id: 81</div><div>Hits: 0</div></div>return BadRequest(&quot;Изображение не принадлежит объявлению.&quot;);</div></div></div>
+<div class="line"><div class="line-number">227</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">228</div><div class="line-content">        <div data-hover-target=".s-82" data-activate-target=".s-82" class="statement s-82 not-hit"><div class="statement-info s-82"><div>Id: 82</div><div>Hits: 0</div></div>await imageService.DeleteImageAsync(imageId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">229</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">230</div><div class="line-content">        <div data-hover-target=".s-83" data-activate-target=".s-83" class="statement s-83 not-hit"><div class="statement-info s-83"><div>Id: 83</div><div>Hits: 0</div></div>return NoContent();</div></div></div>
+<div class="line"><div class="line-number">231</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">232</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">233</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">234</div><div class="line-content">    /// Добавляет комментарий к объявлению.</div></div>
+<div class="line"><div class="line-number">235</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">236</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">237</div><div class="line-content">    /// &lt;param name=&quot;comment&quot;&gt;Комментарий.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">238</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">239</div><div class="line-content">    /// &lt;returns&gt;Идентификатор комментария.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">240</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">241</div><div class="line-content">    [HttpPost(&quot;{bulletinId}/comments&quot;)]</div></div>
+<div class="line"><div class="line-number">242</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">243</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;Guid&gt;), (int)HttpStatusCode.Created)]</div></div>
+<div class="line"><div class="line-number">244</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">245</div><div class="line-content">    public async Task&lt;IActionResult&gt; AddCommentAsync(Guid bulletinId, AddCommentRequest comment, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">246</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">247</div><div class="line-content">        <div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit"><div class="statement-info s-60"><div>Id: 60</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">248</div><div class="line-content">        <div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div class="statement-info s-61"><div>Id: 61</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit"><div class="statement-info s-62"><div>Id: 62</div><div>Hits: 0</div></div>return NotFound(&quot;Объявление не существует.&quot;);</div></div></div>
+<div class="line"><div class="line-number">249</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">250</div><div class="line-content">        <div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit"><div class="statement-info s-63"><div>Id: 63</div><div>Hits: 0</div></div>var authorId = GetCurrentUserIdAsync();</div></div></div>
+<div class="line"><div class="line-number">251</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">252</div><div class="line-content">        <div data-hover-target=".s-64" data-activate-target=".s-64" class="statement s-64 not-hit"><div class="statement-info s-64"><div>Id: 64</div><div>Hits: 0</div></div>var commentId = await commentService.AddCommentAsync(bulletinId, authorId, comment, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">253</div><div class="line-content">        <div data-hover-target=".s-65" data-activate-target=".s-65" class="statement s-65 not-hit"><div class="statement-info s-65"><div>Id: 65</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created, commentId.ToString());</div></div></div>
+<div class="line"><div class="line-number">254</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">255</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">256</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">257</div><div class="line-content">    /// Удаляет комментарий объявления.</div></div>
+<div class="line"><div class="line-number">258</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">259</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">260</div><div class="line-content">    /// &lt;param name=&quot;commentId&quot;&gt;Идентификатор комментария.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">261</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">262</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">263</div><div class="line-content">    [Authorize(Roles = &quot;Admin&quot;)]</div></div>
+<div class="line"><div class="line-number">264</div><div class="line-content">    [HttpDelete(&quot;{bulletinId}/comments/{commentId}&quot;)]</div></div>
+<div class="line"><div class="line-number">265</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NoContent)]</div></div>
+<div class="line"><div class="line-number">266</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.BadRequest)]</div></div>
+<div class="line"><div class="line-number">267</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">268</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">269</div><div class="line-content">    public async Task&lt;IActionResult&gt; DeleteCommentAsync(Guid bulletinId, Guid commentId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">270</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">271</div><div class="line-content">        <div data-hover-target=".s-94" data-activate-target=".s-94" class="statement s-94 not-hit"><div class="statement-info s-94"><div>Id: 94</div><div>Hits: 0</div></div>var comment = await commentService.GetCommentByIdAsync(commentId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">272</div><div class="line-content">        <div data-hover-target=".s-95" data-activate-target=".s-95" class="statement s-95 not-hit"><div class="statement-info s-95"><div>Id: 95</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletinId != comment.BulletinId)</div> <div data-hover-target=".s-98" data-activate-target=".s-98" class="statement s-98 not-hit"><div class="statement-info s-98"><div>Id: 98</div><div>Hits: 0</div></div>return BadRequest();</div></div></div>
+<div class="line"><div class="line-number">273</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">274</div><div class="line-content">        <div data-hover-target=".s-99" data-activate-target=".s-99" class="statement s-99 not-hit"><div class="statement-info s-99"><div>Id: 99</div><div>Hits: 0</div></div>await commentService.DeleteCommentAsync(commentId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">275</div><div class="line-content">        <div data-hover-target=".s-100" data-activate-target=".s-100" class="statement s-100 not-hit"><div class="statement-info s-100"><div>Id: 100</div><div>Hits: 0</div></div>return NoContent();</div></div></div>
+<div class="line"><div class="line-number">276</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">277</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">278</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">279</div><div class="line-content">    /// Получает все комментарии по идентификатору объявления.</div></div>
+<div class="line"><div class="line-number">280</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">281</div><div class="line-content">    /// &lt;param name=&quot;bulletinId&quot;&gt;Идентификатор объявления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">282</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">283</div><div class="line-content">    /// &lt;returns&gt;Коллекция моделей комментариев.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">284</div><div class="line-content">    [HttpGet(&quot;{bulletinId}/comments&quot;)]</div></div>
+<div class="line"><div class="line-number">285</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;CommentDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">286</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
+<div class="line"><div class="line-number">287</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetBulletinsCommentsAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">288</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">289</div><div class="line-content">        <div data-hover-target=".s-107" data-activate-target=".s-107" class="statement s-107 not-hit"><div class="statement-info s-107"><div>Id: 107</div><div>Hits: 0</div></div>var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">290</div><div class="line-content">        <div data-hover-target=".s-108" data-activate-target=".s-108" class="statement s-108 not-hit"><div class="statement-info s-108"><div>Id: 108</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (bulletin == null)</div> <div data-hover-target=".s-109" data-activate-target=".s-109" class="statement s-109 not-hit"><div class="statement-info s-109"><div>Id: 109</div><div>Hits: 0</div></div>return NotFound(&quot;Объявление не существует.&quot;);</div></div></div>
+<div class="line"><div class="line-number">291</div><div class="line-content">        </div></div>
+<div class="line"><div class="line-number">292</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">293</div><div class="line-content">        <div data-hover-target=".s-110" data-activate-target=".s-110" class="statement s-110 not-hit"><div class="statement-info s-110"><div>Id: 110</div><div>Hits: 0</div></div>var comments = await commentService.GetByBulletinIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">294</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">295</div><div class="line-content">        <div data-hover-target=".s-111" data-activate-target=".s-111" class="statement s-111 not-hit"><div class="statement-info s-111"><div>Id: 111</div><div>Hits: 0</div></div>return Ok(comments);</div></div></div>
+<div class="line"><div class="line-number">296</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">297</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>
