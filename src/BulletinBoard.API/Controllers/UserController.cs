@@ -38,7 +38,7 @@ public class UserController(IUserService userService) : BaseController
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Модель пользователя.</returns>
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     [HttpGet("{userId}")]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
