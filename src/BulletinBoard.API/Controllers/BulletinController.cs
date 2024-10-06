@@ -19,7 +19,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class BulletinController(IBulletinService bulletinService, IImageService imageService, ICommentService commentService) : BaseController
+public class BulletinController(IBulletinService bulletinService, IImageService imageService, ICommentService commentService, ILogger<BulletinController> logger) : BaseController
 {
     /// <summary>
     /// Создаёт объявление по модели запроса.
@@ -122,6 +122,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> SearchBulletinsAsync(SearchBulletinRequest request,
         CancellationToken cancellationToken)
     {
+        logger.LogInformation("Поиск объявлений по запросу: {@Request}", request);
         var bulletins = await bulletinService.SearchBulletinsAsync(request, cancellationToken);
         
         return Ok(bulletins);

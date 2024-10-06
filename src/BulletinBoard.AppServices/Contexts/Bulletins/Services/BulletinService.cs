@@ -2,6 +2,7 @@
 using BulletinBoard.AppServices.Contexts.Bulletins.Repositories;
 using BulletinBoard.AppServices.Contexts.Categories.Services;
 using BulletinBoard.Contracts.Bulletins;
+using Microsoft.Extensions.Logging;
 
 namespace BulletinBoard.AppServices.Contexts.Bulletins.Services;
 
@@ -11,19 +12,23 @@ public class BulletinService : IBulletinService
     private readonly IBulletinRepository _repository;
     private readonly IBulletinSpecificationBuilder _specificationBuilder;
     private readonly ICategoryService _categoryService;
+    private readonly ILogger<BulletinService> _logger;
 
     public BulletinService(IBulletinRepository repository, IBulletinSpecificationBuilder specificationBuilder,
-        ICategoryService categoryService)
+        ICategoryService categoryService, ILogger<BulletinService> logger)
     {
         _repository = repository;
         _specificationBuilder = specificationBuilder;
         _categoryService = categoryService;
+        _logger = logger;
     }
 
     /// <inheritdoc />
     public async Task<ICollection<BulletinDto>> SearchBulletinsAsync(SearchBulletinRequest request, CancellationToken cancellationToken)
     {
+        using var _ = _logger.BeginScope("Поиск по запросу: {@Request}", request);
         var specification = _specificationBuilder.Build(request);
+        _logger.LogInformation("Построена спецификация поиска объявлений");
         return await _repository.GetBySpecificationWithPaginationAsync(specification, request.Take, request.Skip, cancellationToken);
     }
 
