@@ -235,10 +235,10 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/12)</td></tr>
-<tr><th>Statements Coverage</th><td class="red">0,00 % (0/13)</td></tr>
-<tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
+<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/11)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/11)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
 <h2>Code</h2>
@@ -262,7 +262,7 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">13</div><div class="line-content">[ApiController]</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">[Route(&quot;[controller]&quot;)]</div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">[ProducesResponseType((int)HttpStatusCode.InternalServerError)]</div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-141" data-activate-target=".s-141" class="statement s-141 not-hit"><div class="statement-info s-141"><div>Id: 141</div><div>Hits: 0</div></div>CategoryController(ICategoryService categoryService)</div> : BaseController</div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-170" data-activate-target=".s-170" class="statement s-170 not-hit"><div class="statement-info s-170"><div>Id: 170</div><div>Hits: 0</div></div>CategoryController(ICategoryService categoryService)</div> : BaseController</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">{</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">19</div><div class="line-content">    /// Создаёт категорию по модели запроса.</div></div>
@@ -277,10 +277,10 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">28</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">    public async Task&lt;IActionResult&gt; AddCategoryAsync(CreateCategoryRequest request, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">30</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-142" data-activate-target=".s-142" class="statement s-142 not-hit"><div class="statement-info s-142"><div>Id: 142</div><div>Hits: 0</div></div>var categoryId =  await categoryService.CreateCategoryAsync(request, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-171" data-activate-target=".s-171" class="statement s-171 not-hit"><div class="statement-info s-171"><div>Id: 171</div><div>Hits: 0</div></div>var categoryId =  await categoryService.CreateCategoryAsync(request, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">32</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-143" data-activate-target=".s-143" class="statement s-143 not-hit"><div class="statement-info s-143"><div>Id: 143</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created,  categoryId.ToString() );</div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-172" data-activate-target=".s-172" class="statement s-172 not-hit"><div class="statement-info s-172"><div>Id: 172</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created,  categoryId.ToString() );</div></div></div>
 <div class="line"><div class="line-number">34</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">35</div><div class="line-content">&nbsp;
 </div></div>
@@ -295,64 +295,62 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">44</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
 <div class="line"><div class="line-number">45</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetCategoryByIdAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">46</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-148" data-activate-target=".s-148" class="statement s-148 not-hit"><div class="statement-info s-148"><div>Id: 148</div><div>Hits: 0</div></div>var category = await categoryService.GetCategoryByIdAsync(categoryId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-177" data-activate-target=".s-177" class="statement s-177 not-hit"><div class="statement-info s-177"><div>Id: 177</div><div>Hits: 0</div></div>var category = await categoryService.GetCategoryByIdAsync(categoryId, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">48</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-149" data-activate-target=".s-149" class="statement s-149 not-hit"><div class="statement-info s-149"><div>Id: 149</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (category == null)</div> <div data-hover-target=".s-150" data-activate-target=".s-150" class="statement s-150 not-hit"><div class="statement-info s-150"><div>Id: 150</div><div>Hits: 0</div></div>return NotFound();</div></div></div>
-<div class="line"><div class="line-number">50</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">51</div><div class="line-content">        <div data-hover-target=".s-151" data-activate-target=".s-151" class="statement s-151 not-hit"><div class="statement-info s-151"><div>Id: 151</div><div>Hits: 0</div></div>return Ok(category);</div></div></div>
-<div class="line"><div class="line-number">52</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">53</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-178" data-activate-target=".s-178" class="statement s-178 not-hit"><div class="statement-info s-178"><div>Id: 178</div><div>Hits: 0</div></div>return Ok(category);</div></div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">54</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">55</div><div class="line-content">    /// Удаляет категорию по идентификатору.</div></div>
-<div class="line"><div class="line-number">56</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">57</div><div class="line-content">    /// &lt;param name=&quot;categoryId&quot;&gt;Идентификатор.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">58</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">59</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">60</div><div class="line-content">    [HttpDelete(&quot;{categoryId}&quot;)]</div></div>
-<div class="line"><div class="line-number">61</div><div class="line-content">    [Authorize(Roles = &quot;Admin&quot;)]</div></div>
-<div class="line"><div class="line-number">62</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.OK)]</div></div>
-<div class="line"><div class="line-number">63</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
-<div class="line"><div class="line-number">64</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
-<div class="line"><div class="line-number">65</div><div class="line-content">    public async Task&lt;IActionResult&gt; DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">66</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">67</div><div class="line-content">        <div data-hover-target=".s-144" data-activate-target=".s-144" class="statement s-144 not-hit"><div class="statement-info s-144"><div>Id: 144</div><div>Hits: 0</div></div>await categoryService.DeleteCategoryAsync(categoryId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">68</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">52</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">    /// Удаляет категорию по идентификатору.</div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">    /// &lt;param name=&quot;categoryId&quot;&gt;Идентификатор.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">57</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">    [HttpDelete(&quot;{categoryId}&quot;)]</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">    [Authorize(Roles = &quot;Admin&quot;)]</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">    public async Task&lt;IActionResult&gt; DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">64</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">65</div><div class="line-content">        <div data-hover-target=".s-173" data-activate-target=".s-173" class="statement s-173 not-hit"><div class="statement-info s-173"><div>Id: 173</div><div>Hits: 0</div></div>await categoryService.DeleteCategoryAsync(categoryId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">69</div><div class="line-content">        <div data-hover-target=".s-145" data-activate-target=".s-145" class="statement s-145 not-hit"><div class="statement-info s-145"><div>Id: 145</div><div>Hits: 0</div></div>return Ok();</div></div></div>
-<div class="line"><div class="line-number">70</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">71</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">67</div><div class="line-content">        <div data-hover-target=".s-174" data-activate-target=".s-174" class="statement s-174 not-hit"><div class="statement-info s-174"><div>Id: 174</div><div>Hits: 0</div></div>return Ok();</div></div></div>
+<div class="line"><div class="line-number">68</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">72</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">73</div><div class="line-content">    /// Возвращает дерево категорий по идентификатору корневой категории.</div></div>
-<div class="line"><div class="line-number">74</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">75</div><div class="line-content">    /// &lt;param name=&quot;categoryId&quot;&gt;Идентификатор корневой категории.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">76</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">77</div><div class="line-content">    /// &lt;returns&gt;Коллекция моделей категорий.&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">78</div><div class="line-content">    [HttpGet(&quot;{categoryId}/subcategories&quot;)]</div></div>
-<div class="line"><div class="line-number">79</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;CategoryDto&gt;), (int)HttpStatusCode.OK)]</div></div>
-<div class="line"><div class="line-number">80</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">81</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">82</div><div class="line-content">        <div data-hover-target=".s-152" data-activate-target=".s-152" class="statement s-152 not-hit"><div class="statement-info s-152"><div>Id: 152</div><div>Hits: 0</div></div>var categories = await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">83</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">84</div><div class="line-content">        <div data-hover-target=".s-153" data-activate-target=".s-153" class="statement s-153 not-hit"><div class="statement-info s-153"><div>Id: 153</div><div>Hits: 0</div></div>return Ok(categories);</div></div></div>
-<div class="line"><div class="line-number">85</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">86</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">70</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">71</div><div class="line-content">    /// Возвращает дерево категорий по идентификатору корневой категории.</div></div>
+<div class="line"><div class="line-number">72</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">73</div><div class="line-content">    /// &lt;param name=&quot;categoryId&quot;&gt;Идентификатор корневой категории.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">74</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">75</div><div class="line-content">    /// &lt;returns&gt;Коллекция моделей категорий.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">76</div><div class="line-content">    [HttpGet(&quot;{categoryId}/subcategories&quot;)]</div></div>
+<div class="line"><div class="line-number">77</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;CategoryDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">78</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">79</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">80</div><div class="line-content">        <div data-hover-target=".s-179" data-activate-target=".s-179" class="statement s-179 not-hit"><div class="statement-info s-179"><div>Id: 179</div><div>Hits: 0</div></div>var categories = await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">81</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">82</div><div class="line-content">        <div data-hover-target=".s-180" data-activate-target=".s-180" class="statement s-180 not-hit"><div class="statement-info s-180"><div>Id: 180</div><div>Hits: 0</div></div>return Ok(categories);</div></div></div>
+<div class="line"><div class="line-number">83</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">84</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">87</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">88</div><div class="line-content">    /// Возвращает все категории.</div></div>
-<div class="line"><div class="line-number">89</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">90</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">91</div><div class="line-content">    /// &lt;returns&gt;Коллекция категорий.&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">92</div><div class="line-content">    [HttpGet(&quot;all&quot;)]</div></div>
-<div class="line"><div class="line-number">93</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;CategoryDto&gt;), (int)HttpStatusCode.OK)]</div></div>
-<div class="line"><div class="line-number">94</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetAllCategoriesAsync(CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">95</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">96</div><div class="line-content">        <div data-hover-target=".s-146" data-activate-target=".s-146" class="statement s-146 not-hit"><div class="statement-info s-146"><div>Id: 146</div><div>Hits: 0</div></div>var categories = await categoryService.GetAllCategoriesAsync(cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">97</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">98</div><div class="line-content">        <div data-hover-target=".s-147" data-activate-target=".s-147" class="statement s-147 not-hit"><div class="statement-info s-147"><div>Id: 147</div><div>Hits: 0</div></div>return Ok(categories);</div></div></div>
-<div class="line"><div class="line-number">99</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">100</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">85</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">86</div><div class="line-content">    /// Возвращает все категории.</div></div>
+<div class="line"><div class="line-number">87</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">88</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">89</div><div class="line-content">    /// &lt;returns&gt;Коллекция категорий.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">90</div><div class="line-content">    [HttpGet(&quot;all&quot;)]</div></div>
+<div class="line"><div class="line-number">91</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;CategoryDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">92</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetAllCategoriesAsync(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">93</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">94</div><div class="line-content">        <div data-hover-target=".s-175" data-activate-target=".s-175" class="statement s-175 not-hit"><div class="statement-info s-175"><div>Id: 175</div><div>Hits: 0</div></div>var categories = await categoryService.GetAllCategoriesAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">95</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">96</div><div class="line-content">        <div data-hover-target=".s-176" data-activate-target=".s-176" class="statement s-176 not-hit"><div class="statement-info s-176"><div>Id: 176</div><div>Hits: 0</div></div>return Ok(categories);</div></div></div>
+<div class="line"><div class="line-number">97</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">98</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

@@ -13,7 +13,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class UserController(IUserService userService) : BaseController
+public class UserController(IUserService userService, ILogger<UserController> logger) : BaseController
 {
     /// <summary>
     /// Удаляет пользователя по идентификатору.
@@ -28,6 +28,7 @@ public class UserController(IUserService userService) : BaseController
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> DeleteUser(Guid userId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Удаление пользователя: {id}", userId);
         await userService.DeleteUserAsync(userId, cancellationToken);
         return NoContent();
     }
@@ -46,6 +47,7 @@ public class UserController(IUserService userService) : BaseController
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> GetUserById(Guid userId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Поиск пользователя: {id}", userId);
         var user = await userService.GetUserByIdAsync(userId, cancellationToken);
         
         return Ok(user);
@@ -63,6 +65,7 @@ public class UserController(IUserService userService) : BaseController
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
     {
+        logger.LogInformation("Получение всех пользователей");
         var users = await userService.GetUsersAsync(cancellationToken);
         return Ok(users);
     }

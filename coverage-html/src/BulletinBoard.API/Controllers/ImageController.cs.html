@@ -235,10 +235,10 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/4)</td></tr>
-<tr><th>Statements Coverage</th><td class="red">0,00 % (0/5)</td></tr>
-<tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
+<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/3)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/3)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
 <h2>Code</h2>
@@ -262,7 +262,7 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">13</div><div class="line-content">[ApiController]</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">[Route(&quot;[controller]&quot;)]</div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">[ProducesResponseType((int)HttpStatusCode.InternalServerError)]</div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-154" data-activate-target=".s-154" class="statement s-154 not-hit"><div class="statement-info s-154"><div>Id: 154</div><div>Hits: 0</div></div>ImageController(IImageService imageService)</div> : BaseController</div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-181" data-activate-target=".s-181" class="statement s-181 not-hit"><div class="statement-info s-181"><div>Id: 181</div><div>Hits: 0</div></div>ImageController(IImageService imageService)</div> : BaseController</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">{</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">19</div><div class="line-content">    /// Выполняет поиск изображения по идентификатору.</div></div>
@@ -275,13 +275,11 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">26</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
 <div class="line"><div class="line-number">27</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetByImageIdAsync(Guid imageId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">28</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-155" data-activate-target=".s-155" class="statement s-155 not-hit"><div class="statement-info s-155"><div>Id: 155</div><div>Hits: 0</div></div>var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-182" data-activate-target=".s-182" class="statement s-182 not-hit"><div class="statement-info s-182"><div>Id: 182</div><div>Hits: 0</div></div>var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">30</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-156" data-activate-target=".s-156" class="statement s-156 not-hit"><div class="statement-info s-156"><div>Id: 156</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (image == null)</div> <div data-hover-target=".s-157" data-activate-target=".s-157" class="statement s-157 not-hit"><div class="statement-info s-157"><div>Id: 157</div><div>Hits: 0</div></div>return NotFound();</div></div></div>
-<div class="line"><div class="line-number">32</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-158" data-activate-target=".s-158" class="statement s-158 not-hit"><div class="statement-info s-158"><div>Id: 158</div><div>Hits: 0</div></div>return File(image.Content, image.ContentType);</div></div></div>
-<div class="line"><div class="line-number">34</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">35</div><div class="line-content">}</div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-183" data-activate-target=".s-183" class="statement s-183 not-hit"><div class="statement-info s-183"><div>Id: 183</div><div>Hits: 0</div></div>return File(image.Content, image.ContentType);</div></div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

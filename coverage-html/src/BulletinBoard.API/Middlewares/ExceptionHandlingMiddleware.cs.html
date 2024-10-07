@@ -1,0 +1,372 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/58)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/28)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/34)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using System.Net;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using System.Text.Json;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Exceptions;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Errors;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using Microsoft.AspNetCore.Http.Extensions;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">using Serilog.Context;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">namespace BulletinBoard.API.Middlewares;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">/// Промежуточное ПО для обработки ошибок.</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">public class ExceptionHandlingMiddleware</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">{</div></div>
+<div class="line not-hit"><div class="line-number">15</div><div class="line-content">    <div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit">private static readonly JsonSerializerOptions JsonSerializerOptions = new()</div></div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content"><div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit">    {</div></div></div>
+<div class="line not-hit"><div class="line-number">17</div><div class="line-content"><div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit">        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All),</div></div></div>
+<div class="line not-hit"><div class="line-number">18</div><div class="line-content"><div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit">        WriteIndented = true,</div></div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content"><div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit">        PropertyNamingPolicy = JsonNamingPolicy.CamelCase</div></div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content"><div data-hover-target=".s-71" data-activate-target=".s-71" class="statement s-71 not-hit"><div class="statement-info s-71"><div>Id: 71</div><div>Hits: 0</div></div>    };</div></div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    private const string LogTemplate = &quot;HTTP {RequestMethod} {RequestPath} responded {StatusCode}&quot;;</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    private readonly RequestDelegate _next;</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    /// Инициализирует экземпляр &lt;see cref=&quot;ExceptionHandlingMiddleware&quot;/&gt;.</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line not-hit"><div class="line-number">28</div><div class="line-content">    <div data-hover-target=".s-51" data-activate-target=".s-51" class="statement s-51 not-hit"><div class="statement-info s-51"><div>Id: 51</div><div>Hits: 0</div></div>public ExceptionHandlingMiddleware(RequestDelegate next)</div></div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-52" data-activate-target=".s-52" class="statement s-52 not-hit"><div class="statement-info s-52"><div>Id: 52</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>_next = next ?? throw new ArgumentNullException(nameof(next));</div></div></div>
+<div class="line"><div class="line-number">31</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    /// Выполняет операцию промежуточного ПО и передаёт управление</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    public async Task Invoke(</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">        HttpContext context</div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">        , IHostEnvironment environment</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">        , IServiceProvider serviceProvider</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">        , ILogger&lt;ExceptionHandlingMiddleware&gt; logger)</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    {</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">        try</div></div>
+<div class="line"><div class="line-number">43</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content">            <div data-hover-target=".s-72" data-activate-target=".s-72" class="statement s-72 not-hit"><div class="statement-info s-72"><div>Id: 72</div><div>Hits: 0</div></div>await _next(context);</div></div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">        }</div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-73" data-activate-target=".s-73" class="statement s-73 not-hit"><div class="statement-info s-73"><div>Id: 73</div><div>Hits: 0</div></div>catch (Exception e)</div></div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content">            <div data-hover-target=".s-74" data-activate-target=".s-74" class="statement s-74 not-hit"><div class="statement-info s-74"><div>Id: 74</div><div>Hits: 0</div></div>var statusCode = GetStatusCode(e);</div></div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">            </div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content">            <div data-hover-target=".s-75" data-activate-target=".s-75" class="statement s-75 not-hit"><div class="statement-info s-75"><div>Id: 75</div><div>Hits: 0</div></div>using (LogContext.PushProperty(&quot;Request.TraceId&quot;, context.TraceIdentifier))</div></div></div>
+<div class="line not-hit"><div class="line-number">51</div><div class="line-content">            <div data-hover-target=".s-76" data-activate-target=".s-76" class="statement s-76 not-hit"><div class="statement-info s-76"><div>Id: 76</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>using (LogContext.PushProperty(&quot;Request.UserName&quot;, context.User.Identity?.Name ?? string.Empty))</div></div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">            <div data-hover-target=".s-81" data-activate-target=".s-81" class="statement s-81 not-hit"><div class="statement-info s-81"><div>Id: 81</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div><div>Condition 2:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>using (LogContext.PushProperty(&quot;Request.Connection&quot;, context.Connection.RemoteIpAddress?.ToString() ?? string.Empty))</div></div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content">            <div data-hover-target=".s-86" data-activate-target=".s-86" class="statement s-86 not-hit"><div class="statement-info s-86"><div>Id: 86</div><div>Hits: 0</div></div>using (LogContext.PushProperty(&quot;Request.DisplayUrl&quot;, context.Request.GetDisplayUrl()))</div></div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">            {</div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content">                <div data-hover-target=".s-87" data-activate-target=".s-87" class="statement s-87 not-hit">logger.LogError(e, LogTemplate,</div></div></div>
+<div class="line not-hit"><div class="line-number">56</div><div class="line-content"><div data-hover-target=".s-87" data-activate-target=".s-87" class="statement s-87 not-hit">                    context.Request.Method,</div></div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content"><div data-hover-target=".s-87" data-activate-target=".s-87" class="statement s-87 not-hit">                    context.Request.Path.ToString(),</div></div></div>
+<div class="line not-hit"><div class="line-number">58</div><div class="line-content"><div data-hover-target=".s-87" data-activate-target=".s-87" class="statement s-87 not-hit"><div class="statement-info s-87"><div>Id: 87</div><div>Hits: 0</div></div>                    (int)statusCode);</div></div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">            }</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">            </div></div>
+<div class="line not-hit"><div class="line-number">61</div><div class="line-content">            <div data-hover-target=".s-88" data-activate-target=".s-88" class="statement s-88 not-hit"><div class="statement-info s-88"><div>Id: 88</div><div>Hits: 0</div></div>context.Response.ContentType = &quot;application/json&quot;;</div></div></div>
+<div class="line not-hit"><div class="line-number">62</div><div class="line-content">            <div data-hover-target=".s-89" data-activate-target=".s-89" class="statement s-89 not-hit"><div class="statement-info s-89"><div>Id: 89</div><div>Hits: 0</div></div>context.Response.StatusCode = (int)statusCode;</div></div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line not-hit"><div class="line-number">64</div><div class="line-content">            <div data-hover-target=".s-90" data-activate-target=".s-90" class="statement s-90 not-hit"><div class="statement-info s-90"><div>Id: 90</div><div>Hits: 0</div></div>var apiError = CreateApiError(e, context, environment);</div></div></div>
+<div class="line not-hit"><div class="line-number">65</div><div class="line-content">            <div data-hover-target=".s-91" data-activate-target=".s-91" class="statement s-91 not-hit"><div class="statement-info s-91"><div>Id: 91</div><div>Hits: 0</div></div>await context.Response.WriteAsync(JsonSerializer.Serialize(apiError, JsonSerializerOptions));</div></div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">67</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">68</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">    private object CreateApiError(Exception exception, HttpContext context, IHostEnvironment environment)</div></div>
+<div class="line"><div class="line-number">70</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">71</div><div class="line-content">        <div data-hover-target=".s-55" data-activate-target=".s-55" class="statement s-55 not-hit"><div class="statement-info s-55"><div>Id: 55</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (environment.IsDevelopment())</div></div></div>
+<div class="line"><div class="line-number">72</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">73</div><div class="line-content">            <div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit">return new ApiError</div></div></div>
+<div class="line not-hit"><div class="line-number">74</div><div class="line-content"><div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit">            {</div></div></div>
+<div class="line not-hit"><div class="line-number">75</div><div class="line-content"><div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit">                Code = ((int)HttpStatusCode.InternalServerError).ToString(),</div></div></div>
+<div class="line not-hit"><div class="line-number">76</div><div class="line-content"><div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit">                Message = exception.Message,</div></div></div>
+<div class="line not-hit"><div class="line-number">77</div><div class="line-content"><div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit">                Description = exception.StackTrace,</div></div></div>
+<div class="line not-hit"><div class="line-number">78</div><div class="line-content"><div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit">                TraceId = context.TraceIdentifier,</div></div></div>
+<div class="line not-hit"><div class="line-number">79</div><div class="line-content"><div data-hover-target=".s-58" data-activate-target=".s-58" class="statement s-58 not-hit"><div class="statement-info s-58"><div>Id: 58</div><div>Hits: 0</div></div>            };</div></div></div>
+<div class="line"><div class="line-number">80</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">81</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">82</div><div class="line-content">        <div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">return exception <div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit">switch</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">83</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">        {</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">84</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            HumanReadableException humanReadableException =&gt; <div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit">new HumanReadableError</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">85</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            {</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">86</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                Code = context.Response.StatusCode.ToString(),</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">87</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                HumanReadableErrorMessage = humanReadableException.HumanReadableMessage,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">88</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                Message = humanReadableException.Message,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">89</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                TraceId = context.TraceIdentifier,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">90</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-61" data-activate-target=".s-61" class="statement s-61 not-hit"><div class="statement-info s-61"><div>Id: 61</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            }</div>,</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">91</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            EntityNotFoundException =&gt; <div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit">new ApiError</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">92</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            {</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">93</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                Code = ((int)HttpStatusCode.NotFound).ToString(),</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">94</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                Message = &quot;Сущность не была найдена.&quot;,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">95</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                TraceId = context.TraceIdentifier,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">96</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-62" data-activate-target=".s-62" class="statement s-62 not-hit"><div class="statement-info s-62"><div>Id: 62</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            }</div>,</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">97</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            _ =&gt; <div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit">new ApiError</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">98</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            {</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">99</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                Code = ((int)HttpStatusCode.InternalServerError).ToString(),</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">100</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                Message = &quot;Произошла непредвиденая ошибка.&quot;,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">101</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit"><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">                TraceId = context.TraceIdentifier,</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">102</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div data-hover-target=".s-60" data-activate-target=".s-60" class="statement s-60 not-hit"><div class="statement-info s-60"><div>Id: 60</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit">            }</div></div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">103</div><div class="line-content"><div data-hover-target=".s-57" data-activate-target=".s-57" class="statement s-57 not-hit"><div class="statement-info s-57"><div>Id: 57</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li><li>Branch 3: 0 hits</li><li>Branch 4: 0 hits</li></ul></div></div><div data-hover-target=".s-59" data-activate-target=".s-59" class="statement s-59 not-hit"><div class="statement-info s-59"><div>Id: 59</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li><li>Branch 3: 0 hits</li></ul></div></div><div data-hover-target=".s-63" data-activate-target=".s-63" class="statement s-63 not-hit"><div class="statement-info s-63"><div>Id: 63</div><div>Hits: 0</div></div>        }</div>;</div></div></div></div>
+<div class="line"><div class="line-number">104</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">105</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">106</div><div class="line-content">    private HttpStatusCode GetStatusCode(Exception exception)</div></div>
+<div class="line"><div class="line-number">107</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">108</div><div class="line-content">        <div data-hover-target=".s-65" data-activate-target=".s-65" class="statement s-65 not-hit"><div data-hover-target=".s-69" data-activate-target=".s-69" class="statement s-69 not-hit">return exception <div data-hover-target=".s-66" data-activate-target=".s-66" class="statement s-66 not-hit">switch</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">109</div><div class="line-content"><div data-hover-target=".s-65" data-activate-target=".s-65" class="statement s-65 not-hit"><div data-hover-target=".s-66" data-activate-target=".s-66" class="statement s-66 not-hit"><div data-hover-target=".s-69" data-activate-target=".s-69" class="statement s-69 not-hit">        {</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">110</div><div class="line-content"><div data-hover-target=".s-65" data-activate-target=".s-65" class="statement s-65 not-hit"><div data-hover-target=".s-66" data-activate-target=".s-66" class="statement s-66 not-hit"><div data-hover-target=".s-69" data-activate-target=".s-69" class="statement s-69 not-hit">            EntityNotFoundException =&gt; <div data-hover-target=".s-68" data-activate-target=".s-68" class="statement s-68 not-hit"><div class="statement-info s-68"><div>Id: 68</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>HttpStatusCode.NotFound</div>,</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">111</div><div class="line-content"><div data-hover-target=".s-65" data-activate-target=".s-65" class="statement s-65 not-hit"><div data-hover-target=".s-66" data-activate-target=".s-66" class="statement s-66 not-hit"><div data-hover-target=".s-69" data-activate-target=".s-69" class="statement s-69 not-hit">            _ =&gt; <div data-hover-target=".s-67" data-activate-target=".s-67" class="statement s-67 not-hit"><div class="statement-info s-67"><div>Id: 67</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>HttpStatusCode.InternalServerError</div>,</div></div></div></div></div>
+<div class="line not-hit"><div class="line-number">112</div><div class="line-content"><div data-hover-target=".s-65" data-activate-target=".s-65" class="statement s-65 not-hit"><div class="statement-info s-65"><div>Id: 65</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li><li>Branch 3: 0 hits</li></ul></div></div><div data-hover-target=".s-66" data-activate-target=".s-66" class="statement s-66 not-hit"><div class="statement-info s-66"><div>Id: 66</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div><div data-hover-target=".s-69" data-activate-target=".s-69" class="statement s-69 not-hit"><div class="statement-info s-69"><div>Id: 69</div><div>Hits: 0</div></div>        }</div>;</div></div></div></div>
+<div class="line"><div class="line-number">113</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">114</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

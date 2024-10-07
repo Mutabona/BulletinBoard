@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/21)</td></tr>
-<tr><th>Statements Coverage</th><td class="red">0,00 % (0/24)</td></tr>
+<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/22)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/25)</td></tr>
 <tr><th>Branch Coverage</th><td class="red">0,00 % (0/6)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -264,69 +264,70 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">15</div><div class="line-content">    private readonly IMapper _mapper;</div></div>
 <div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">17</div><div class="line-content">    <div data-hover-target=".s-631" data-activate-target=".s-631" class="statement s-631 not-hit"><div class="statement-info s-631"><div>Id: 631</div><div>Hits: 0</div></div>public CategoryRepository(IRepository&lt;Category&gt; repository, IMapper mapper)</div></div></div>
+<div class="line not-hit"><div class="line-number">17</div><div class="line-content">    <div data-hover-target=".s-684" data-activate-target=".s-684" class="statement s-684 not-hit"><div class="statement-info s-684"><div>Id: 684</div><div>Hits: 0</div></div>public CategoryRepository(IRepository&lt;Category&gt; repository, IMapper mapper)</div></div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-632" data-activate-target=".s-632" class="statement s-632 not-hit"><div class="statement-info s-632"><div>Id: 632</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
-<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-633" data-activate-target=".s-633" class="statement s-633 not-hit"><div class="statement-info s-633"><div>Id: 633</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-685" data-activate-target=".s-685" class="statement s-685 not-hit"><div class="statement-info s-685"><div>Id: 685</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-686" data-activate-target=".s-686" class="statement s-686 not-hit"><div class="statement-info s-686"><div>Id: 686</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
 <div class="line"><div class="line-number">21</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">22</div><div class="line-content">    </div></div>
 <div class="line"><div class="line-number">23</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">24</div><div class="line-content">    public async Task&lt;Guid&gt; AddCategoryAsync(CreateCategoryRequest category, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">25</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-634" data-activate-target=".s-634" class="statement s-634 not-hit"><div class="statement-info s-634"><div>Id: 634</div><div>Hits: 0</div></div>var categoryEntity = _mapper.Map&lt;Category&gt;(category);</div></div></div>
-<div class="line not-hit"><div class="line-number">27</div><div class="line-content">        <div data-hover-target=".s-635" data-activate-target=".s-635" class="statement s-635 not-hit"><div class="statement-info s-635"><div>Id: 635</div><div>Hits: 0</div></div>return await _repository.AddAsync(categoryEntity, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-687" data-activate-target=".s-687" class="statement s-687 not-hit"><div class="statement-info s-687"><div>Id: 687</div><div>Hits: 0</div></div>var categoryEntity = _mapper.Map&lt;Category&gt;(category);</div></div></div>
+<div class="line not-hit"><div class="line-number">27</div><div class="line-content">        <div data-hover-target=".s-688" data-activate-target=".s-688" class="statement s-688 not-hit"><div class="statement-info s-688"><div>Id: 688</div><div>Hits: 0</div></div>return await _repository.AddAsync(categoryEntity, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">28</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">30</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">31</div><div class="line-content">    public async Task&lt;CategoryDto&gt; GetByIdAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">32</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-638" data-activate-target=".s-638" class="statement s-638 not-hit"><div class="statement-info s-638"><div>Id: 638</div><div>Hits: 0</div></div>return _mapper.Map&lt;CategoryDto&gt;(await _repository.GetByIdAsync(categoryId, cancellationToken));</div></div></div>
-<div class="line"><div class="line-number">34</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">35</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-691" data-activate-target=".s-691" class="statement s-691 not-hit"><div class="statement-info s-691"><div>Id: 691</div><div>Hits: 0</div></div>var entity = await _repository.GetByIdAsync(categoryId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-692" data-activate-target=".s-692" class="statement s-692 not-hit"><div class="statement-info s-692"><div>Id: 692</div><div>Hits: 0</div></div>return _mapper.Map&lt;CategoryDto&gt;(entity);</div></div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">36</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">    public async Task DeleteAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">39</div><div class="line-content">        <div data-hover-target=".s-636" data-activate-target=".s-636" class="statement s-636 not-hit"><div class="statement-info s-636"><div>Id: 636</div><div>Hits: 0</div></div>await _repository.DeleteAsync(categoryId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">40</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">41</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">37</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    public async Task DeleteAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-689" data-activate-target=".s-689" class="statement s-689 not-hit"><div class="statement-info s-689"><div>Id: 689</div><div>Hits: 0</div></div>await _repository.DeleteAsync(categoryId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">42</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">43</div><div class="line-content">    public async Task&lt;ICollection&lt;CategoryDto&gt;&gt; GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">44</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">45</div><div class="line-content">        <div data-hover-target=".s-639" data-activate-target=".s-639" class="statement s-639 not-hit"><div class="statement-info s-639"><div>Id: 639</div><div>Hits: 0</div></div>var category = await _repository.GetByIdAsync(categoryId, cancellationToken);</div> //Получаем корневую категорию.</div></div>
-<div class="line"><div class="line-number">46</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-640" data-activate-target=".s-640" class="statement s-640 not-hit"><div class="statement-info s-640"><div>Id: 640</div><div>Hits: 0</div></div>var subcategories = new List&lt;Category&gt;();</div> //Категории, которые будем возвращать.</div></div>
-<div class="line not-hit"><div class="line-number">48</div><div class="line-content">        <div data-hover-target=".s-641" data-activate-target=".s-641" class="statement s-641 not-hit"><div class="statement-info s-641"><div>Id: 641</div><div>Hits: 0</div></div>var subsubcategories = new List&lt;Category&gt;(await _repository.GetAll().Where(c =&gt; c.ParentCategoryId == category.Id).ToListAsync(cancellationToken));</div> //Категории, которые сейчас будем обрабатывать.</div></div>
-<div class="line not-hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-642" data-activate-target=".s-642" class="statement s-642 not-hit"><div class="statement-info s-642"><div>Id: 642</div><div>Hits: 0</div></div>var tempcategories = new List&lt;Category&gt;();</div> //Категории, которые будем обрабатывать следующими.</div></div>
-<div class="line"><div class="line-number">50</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">51</div><div class="line-content">        <div data-hover-target=".s-643" data-activate-target=".s-643" class="statement s-643 not-hit"><div class="statement-info s-643"><div>Id: 643</div><div>Hits: 0</div></div>subcategories.Add(category);</div></div></div>
-<div class="line"><div class="line-number">52</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">43</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">44</div><div class="line-content">    public async Task&lt;ICollection&lt;CategoryDto&gt;&gt; GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-693" data-activate-target=".s-693" class="statement s-693 not-hit"><div class="statement-info s-693"><div>Id: 693</div><div>Hits: 0</div></div>var category = await _repository.GetByIdAsync(categoryId, cancellationToken);</div> //Получаем корневую категорию.</div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content">        <div data-hover-target=".s-694" data-activate-target=".s-694" class="statement s-694 not-hit"><div class="statement-info s-694"><div>Id: 694</div><div>Hits: 0</div></div>var subcategories = new List&lt;Category&gt;();</div> //Категории, которые будем возвращать.</div></div>
+<div class="line not-hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-695" data-activate-target=".s-695" class="statement s-695 not-hit"><div class="statement-info s-695"><div>Id: 695</div><div>Hits: 0</div></div>var subsubcategories = new List&lt;Category&gt;(await _repository.GetAll().Where(c =&gt; c.ParentCategoryId == category.Id).ToListAsync(cancellationToken));</div> //Категории, которые сейчас будем обрабатывать.</div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content">        <div data-hover-target=".s-696" data-activate-target=".s-696" class="statement s-696 not-hit"><div class="statement-info s-696"><div>Id: 696</div><div>Hits: 0</div></div>var tempcategories = new List&lt;Category&gt;();</div> //Категории, которые будем обрабатывать следующими.</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-697" data-activate-target=".s-697" class="statement s-697 not-hit"><div class="statement-info s-697"><div>Id: 697</div><div>Hits: 0</div></div>subcategories.Add(category);</div></div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-655" data-activate-target=".s-655" class="statement s-655 not-hit"><div class="statement-info s-655"><div>Id: 655</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>while (subsubcategories.Count &gt; 0)</div> //Выполнять, пока не останется не обработанных категорий.</div></div>
-<div class="line"><div class="line-number">54</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">55</div><div class="line-content">            <div data-hover-target=".s-644" data-activate-target=".s-644" class="statement s-644 not-hit"><div class="statement-info s-644"><div>Id: 644</div><div>Hits: 0</div></div>foreach</div> (<div data-hover-target=".s-648" data-activate-target=".s-648" class="statement s-648 not-hit"><div class="statement-info s-648"><div>Id: 648</div><div>Hits: 0</div></div>var subsubcategory</div> <div data-hover-target=".s-646" data-activate-target=".s-646" class="statement s-646 not-hit"><div class="statement-info s-646"><div>Id: 646</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>in</div> <div data-hover-target=".s-645" data-activate-target=".s-645" class="statement s-645 not-hit"><div class="statement-info s-645"><div>Id: 645</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>subsubcategories</div>) //Проходимся по категориям.</div></div>
-<div class="line"><div class="line-number">56</div><div class="line-content">            {</div></div>
-<div class="line not-hit"><div class="line-number">57</div><div class="line-content">                <div data-hover-target=".s-649" data-activate-target=".s-649" class="statement s-649 not-hit"><div class="statement-info s-649"><div>Id: 649</div><div>Hits: 0</div></div>tempcategories.AddRange(await _repository.GetAll().Where(c =&gt; c.ParentCategoryId == subsubcategory.Id).ToListAsync(cancellationToken));</div> //Добавляем каждую дочернюю категорию в список категорий, которые будут обработаны позже.</div></div>
-<div class="line"><div class="line-number">58</div><div class="line-content">            }</div></div>
-<div class="line not-hit"><div class="line-number">59</div><div class="line-content">            <div data-hover-target=".s-651" data-activate-target=".s-651" class="statement s-651 not-hit"><div class="statement-info s-651"><div>Id: 651</div><div>Hits: 0</div></div>subcategories.AddRange(subsubcategories);</div> //Добавляем обработанные категории к тем, что будем возвращать.</div></div>
-<div class="line not-hit"><div class="line-number">60</div><div class="line-content">            <div data-hover-target=".s-652" data-activate-target=".s-652" class="statement s-652 not-hit"><div class="statement-info s-652"><div>Id: 652</div><div>Hits: 0</div></div>subsubcategories.Clear();</div> //Очищаем список обработанных категорий.</div></div>
-<div class="line"><div class="line-number">61</div><div class="line-content">            </div></div>
-<div class="line not-hit"><div class="line-number">62</div><div class="line-content">            <div data-hover-target=".s-653" data-activate-target=".s-653" class="statement s-653 not-hit"><div class="statement-info s-653"><div>Id: 653</div><div>Hits: 0</div></div>subsubcategories.AddRange(tempcategories);</div> //Перемещаем не обработанные категории в список для обработки</div></div>
-<div class="line not-hit"><div class="line-number">63</div><div class="line-content">            <div data-hover-target=".s-654" data-activate-target=".s-654" class="statement s-654 not-hit"><div class="statement-info s-654"><div>Id: 654</div><div>Hits: 0</div></div>tempcategories.Clear();</div> //Очищаем список для следующих категорий.</div></div>
-<div class="line"><div class="line-number">64</div><div class="line-content">        }</div></div>
-<div class="line"><div class="line-number">65</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">66</div><div class="line-content">        <div data-hover-target=".s-656" data-activate-target=".s-656" class="statement s-656 not-hit"><div class="statement-info s-656"><div>Id: 656</div><div>Hits: 0</div></div>return _mapper.Map&lt;ICollection&lt;CategoryDto&gt;&gt;(subcategories);</div></div></div>
-<div class="line"><div class="line-number">67</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">68</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">54</div><div class="line-content">        <div data-hover-target=".s-709" data-activate-target=".s-709" class="statement s-709 not-hit"><div class="statement-info s-709"><div>Id: 709</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>while (subsubcategories.Count &gt; 0)</div> //Выполнять, пока не останется не обработанных категорий.</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">56</div><div class="line-content">            <div data-hover-target=".s-698" data-activate-target=".s-698" class="statement s-698 not-hit"><div class="statement-info s-698"><div>Id: 698</div><div>Hits: 0</div></div>foreach</div> (<div data-hover-target=".s-702" data-activate-target=".s-702" class="statement s-702 not-hit"><div class="statement-info s-702"><div>Id: 702</div><div>Hits: 0</div></div>var subsubcategory</div> <div data-hover-target=".s-700" data-activate-target=".s-700" class="statement s-700 not-hit"><div class="statement-info s-700"><div>Id: 700</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>in</div> <div data-hover-target=".s-699" data-activate-target=".s-699" class="statement s-699 not-hit"><div class="statement-info s-699"><div>Id: 699</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>subsubcategories</div>) //Проходимся по категориям.</div></div>
+<div class="line"><div class="line-number">57</div><div class="line-content">            {</div></div>
+<div class="line not-hit"><div class="line-number">58</div><div class="line-content">                <div data-hover-target=".s-703" data-activate-target=".s-703" class="statement s-703 not-hit"><div class="statement-info s-703"><div>Id: 703</div><div>Hits: 0</div></div>tempcategories.AddRange(await _repository.GetAll().Where(c =&gt; c.ParentCategoryId == subsubcategory.Id).ToListAsync(cancellationToken));</div> //Добавляем каждую дочернюю категорию в список категорий, которые будут обработаны позже.</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">            }</div></div>
+<div class="line not-hit"><div class="line-number">60</div><div class="line-content">            <div data-hover-target=".s-705" data-activate-target=".s-705" class="statement s-705 not-hit"><div class="statement-info s-705"><div>Id: 705</div><div>Hits: 0</div></div>subcategories.AddRange(subsubcategories);</div> //Добавляем обработанные категории к тем, что будем возвращать.</div></div>
+<div class="line not-hit"><div class="line-number">61</div><div class="line-content">            <div data-hover-target=".s-706" data-activate-target=".s-706" class="statement s-706 not-hit"><div class="statement-info s-706"><div>Id: 706</div><div>Hits: 0</div></div>subsubcategories.Clear();</div> //Очищаем список обработанных категорий.</div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">            </div></div>
+<div class="line not-hit"><div class="line-number">63</div><div class="line-content">            <div data-hover-target=".s-707" data-activate-target=".s-707" class="statement s-707 not-hit"><div class="statement-info s-707"><div>Id: 707</div><div>Hits: 0</div></div>subsubcategories.AddRange(tempcategories);</div> //Перемещаем не обработанные категории в список для обработки</div></div>
+<div class="line not-hit"><div class="line-number">64</div><div class="line-content">            <div data-hover-target=".s-708" data-activate-target=".s-708" class="statement s-708 not-hit"><div class="statement-info s-708"><div>Id: 708</div><div>Hits: 0</div></div>tempcategories.Clear();</div> //Очищаем список для следующих категорий.</div></div>
+<div class="line"><div class="line-number">65</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">67</div><div class="line-content">        <div data-hover-target=".s-710" data-activate-target=".s-710" class="statement s-710 not-hit"><div class="statement-info s-710"><div>Id: 710</div><div>Hits: 0</div></div>return _mapper.Map&lt;ICollection&lt;CategoryDto&gt;&gt;(subcategories);</div></div></div>
+<div class="line"><div class="line-number">68</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">69</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">70</div><div class="line-content">    public async Task&lt;ICollection&lt;CategoryDto&gt;&gt; GetAllCategoriesAsync(CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">71</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">72</div><div class="line-content">        <div data-hover-target=".s-637" data-activate-target=".s-637" class="statement s-637 not-hit"><div class="statement-info s-637"><div>Id: 637</div><div>Hits: 0</div></div>return await _repository.GetAll().ProjectTo&lt;CategoryDto&gt;(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">73</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">74</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">70</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">71</div><div class="line-content">    public async Task&lt;ICollection&lt;CategoryDto&gt;&gt; GetAllCategoriesAsync(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">72</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">73</div><div class="line-content">        <div data-hover-target=".s-690" data-activate-target=".s-690" class="statement s-690 not-hit"><div class="statement-info s-690"><div>Id: 690</div><div>Hits: 0</div></div>return await _repository.GetAll().ProjectTo&lt;CategoryDto&gt;(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">74</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">75</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

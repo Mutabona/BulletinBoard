@@ -13,7 +13,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class ImageController(IImageService imageService) : BaseController
+public class ImageController(IImageService imageService, ILogger<ImageController> logger) : BaseController
 {
     /// <summary>
     /// Выполняет поиск изображения по идентификатору.
@@ -26,6 +26,7 @@ public class ImageController(IImageService imageService) : BaseController
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetByImageIdAsync(Guid imageId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Поиск изображения: {id}", imageId);
         var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);
         
         return File(image.Content, image.ContentType);

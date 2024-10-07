@@ -235,10 +235,10 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/14)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/12)</td></tr>
-<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
+<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/18)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/18)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/4)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
 <h2>Code</h2>
@@ -248,72 +248,81 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">1</div><div class="line-content">using AutoMapper;</div></div>
 <div class="line"><div class="line-number">2</div><div class="line-content">using AutoMapper.QueryableExtensions;</div></div>
 <div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Users.Repositories;</div></div>
-<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
-<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.Domain.Users.Entity;</div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">using BulletinBoard.Infrastructure.Repository;</div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">using Microsoft.EntityFrameworkCore;</div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.AppServices.Exceptions;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">using BulletinBoard.Domain.Users.Entity;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">using BulletinBoard.Infrastructure.Repository;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">using Microsoft.EntityFrameworkCore;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">namespace BulletinBoard.DataAccess.Users.Repository;</div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">10</div><div class="line-content">namespace BulletinBoard.DataAccess.Users.Repository;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">///&lt;inheritdoc cref=&quot;IUserRepository&quot;/&gt;</div></div>
-<div class="line"><div class="line-number">12</div><div class="line-content">public class UserRepository : IUserRepository</div></div>
-<div class="line"><div class="line-number">13</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">    private readonly IRepository&lt;User&gt; _repository;</div></div>
-<div class="line"><div class="line-number">15</div><div class="line-content">    private readonly IMapper _mapper;</div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">12</div><div class="line-content">///&lt;inheritdoc cref=&quot;IUserRepository&quot;/&gt;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">public class UserRepository : IUserRepository</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    private readonly IRepository&lt;User&gt; _repository;</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    private readonly IMapper _mapper;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">17</div><div class="line-content">    <div data-hover-target=".s-579" data-activate-target=".s-579" class="statement s-579 not-hit"><div class="statement-info s-579"><div>Id: 579</div><div>Hits: 0</div></div>public UserRepository(IRepository&lt;User&gt; repository, IMapper mapper)</div></div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-580" data-activate-target=".s-580" class="statement s-580 not-hit"><div class="statement-info s-580"><div>Id: 580</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
-<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-581" data-activate-target=".s-581" class="statement s-581 not-hit"><div class="statement-info s-581"><div>Id: 581</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
-<div class="line"><div class="line-number">21</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">22</div><div class="line-content">    </div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">    public async Task&lt;Guid&gt; AddAsync(RegisterUserRequest user, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">25</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-582" data-activate-target=".s-582" class="statement s-582 not-hit"><div class="statement-info s-582"><div>Id: 582</div><div>Hits: 0</div></div>var userEntity = _mapper.Map&lt;User&gt;(user);</div></div></div>
-<div class="line not-hit"><div class="line-number">27</div><div class="line-content">        <div data-hover-target=".s-583" data-activate-target=".s-583" class="statement s-583 not-hit"><div class="statement-info s-583"><div>Id: 583</div><div>Hits: 0</div></div>userEntity.Role = &quot;User&quot;;</div></div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-584" data-activate-target=".s-584" class="statement s-584 not-hit"><div class="statement-info s-584"><div>Id: 584</div><div>Hits: 0</div></div>return await _repository.AddAsync(userEntity, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">29</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">30</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">18</div><div class="line-content">    <div data-hover-target=".s-624" data-activate-target=".s-624" class="statement s-624 not-hit"><div class="statement-info s-624"><div>Id: 624</div><div>Hits: 0</div></div>public UserRepository(IRepository&lt;User&gt; repository, IMapper mapper)</div></div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-625" data-activate-target=".s-625" class="statement s-625 not-hit"><div class="statement-info s-625"><div>Id: 625</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
+<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-626" data-activate-target=".s-626" class="statement s-626 not-hit"><div class="statement-info s-626"><div>Id: 626</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    public async Task&lt;Guid&gt; AddAsync(RegisterUserRequest user, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">27</div><div class="line-content">        <div data-hover-target=".s-627" data-activate-target=".s-627" class="statement s-627 not-hit"><div class="statement-info s-627"><div>Id: 627</div><div>Hits: 0</div></div>var userEntity = _mapper.Map&lt;User&gt;(user);</div></div></div>
+<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-628" data-activate-target=".s-628" class="statement s-628 not-hit"><div class="statement-info s-628"><div>Id: 628</div><div>Hits: 0</div></div>userEntity.Role = &quot;User&quot;;</div></div></div>
+<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-629" data-activate-target=".s-629" class="statement s-629 not-hit"><div class="statement-info s-629"><div>Id: 629</div><div>Hits: 0</div></div>return await _repository.AddAsync(userEntity, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">31</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">31</div><div class="line-content">    public async Task&lt;UserDto&gt; LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">32</div><div class="line-content">    { </div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-590" data-activate-target=".s-590" class="statement s-590 not-hit">return await _repository.GetAll().Where(s =&gt; s.Email == request.Email &amp;&amp; s.Password == request.Password)</div></div></div>
-<div class="line not-hit"><div class="line-number">34</div><div class="line-content"><div data-hover-target=".s-590" data-activate-target=".s-590" class="statement s-590 not-hit">            .ProjectTo&lt;UserDto&gt;(_mapper.ConfigurationProvider)</div></div></div>
-<div class="line not-hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-590" data-activate-target=".s-590" class="statement s-590 not-hit"><div class="statement-info s-590"><div>Id: 590</div><div>Hits: 0</div></div>            .FirstOrDefaultAsync(cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">36</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">32</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    public async Task&lt;UserDto&gt; LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    { </div></div>
+<div class="line not-hit"><div class="line-number">35</div><div class="line-content">        <div data-hover-target=".s-638" data-activate-target=".s-638" class="statement s-638 not-hit">var user = await _repository.GetAll().Where(s =&gt; s.Email == request.Email &amp;&amp; s.Password == request.Password)</div></div></div>
+<div class="line not-hit"><div class="line-number">36</div><div class="line-content"><div data-hover-target=".s-638" data-activate-target=".s-638" class="statement s-638 not-hit">            .ProjectTo&lt;UserDto&gt;(_mapper.ConfigurationProvider)</div></div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content"><div data-hover-target=".s-638" data-activate-target=".s-638" class="statement s-638 not-hit"><div class="statement-info s-638"><div>Id: 638</div><div>Hits: 0</div></div>            .FirstOrDefaultAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">    public async Task&lt;UserDto&gt; GetByEmailAsync(string email, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">39</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-587" data-activate-target=".s-587" class="statement s-587 not-hit"><div class="statement-info s-587"><div>Id: 587</div><div>Hits: 0</div></div>return await _repository.GetAll().Where(u =&gt; u.Email == email).ProjectTo&lt;UserDto&gt;(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">39</div><div class="line-content">        <div data-hover-target=".s-639" data-activate-target=".s-639" class="statement s-639 not-hit"><div class="statement-info s-639"><div>Id: 639</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (user == null)</div> <div data-hover-target=".s-640" data-activate-target=".s-640" class="statement s-640 not-hit"><div class="statement-info s-640"><div>Id: 640</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-641" data-activate-target=".s-641" class="statement s-641 not-hit"><div class="statement-info s-641"><div>Id: 641</div><div>Hits: 0</div></div>return user;</div></div></div>
 <div class="line"><div class="line-number">41</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">42</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">43</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">44</div><div class="line-content">    public async Task&lt;UserDto&gt; GetByIdAsync(Guid userId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">44</div><div class="line-content">    public async Task&lt;UserDto&gt; GetByEmailAsync(string email, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">45</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-588" data-activate-target=".s-588" class="statement s-588 not-hit"><div class="statement-info s-588"><div>Id: 588</div><div>Hits: 0</div></div>var userEntity = _mapper.Map&lt;UserDto&gt;(await _repository.GetByIdAsync(userId, cancellationToken));</div></div></div>
-<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-589" data-activate-target=".s-589" class="statement s-589 not-hit"><div class="statement-info s-589"><div>Id: 589</div><div>Hits: 0</div></div>return userEntity;</div></div></div>
-<div class="line"><div class="line-number">48</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">49</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-632" data-activate-target=".s-632" class="statement s-632 not-hit"><div class="statement-info s-632"><div>Id: 632</div><div>Hits: 0</div></div>var user = await _repository.GetAll().Where(u =&gt; u.Email == email).ProjectTo&lt;UserDto&gt;(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-633" data-activate-target=".s-633" class="statement s-633 not-hit"><div class="statement-info s-633"><div>Id: 633</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (user == null)</div> <div data-hover-target=".s-634" data-activate-target=".s-634" class="statement s-634 not-hit"><div class="statement-info s-634"><div>Id: 634</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content">        <div data-hover-target=".s-635" data-activate-target=".s-635" class="statement s-635 not-hit"><div class="statement-info s-635"><div>Id: 635</div><div>Hits: 0</div></div>return user;</div></div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">50</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">51</div><div class="line-content">    public async Task&lt;ICollection&lt;UserDto&gt;&gt; GetAllAsync(CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">52</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-586" data-activate-target=".s-586" class="statement s-586 not-hit"><div class="statement-info s-586"><div>Id: 586</div><div>Hits: 0</div></div>return await _repository.GetAll().ProjectTo&lt;UserDto&gt;(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">54</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">55</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">51</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">    public async Task&lt;UserDto&gt; GetByIdAsync(Guid userId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">54</div><div class="line-content">        <div data-hover-target=".s-636" data-activate-target=".s-636" class="statement s-636 not-hit"><div class="statement-info s-636"><div>Id: 636</div><div>Hits: 0</div></div>var userEntity = _mapper.Map&lt;UserDto&gt;(await _repository.GetByIdAsync(userId, cancellationToken));</div></div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content">        <div data-hover-target=".s-637" data-activate-target=".s-637" class="statement s-637 not-hit"><div class="statement-info s-637"><div>Id: 637</div><div>Hits: 0</div></div>return userEntity;</div></div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">57</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">56</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">57</div><div class="line-content">    public async Task DeleteAsync(Guid userId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">58</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">59</div><div class="line-content">        <div data-hover-target=".s-585" data-activate-target=".s-585" class="statement s-585 not-hit"><div class="statement-info s-585"><div>Id: 585</div><div>Hits: 0</div></div>await _repository.DeleteAsync(userId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">60</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">61</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">    public async Task&lt;ICollection&lt;UserDto&gt;&gt; GetAllAsync(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">61</div><div class="line-content">        <div data-hover-target=".s-631" data-activate-target=".s-631" class="statement s-631 not-hit"><div class="statement-info s-631"><div>Id: 631</div><div>Hits: 0</div></div>return await _repository.GetAll().ProjectTo&lt;UserDto&gt;(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">64</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">65</div><div class="line-content">    public async Task DeleteAsync(Guid userId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">67</div><div class="line-content">        <div data-hover-target=".s-630" data-activate-target=".s-630" class="statement s-630 not-hit"><div class="statement-info s-630"><div>Id: 630</div><div>Hits: 0</div></div>await _repository.DeleteAsync(userId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">68</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

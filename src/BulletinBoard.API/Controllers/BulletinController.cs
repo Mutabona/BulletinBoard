@@ -34,6 +34,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> CreateBulletinAsync([FromBody] CreateBulletinRequest request, CancellationToken cancellationToken)
     {
         var ownerId = GetCurrentUserId();
+        logger.LogInformation("Создание объявления по запросу: {@Request}, пользователем с id: {id}", request, ownerId);
         var bulletinId = await bulletinService.CreateAsync(ownerId, request, cancellationToken);
         
         return StatusCode((int)HttpStatusCode.Created, bulletinId.ToString());
@@ -50,6 +51,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetBulletinByIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Поиск объявлений с id: {id}", bulletinId);
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         
         return Ok(bulletin);
@@ -76,6 +78,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         
         if (bulletin.OwnerId != userId) return Forbid();
         
+        logger.LogInformation("Обновление объявления с id: {id}, по запросу: {@Request}", bulletinId, request);
         await bulletinService.UpdateAsync(bulletinId, request, cancellationToken);
         
         return Ok();
@@ -99,6 +102,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         
         if (!(bulletin.OwnerId == GetCurrentUserId() || GetCurrentUserRole() == "Admin")) return Forbid();
         
+        logger.LogInformation("Удаление объявления: {id}", bulletinId);
         await bulletinService.DeleteAsync(bulletinId, cancellationToken);
         
         return NoContent();
@@ -131,6 +135,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType(typeof(ICollection<BulletinDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByCategoryAsync(Guid bulletinCategoryId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Поиск объявлений по категории: {id}", bulletinCategoryId);
         var bulletins = await bulletinService.GetByCategoryAsync(bulletinCategoryId, cancellationToken);
         
         return Ok(bulletins);
@@ -145,6 +150,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType(typeof(ICollection<BulletinDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetBulletinsAsync(CancellationToken cancellationToken)
     {
+        logger.LogInformation("Получение всех объявлений");
         var bulletins =  await bulletinService.GetAllAsync(cancellationToken);
         
         return Ok(bulletins);
@@ -171,6 +177,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         
         if (userId != bulletin.OwnerId) return Forbid();
         
+        logger.LogInformation("Добавление изображения к объявлению: {id}", bulletinId);
         var fileId = await imageService.AddImageAsync(bulletinId, file, cancellationToken);
         return StatusCode((int)HttpStatusCode.Created, fileId.ToString());
     }
@@ -188,6 +195,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         
+        logger.LogInformation("Поиск изображений по объявлению: {id}", bulletinId);
         var imageIds = await imageService.GetImageIdsByBulletinIdAsync(bulletinId, cancellationToken);
         return Ok(imageIds);
     }
@@ -216,6 +224,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);
         if (bulletin.Id != image.BulletinId) return BadRequest("Изображение не принадлежит объявлению.");
         
+        logger.LogInformation("Удаление изображения: {imageId}, объявления: {bulletinId}", imageId, bulletinId);
         await imageService.DeleteImageAsync(imageId, cancellationToken);
         
         return NoContent();
@@ -239,6 +248,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         
         var authorId = GetCurrentUserId();
         
+        logger.LogInformation("Добавление комментария по запросу: {@Request}, к объявлению {id}, пользователем: {authorId}", comment, bulletinId, authorId);
         var commentId = await commentService.AddCommentAsync(bulletinId, authorId, comment, cancellationToken);
         return StatusCode((int)HttpStatusCode.Created, commentId.ToString());
     }
@@ -261,6 +271,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         var comment = await commentService.GetCommentByIdAsync(commentId, cancellationToken);
         if (bulletinId != comment.BulletinId) return BadRequest();
         
+        logger.LogInformation("Удаление комментария: {commentId}, у объявления: {bulletinId}", commentId, bulletinId);
         await commentService.DeleteCommentAsync(commentId, cancellationToken);
         return NoContent();
     }
@@ -278,6 +289,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         
+        logger.LogInformation("Поиск комментариев по объявлению: {id}", bulletinId);
         var comments = await commentService.GetByBulletinIdAsync(bulletinId, cancellationToken);
         
         return Ok(comments);

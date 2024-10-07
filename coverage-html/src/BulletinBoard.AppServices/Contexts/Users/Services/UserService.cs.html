@@ -235,10 +235,10 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>06.10.2024 22:24:44</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/19)</td></tr>
+<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/20)</td></tr>
 <tr><th>Statements Coverage</th><td class="red">0,00 % (0/20)</td></tr>
-<tr><th>Branch Coverage</th><td class="red">0,00 % (0/6)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/4)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
 <h2>Code</h2>
@@ -246,92 +246,101 @@ document.addEventListener('click', toggleTargetHandler);
 <label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
 <div class="code">
 <div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Users.Repositories;</div></div>
-<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.AppServices.Helpers;</div></div>
-<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
-<div class="line"><div class="line-number">4</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.AppServices.Exceptions;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Helpers;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">5</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">6</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">///&lt;inheritdoc cref=&quot;IUserService&quot;/&gt;</div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">public class UserService : IUserService</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">    private readonly IUserRepository _repository;</div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">    private readonly IJwtService _jwtService;</div></div>
-<div class="line"><div class="line-number">12</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">8</div><div class="line-content">///&lt;inheritdoc cref=&quot;IUserService&quot;/&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">public class UserService : IUserService</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">    private readonly IUserRepository _repository;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">    private readonly IJwtService _jwtService;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">13</div><div class="line-content">    <div data-hover-target=".s-306" data-activate-target=".s-306" class="statement s-306 not-hit"><div class="statement-info s-306"><div>Id: 306</div><div>Hits: 0</div></div>public UserService(IUserRepository repository, IJwtService jwtService)</div></div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">15</div><div class="line-content">        <div data-hover-target=".s-307" data-activate-target=".s-307" class="statement s-307 not-hit"><div class="statement-info s-307"><div>Id: 307</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-308" data-activate-target=".s-308" class="statement s-308 not-hit"><div class="statement-info s-308"><div>Id: 308</div><div>Hits: 0</div></div>_jwtService = jwtService;</div></div></div>
-<div class="line"><div class="line-number">17</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    </div></div>
-<div class="line"><div class="line-number">19</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">20</div><div class="line-content">    public async Task&lt;ICollection&lt;UserDto&gt;&gt; GetUsersAsync(CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">21</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-312" data-activate-target=".s-312" class="statement s-312 not-hit"><div class="statement-info s-312"><div>Id: 312</div><div>Hits: 0</div></div>return await _repository.GetAllAsync(cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">14</div><div class="line-content">    <div data-hover-target=".s-337" data-activate-target=".s-337" class="statement s-337 not-hit"><div class="statement-info s-337"><div>Id: 337</div><div>Hits: 0</div></div>public UserService(IUserRepository repository, IJwtService jwtService)</div></div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-338" data-activate-target=".s-338" class="statement s-338 not-hit"><div class="statement-info s-338"><div>Id: 338</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
+<div class="line not-hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-339" data-activate-target=".s-339" class="statement s-339 not-hit"><div class="statement-info s-339"><div>Id: 339</div><div>Hits: 0</div></div>_jwtService = jwtService;</div></div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    public async Task&lt;ICollection&lt;UserDto&gt;&gt; GetUsersAsync(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content">        <div data-hover-target=".s-343" data-activate-target=".s-343" class="statement s-343 not-hit"><div class="statement-info s-343"><div>Id: 343</div><div>Hits: 0</div></div>return await _repository.GetAllAsync(cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">25</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">26</div><div class="line-content">    public async Task&lt;UserDto&gt; GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">27</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-311" data-activate-target=".s-311" class="statement s-311 not-hit"><div class="statement-info s-311"><div>Id: 311</div><div>Hits: 0</div></div>return await _repository.GetByIdAsync(userId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">29</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">30</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">26</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    public async Task&lt;UserDto&gt; GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-342" data-activate-target=".s-342" class="statement s-342 not-hit"><div class="statement-info s-342"><div>Id: 342</div><div>Hits: 0</div></div>return await _repository.GetByIdAsync(userId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">31</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">31</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">32</div><div class="line-content">    public async Task&lt;UserDto&gt; GetUserByEmailAsync(string email, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">33</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-310" data-activate-target=".s-310" class="statement s-310 not-hit"><div class="statement-info s-310"><div>Id: 310</div><div>Hits: 0</div></div>return await _repository.GetByEmailAsync(email, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">35</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">36</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">32</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    public async Task&lt;UserDto&gt; GetUserByEmailAsync(string email, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">35</div><div class="line-content">        <div data-hover-target=".s-341" data-activate-target=".s-341" class="statement s-341 not-hit"><div class="statement-info s-341"><div>Id: 341</div><div>Hits: 0</div></div>return await _repository.GetByEmailAsync(email, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">    public async Task&lt;Guid&gt; RegisterAsync(RegisterUserRequest request, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">39</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-323" data-activate-target=".s-323" class="statement s-323 not-hit"><div class="statement-info s-323"><div>Id: 323</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (await IsUniqueEmailAsync(request.Email, cancellationToken))</div></div></div>
-<div class="line"><div class="line-number">41</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">42</div><div class="line-content">            <div data-hover-target=".s-326" data-activate-target=".s-326" class="statement s-326 not-hit"><div class="statement-info s-326"><div>Id: 326</div><div>Hits: 0</div></div>request.Password = CryptoHelper.GetBase64Hash(request.Password);</div></div></div>
-<div class="line not-hit"><div class="line-number">43</div><div class="line-content">            <div data-hover-target=".s-327" data-activate-target=".s-327" class="statement s-327 not-hit"><div class="statement-info s-327"><div>Id: 327</div><div>Hits: 0</div></div>return await _repository.AddAsync(request, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">44</div><div class="line-content">        }</div></div>
-<div class="line"><div class="line-number">45</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">38</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    public async Task&lt;Guid&gt; RegisterAsync(RegisterUserRequest request, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">41</div><div class="line-content">        <div data-hover-target=".s-355" data-activate-target=".s-355" class="statement s-355 not-hit"><div class="statement-info s-355"><div>Id: 355</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (await IsUniqueEmailAsync(request.Email, cancellationToken))</div></div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content">            <div data-hover-target=".s-358" data-activate-target=".s-358" class="statement s-358 not-hit"><div class="statement-info s-358"><div>Id: 358</div><div>Hits: 0</div></div>request.Password = CryptoHelper.GetBase64Hash(request.Password);</div></div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content">            <div data-hover-target=".s-359" data-activate-target=".s-359" class="statement s-359 not-hit"><div class="statement-info s-359"><div>Id: 359</div><div>Hits: 0</div></div>return await _repository.AddAsync(request, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-325" data-activate-target=".s-325" class="statement s-325 not-hit"><div class="statement-info s-325"><div>Id: 325</div><div>Hits: 0</div></div>return Guid.Empty;</div></div></div>
-<div class="line"><div class="line-number">47</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">48</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-357" data-activate-target=".s-357" class="statement s-357 not-hit"><div class="statement-info s-357"><div>Id: 357</div><div>Hits: 0</div></div>return Guid.Empty;</div></div></div>
+<div class="line"><div class="line-number">48</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">49</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">50</div><div class="line-content">    public async Task&lt;string&gt; LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">51</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-317" data-activate-target=".s-317" class="statement s-317 not-hit"><div class="statement-info s-317"><div>Id: 317</div><div>Hits: 0</div></div>request.Password = CryptoHelper.GetBase64Hash(request.Password);</div></div></div>
-<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-318" data-activate-target=".s-318" class="statement s-318 not-hit"><div class="statement-info s-318"><div>Id: 318</div><div>Hits: 0</div></div>var user = await _repository.LoginAsync(request, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">54</div><div class="line-content">&nbsp;
-</div></div>
-<div class="line not-hit"><div class="line-number">55</div><div class="line-content">        <div data-hover-target=".s-319" data-activate-target=".s-319" class="statement s-319 not-hit"><div class="statement-info s-319"><div>Id: 319</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (user != null)</div></div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">    public async Task&lt;string&gt; LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 not-hit"><div class="statement-info s-348"><div>Id: 348</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>request.Password = CryptoHelper.GetBase64Hash(request.Password);</div></div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">        UserDto user;</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">        try</div></div>
 <div class="line"><div class="line-number">56</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">57</div><div class="line-content">            <div data-hover-target=".s-322" data-activate-target=".s-322" class="statement s-322 not-hit"><div class="statement-info s-322"><div>Id: 322</div><div>Hits: 0</div></div>return _jwtService.GetToken(request, user.Id, user.Role);</div></div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content">            <div data-hover-target=".s-351" data-activate-target=".s-351" class="statement s-351 not-hit"><div class="statement-info s-351"><div>Id: 351</div><div>Hits: 0</div></div>user = await _repository.LoginAsync(request, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">58</div><div class="line-content">        }</div></div>
-<div class="line"><div class="line-number">59</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">60</div><div class="line-content">        <div data-hover-target=".s-321" data-activate-target=".s-321" class="statement s-321 not-hit"><div class="statement-info s-321"><div>Id: 321</div><div>Hits: 0</div></div>return null;</div></div></div>
-<div class="line"><div class="line-number">61</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">62</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">59</div><div class="line-content">        <div data-hover-target=".s-352" data-activate-target=".s-352" class="statement s-352 not-hit"><div class="statement-info s-352"><div>Id: 352</div><div>Hits: 0</div></div>catch (EntityNotFoundException)</div></div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">61</div><div class="line-content">            <div data-hover-target=".s-353" data-activate-target=".s-353" class="statement s-353 not-hit"><div class="statement-info s-353"><div>Id: 353</div><div>Hits: 0</div></div>throw new InvalidLoginDataException(&quot;Неверное имя пользователя или пароль.&quot;);</div></div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">64</div><div class="line-content">        <div data-hover-target=".s-354" data-activate-target=".s-354" class="statement s-354 not-hit"><div class="statement-info s-354"><div>Id: 354</div><div>Hits: 0</div></div>return _jwtService.GetToken(request, user.Id, user.Role);</div></div></div>
+<div class="line"><div class="line-number">65</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">63</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">64</div><div class="line-content">    public async Task DeleteUserAsync(Guid userId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">65</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">66</div><div class="line-content">        <div data-hover-target=".s-309" data-activate-target=".s-309" class="statement s-309 not-hit"><div class="statement-info s-309"><div>Id: 309</div><div>Hits: 0</div></div>await _repository.DeleteAsync(userId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">67</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">68</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">67</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">68</div><div class="line-content">    public async Task DeleteUserAsync(Guid userId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">69</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">70</div><div class="line-content">        <div data-hover-target=".s-340" data-activate-target=".s-340" class="statement s-340 not-hit"><div class="statement-info s-340"><div>Id: 340</div><div>Hits: 0</div></div>await _repository.DeleteAsync(userId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">71</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">72</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">69</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">70</div><div class="line-content">    public async Task&lt;bool&gt; IsUniqueEmailAsync(string email, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">71</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">72</div><div class="line-content">        <div data-hover-target=".s-313" data-activate-target=".s-313" class="statement s-313 not-hit"><div class="statement-info s-313"><div>Id: 313</div><div>Hits: 0</div></div>var user = await _repository.GetByEmailAsync(email, cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">73</div><div class="line-content">        <div data-hover-target=".s-314" data-activate-target=".s-314" class="statement s-314 not-hit"><div class="statement-info s-314"><div>Id: 314</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (user == null)</div> <div data-hover-target=".s-315" data-activate-target=".s-315" class="statement s-315 not-hit"><div class="statement-info s-315"><div>Id: 315</div><div>Hits: 0</div></div>return true;</div></div></div>
-<div class="line not-hit"><div class="line-number">74</div><div class="line-content">        <div data-hover-target=".s-316" data-activate-target=".s-316" class="statement s-316 not-hit"><div class="statement-info s-316"><div>Id: 316</div><div>Hits: 0</div></div>return false;</div></div></div>
-<div class="line"><div class="line-number">75</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">76</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">73</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">74</div><div class="line-content">    public async Task&lt;bool&gt; IsUniqueEmailAsync(string email, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">75</div><div class="line-content">    {</div></div>
+<div class="line"><div class="line-number">76</div><div class="line-content">        try</div></div>
+<div class="line"><div class="line-number">77</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">78</div><div class="line-content">            <div data-hover-target=".s-344" data-activate-target=".s-344" class="statement s-344 not-hit"><div class="statement-info s-344"><div>Id: 344</div><div>Hits: 0</div></div>var user = await _repository.GetByEmailAsync(email, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">79</div><div class="line-content">        }</div></div>
+<div class="line not-hit"><div class="line-number">80</div><div class="line-content">        <div data-hover-target=".s-345" data-activate-target=".s-345" class="statement s-345 not-hit"><div class="statement-info s-345"><div>Id: 345</div><div>Hits: 0</div></div>catch (EntityNotFoundException)</div></div></div>
+<div class="line"><div class="line-number">81</div><div class="line-content">        {</div></div>
+<div class="line not-hit"><div class="line-number">82</div><div class="line-content">            <div data-hover-target=".s-346" data-activate-target=".s-346" class="statement s-346 not-hit"><div class="statement-info s-346"><div>Id: 346</div><div>Hits: 0</div></div>return true;</div></div></div>
+<div class="line"><div class="line-number">83</div><div class="line-content">        }</div></div>
+<div class="line not-hit"><div class="line-number">84</div><div class="line-content">        <div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 not-hit"><div class="statement-info s-347"><div>Id: 347</div><div>Hits: 0</div></div>return false;</div></div></div>
+<div class="line"><div class="line-number">85</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">86</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

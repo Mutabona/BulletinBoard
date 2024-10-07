@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using BulletinBoard.Contracts.Users;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BulletinBoard.AppServices.Contexts.Users.Services;
@@ -10,15 +11,18 @@ namespace BulletinBoard.AppServices.Contexts.Users.Services;
 ///<inheritdoc cref="IJwtService"/>
 public class JwtService : IJwtService
 {
+    private readonly ILogger<JwtService> _logger;
     private readonly IConfiguration _configuration;
 
     /// <summary>
     /// Создания экземпляра класса <see cref="JwtService"/>
     /// </summary>
     /// <param name="configuration">Конфигурация.</param>
-    public JwtService(IConfiguration configuration)
+    /// <param name="logger">Логгер.</param>
+    public JwtService(IConfiguration configuration, ILogger<JwtService> logger)
     {
         _configuration = configuration;
+        _logger = logger;
     }
 
     ///<inheritdoc/>
@@ -38,6 +42,7 @@ public class JwtService : IJwtService
             SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
         };
 
+        _logger.LogInformation("Создание токена");
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return tokenHandler.WriteToken(token);

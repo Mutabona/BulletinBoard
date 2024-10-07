@@ -13,7 +13,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class CategoryController(ICategoryService categoryService) : BaseController
+public class CategoryController(ICategoryService categoryService, ILogger<CategoryController> logger) : BaseController
 {
     /// <summary>
     /// Создаёт категорию по модели запроса.
@@ -28,6 +28,7 @@ public class CategoryController(ICategoryService categoryService) : BaseControll
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> AddCategoryAsync(CreateCategoryRequest request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Добавление категории: {@Request}", request);
         var categoryId =  await categoryService.CreateCategoryAsync(request, cancellationToken);
 
         return StatusCode((int)HttpStatusCode.Created,  categoryId.ToString() );
@@ -44,6 +45,7 @@ public class CategoryController(ICategoryService categoryService) : BaseControll
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetCategoryByIdAsync(Guid categoryId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Поиск категории: {id}", categoryId);
         var category = await categoryService.GetCategoryByIdAsync(categoryId, cancellationToken);
         
         return Ok(category);
@@ -62,6 +64,7 @@ public class CategoryController(ICategoryService categoryService) : BaseControll
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Удаление категории: {id}", categoryId);
         await categoryService.DeleteCategoryAsync(categoryId, cancellationToken);
 
         return Ok();
@@ -77,6 +80,7 @@ public class CategoryController(ICategoryService categoryService) : BaseControll
     [ProducesResponseType(typeof(ICollection<CategoryDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Получение категории с подкатегориями: {id}", categoryId);
         var categories = await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
         
         return Ok(categories);

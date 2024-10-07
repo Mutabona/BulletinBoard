@@ -13,7 +13,7 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class AccountController(IUserService userService) : BaseController
+public class AccountController(IUserService userService, ILogger<UserController> logger) : BaseController
 {
     /// <summary>
     /// Регистрация пользователя.
@@ -26,11 +26,12 @@ public class AccountController(IUserService userService) : BaseController
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterUserRequest model, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Запрос на регистрацию: {@Request}", model);
         var id = await userService.RegisterAsync(model, cancellationToken);
 
         if (id == Guid.Empty)
         {
-            return BadRequest(new { message = "Username is already taken" });
+            return BadRequest(new { message = "Пользователь с такое почтой уже существует." });
         }
         
         return StatusCode((int)HttpStatusCode.Created, id.ToString());
@@ -48,7 +49,7 @@ public class AccountController(IUserService userService) : BaseController
     public async Task<IActionResult> LoginAsync([FromBody] LoginUserRequest model, CancellationToken cancellationToken)
     {
         string token;
-
+        logger.LogInformation("Запрос на вход: {@Request}", model);
         try
         {
             token = await userService.LoginAsync(model, cancellationToken);
