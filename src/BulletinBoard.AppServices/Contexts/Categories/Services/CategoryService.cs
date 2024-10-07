@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using BulletinBoard.AppServices.Contexts.Categories.Repositories;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Categories;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -73,8 +74,14 @@ public class CategoryService : ICategoryService
     /// <inheritdoc />
     public async Task<bool> IsCategoryExistsAsync(Guid categoryId, CancellationToken cancellationToken)
     {
-        var category = await _repository.GetByIdAsync(categoryId, cancellationToken);
-        if (category is null) return false;
+        try
+        {
+            var category = await _repository.GetByIdAsync(categoryId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return false;
+        }
         return true;
     }
 }

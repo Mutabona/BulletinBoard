@@ -48,9 +48,7 @@ public class UpdateBulletinValidator : AbstractValidator<UpdateBulletinRequest>
     private bool CategoryIdIsValid(Guid? categoryId)
     {
         if (categoryId == null) return false;
-        var answer = _categoryService.IsCategoryExistsAsync(categoryId.Value, CancellationToken.None).GetAwaiter()
+        return _categoryService.IsCategoryExistsAsync(categoryId.Value, CancellationToken.None).GetAwaiter()
             .GetResult();
-        
-        return answer;
     }
 }

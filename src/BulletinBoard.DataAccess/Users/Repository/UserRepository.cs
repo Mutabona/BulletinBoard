@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BulletinBoard.AppServices.Contexts.Users.Repositories;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Users;
 using BulletinBoard.Domain.Users.Entity;
 using BulletinBoard.Infrastructure.Repository;
@@ -28,16 +29,23 @@ public class UserRepository : IUserRepository
         return await _repository.AddAsync(userEntity, cancellationToken);
     }
 
+    ///<inheritdoc/>
     public async Task<UserDto> LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)
     { 
-        return await _repository.GetAll().Where(s => s.Email == request.Email && s.Password == request.Password)
+        var user = await _repository.GetAll().Where(s => s.Email == request.Email && s.Password == request.Password)
             .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
+
+        if (user == null) throw new EntityNotFoundException();
+        return user;
     }
 
+    ///<inheritdoc/>
     public async Task<UserDto> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        return await _repository.GetAll().Where(u => u.Email == email).ProjectTo<UserDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+        var user = await _repository.GetAll().Where(u => u.Email == email).ProjectTo<UserDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+        if (user == null) throw new EntityNotFoundException();
+        return user;
     }
 
     ///<inheritdoc/>

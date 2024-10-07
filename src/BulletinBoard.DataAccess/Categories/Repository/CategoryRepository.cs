@@ -30,7 +30,8 @@ public class CategoryRepository : ICategoryRepository
     ///<inheritdoc/>
     public async Task<CategoryDto> GetByIdAsync(Guid categoryId, CancellationToken cancellationToken)
     {
-        return _mapper.Map<CategoryDto>(await _repository.GetByIdAsync(categoryId, cancellationToken));
+        var entity = await _repository.GetByIdAsync(categoryId, cancellationToken);
+        return _mapper.Map<CategoryDto>(entity);
     }
 
     ///<inheritdoc/>

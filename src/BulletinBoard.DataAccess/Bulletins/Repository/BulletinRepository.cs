@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BulletinBoard.AppServices.Contexts.Bulletins.Repositories;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.AppServices.Specifications;
 using BulletinBoard.Contracts.Bulletins;
 using BulletinBoard.Domain.Bulletins.Entity;
@@ -60,13 +61,16 @@ public class BulletinRepository : IBulletinRepository
     ///<inheritdoc/>
     public async Task<BulletinDto> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _repository
+        var bulletin = await _repository
             .GetAll()
             .Where(bulletin => bulletin.Id == id)
             .Include(c => c.Owner)
             .Include(c => c.Category)
             .ProjectTo<BulletinDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
+
+        if (bulletin == null) throw new EntityNotFoundException();
+        return bulletin;
     }
 
     ///<inheritdoc/>

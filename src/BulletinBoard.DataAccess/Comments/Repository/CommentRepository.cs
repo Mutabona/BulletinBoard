@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BulletinBoard.AppServices.Contexts.Comments.Repositories;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Comments;
 using BulletinBoard.Domain.Comments.Entity;
 using BulletinBoard.Infrastructure.Repository;
@@ -37,6 +38,7 @@ public class CommentRepository(IRepository<Comment> repository, IMapper mapper) 
     public async Task<CommentDto> GetCommentByIdAsync(Guid commentId, CancellationToken cancellationToken)
     {
         var comment =  await repository.GetAll().Where(c => c.Id == commentId).Include(x => x.Author).FirstOrDefaultAsync(cancellationToken);
+        if (comment == null) throw new EntityNotFoundException();
         return mapper.Map<CommentDto>(comment);
     }
 }

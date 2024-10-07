@@ -46,8 +46,6 @@ public class CategoryController(ICategoryService categoryService) : BaseControll
     {
         var category = await categoryService.GetCategoryByIdAsync(categoryId, cancellationToken);
         
-        if (category == null) return NotFound();
-        
         return Ok(category);
     }
 

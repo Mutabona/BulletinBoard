@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,12 +40,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await GetByIdAsync(id, cancellationToken);
-        if (entity != null)
-        {
-            DbSet.Remove(entity);
-
-            await DbContext.SaveChangesAsync(cancellationToken);
-        }
+        if (entity == null) throw new EntityNotFoundException();
+        
+        DbSet.Remove(entity);
+        await DbContext.SaveChangesAsync(cancellationToken);
     }
 
     ///<inheritdoc/>
@@ -56,7 +55,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     ///<inheritdoc/>
     public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await DbSet.FindAsync(id, cancellationToken);
+        var entity = await DbSet.FindAsync(id, cancellationToken);
+        if (entity == null) throw new EntityNotFoundException();
+        return entity;
     }
 
     ///<inheritdoc/>
@@ -72,7 +73,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     {
         if (entity == null)
         {
-            throw new ArgumentNullException(nameof(entity));
+            throw new EntityNotFoundException();
         }
         
         DbSet.Update(entity);

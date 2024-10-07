@@ -33,7 +33,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> CreateBulletinAsync([FromBody] CreateBulletinRequest request, CancellationToken cancellationToken)
     {
-        var ownerId = GetCurrentUserIdAsync();
+        var ownerId = GetCurrentUserId();
         var bulletinId = await bulletinService.CreateAsync(ownerId, request, cancellationToken);
         
         return StatusCode((int)HttpStatusCode.Created, bulletinId.ToString());
@@ -51,8 +51,6 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> GetBulletinByIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        
-        if (bulletin == null) return NotFound();
         
         return Ok(bulletin);
     }
@@ -73,9 +71,8 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> UpdateBulletinAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        if (bulletin == null) return NotFound();
         
-        var userId = GetCurrentUserIdAsync();
+        var userId = GetCurrentUserId();
         
         if (bulletin.OwnerId != userId) return Forbid();
         
@@ -100,11 +97,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         
-        if (bulletin == null) return NotFound();
-
-        var userId = GetCurrentUserIdAsync();
-        
-        if (!(bulletin.OwnerId.Equals(userId) || HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value == "Admin")) return Forbid();
+        if (!(bulletin.OwnerId == GetCurrentUserId() || GetCurrentUserRole() == "Admin")) return Forbid();
         
         await bulletinService.DeleteAsync(bulletinId, cancellationToken);
         
@@ -173,9 +166,8 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> UploadImageAsync(Guid bulletinId, IFormFile file, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        if (bulletin == null) return NotFound("Объявление не существует.");
         
-        var userId = GetCurrentUserIdAsync();
+        var userId = GetCurrentUserId();
         
         if (userId != bulletin.OwnerId) return Forbid();
         
@@ -195,7 +187,6 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> GetImagesAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        if (bulletin == null) return NotFound("Объявление не существует.");
         
         var imageIds = await imageService.GetImageIdsByBulletinIdAsync(bulletinId, cancellationToken);
         return Ok(imageIds);
@@ -218,9 +209,8 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> DeleteAsync(Guid bulletinId, Guid imageId, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        if (bulletin == null) return NotFound("Объявление не существует.");
         
-        var userId = GetCurrentUserIdAsync();
+        var userId = GetCurrentUserId();
         if (userId != bulletin.OwnerId) return Forbid();
         
         var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);
@@ -246,9 +236,8 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> AddCommentAsync(Guid bulletinId, AddCommentRequest comment, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        if (bulletin == null) return NotFound("Объявление не существует.");
         
-        var authorId = GetCurrentUserIdAsync();
+        var authorId = GetCurrentUserId();
         
         var commentId = await commentService.AddCommentAsync(bulletinId, authorId, comment, cancellationToken);
         return StatusCode((int)HttpStatusCode.Created, commentId.ToString());
@@ -288,8 +277,6 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     public async Task<IActionResult> GetBulletinsCommentsAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
         var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        if (bulletin == null) return NotFound("Объявление не существует.");
-        
         
         var comments = await commentService.GetByBulletinIdAsync(bulletinId, cancellationToken);
         

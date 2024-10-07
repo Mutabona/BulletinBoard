@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BulletinBoard.AppServices\BulletinBoard.AppServices.csproj" />
     <ProjectReference Include="..\BulletinBoard.Domain\BulletinBoard.Domain.csproj" />
   </ItemGroup>
 

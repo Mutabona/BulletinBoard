@@ -1,5 +1,6 @@
 using System.Text;
 using BulletinBoard.API.Controllers;
+using BulletinBoard.API.Middlewares;
 using BulletinBoard.ComponentRegistrar;
 using BulletinBoard.Contracts.Bulletins;
 using BulletinBoard.Contracts.Categories;
@@ -106,6 +107,8 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

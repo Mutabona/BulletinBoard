@@ -28,8 +28,6 @@ public class ImageController(IImageService imageService) : BaseController
     {
         var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);
         
-        if (image == null) return NotFound();
-        
         return File(image.Content, image.ContentType);
     }
 }

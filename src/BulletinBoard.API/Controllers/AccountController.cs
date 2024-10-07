@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using BulletinBoard.API.Controllers.Base;
 using BulletinBoard.AppServices.Contexts.Users.Services;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,11 +47,15 @@ public class AccountController(IUserService userService) : BaseController
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> LoginAsync([FromBody] LoginUserRequest model, CancellationToken cancellationToken)
     {
-        var token = await userService.LoginAsync(model, cancellationToken);
+        string token;
 
-        if (token == null)
+        try
         {
-            return BadRequest(new { message = "Username or password is incorrect" });
+            token = await userService.LoginAsync(model, cancellationToken);
+        }
+        catch (InvalidLoginDataException e)
+        {
+            return BadRequest(new { message = e.Message });
         }
         
         return Ok(token);

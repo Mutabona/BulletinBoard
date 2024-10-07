@@ -69,3 +69,5 @@ volumes:
 
 networks:
   bulletinboard-network:
+    name: docker-elk_elk
+    external: true

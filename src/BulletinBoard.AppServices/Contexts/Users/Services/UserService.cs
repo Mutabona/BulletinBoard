@@ -1,4 +1,5 @@
 ﻿using BulletinBoard.AppServices.Contexts.Users.Repositories;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.AppServices.Helpers;
 using BulletinBoard.Contracts.Users;
 
@@ -50,14 +51,17 @@ public class UserService : IUserService
     public async Task<string> LoginAsync(LoginUserRequest request, CancellationToken cancellationToken)
     {
         request.Password = CryptoHelper.GetBase64Hash(request.Password);
-        var user = await _repository.LoginAsync(request, cancellationToken);
-
-        if (user != null)
+        UserDto user;
+        try
         {
-            return _jwtService.GetToken(request, user.Id, user.Role);
+            user = await _repository.LoginAsync(request, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            throw new InvalidLoginDataException("Неверное имя пользователя или пароль.");
         }
         
-        return null;
+        return _jwtService.GetToken(request, user.Id, user.Role);
     }
 
     ///<inheritdoc/>
@@ -69,8 +73,14 @@ public class UserService : IUserService
     ///<inheritdoc/>
     public async Task<bool> IsUniqueEmailAsync(string email, CancellationToken cancellationToken)
     {
-        var user = await _repository.GetByEmailAsync(email, cancellationToken);
-        if (user == null) return true;
+        try
+        {
+            var user = await _repository.GetByEmailAsync(email, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return true;
+        }
         return false;
     }
 }

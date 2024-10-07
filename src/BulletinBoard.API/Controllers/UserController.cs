@@ -48,11 +48,6 @@ public class UserController(IUserService userService) : BaseController
     {
         var user = await userService.GetUserByIdAsync(userId, cancellationToken);
         
-        if (user == null)
-        {
-            return NotFound();
-        }
-        
         return Ok(user);
     }
 
