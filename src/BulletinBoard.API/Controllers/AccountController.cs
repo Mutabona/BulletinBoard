@@ -28,11 +28,6 @@ public class AccountController(IUserService userService, ILogger<UserController>
     {
         logger.LogInformation("Запрос на регистрацию: {@Request}", model);
         var id = await userService.RegisterAsync(model, cancellationToken);
-
-        if (id == Guid.Empty)
-        {
-            return BadRequest(new { message = "Пользователь с такое почтой уже существует." });
-        }
         
         return StatusCode((int)HttpStatusCode.Created, id.ToString());
     }

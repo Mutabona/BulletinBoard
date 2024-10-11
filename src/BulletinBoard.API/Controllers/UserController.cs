@@ -43,7 +43,6 @@ public class UserController(IUserService userService, ILogger<UserController> lo
     [HttpGet("{userId}")]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> GetUserById(Guid userId, CancellationToken cancellationToken)
     {

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using BulletinBoard.API.Controllers.Base;
 using BulletinBoard.AppServices.Contexts.Categories.Services;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,7 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Удаление категории: {id}", categoryId);
@@ -78,8 +80,17 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     /// <returns>Коллекция моделей категорий.</returns>
     [HttpGet("{categoryId}/subcategories")]
     [ProducesResponseType(typeof(ICollection<CategoryDto>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)
     {
+        try
+        {
+            await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Категория не найдена.");
+        }
         logger.LogInformation("Получение категории с подкатегориями: {id}", categoryId);
         var categories = await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
         

@@ -1,9 +1,9 @@
 ﻿using System.Net;
-using System.Security.Claims;
 using BulletinBoard.API.Controllers.Base;
 using BulletinBoard.AppServices.Contexts.Bulletins.Services;
 using BulletinBoard.AppServices.Contexts.Comments.Services;
 using BulletinBoard.AppServices.Contexts.Files.Images.Services;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Bulletins;
 using BulletinBoard.Contracts.Comments;
 using BulletinBoard.Contracts.Files.Images;
@@ -72,7 +72,15 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> UpdateBulletinAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        BulletinDto bulletin;
+        try
+        {
+            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         
         var userId = GetCurrentUserId();
         
@@ -98,7 +106,15 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> DeleteBulletinAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        BulletinDto bulletin;
+        try
+        {
+            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         
         if (!(bulletin.OwnerId == GetCurrentUserId() || GetCurrentUserRole() == "Admin")) return Forbid();
         
@@ -171,7 +187,15 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> UploadImageAsync(Guid bulletinId, IFormFile file, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        BulletinDto bulletin;
+        try
+        {
+            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         
         var userId = GetCurrentUserId();
         
@@ -193,15 +217,21 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetImagesAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        
+        try
+        {
+            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         logger.LogInformation("Поиск изображений по объявлению: {id}", bulletinId);
         var imageIds = await imageService.GetImageIdsByBulletinIdAsync(bulletinId, cancellationToken);
         return Ok(imageIds);
     }
 
     /// <summary>
-    /// Удаляет изображние из объявления по идентификатору.
+    /// Удаляет изображение из объявления по идентификатору.
     /// </summary>
     /// <param name="imageId">Идентификатор изображения.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
@@ -216,12 +246,29 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> DeleteAsync(Guid bulletinId, Guid imageId, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        BulletinDto bulletin;
+        try
+        {
+            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         
         var userId = GetCurrentUserId();
         if (userId != bulletin.OwnerId) return Forbid();
+
+        ImageDto image;
+        try
+        {
+            image = await imageService.GetImageByIdAsync(imageId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Изображение не найдено.");
+        }
         
-        var image = await imageService.GetImageByIdAsync(imageId, cancellationToken);
         if (bulletin.Id != image.BulletinId) return BadRequest("Изображение не принадлежит объявлению.");
         
         logger.LogInformation("Удаление изображения: {imageId}, объявления: {bulletinId}", imageId, bulletinId);
@@ -244,7 +291,14 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> AddCommentAsync(Guid bulletinId, AddCommentRequest comment, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        try
+        {
+            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         
         var authorId = GetCurrentUserId();
         
@@ -266,9 +320,28 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteCommentAsync(Guid bulletinId, Guid commentId, CancellationToken cancellationToken)
     {
-        var comment = await commentService.GetCommentByIdAsync(commentId, cancellationToken);
+        try
+        {
+            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
+
+        CommentDto comment;
+        try
+        {
+            comment = await commentService.GetCommentByIdAsync(commentId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Комментарий не найден.");
+        }
+        
         if (bulletinId != comment.BulletinId) return BadRequest();
         
         logger.LogInformation("Удаление комментария: {commentId}, у объявления: {bulletinId}", commentId, bulletinId);
@@ -287,7 +360,14 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetBulletinsCommentsAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        try
+        {
+            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+        }
+        catch (EntityNotFoundException)
+        {
+            return NotFound("Объявление не найдено.");
+        }
         
         logger.LogInformation("Поиск комментариев по объявлению: {id}", bulletinId);
         var comments = await commentService.GetByBulletinIdAsync(bulletinId, cancellationToken);
