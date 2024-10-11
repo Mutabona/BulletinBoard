@@ -33,8 +33,8 @@ public class CreateBulletinRequestValidator : AbstractValidator<CreateBulletinRe
         RuleFor(x => x.Price)
             .NotNull()
             .WithMessage("Цена должна быть заполнена.")
-            .GreaterThan(0)
-            .WithMessage("Цена не может быть меньше или равна нулю.");
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("Цена не может быть меньше нуля.");
         
         RuleFor(x => x.CategoryId)
             .NotEmpty()

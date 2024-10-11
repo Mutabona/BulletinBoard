@@ -235,7 +235,7 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
 <tr><th>Line Coverage</th><td class="red">0,00 % (0/24)</td></tr>
 <tr><th>Statements Coverage</th><td class="red">0,00 % (0/27)</td></tr>
 <tr><th>Branch Coverage</th><td class="red">0,00 % (0/10)</td></tr>
@@ -257,87 +257,87 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">8</div><div class="line-content">///&lt;inheritdoc cref=&quot;IRepository{TEntity}&quot;/&gt;</div></div>
 <div class="line"><div class="line-number">9</div><div class="line-content">public class Repository&lt;TEntity&gt; : IRepository&lt;TEntity&gt; where TEntity : BaseEntity</div></div>
 <div class="line"><div class="line-number">10</div><div class="line-content">{</div></div>
-<div class="line not-hit"><div class="line-number">11</div><div class="line-content">    protected DbContext DbContext { <div data-hover-target=".s-803" data-activate-target=".s-803" class="statement s-803 not-hit"><div class="statement-info s-803"><div>Id: 803</div><div>Hits: 0</div></div>get;</div> }</div></div>
+<div class="line not-hit"><div class="line-number">11</div><div class="line-content">    protected DbContext DbContext { <div data-hover-target=".s-921" data-activate-target=".s-921" class="statement s-921 not-hit"><div class="statement-info s-921"><div>Id: 921</div><div>Hits: 0</div></div>get;</div> }</div></div>
 <div class="line"><div class="line-number">12</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">13</div><div class="line-content">    protected DbSet&lt;TEntity&gt; DbSet { <div data-hover-target=".s-804" data-activate-target=".s-804" class="statement s-804 not-hit"><div class="statement-info s-804"><div>Id: 804</div><div>Hits: 0</div></div>get;</div> }</div></div>
+<div class="line not-hit"><div class="line-number">13</div><div class="line-content">    protected DbSet&lt;TEntity&gt; DbSet { <div data-hover-target=".s-922" data-activate-target=".s-922" class="statement s-922 not-hit"><div class="statement-info s-922"><div>Id: 922</div><div>Hits: 0</div></div>get;</div> }</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">16</div><div class="line-content">    /// Создаёт экземпляр &lt;see cref=&quot;Repository&quot;/&gt;.</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;param name=&quot;dbContext&quot;&gt;Контекст базы данных &lt;see cref=&quot;DbContext&quot;/&gt;&lt;/param&gt;</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">    <div data-hover-target=".s-805" data-activate-target=".s-805" class="statement s-805 not-hit"><div class="statement-info s-805"><div>Id: 805</div><div>Hits: 0</div></div>public Repository(DbContext dbContext)</div></div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content">    <div data-hover-target=".s-923" data-activate-target=".s-923" class="statement s-923 not-hit"><div class="statement-info s-923"><div>Id: 923</div><div>Hits: 0</div></div>public Repository(DbContext dbContext)</div></div></div>
 <div class="line"><div class="line-number">20</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-806" data-activate-target=".s-806" class="statement s-806 not-hit"><div class="statement-info s-806"><div>Id: 806</div><div>Hits: 0</div></div>DbContext = dbContext;</div></div></div>
-<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-807" data-activate-target=".s-807" class="statement s-807 not-hit"><div class="statement-info s-807"><div>Id: 807</div><div>Hits: 0</div></div>DbSet = DbContext.Set&lt;TEntity&gt;();</div></div></div>
+<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-924" data-activate-target=".s-924" class="statement s-924 not-hit"><div class="statement-info s-924"><div>Id: 924</div><div>Hits: 0</div></div>DbContext = dbContext;</div></div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-925" data-activate-target=".s-925" class="statement s-925 not-hit"><div class="statement-info s-925"><div>Id: 925</div><div>Hits: 0</div></div>DbSet = DbContext.Set&lt;TEntity&gt;();</div></div></div>
 <div class="line"><div class="line-number">23</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">24</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">25</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">26</div><div class="line-content">    public async Task&lt;Guid&gt; AddAsync(TEntity entity, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">27</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-812" data-activate-target=".s-812" class="statement s-812 not-hit"><div class="statement-info s-812"><div>Id: 812</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div></div></div>
+<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-930" data-activate-target=".s-930" class="statement s-930 not-hit"><div class="statement-info s-930"><div>Id: 930</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div></div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">30</div><div class="line-content">            <div data-hover-target=".s-815" data-activate-target=".s-815" class="statement s-815 not-hit"><div class="statement-info s-815"><div>Id: 815</div><div>Hits: 0</div></div>throw new ArgumentNullException(nameof(entity));</div></div></div>
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content">            <div data-hover-target=".s-933" data-activate-target=".s-933" class="statement s-933 not-hit"><div class="statement-info s-933"><div>Id: 933</div><div>Hits: 0</div></div>throw new ArgumentNullException(nameof(entity));</div></div></div>
 <div class="line"><div class="line-number">31</div><div class="line-content">        }</div></div>
 <div class="line"><div class="line-number">32</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-814" data-activate-target=".s-814" class="statement s-814 not-hit"><div class="statement-info s-814"><div>Id: 814</div><div>Hits: 0</div></div>await DbSet.AddAsync(entity, cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-816" data-activate-target=".s-816" class="statement s-816 not-hit"><div class="statement-info s-816"><div>Id: 816</div><div>Hits: 0</div></div>await DbContext.SaveChangesAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-932" data-activate-target=".s-932" class="statement s-932 not-hit"><div class="statement-info s-932"><div>Id: 932</div><div>Hits: 0</div></div>await DbSet.AddAsync(entity, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-934" data-activate-target=".s-934" class="statement s-934 not-hit"><div class="statement-info s-934"><div>Id: 934</div><div>Hits: 0</div></div>await DbContext.SaveChangesAsync(cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">35</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">36</div><div class="line-content">        <div data-hover-target=".s-817" data-activate-target=".s-817" class="statement s-817 not-hit"><div class="statement-info s-817"><div>Id: 817</div><div>Hits: 0</div></div>return entity.Id;</div></div></div>
+<div class="line not-hit"><div class="line-number">36</div><div class="line-content">        <div data-hover-target=".s-935" data-activate-target=".s-935" class="statement s-935 not-hit"><div class="statement-info s-935"><div>Id: 935</div><div>Hits: 0</div></div>return entity.Id;</div></div></div>
 <div class="line"><div class="line-number">37</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">38</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">39</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">40</div><div class="line-content">    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">41</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-818" data-activate-target=".s-818" class="statement s-818 not-hit"><div class="statement-info s-818"><div>Id: 818</div><div>Hits: 0</div></div>var entity = await GetByIdAsync(id, cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">43</div><div class="line-content">        <div data-hover-target=".s-819" data-activate-target=".s-819" class="statement s-819 not-hit"><div class="statement-info s-819"><div>Id: 819</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div> <div data-hover-target=".s-820" data-activate-target=".s-820" class="statement s-820 not-hit"><div class="statement-info s-820"><div>Id: 820</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-936" data-activate-target=".s-936" class="statement s-936 not-hit"><div class="statement-info s-936"><div>Id: 936</div><div>Hits: 0</div></div>var entity = await GetByIdAsync(id, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content">        <div data-hover-target=".s-937" data-activate-target=".s-937" class="statement s-937 not-hit"><div class="statement-info s-937"><div>Id: 937</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div> <div data-hover-target=".s-938" data-activate-target=".s-938" class="statement s-938 not-hit"><div class="statement-info s-938"><div>Id: 938</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
 <div class="line"><div class="line-number">44</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">45</div><div class="line-content">        <div data-hover-target=".s-821" data-activate-target=".s-821" class="statement s-821 not-hit"><div class="statement-info s-821"><div>Id: 821</div><div>Hits: 0</div></div>DbSet.Remove(entity);</div></div></div>
-<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-822" data-activate-target=".s-822" class="statement s-822 not-hit"><div class="statement-info s-822"><div>Id: 822</div><div>Hits: 0</div></div>await DbContext.SaveChangesAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content">        <div data-hover-target=".s-939" data-activate-target=".s-939" class="statement s-939 not-hit"><div class="statement-info s-939"><div>Id: 939</div><div>Hits: 0</div></div>DbSet.Remove(entity);</div></div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-940" data-activate-target=".s-940" class="statement s-940 not-hit"><div class="statement-info s-940"><div>Id: 940</div><div>Hits: 0</div></div>await DbContext.SaveChangesAsync(cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">47</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">48</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">49</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">50</div><div class="line-content">    public IQueryable&lt;TEntity&gt; GetAll()</div></div>
 <div class="line"><div class="line-number">51</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-808" data-activate-target=".s-808" class="statement s-808 not-hit"><div class="statement-info s-808"><div>Id: 808</div><div>Hits: 0</div></div>return DbSet.AsNoTracking();</div></div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-926" data-activate-target=".s-926" class="statement s-926 not-hit"><div class="statement-info s-926"><div>Id: 926</div><div>Hits: 0</div></div>return DbSet.AsNoTracking();</div></div></div>
 <div class="line"><div class="line-number">53</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">54</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">55</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">56</div><div class="line-content">    public async Task&lt;TEntity&gt; GetByIdAsync(Guid id, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">57</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">58</div><div class="line-content">        <div data-hover-target=".s-823" data-activate-target=".s-823" class="statement s-823 not-hit"><div class="statement-info s-823"><div>Id: 823</div><div>Hits: 0</div></div>var entity = await DbSet.FindAsync(id, cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">59</div><div class="line-content">        <div data-hover-target=".s-824" data-activate-target=".s-824" class="statement s-824 not-hit"><div class="statement-info s-824"><div>Id: 824</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div> <div data-hover-target=".s-825" data-activate-target=".s-825" class="statement s-825 not-hit"><div class="statement-info s-825"><div>Id: 825</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
-<div class="line not-hit"><div class="line-number">60</div><div class="line-content">        <div data-hover-target=".s-826" data-activate-target=".s-826" class="statement s-826 not-hit"><div class="statement-info s-826"><div>Id: 826</div><div>Hits: 0</div></div>return entity;</div></div></div>
+<div class="line not-hit"><div class="line-number">58</div><div class="line-content">        <div data-hover-target=".s-941" data-activate-target=".s-941" class="statement s-941 not-hit"><div class="statement-info s-941"><div>Id: 941</div><div>Hits: 0</div></div>var entity = await DbSet.FindAsync(id, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">59</div><div class="line-content">        <div data-hover-target=".s-942" data-activate-target=".s-942" class="statement s-942 not-hit"><div class="statement-info s-942"><div>Id: 942</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div> <div data-hover-target=".s-943" data-activate-target=".s-943" class="statement s-943 not-hit"><div class="statement-info s-943"><div>Id: 943</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
+<div class="line not-hit"><div class="line-number">60</div><div class="line-content">        <div data-hover-target=".s-944" data-activate-target=".s-944" class="statement s-944 not-hit"><div class="statement-info s-944"><div>Id: 944</div><div>Hits: 0</div></div>return entity;</div></div></div>
 <div class="line"><div class="line-number">61</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">62</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">63</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">64</div><div class="line-content">    public IQueryable&lt;TEntity&gt; GetByPredicate(Expression&lt;Func&lt;TEntity, bool&gt;&gt; predicate)</div></div>
 <div class="line"><div class="line-number">65</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">66</div><div class="line-content">        <div data-hover-target=".s-809" data-activate-target=".s-809" class="statement s-809 not-hit"><div class="statement-info s-809"><div>Id: 809</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (predicate == null)</div> <div data-hover-target=".s-810" data-activate-target=".s-810" class="statement s-810 not-hit"><div class="statement-info s-810"><div>Id: 810</div><div>Hits: 0</div></div>throw new ArgumentNullException(nameof(predicate));</div></div></div>
+<div class="line not-hit"><div class="line-number">66</div><div class="line-content">        <div data-hover-target=".s-927" data-activate-target=".s-927" class="statement s-927 not-hit"><div class="statement-info s-927"><div>Id: 927</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (predicate == null)</div> <div data-hover-target=".s-928" data-activate-target=".s-928" class="statement s-928 not-hit"><div class="statement-info s-928"><div>Id: 928</div><div>Hits: 0</div></div>throw new ArgumentNullException(nameof(predicate));</div></div></div>
 <div class="line"><div class="line-number">67</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">68</div><div class="line-content">        <div data-hover-target=".s-811" data-activate-target=".s-811" class="statement s-811 not-hit"><div class="statement-info s-811"><div>Id: 811</div><div>Hits: 0</div></div>return DbSet.Where(predicate);</div></div></div>
+<div class="line not-hit"><div class="line-number">68</div><div class="line-content">        <div data-hover-target=".s-929" data-activate-target=".s-929" class="statement s-929 not-hit"><div class="statement-info s-929"><div>Id: 929</div><div>Hits: 0</div></div>return DbSet.Where(predicate);</div></div></div>
 <div class="line"><div class="line-number">69</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">70</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">71</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">72</div><div class="line-content">    public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">73</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">74</div><div class="line-content">        <div data-hover-target=".s-827" data-activate-target=".s-827" class="statement s-827 not-hit"><div class="statement-info s-827"><div>Id: 827</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div></div></div>
+<div class="line not-hit"><div class="line-number">74</div><div class="line-content">        <div data-hover-target=".s-945" data-activate-target=".s-945" class="statement s-945 not-hit"><div class="statement-info s-945"><div>Id: 945</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (entity == null)</div></div></div>
 <div class="line"><div class="line-number">75</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">76</div><div class="line-content">            <div data-hover-target=".s-830" data-activate-target=".s-830" class="statement s-830 not-hit"><div class="statement-info s-830"><div>Id: 830</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
+<div class="line not-hit"><div class="line-number">76</div><div class="line-content">            <div data-hover-target=".s-948" data-activate-target=".s-948" class="statement s-948 not-hit"><div class="statement-info s-948"><div>Id: 948</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
 <div class="line"><div class="line-number">77</div><div class="line-content">        }</div></div>
 <div class="line"><div class="line-number">78</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">79</div><div class="line-content">        <div data-hover-target=".s-829" data-activate-target=".s-829" class="statement s-829 not-hit"><div class="statement-info s-829"><div>Id: 829</div><div>Hits: 0</div></div>DbSet.Update(entity);</div></div></div>
-<div class="line not-hit"><div class="line-number">80</div><div class="line-content">        <div data-hover-target=".s-831" data-activate-target=".s-831" class="statement s-831 not-hit"><div class="statement-info s-831"><div>Id: 831</div><div>Hits: 0</div></div>await DbContext.SaveChangesAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">79</div><div class="line-content">        <div data-hover-target=".s-947" data-activate-target=".s-947" class="statement s-947 not-hit"><div class="statement-info s-947"><div>Id: 947</div><div>Hits: 0</div></div>DbSet.Update(entity);</div></div></div>
+<div class="line not-hit"><div class="line-number">80</div><div class="line-content">        <div data-hover-target=".s-949" data-activate-target=".s-949" class="statement s-949 not-hit"><div class="statement-info s-949"><div>Id: 949</div><div>Hits: 0</div></div>await DbContext.SaveChangesAsync(cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">81</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">82</div><div class="line-content">}</div></div>
 </div>

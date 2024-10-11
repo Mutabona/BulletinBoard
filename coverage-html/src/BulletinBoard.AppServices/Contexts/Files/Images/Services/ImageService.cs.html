@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/6)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/6)</td></tr>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/11)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/11)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -248,48 +248,57 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Files.Images.Repositories;</div></div>
 <div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.Contracts.Files.Images;</div></div>
 <div class="line"><div class="line-number">3</div><div class="line-content">using Microsoft.AspNetCore.Http;</div></div>
-<div class="line"><div class="line-number">4</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">4</div><div class="line-content">using Microsoft.Extensions.Logging;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">5</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Files.Images.Services;</div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">6</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Files.Images.Services;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">///&lt;inheritdoc cref=&quot;IImageService&quot;/&gt;</div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">public class ImageService : IImageService</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">    private readonly IImageRepository _repository;</div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">8</div><div class="line-content">///&lt;inheritdoc cref=&quot;IImageService&quot;/&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">public class ImageService : IImageService</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">    private readonly IImageRepository _repository;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">    private readonly ILogger&lt;ImageService&gt; _logger;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">12</div><div class="line-content">    <div data-hover-target=".s-360" data-activate-target=".s-360" class="statement s-360 not-hit"><div class="statement-info s-360"><div>Id: 360</div><div>Hits: 0</div></div>public ImageService(IImageRepository repository)</div></div></div>
-<div class="line"><div class="line-number">13</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">14</div><div class="line-content">        <div data-hover-target=".s-361" data-activate-target=".s-361" class="statement s-361 not-hit"><div class="statement-info s-361"><div>Id: 361</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
-<div class="line"><div class="line-number">15</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">14</div><div class="line-content">    <div data-hover-target=".s-434" data-activate-target=".s-434" class="statement s-434 not-hit"><div class="statement-info s-434"><div>Id: 434</div><div>Hits: 0</div></div>public ImageService(IImageRepository repository, ILogger&lt;ImageService&gt; logger)</div></div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 not-hit"><div class="statement-info s-435"><div>Id: 435</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
+<div class="line not-hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-436" data-activate-target=".s-436" class="statement s-436 not-hit"><div class="statement-info s-436"><div>Id: 436</div><div>Hits: 0</div></div>_logger = logger;</div></div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">17</div><div class="line-content">    public async Task&lt;Guid&gt; AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-362" data-activate-target=".s-362" class="statement s-362 not-hit"><div class="statement-info s-362"><div>Id: 362</div><div>Hits: 0</div></div>return await _repository.AddAsync(bulletinId, image, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">20</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">21</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    public async Task&lt;Guid&gt; AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content">        <div data-hover-target=".s-437" data-activate-target=".s-437" class="statement s-437 not-hit"><div class="statement-info s-437"><div>Id: 437</div><div>Hits: 0</div></div>_logger.BeginScope(&quot;Добавление изображения к объявлению: {id}&quot;, bulletinId);</div></div></div>
+<div class="line not-hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-438" data-activate-target=".s-438" class="statement s-438 not-hit"><div class="statement-info s-438"><div>Id: 438</div><div>Hits: 0</div></div>return await _repository.AddAsync(bulletinId, image, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">22</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">    public async Task DeleteImageAsync(Guid imageId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-363" data-activate-target=".s-363" class="statement s-363 not-hit"><div class="statement-info s-363"><div>Id: 363</div><div>Hits: 0</div></div>await _repository.DeleteAsync(imageId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">26</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">27</div><div class="line-content">&nbsp;
-</div></div>
-<div class="line"><div class="line-number">28</div><div class="line-content">    public async Task&lt;ICollection&lt;Guid&gt;&gt; GetImageIdsByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    public async Task DeleteImageAsync(Guid imageId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-365" data-activate-target=".s-365" class="statement s-365 not-hit"><div class="statement-info s-365"><div>Id: 365</div><div>Hits: 0</div></div>return await _repository.GetImageIdByBulletinIdAsync(bulletinId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">31</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">32</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-439" data-activate-target=".s-439" class="statement s-439 not-hit"><div class="statement-info s-439"><div>Id: 439</div><div>Hits: 0</div></div>_logger.BeginScope(&quot;Удаление изображения: {imageId}&quot;, imageId);</div></div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-440" data-activate-target=".s-440" class="statement s-440 not-hit"><div class="statement-info s-440"><div>Id: 440</div><div>Hits: 0</div></div>await _repository.DeleteAsync(imageId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">33</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">34</div><div class="line-content">    public async Task&lt;ImageDto&gt; GetImageByIdAsync(Guid imageId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">35</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">36</div><div class="line-content">        <div data-hover-target=".s-364" data-activate-target=".s-364" class="statement s-364 not-hit"><div class="statement-info s-364"><div>Id: 364</div><div>Hits: 0</div></div>return await  _repository.GetByIdAsync(imageId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">    public async Task&lt;ICollection&lt;Guid&gt;&gt; GetImageIdsByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content">        <div data-hover-target=".s-443" data-activate-target=".s-443" class="statement s-443 not-hit"><div class="statement-info s-443"><div>Id: 443</div><div>Hits: 0</div></div>_logger.BeginScope(&quot;Поиск изображений по объявлению: {id}&quot;, bulletinId);</div></div></div>
+<div class="line not-hit"><div class="line-number">38</div><div class="line-content">        <div data-hover-target=".s-444" data-activate-target=".s-444" class="statement s-444 not-hit"><div class="statement-info s-444"><div>Id: 444</div><div>Hits: 0</div></div>return await _repository.GetImageIdByBulletinIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">    public async Task&lt;ImageDto&gt; GetImageByIdAsync(Guid imageId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">43</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content">        <div data-hover-target=".s-441" data-activate-target=".s-441" class="statement s-441 not-hit"><div class="statement-info s-441"><div>Id: 441</div><div>Hits: 0</div></div>_logger.BeginScope(&quot;Поиск изображения: {id}&quot;, imageId);</div></div></div>
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content">        <div data-hover-target=".s-442" data-activate-target=".s-442" class="statement s-442 not-hit"><div class="statement-info s-442"><div>Id: 442</div><div>Hits: 0</div></div>return await  _repository.GetByIdAsync(imageId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

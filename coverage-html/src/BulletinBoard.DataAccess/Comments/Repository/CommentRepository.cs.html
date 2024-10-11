@@ -235,7 +235,7 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
 <tr><th>Line Coverage</th><td class="red">0,00 % (0/10)</td></tr>
 <tr><th>Statements Coverage</th><td class="red">0,00 % (0/11)</td></tr>
 <tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
@@ -259,39 +259,39 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">11</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">12</div><div class="line-content">///&lt;inheritdoc cref=&quot;ICommentRepository&quot;/&gt;</div></div>
-<div class="line not-hit"><div class="line-number">13</div><div class="line-content">public class <div data-hover-target=".s-673" data-activate-target=".s-673" class="statement s-673 not-hit"><div class="statement-info s-673"><div>Id: 673</div><div>Hits: 0</div></div>CommentRepository(IRepository&lt;Comment&gt; repository, IMapper mapper)</div> : ICommentRepository</div></div>
+<div class="line not-hit"><div class="line-number">13</div><div class="line-content">public class <div data-hover-target=".s-791" data-activate-target=".s-791" class="statement s-791 not-hit"><div class="statement-info s-791"><div>Id: 791</div><div>Hits: 0</div></div>CommentRepository(IRepository&lt;Comment&gt; repository, IMapper mapper)</div> : ICommentRepository</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">{</div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">16</div><div class="line-content">    public async Task&lt;Guid&gt; AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest comment, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">18</div><div class="line-content">        <div data-hover-target=".s-674" data-activate-target=".s-674" class="statement s-674 not-hit"><div class="statement-info s-674"><div>Id: 674</div><div>Hits: 0</div></div>var entity = mapper.Map&lt;Comment&gt;(comment);</div></div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-675" data-activate-target=".s-675" class="statement s-675 not-hit"><div class="statement-info s-675"><div>Id: 675</div><div>Hits: 0</div></div>entity.AuthorId = authorId;</div></div></div>
-<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-676" data-activate-target=".s-676" class="statement s-676 not-hit"><div class="statement-info s-676"><div>Id: 676</div><div>Hits: 0</div></div>entity.BulletinId = bulletinId;</div></div></div>
+<div class="line not-hit"><div class="line-number">18</div><div class="line-content">        <div data-hover-target=".s-792" data-activate-target=".s-792" class="statement s-792 not-hit"><div class="statement-info s-792"><div>Id: 792</div><div>Hits: 0</div></div>var entity = mapper.Map&lt;Comment&gt;(comment);</div></div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-793" data-activate-target=".s-793" class="statement s-793 not-hit"><div class="statement-info s-793"><div>Id: 793</div><div>Hits: 0</div></div>entity.AuthorId = authorId;</div></div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-794" data-activate-target=".s-794" class="statement s-794 not-hit"><div class="statement-info s-794"><div>Id: 794</div><div>Hits: 0</div></div>entity.BulletinId = bulletinId;</div></div></div>
 <div class="line"><div class="line-number">21</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-677" data-activate-target=".s-677" class="statement s-677 not-hit"><div class="statement-info s-677"><div>Id: 677</div><div>Hits: 0</div></div>return await repository.AddAsync(entity, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-795" data-activate-target=".s-795" class="statement s-795 not-hit"><div class="statement-info s-795"><div>Id: 795</div><div>Hits: 0</div></div>return await repository.AddAsync(entity, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">23</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">24</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">25</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">26</div><div class="line-content">    public async Task DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">27</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-678" data-activate-target=".s-678" class="statement s-678 not-hit"><div class="statement-info s-678"><div>Id: 678</div><div>Hits: 0</div></div>await repository.DeleteAsync(commentId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-796" data-activate-target=".s-796" class="statement s-796 not-hit"><div class="statement-info s-796"><div>Id: 796</div><div>Hits: 0</div></div>await repository.DeleteAsync(commentId, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">30</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">31</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">32</div><div class="line-content">    public async Task&lt;ICollection&lt;CommentDto&gt;&gt; GetCommentsByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">33</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-683" data-activate-target=".s-683" class="statement s-683 not-hit"><div class="statement-info s-683"><div>Id: 683</div><div>Hits: 0</div></div>return await repository.GetAll().Where(c =&gt; c.BulletinId == bulletinId).Include(x =&gt; x.Author).ProjectTo&lt;CommentDto&gt;(mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-801" data-activate-target=".s-801" class="statement s-801 not-hit"><div class="statement-info s-801"><div>Id: 801</div><div>Hits: 0</div></div>return await repository.GetAll().Where(c =&gt; c.BulletinId == bulletinId).Include(x =&gt; x.Author).ProjectTo&lt;CommentDto&gt;(mapper.ConfigurationProvider).ToListAsync(cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">35</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">36</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">37</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">38</div><div class="line-content">    public async Task&lt;CommentDto&gt; GetCommentByIdAsync(Guid commentId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">39</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-679" data-activate-target=".s-679" class="statement s-679 not-hit"><div class="statement-info s-679"><div>Id: 679</div><div>Hits: 0</div></div>var comment =  await repository.GetAll().Where(c =&gt; c.Id == commentId).Include(x =&gt; x.Author).FirstOrDefaultAsync(cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">41</div><div class="line-content">        <div data-hover-target=".s-680" data-activate-target=".s-680" class="statement s-680 not-hit"><div class="statement-info s-680"><div>Id: 680</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (comment == null)</div> <div data-hover-target=".s-681" data-activate-target=".s-681" class="statement s-681 not-hit"><div class="statement-info s-681"><div>Id: 681</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
-<div class="line not-hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-682" data-activate-target=".s-682" class="statement s-682 not-hit"><div class="statement-info s-682"><div>Id: 682</div><div>Hits: 0</div></div>return mapper.Map&lt;CommentDto&gt;(comment);</div></div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-797" data-activate-target=".s-797" class="statement s-797 not-hit"><div class="statement-info s-797"><div>Id: 797</div><div>Hits: 0</div></div>var comment =  await repository.GetAll().Where(c =&gt; c.Id == commentId).Include(x =&gt; x.Author).FirstOrDefaultAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">41</div><div class="line-content">        <div data-hover-target=".s-798" data-activate-target=".s-798" class="statement s-798 not-hit"><div class="statement-info s-798"><div>Id: 798</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>if (comment == null)</div> <div data-hover-target=".s-799" data-activate-target=".s-799" class="statement s-799 not-hit"><div class="statement-info s-799"><div>Id: 799</div><div>Hits: 0</div></div>throw new EntityNotFoundException();</div></div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-800" data-activate-target=".s-800" class="statement s-800 not-hit"><div class="statement-info s-800"><div>Id: 800</div><div>Hits: 0</div></div>return mapper.Map&lt;CommentDto&gt;(comment);</div></div></div>
 <div class="line"><div class="line-number">43</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">44</div><div class="line-content">}</div></div>
 </div>

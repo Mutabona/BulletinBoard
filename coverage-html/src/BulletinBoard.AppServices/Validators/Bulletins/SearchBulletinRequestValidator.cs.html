@@ -1,0 +1,313 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (23/23)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (14/14)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (2/2)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.AppServices.Exceptions;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.Contracts.Bulletins;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using FluentValidation;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">namespace BulletinBoard.AppServices.Validators.Bulletins;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// Валидатор запроса на поиск объявлений.</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">public class SearchBulletinRequestValidator : AbstractValidator&lt;SearchBulletinRequest&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    private readonly IUserService _userService;</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">15</div><div class="line-content">    <div data-hover-target=".s-280" data-activate-target=".s-280" class="statement s-280 hit"><div class="statement-info s-280"><div>Id: 280</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>public SearchBulletinRequestValidator(IUserService userService)</div></div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-281" data-activate-target=".s-281" class="statement s-281 hit"><div class="statement-info s-281"><div>Id: 281</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>_userService = userService;</div></div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-282" data-activate-target=".s-282" class="statement s-282 hit">RuleFor(x =&gt; x.Search)</div></div></div>
+<div class="line hit"><div class="line-number">20</div><div class="line-content"><div data-hover-target=".s-282" data-activate-target=".s-282" class="statement s-282 hit">            .MaximumLength(1500)</div></div></div>
+<div class="line hit"><div class="line-number">21</div><div class="line-content"><div data-hover-target=".s-282" data-activate-target=".s-282" class="statement s-282 hit"><div class="statement-info s-282"><div>Id: 282</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>            .WithMessage(&quot;Превышена максимальная длинна текста поиска.&quot;);</div></div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">23</div><div class="line-content">        <div data-hover-target=".s-283" data-activate-target=".s-283" class="statement s-283 hit">RuleFor(x =&gt; x.MaxPrice)</div></div></div>
+<div class="line hit"><div class="line-number">24</div><div class="line-content"><div data-hover-target=".s-283" data-activate-target=".s-283" class="statement s-283 hit">            .GreaterThanOrEqualTo(0)</div></div></div>
+<div class="line hit"><div class="line-number">25</div><div class="line-content"><div data-hover-target=".s-283" data-activate-target=".s-283" class="statement s-283 hit"><div class="statement-info s-283"><div>Id: 283</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>            .WithMessage(&quot;Максимальная цена не может быть меньше нуля.&quot;);</div></div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">27</div><div class="line-content">        <div data-hover-target=".s-284" data-activate-target=".s-284" class="statement s-284 hit">RuleFor(x =&gt; x.MinPrice)</div></div></div>
+<div class="line hit"><div class="line-number">28</div><div class="line-content"><div data-hover-target=".s-284" data-activate-target=".s-284" class="statement s-284 hit">            .GreaterThanOrEqualTo(0)</div></div></div>
+<div class="line hit"><div class="line-number">29</div><div class="line-content"><div data-hover-target=".s-284" data-activate-target=".s-284" class="statement s-284 hit"><div class="statement-info s-284"><div>Id: 284</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>            .WithMessage(&quot;Минимальная цена не может быть меньше нуля.&quot;);</div></div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-285" data-activate-target=".s-285" class="statement s-285 hit">RuleFor(x =&gt; x.Take)</div></div></div>
+<div class="line hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-285" data-activate-target=".s-285" class="statement s-285 hit"><div class="statement-info s-285"><div>Id: 285</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>            .GreaterThanOrEqualTo(0);</div></div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-286" data-activate-target=".s-286" class="statement s-286 hit">RuleFor(x =&gt; x.Skip)</div></div></div>
+<div class="line hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-286" data-activate-target=".s-286" class="statement s-286 hit"><div class="statement-info s-286"><div>Id: 286</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>            .GreaterThanOrEqualTo(0);</div></div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line hit"><div class="line-number">37</div><div class="line-content">        <div data-hover-target=".s-287" data-activate-target=".s-287" class="statement s-287 hit">RuleFor(x =&gt; x.UserId)</div></div></div>
+<div class="line hit"><div class="line-number">38</div><div class="line-content"><div data-hover-target=".s-287" data-activate-target=".s-287" class="statement s-287 hit">            .Must(UserExistsOrNull)</div></div></div>
+<div class="line hit"><div class="line-number">39</div><div class="line-content"><div data-hover-target=".s-287" data-activate-target=".s-287" class="statement s-287 hit"><div class="statement-info s-287"><div>Id: 287</div><div>Hits: 7</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests..ctor: 7 hits</li></ul></div></div>            .WithMessage(&quot;Такого пользователя не существует.&quot;);</div></div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">    private bool UserExistsOrNull(Guid? userId)</div></div>
+<div class="line"><div class="line-number">43</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">44</div><div class="line-content">        <div data-hover-target=".s-288" data-activate-target=".s-288" class="statement s-288 hit"><div class="statement-info s-288"><div>Id: 288</div><div>Hits: 7</div><div>Condition 1:<ul><li>Branch 1: 1 hit</li><li>Branch 2: 6 hits</li></ul></div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_MaxPrice_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Take_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Not_Have_Error_When_UserId_Is_Null: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Skip_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_MinPrice_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Search_Exceeds_MaxLength: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_UserId_Does_Not_Exist: 1 hit</li></ul></div></div>if (userId == null)</div> <div data-hover-target=".s-289" data-activate-target=".s-289" class="statement s-289 hit"><div class="statement-info s-289"><div>Id: 289</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Not_Have_Error_When_UserId_Is_Null: 1 hit</li></ul></div></div>return true;</div></div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">        try</div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">        {</div></div>
+<div class="line hit"><div class="line-number">47</div><div class="line-content">            <div data-hover-target=".s-291" data-activate-target=".s-291" class="statement s-291 hit"><div class="statement-info s-291"><div>Id: 291</div><div>Hits: 6</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_MaxPrice_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Take_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Skip_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_MinPrice_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Search_Exceeds_MaxLength: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_UserId_Does_Not_Exist: 1 hit</li></ul></div></div>_userService.GetUserByIdAsync(userId.Value, CancellationToken.None).GetAwaiter().GetResult();</div></div></div>
+<div class="line"><div class="line-number">48</div><div class="line-content">        }</div></div>
+<div class="line hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-292" data-activate-target=".s-292" class="statement s-292 hit"><div class="statement-info s-292"><div>Id: 292</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_UserId_Does_Not_Exist: 1 hit</li></ul></div></div>catch (EntityNotFoundException)</div></div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">        {</div></div>
+<div class="line hit"><div class="line-number">51</div><div class="line-content">            <div data-hover-target=".s-293" data-activate-target=".s-293" class="statement s-293 hit"><div class="statement-info s-293"><div>Id: 293</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_UserId_Does_Not_Exist: 1 hit</li></ul></div></div>return false;</div></div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">        }</div></div>
+<div class="line hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-294" data-activate-target=".s-294" class="statement s-294 hit"><div class="statement-info s-294"><div>Id: 294</div><div>Hits: 5</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_MaxPrice_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Take_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Skip_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_MinPrice_Is_Less_Than_Zero: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.ValidatorsTests.Bulletins.SearchBulletinRequestValidatorTests.Should_Have_Error_When_Search_Exceeds_MaxLength: 1 hit</li></ul></div></div>return true;</div></div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

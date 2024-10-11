@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/17)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/7)</td></tr>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/19)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/9)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -250,52 +250,57 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">3</div><div class="line-content">using System.Text;</div></div>
 <div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Users;</div></div>
 <div class="line"><div class="line-number">5</div><div class="line-content">using Microsoft.Extensions.Configuration;</div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">using Microsoft.IdentityModel.Tokens;</div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">6</div><div class="line-content">using Microsoft.Extensions.Logging;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">using Microsoft.IdentityModel.Tokens;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">9</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">///&lt;inheritdoc cref=&quot;IJwtService&quot;/&gt;</div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">public class JwtService : IJwtService</div></div>
-<div class="line"><div class="line-number">12</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">13</div><div class="line-content">    private readonly IConfiguration _configuration;</div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">11</div><div class="line-content">///&lt;inheritdoc cref=&quot;IJwtService&quot;/&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">public class JwtService : IJwtService</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">    private readonly ILogger&lt;JwtService&gt; _logger;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    private readonly IConfiguration _configuration;</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">15</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">    /// Создания экземпляра класса &lt;see cref=&quot;JwtService&quot;/&gt;</div></div>
-<div class="line"><div class="line-number">17</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;param name=&quot;configuration&quot;&gt;Конфигурация.&lt;/param&gt;</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">    <div data-hover-target=".s-330" data-activate-target=".s-330" class="statement s-330 not-hit"><div class="statement-info s-330"><div>Id: 330</div><div>Hits: 0</div></div>public JwtService(IConfiguration configuration)</div></div></div>
-<div class="line"><div class="line-number">20</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-331" data-activate-target=".s-331" class="statement s-331 not-hit"><div class="statement-info s-331"><div>Id: 331</div><div>Hits: 0</div></div>_configuration = configuration;</div></div></div>
-<div class="line"><div class="line-number">22</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">17</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    /// Создания экземпляра класса &lt;see cref=&quot;JwtService&quot;/&gt;</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;param name=&quot;configuration&quot;&gt;Конфигурация.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    /// &lt;param name=&quot;logger&quot;&gt;Логгер.&lt;/param&gt;</div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content">    <div data-hover-target=".s-392" data-activate-target=".s-392" class="statement s-392 not-hit"><div class="statement-info s-392"><div>Id: 392</div><div>Hits: 0</div></div>public JwtService(IConfiguration configuration, ILogger&lt;JwtService&gt; logger)</div></div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-393" data-activate-target=".s-393" class="statement s-393 not-hit"><div class="statement-info s-393"><div>Id: 393</div><div>Hits: 0</div></div>_configuration = configuration;</div></div></div>
+<div class="line not-hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-394" data-activate-target=".s-394" class="statement s-394 not-hit"><div class="statement-info s-394"><div>Id: 394</div><div>Hits: 0</div></div>_logger = logger;</div></div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
-<div class="line"><div class="line-number">25</div><div class="line-content">    public string GetToken(LoginUserRequest userData, Guid id, string role)</div></div>
-<div class="line"><div class="line-number">26</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">27</div><div class="line-content">        <div data-hover-target=".s-332" data-activate-target=".s-332" class="statement s-332 not-hit"><div class="statement-info s-332"><div>Id: 332</div><div>Hits: 0</div></div>var tokenHandler = new JwtSecurityTokenHandler();</div></div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-333" data-activate-target=".s-333" class="statement s-333 not-hit"><div class="statement-info s-333"><div>Id: 333</div><div>Hits: 0</div></div>var key = Encoding.UTF8.GetBytes(_configuration[&quot;Jwt:Key&quot;]);</div></div></div>
-<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">var tokenDescriptor = new SecurityTokenDescriptor</div></div></div>
-<div class="line not-hit"><div class="line-number">30</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">        {</div></div></div>
-<div class="line not-hit"><div class="line-number">31</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">            Subject = new ClaimsIdentity(new Claim[]</div></div></div>
-<div class="line not-hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">            {</div></div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">                new Claim(ClaimTypes.Name, userData.Email),</div></div></div>
-<div class="line not-hit"><div class="line-number">34</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">                new Claim(ClaimTypes.NameIdentifier, id.ToString()),</div></div></div>
-<div class="line not-hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">                new Claim(ClaimTypes.Role, role),</div></div></div>
-<div class="line not-hit"><div class="line-number">36</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">            }),</div></div></div>
-<div class="line not-hit"><div class="line-number">37</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">            Expires = DateTime.UtcNow.AddDays(7),</div></div></div>
-<div class="line not-hit"><div class="line-number">38</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit">            SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)</div></div></div>
-<div class="line not-hit"><div class="line-number">39</div><div class="line-content"><div data-hover-target=".s-334" data-activate-target=".s-334" class="statement s-334 not-hit"><div class="statement-info s-334"><div>Id: 334</div><div>Hits: 0</div></div>        };</div></div></div>
-<div class="line"><div class="line-number">40</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">28</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">    public string GetToken(LoginUserRequest userData, Guid id, string role)</div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-395" data-activate-target=".s-395" class="statement s-395 not-hit"><div class="statement-info s-395"><div>Id: 395</div><div>Hits: 0</div></div>var tokenHandler = new JwtSecurityTokenHandler();</div></div></div>
+<div class="line not-hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-396" data-activate-target=".s-396" class="statement s-396 not-hit"><div class="statement-info s-396"><div>Id: 396</div><div>Hits: 0</div></div>var key = Encoding.UTF8.GetBytes(_configuration[&quot;Jwt:Key&quot;]);</div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">var tokenDescriptor = new SecurityTokenDescriptor</div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">        {</div></div></div>
+<div class="line not-hit"><div class="line-number">35</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">            Subject = new ClaimsIdentity(new Claim[]</div></div></div>
+<div class="line not-hit"><div class="line-number">36</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">            {</div></div></div>
+<div class="line not-hit"><div class="line-number">37</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">                new Claim(ClaimTypes.Name, userData.Email),</div></div></div>
+<div class="line not-hit"><div class="line-number">38</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">                new Claim(ClaimTypes.NameIdentifier, id.ToString()),</div></div></div>
+<div class="line not-hit"><div class="line-number">39</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">                new Claim(ClaimTypes.Role, role),</div></div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">            }),</div></div></div>
+<div class="line not-hit"><div class="line-number">41</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">            Expires = DateTime.UtcNow.AddDays(7),</div></div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit">            SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)</div></div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content"><div data-hover-target=".s-397" data-activate-target=".s-397" class="statement s-397 not-hit"><div class="statement-info s-397"><div>Id: 397</div><div>Hits: 0</div></div>        };</div></div></div>
+<div class="line"><div class="line-number">44</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">41</div><div class="line-content">        <div data-hover-target=".s-335" data-activate-target=".s-335" class="statement s-335 not-hit"><div class="statement-info s-335"><div>Id: 335</div><div>Hits: 0</div></div>var token = tokenHandler.CreateToken(tokenDescriptor);</div></div></div>
-<div class="line"><div class="line-number">42</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content">        <div data-hover-target=".s-398" data-activate-target=".s-398" class="statement s-398 not-hit"><div class="statement-info s-398"><div>Id: 398</div><div>Hits: 0</div></div>_logger.LogInformation(&quot;Создание токена&quot;);</div></div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-399" data-activate-target=".s-399" class="statement s-399 not-hit"><div class="statement-info s-399"><div>Id: 399</div><div>Hits: 0</div></div>var token = tokenHandler.CreateToken(tokenDescriptor);</div></div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">43</div><div class="line-content">        <div data-hover-target=".s-336" data-activate-target=".s-336" class="statement s-336 not-hit"><div class="statement-info s-336"><div>Id: 336</div><div>Hits: 0</div></div>return tokenHandler.WriteToken(token);</div></div></div>
-<div class="line"><div class="line-number">44</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">45</div><div class="line-content">}</div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content">        <div data-hover-target=".s-400" data-activate-target=".s-400" class="statement s-400 not-hit"><div class="statement-info s-400"><div>Id: 400</div><div>Hits: 0</div></div>return tokenHandler.WriteToken(token);</div></div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

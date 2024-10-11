@@ -151,7 +151,7 @@ public class CreateBulletinRequestValidatorTests
     {
         var title = _fixture.Create<string>();
         string? description = null;
-        var price = 0;
+        var price = -1;
         var categoryId = _fixture.Create<Guid>();
         
         var source = _fixture.Build<CreateBulletinRequest>()
@@ -170,7 +170,7 @@ public class CreateBulletinRequestValidatorTests
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
         result.ShouldNotHaveValidationErrorFor(x => x.CategoryId);
         result.ShouldNotHaveValidationErrorFor(x => x.Title);
-        result.ShouldHaveValidationErrorFor(x => x.Price).WithErrorMessage("Цена не может быть меньше или равна нулю.");
+        result.ShouldHaveValidationErrorFor(x => x.Price).WithErrorMessage("Цена не может быть меньше нуля.");
     }
 
     /// <summary>

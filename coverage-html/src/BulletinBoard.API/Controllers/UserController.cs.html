@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/7)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/7)</td></tr>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/10)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/10)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -262,7 +262,7 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">13</div><div class="line-content">[ApiController]</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">[Route(&quot;[controller]&quot;)]</div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">[ProducesResponseType((int)HttpStatusCode.InternalServerError)]</div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-184" data-activate-target=".s-184" class="statement s-184 not-hit"><div class="statement-info s-184"><div>Id: 184</div><div>Hits: 0</div></div>UserController(IUserService userService)</div> : BaseController</div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-228" data-activate-target=".s-228" class="statement s-228 not-hit"><div class="statement-info s-228"><div>Id: 228</div><div>Hits: 0</div></div>UserController(IUserService userService, ILogger&lt;UserController&gt; logger)</div> : BaseController</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">{</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">19</div><div class="line-content">    /// Удаляет пользователя по идентификатору.</div></div>
@@ -277,47 +277,49 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">28</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">    public async Task&lt;IActionResult&gt; DeleteUser(Guid userId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">30</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-185" data-activate-target=".s-185" class="statement s-185 not-hit"><div class="statement-info s-185"><div>Id: 185</div><div>Hits: 0</div></div>await userService.DeleteUserAsync(userId, cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-186" data-activate-target=".s-186" class="statement s-186 not-hit"><div class="statement-info s-186"><div>Id: 186</div><div>Hits: 0</div></div>return NoContent();</div></div></div>
-<div class="line"><div class="line-number">33</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">34</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-229" data-activate-target=".s-229" class="statement s-229 not-hit"><div class="statement-info s-229"><div>Id: 229</div><div>Hits: 0</div></div>logger.LogInformation(&quot;Удаление пользователя: {id}&quot;, userId);</div></div></div>
+<div class="line not-hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-230" data-activate-target=".s-230" class="statement s-230 not-hit"><div class="statement-info s-230"><div>Id: 230</div><div>Hits: 0</div></div>await userService.DeleteUserAsync(userId, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-231" data-activate-target=".s-231" class="statement s-231 not-hit"><div class="statement-info s-231"><div>Id: 231</div><div>Hits: 0</div></div>return NoContent();</div></div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">35</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">36</div><div class="line-content">    /// Выполняет поиск пользователя по идентификатору.</div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">    /// &lt;param name=&quot;userId&quot;&gt;Идентификатор пользователя.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">39</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">40</div><div class="line-content">    /// &lt;returns&gt;Модель пользователя.&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">41</div><div class="line-content">    [Authorize]</div></div>
-<div class="line"><div class="line-number">42</div><div class="line-content">    [HttpGet(&quot;{userId}&quot;)]</div></div>
-<div class="line"><div class="line-number">43</div><div class="line-content">    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]</div></div>
-<div class="line"><div class="line-number">44</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
-<div class="line"><div class="line-number">45</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">    /// Выполняет поиск пользователя по идентификатору.</div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    /// &lt;param name=&quot;userId&quot;&gt;Идентификатор пользователя.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    /// &lt;returns&gt;Модель пользователя.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">    [Authorize]</div></div>
+<div class="line"><div class="line-number">43</div><div class="line-content">    [HttpGet(&quot;{userId}&quot;)]</div></div>
+<div class="line"><div class="line-number">44</div><div class="line-content">    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.NotFound)]</div></div>
 <div class="line"><div class="line-number">46</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
 <div class="line"><div class="line-number">47</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetUserById(Guid userId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">48</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-187" data-activate-target=".s-187" class="statement s-187 not-hit"><div class="statement-info s-187"><div>Id: 187</div><div>Hits: 0</div></div>var user = await userService.GetUserByIdAsync(userId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">50</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">51</div><div class="line-content">        <div data-hover-target=".s-188" data-activate-target=".s-188" class="statement s-188 not-hit"><div class="statement-info s-188"><div>Id: 188</div><div>Hits: 0</div></div>return Ok(user);</div></div></div>
-<div class="line"><div class="line-number">52</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">53</div><div class="line-content">&nbsp;
+<div class="line not-hit"><div class="line-number">49</div><div class="line-content">        <div data-hover-target=".s-232" data-activate-target=".s-232" class="statement s-232 not-hit"><div class="statement-info s-232"><div>Id: 232</div><div>Hits: 0</div></div>logger.LogInformation(&quot;Поиск пользователя: {id}&quot;, userId);</div></div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content">        <div data-hover-target=".s-233" data-activate-target=".s-233" class="statement s-233 not-hit"><div class="statement-info s-233"><div>Id: 233</div><div>Hits: 0</div></div>var user = await userService.GetUserByIdAsync(userId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-234" data-activate-target=".s-234" class="statement s-234 not-hit"><div class="statement-info s-234"><div>Id: 234</div><div>Hits: 0</div></div>return Ok(user);</div></div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">54</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">55</div><div class="line-content">    /// Возвращает всех пользователей.</div></div>
-<div class="line"><div class="line-number">56</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">57</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">58</div><div class="line-content">    /// &lt;returns&gt;Коллекция моделей пользователя.&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">59</div><div class="line-content">    [Authorize(Roles = &quot;Admin&quot;)]</div></div>
-<div class="line"><div class="line-number">60</div><div class="line-content">    [HttpGet(&quot;all&quot;)]</div></div>
-<div class="line"><div class="line-number">61</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;UserDto&gt;), (int)HttpStatusCode.OK)]</div></div>
-<div class="line"><div class="line-number">62</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
-<div class="line"><div class="line-number">63</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
-<div class="line"><div class="line-number">64</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetUsers(CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">65</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">66</div><div class="line-content">        <div data-hover-target=".s-189" data-activate-target=".s-189" class="statement s-189 not-hit"><div class="statement-info s-189"><div>Id: 189</div><div>Hits: 0</div></div>var users = await userService.GetUsersAsync(cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">67</div><div class="line-content">        <div data-hover-target=".s-190" data-activate-target=".s-190" class="statement s-190 not-hit"><div class="statement-info s-190"><div>Id: 190</div><div>Hits: 0</div></div>return Ok(users);</div></div></div>
-<div class="line"><div class="line-number">68</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">69</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">    /// Возвращает всех пользователей.</div></div>
+<div class="line"><div class="line-number">57</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">59</div><div class="line-content">    /// &lt;returns&gt;Коллекция моделей пользователя.&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    [Authorize(Roles = &quot;Admin&quot;)]</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">    [HttpGet(&quot;all&quot;)]</div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">    [ProducesResponseType(typeof(ICollection&lt;UserDto&gt;), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Forbidden)]</div></div>
+<div class="line"><div class="line-number">64</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">65</div><div class="line-content">    public async Task&lt;IActionResult&gt; GetUsers(CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">66</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">67</div><div class="line-content">        <div data-hover-target=".s-235" data-activate-target=".s-235" class="statement s-235 not-hit"><div class="statement-info s-235"><div>Id: 235</div><div>Hits: 0</div></div>logger.LogInformation(&quot;Получение всех пользователей&quot;);</div></div></div>
+<div class="line not-hit"><div class="line-number">68</div><div class="line-content">        <div data-hover-target=".s-236" data-activate-target=".s-236" class="statement s-236 not-hit"><div class="statement-info s-236"><div>Id: 236</div><div>Hits: 0</div></div>var users = await userService.GetUsersAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">69</div><div class="line-content">        <div data-hover-target=".s-237" data-activate-target=".s-237" class="statement s-237 not-hit"><div class="statement-info s-237"><div>Id: 237</div><div>Hits: 0</div></div>return Ok(users);</div></div></div>
+<div class="line"><div class="line-number">70</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">71</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

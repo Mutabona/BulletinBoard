@@ -235,7 +235,7 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>07.10.2024 23:03:14</td></tr>
+<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
 <tr><th>Line Coverage</th><td class="red">0,00 % (0/10)</td></tr>
 <tr><th>Statements Coverage</th><td class="green">0,00 % (0/10)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
@@ -269,40 +269,40 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
 <div class="line"><div class="line-number">21</div><div class="line-content">    /// &lt;param name=&quot;repository&quot;&gt;Репозиторий.&lt;/param&gt;</div></div>
 <div class="line"><div class="line-number">22</div><div class="line-content">    /// &lt;param name=&quot;mapper&quot;&gt;Маппер.&lt;/param&gt;</div></div>
-<div class="line not-hit"><div class="line-number">23</div><div class="line-content">    <div data-hover-target=".s-642" data-activate-target=".s-642" class="statement s-642 not-hit"><div class="statement-info s-642"><div>Id: 642</div><div>Hits: 0</div></div>public ImageRepository(IRepository&lt;Image&gt; repository, IMapper mapper)</div></div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content">    <div data-hover-target=".s-760" data-activate-target=".s-760" class="statement s-760 not-hit"><div class="statement-info s-760"><div>Id: 760</div><div>Hits: 0</div></div>public ImageRepository(IRepository&lt;Image&gt; repository, IMapper mapper)</div></div></div>
 <div class="line"><div class="line-number">24</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-643" data-activate-target=".s-643" class="statement s-643 not-hit"><div class="statement-info s-643"><div>Id: 643</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
-<div class="line not-hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-644" data-activate-target=".s-644" class="statement s-644 not-hit"><div class="statement-info s-644"><div>Id: 644</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
+<div class="line not-hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-761" data-activate-target=".s-761" class="statement s-761 not-hit"><div class="statement-info s-761"><div>Id: 761</div><div>Hits: 0</div></div>_repository = repository;</div></div></div>
+<div class="line not-hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-762" data-activate-target=".s-762" class="statement s-762 not-hit"><div class="statement-info s-762"><div>Id: 762</div><div>Hits: 0</div></div>_mapper = mapper;</div></div></div>
 <div class="line"><div class="line-number">27</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">28</div><div class="line-content">    </div></div>
 <div class="line"><div class="line-number">29</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">30</div><div class="line-content">    public async Task&lt;Guid&gt; AddAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">31</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-645" data-activate-target=".s-645" class="statement s-645 not-hit"><div class="statement-info s-645"><div>Id: 645</div><div>Hits: 0</div></div>var imageEntity = _mapper.Map&lt;Image&gt;(image);</div></div></div>
-<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-646" data-activate-target=".s-646" class="statement s-646 not-hit"><div class="statement-info s-646"><div>Id: 646</div><div>Hits: 0</div></div>imageEntity.BulletinId = bulletinId;</div></div></div>
-<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-647" data-activate-target=".s-647" class="statement s-647 not-hit"><div class="statement-info s-647"><div>Id: 647</div><div>Hits: 0</div></div>return await _repository.AddAsync(imageEntity, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-763" data-activate-target=".s-763" class="statement s-763 not-hit"><div class="statement-info s-763"><div>Id: 763</div><div>Hits: 0</div></div>var imageEntity = _mapper.Map&lt;Image&gt;(image);</div></div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-764" data-activate-target=".s-764" class="statement s-764 not-hit"><div class="statement-info s-764"><div>Id: 764</div><div>Hits: 0</div></div>imageEntity.BulletinId = bulletinId;</div></div></div>
+<div class="line not-hit"><div class="line-number">34</div><div class="line-content">        <div data-hover-target=".s-765" data-activate-target=".s-765" class="statement s-765 not-hit"><div class="statement-info s-765"><div>Id: 765</div><div>Hits: 0</div></div>return await _repository.AddAsync(imageEntity, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">35</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">36</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">37</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">38</div><div class="line-content">    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">39</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-648" data-activate-target=".s-648" class="statement s-648 not-hit"><div class="statement-info s-648"><div>Id: 648</div><div>Hits: 0</div></div>await _repository.DeleteAsync(id, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">40</div><div class="line-content">        <div data-hover-target=".s-766" data-activate-target=".s-766" class="statement s-766 not-hit"><div class="statement-info s-766"><div>Id: 766</div><div>Hits: 0</div></div>await _repository.DeleteAsync(id, cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">41</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">42</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">43</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">44</div><div class="line-content">    public async Task&lt;ICollection&lt;Guid&gt;&gt; GetImageIdByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">45</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-651" data-activate-target=".s-651" class="statement s-651 not-hit"><div class="statement-info s-651"><div>Id: 651</div><div>Hits: 0</div></div>return await _repository.GetAll().Where(i =&gt; i.BulletinId == bulletinId).Select(i =&gt; i.Id).ToListAsync(cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content">        <div data-hover-target=".s-769" data-activate-target=".s-769" class="statement s-769 not-hit"><div class="statement-info s-769"><div>Id: 769</div><div>Hits: 0</div></div>return await _repository.GetAll().Where(i =&gt; i.BulletinId == bulletinId).Select(i =&gt; i.Id).ToListAsync(cancellationToken);</div></div></div>
 <div class="line"><div class="line-number">47</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">48</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">49</div><div class="line-content">    ///&lt;inheritdoc/&gt;</div></div>
 <div class="line"><div class="line-number">50</div><div class="line-content">    public async Task&lt;ImageDto&gt; GetByIdAsync(Guid id, CancellationToken cancellationToken)</div></div>
 <div class="line"><div class="line-number">51</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-649" data-activate-target=".s-649" class="statement s-649 not-hit"><div class="statement-info s-649"><div>Id: 649</div><div>Hits: 0</div></div>var image = await _repository.GetByIdAsync(id, cancellationToken);</div></div></div>
-<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-650" data-activate-target=".s-650" class="statement s-650 not-hit"><div class="statement-info s-650"><div>Id: 650</div><div>Hits: 0</div></div>return _mapper.Map&lt;ImageDto&gt;(image);</div></div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-767" data-activate-target=".s-767" class="statement s-767 not-hit"><div class="statement-info s-767"><div>Id: 767</div><div>Hits: 0</div></div>var image = await _repository.GetByIdAsync(id, cancellationToken);</div></div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content">        <div data-hover-target=".s-768" data-activate-target=".s-768" class="statement s-768 not-hit"><div class="statement-info s-768"><div>Id: 768</div><div>Hits: 0</div></div>return _mapper.Map&lt;ImageDto&gt;(image);</div></div></div>
 <div class="line"><div class="line-number">54</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">55</div><div class="line-content">}</div></div>
 </div>
