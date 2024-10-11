@@ -180,7 +180,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор добавленного изображения.</returns>
     [Authorize]
-    [HttpPost("{bulletinId}/images/upload")]
+    [HttpPost("{bulletinId}/images/")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]

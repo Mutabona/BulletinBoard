@@ -11,7 +11,7 @@ public class BulletinSpecificationBuilder : IBulletinSpecificationBuilder
     /// <inheritdoc />
     public ISpecification<Bulletin> Build(SearchBulletinRequest request)
     {
-        var specification = Specification<Bulletin>.FromPredicate(bulletin => bulletin.CategoryId != null);
+        var specification = Specification<Bulletin>.FromPredicate(bulletin => bulletin.OwnerId != Guid.Empty);
 
         if (!string.IsNullOrWhiteSpace(request.Search))
         {
@@ -26,6 +26,11 @@ public class BulletinSpecificationBuilder : IBulletinSpecificationBuilder
         if (request.MaxPrice.HasValue)
         {
             specification = specification.And(new MaxPriceSpecification(request.MaxPrice.Value));
+        }
+
+        if (request.UserId.HasValue)
+        {
+            specification = specification.And(new ByUserSpecification(request.UserId.Value));
         }
         return specification;
     }

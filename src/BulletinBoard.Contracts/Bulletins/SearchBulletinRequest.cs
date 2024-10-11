@@ -21,4 +21,9 @@ public class SearchBulletinRequest : BasePaginationRequest
     /// Максимальная цена.
     /// </summary>
     public decimal? MaxPrice { get; set; }
+    
+    /// <summary>
+    /// Пользователь.
+    /// </summary>
+    public Guid? UserId { get; set; }
 }

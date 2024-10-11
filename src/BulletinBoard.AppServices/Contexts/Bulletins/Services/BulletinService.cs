@@ -38,7 +38,7 @@ public class BulletinService : IBulletinService
         using var _ = _logger.BeginScope("Поиск по категории: {id}", categoryId);
         var categories = await _categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
         var categoriesIds = categories.Select(c => c.Id).ToList();
-        _logger.LogInformation("Получена категория с субкатегориями");
+        _logger.LogInformation("Получена категория с подкатегориями");
         var specification = _specificationBuilder.Build(categoriesIds);
         _logger.LogInformation("Построена спецификация поиска объявлений");
         var bulletins = await _repository.GetBySpecificationAsync(specification, cancellationToken);
