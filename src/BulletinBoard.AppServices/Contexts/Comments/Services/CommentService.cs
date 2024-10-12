@@ -1,18 +1,25 @@
 ﻿using BulletinBoard.AppServices.Contexts.Comments.Repositories;
+using BulletinBoard.AppServices.Services;
 using BulletinBoard.Contracts.Comments;
+using BulletinBoard.Contracts.Emails;
+using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace BulletinBoard.AppServices.Contexts.Comments.Services;
 
 ///<inheritdoc cref="ICommentService"/>
-public class CommentService(ICommentRepository repository, ILogger<CommentService> logger) : ICommentService
+public class CommentService(ICommentRepository repository, ILogger<CommentService> logger, IPublishEndpoint publishEndpoint) : ICommentService
 {
     /// <inheritdoc />
     public async Task<Guid> AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest request,
         CancellationToken cancellationToken)
     {
         logger.BeginScope("Добавление комментария по запросу: {@Request}, к объявлению {id}, пользователем: {authorId}", request, bulletinId, authorId);
-        return await repository.AddCommentAsync(bulletinId, authorId, request, cancellationToken);
+        var commentId = await repository.AddCommentAsync(bulletinId, authorId, request, cancellationToken);
+
+        await publishEndpoint.Publish<CommentAdded>(new {id = commentId}, cancellationToken);
+        
+        return commentId;
     }
 
     /// <inheritdoc />

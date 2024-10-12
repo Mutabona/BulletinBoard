@@ -8,7 +8,7 @@ public class CommentDto
     /// <summary>
     /// Идентификатор автора комментария.
     /// </summary>
-    public Guid? AuthorId { get; set; }
+    public Guid AuthorId { get; set; }
     
     /// <summary>
     /// Имя автора.
@@ -18,7 +18,7 @@ public class CommentDto
     /// <summary>
     /// Идентификатор объявления с комментарием.
     /// </summary>
-    public Guid? BulletinId { get; set; }
+    public Guid BulletinId { get; set; }
     
     /// <summary>
     /// Содержание комментария.

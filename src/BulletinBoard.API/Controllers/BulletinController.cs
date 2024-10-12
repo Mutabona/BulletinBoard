@@ -3,11 +3,13 @@ using BulletinBoard.API.Controllers.Base;
 using BulletinBoard.AppServices.Contexts.Bulletins.Services;
 using BulletinBoard.AppServices.Contexts.Comments.Services;
 using BulletinBoard.AppServices.Contexts.Files.Images.Services;
+using BulletinBoard.AppServices.Contexts.Users.Services;
 using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Bulletins;
 using BulletinBoard.Contracts.Comments;
+using BulletinBoard.Contracts.Emails;
 using BulletinBoard.Contracts.Files.Images;
-using BulletinBoard.Domain.Bulletins.Entity;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +21,12 @@ namespace BulletinBoard.API.Controllers;
 [ApiController]
 [Route("[controller]")]
 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-public class BulletinController(IBulletinService bulletinService, IImageService imageService, ICommentService commentService, ILogger<BulletinController> logger) : BaseController
+public class BulletinController(
+    IBulletinService bulletinService, 
+    IImageService imageService, 
+    ICommentService commentService, 
+    ILogger<BulletinController> logger, 
+    IUserService userService) : BaseController
 {
     /// <summary>
     /// Создаёт объявление по модели запроса.
@@ -47,7 +54,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Модель объявления.</returns>
     [HttpGet("{bulletinId}")]
-    [ProducesResponseType(typeof(Bulletin), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BulletinDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetBulletinByIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
@@ -291,9 +298,10 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> AddCommentAsync(Guid bulletinId, AddCommentRequest comment, CancellationToken cancellationToken)
     {
+        BulletinDto bulletin;
         try
         {
-            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
+            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         }
         catch (EntityNotFoundException)
         {
@@ -304,6 +312,7 @@ public class BulletinController(IBulletinService bulletinService, IImageService 
         
         logger.LogInformation("Добавление комментария по запросу: {@Request}, к объявлению {id}, пользователем: {authorId}", comment, bulletinId, authorId);
         var commentId = await commentService.AddCommentAsync(bulletinId, authorId, comment, cancellationToken);
+        
         return StatusCode((int)HttpStatusCode.Created, commentId.ToString());
     }
 

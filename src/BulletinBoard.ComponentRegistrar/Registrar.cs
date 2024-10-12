@@ -10,7 +10,7 @@ using BulletinBoard.AppServices.Contexts.Files.Images.Repositories;
 using BulletinBoard.AppServices.Contexts.Files.Images.Services;
 using BulletinBoard.AppServices.Contexts.Users.Repositories;
 using BulletinBoard.AppServices.Contexts.Users.Services;
-using BulletinBoard.AppServices.Validators;
+using BulletinBoard.AppServices.Services;
 using BulletinBoard.AppServices.Validators.Bulletins;
 using BulletinBoard.AppServices.Validators.Categories;
 using BulletinBoard.AppServices.Validators.Comments;
@@ -25,6 +25,7 @@ using BulletinBoard.DataAccess.Users.Repository;
 using BulletinBoard.Infrastructure.Repository;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -54,22 +55,15 @@ public static class Registrar
         services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
         
         services.AddScoped<DbContext>(s => s.GetRequiredService<ApplicationDbContext>());
-
-        services.AddValidatorsFromAssemblyContaining<CreateCategoryValidator>();
-        services.AddValidatorsFromAssemblyContaining<CreateBulletinRequestValidator>();
-        services.AddValidatorsFromAssemblyContaining<UpdateBulletinValidator>();
-        services.AddValidatorsFromAssemblyContaining<AddCommentValidator>();
-        services.AddValidatorsFromAssemblyContaining<LoginUserRequestValidator>();
-        services.AddValidatorsFromAssemblyContaining<RegisterUserRequestValidator>();
-        services.AddFluentValidationAutoValidation();
+        
+        services.AddFluentValidation();
+        services.AddMassTransitWithRabbitMq();
         
         return services;
     }
 
     private static MapperConfiguration GetMapperConfiguration()
     {
-        TimeProvider timeProvider = TimeProvider.System;
-        
         var configuration = new MapperConfiguration(cfg =>
         {
             cfg.AddProfile<BulletinProfile>();
@@ -81,5 +75,39 @@ public static class Registrar
         
         configuration.AssertConfigurationIsValid();
         return configuration;
+    }
+
+    private static IServiceCollection AddFluentValidation(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<CreateCategoryValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateBulletinRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateBulletinValidator>();
+        services.AddValidatorsFromAssemblyContaining<AddCommentValidator>();
+        services.AddValidatorsFromAssemblyContaining<LoginUserRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<RegisterUserRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<SearchBulletinRequestValidator>();
+        services.AddFluentValidationAutoValidation();
+
+        return services;
+    }
+    
+    private static IServiceCollection AddMassTransitWithRabbitMq(this IServiceCollection services)
+    {
+        services.AddMassTransit(mt =>
+        {
+            mt.AddConsumer<NotificationService>();
+            mt.UsingRabbitMq((context, cfg) =>
+            {
+                //cfg.AutoStart = true;
+                cfg.Host("rabbit", h =>
+                {
+                    h.Username("guest");
+                    h.Password("guest");
+                });
+                cfg.ConfigureEndpoints(context);
+            });
+        });
+        
+        return services;
     }
 }

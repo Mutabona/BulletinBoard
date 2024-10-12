@@ -18,7 +18,7 @@ public class UserDto
     /// <summary>
     /// Почта.
     /// </summary>
-    public string? Email { get; set; }
+    public string Email { get; set; }
     
     /// <summary>
     /// Номер телефона.

@@ -22,7 +22,7 @@ public class BulletinDto
     /// <summary>
     /// Идентификатор владельца.
     /// </summary>
-    public Guid? OwnerId { get; set; }
+    public Guid OwnerId { get; set; }
     
     /// <summary>
     /// Имя владельца.

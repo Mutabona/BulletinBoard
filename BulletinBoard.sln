@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3D0CFC62
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletinBoard.Tests", "tests\BulletinBoard.Tests\BulletinBoard.Tests.csproj", "{B718D632-8D96-4CCA-8470-C8BE4D24FBBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletinBoard.EmailSender", "src\BulletinBoard.EmailSender\BulletinBoard.EmailSender.csproj", "{D5DBB706-8DD8-4412-BC2F-D44ACAFDCFE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{B718D632-8D96-4CCA-8470-C8BE4D24FBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B718D632-8D96-4CCA-8470-C8BE4D24FBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B718D632-8D96-4CCA-8470-C8BE4D24FBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5DBB706-8DD8-4412-BC2F-D44ACAFDCFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5DBB706-8DD8-4412-BC2F-D44ACAFDCFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5DBB706-8DD8-4412-BC2F-D44ACAFDCFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5DBB706-8DD8-4412-BC2F-D44ACAFDCFE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{32F1742A-A7BF-40FB-B557-91CC5EBFB3B5} = {013C7129-CA37-44D7-AA2D-4B0E3A477229}
 		{16FF1C32-3F05-4BD3-B5C8-4F581353D3BD} = {013C7129-CA37-44D7-AA2D-4B0E3A477229}
 		{B718D632-8D96-4CCA-8470-C8BE4D24FBBE} = {3D0CFC62-D010-4E82-93F4-294B153DEE24}
+		{D5DBB706-8DD8-4412-BC2F-D44ACAFDCFE2} = {5A4C84BD-026B-49A3-93C9-7770FE9964C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3307562-6300-4284-A095-32405818E59E}

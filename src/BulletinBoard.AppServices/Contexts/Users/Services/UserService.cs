@@ -1,7 +1,9 @@
 ﻿using BulletinBoard.AppServices.Contexts.Users.Repositories;
 using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.AppServices.Helpers;
+using BulletinBoard.Contracts.Emails;
 using BulletinBoard.Contracts.Users;
+using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace BulletinBoard.AppServices.Contexts.Users.Services;
@@ -12,12 +14,14 @@ public class UserService : IUserService
     private readonly IUserRepository _repository;
     private readonly IJwtService _jwtService;
     private readonly ILogger<UserService> _logger;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public UserService(IUserRepository repository, IJwtService jwtService, ILogger<UserService> logger)
+    public UserService(IUserRepository repository, IJwtService jwtService, ILogger<UserService> logger, IPublishEndpoint publishEndpoint)
     {
         _repository = repository;
         _jwtService = jwtService;
         _logger = logger;
+        _publishEndpoint = publishEndpoint;
     }
     
     ///<inheritdoc/>
@@ -48,10 +52,16 @@ public class UserService : IUserService
         if (await IsUniqueEmailAsync(request.Email, cancellationToken))
         {
             request.Password = CryptoHelper.GetBase64Hash(request.Password);
-            return await _repository.AddAsync(request, cancellationToken);
-        }
+            var userId =  await _repository.AddAsync(request, cancellationToken);
 
-        return Guid.Empty;
+            await _publishEndpoint.Publish<UserRegistred>(new { email = request.Email }, cancellationToken);
+            
+            return userId;
+        }
+        else
+        {
+            throw new EmailAlreadyExistsException("Такая почта уже зарегистрирована.");
+        }
     }
 
     ///<inheritdoc/>
@@ -63,6 +73,7 @@ public class UserService : IUserService
         try
         {
             user = await _repository.LoginAsync(request, cancellationToken);
+            await _publishEndpoint.Publish<UserLoggedIn>(new { email = request.Email }, cancellationToken);
         }
         catch (EntityNotFoundException)
         {

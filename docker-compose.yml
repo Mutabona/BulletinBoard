@@ -12,6 +12,10 @@
       - "5000:8080"
     networks:
       - bulletinboard-network
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
     
 
   bulletinboard.dbmigrator:
@@ -25,6 +29,18 @@
       - ConnectionStrings__DbConnection=Server=postgres;Database=BulletinDb;Username=postgres;Password=password;Port=5432
     networks:
       - bulletinboard-network
+        
+  bulletinboard.emailsender:
+    image: bulletinboard.emailsender
+    build:
+      context: .
+      dockerfile: src/BulletinBoard.EmailSender/Dockerfile
+    networks:
+      - bulletinboard-network
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
   
   postgres:
     image: postgres
@@ -63,9 +79,23 @@
     volumes:
       - redis-data:/var/lib/redis/data
   
+  rabbit:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - bulletinboard-network
+  
 volumes:
   pg-data:
   redis-data:
+  rabbitmq-data:
 
 networks:
   bulletinboard-network:
