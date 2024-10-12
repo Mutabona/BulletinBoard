@@ -1,6 +1,7 @@
 using System.Text;
 using BulletinBoard.API.Controllers;
 using BulletinBoard.API.Middlewares;
+using BulletinBoard.AppServices.Services;
 using BulletinBoard.ComponentRegistrar;
 using BulletinBoard.Contracts.Bulletins;
 using BulletinBoard.Contracts.Categories;
@@ -8,6 +9,7 @@ using BulletinBoard.Contracts.Comments;
 using BulletinBoard.Contracts.Files.Images;
 using BulletinBoard.Contracts.Users;
 using BulletinBoard.DataAccess;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -78,6 +80,21 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.InstanceName = "BulletinBoard_";
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
+builder.Services.AddMassTransit(mt =>
+{
+    mt.AddConsumer<NotificationService>();
+    mt.UsingRabbitMq((context, cfg) =>
+    {
+        //cfg.AutoStart = true;
+        cfg.Host(builder.Configuration.GetSection("RabbitMq").GetValue<string>("Host"), h =>
+        {
+            h.Username(builder.Configuration.GetSection("RabbitMq").GetValue<string>("Username"));
+            h.Password(builder.Configuration.GetSection("RabbitMq").GetValue<string>("Password"));
+        });
+        cfg.ConfigureEndpoints(context);
+    });
 });
 
 builder.Host.UseSerilog((context, provider, config) =>

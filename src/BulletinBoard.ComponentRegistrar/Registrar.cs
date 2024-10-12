@@ -55,9 +55,8 @@ public static class Registrar
         services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
         
         services.AddScoped<DbContext>(s => s.GetRequiredService<ApplicationDbContext>());
-        
+
         services.AddFluentValidation();
-        services.AddMassTransitWithRabbitMq();
         
         return services;
     }
@@ -88,26 +87,6 @@ public static class Registrar
         services.AddValidatorsFromAssemblyContaining<SearchBulletinRequestValidator>();
         services.AddFluentValidationAutoValidation();
 
-        return services;
-    }
-    
-    private static IServiceCollection AddMassTransitWithRabbitMq(this IServiceCollection services)
-    {
-        services.AddMassTransit(mt =>
-        {
-            mt.AddConsumer<NotificationService>();
-            mt.UsingRabbitMq((context, cfg) =>
-            {
-                //cfg.AutoStart = true;
-                cfg.Host("rabbit", h =>
-                {
-                    h.Username("guest");
-                    h.Password("guest");
-                });
-                cfg.ConfigureEndpoints(context);
-            });
-        });
-        
         return services;
     }
 }

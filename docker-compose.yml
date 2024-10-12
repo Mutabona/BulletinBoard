@@ -7,6 +7,7 @@
     environment:
       - ConnectionStrings__DbConnection=Server=postgres;Database=BulletinDb;Username=postgres;Password=password;Port=5432
       - ConnectionStrings__Redis=redis
+      - RabbitMq__RabbitMq=rabbit
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5000:8080"
@@ -41,6 +42,8 @@
       - rabbit
     depends_on:
       - rabbit
+    environment:
+      - RabbitMq__RabbitMq=rabbit
   
   postgres:
     image: postgres
