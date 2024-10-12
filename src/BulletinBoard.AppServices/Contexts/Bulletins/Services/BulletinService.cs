@@ -33,7 +33,8 @@ public class BulletinService : IBulletinService
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<BulletinDto>> GetByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+    public async Task<ICollection<BulletinDto>> GetByCategoryAsync(int take, int? skip, Guid categoryId,
+        CancellationToken cancellationToken)
     {
         using var _ = _logger.BeginScope("Поиск по категории: {id}", categoryId);
         var categories = await _categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
@@ -41,7 +42,7 @@ public class BulletinService : IBulletinService
         _logger.LogInformation("Получена категория с подкатегориями");
         var specification = _specificationBuilder.Build(categoriesIds);
         _logger.LogInformation("Построена спецификация поиска объявлений");
-        var bulletins = await _repository.GetBySpecificationAsync(specification, cancellationToken);
+        var bulletins = await _repository.GetBySpecificationWithPaginationAsync(specification, take, skip,  cancellationToken);
         
         return bulletins;
     }

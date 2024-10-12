@@ -147,19 +147,21 @@ public class BulletinController(
         
         return Ok(bulletins);
     }
-    
+
     /// <summary>
     /// Выполняет поиск объявлений по идентификатору категории (включая дочерние категории)
     /// </summary>
+    /// <param name="skip">Кол-во элементов для пропуска перед получением.</param>
     /// <param name="bulletinCategoryId">Идентификатор категории.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
+    /// <param name="take">Кол-во элементов для получения.</param>
     /// <returns>Коллекция объявлений.</returns>
     [HttpGet("by-category")]
     [ProducesResponseType(typeof(ICollection<BulletinDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetByCategoryAsync(Guid bulletinCategoryId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByCategoryAsync(int take, int? skip, Guid bulletinCategoryId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Поиск объявлений по категории: {id}", bulletinCategoryId);
-        var bulletins = await bulletinService.GetByCategoryAsync(bulletinCategoryId, cancellationToken);
+        var bulletins = await bulletinService.GetByCategoryAsync(take, skip, bulletinCategoryId, cancellationToken);
         
         return Ok(bulletins);
     }
