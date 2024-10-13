@@ -3,7 +3,7 @@
 namespace BulletinBoard.AppServices.Contexts.Categories.Repositories;
 
 /// <summary>
-/// Репозитороий для работы с категориями.
+/// Репозиторий для работы с категориями.
 /// </summary>
 public interface ICategoryRepository
 {
@@ -27,7 +27,7 @@ public interface ICategoryRepository
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
-    /// <param name="cancellationToken">Токен оменты.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
     Task DeleteAsync(Guid categoryId, CancellationToken cancellationToken);
     

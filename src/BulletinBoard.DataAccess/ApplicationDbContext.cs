@@ -1,8 +1,4 @@
 ﻿using BulletinBoard.DataAccess.Configurations;
-using BulletinBoard.Domain.Bulletins.Entity;
-using BulletinBoard.Domain.Categories.Entity;
-using BulletinBoard.Domain.Files.Images.Entity;
-using BulletinBoard.Domain.Users.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BulletinBoard.DataAccess;
@@ -12,6 +8,10 @@ namespace BulletinBoard.DataAccess;
 /// </summary>
 public class ApplicationDbContext : DbContext
 {
+    /// <summary>
+    /// Создаёт экземпляр <see cref="ApplicationDbContext"/>.
+    /// </summary>
+    /// <param name="options">Опции.</param>
     public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

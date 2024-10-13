@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BulletinBoard.DbMigrator;
 
+/// <summary>
+/// Контекст миграции базы данных.
+/// </summary>
 public class MigrationDbContext : ApplicationDbContext
 {
     /// <summary>

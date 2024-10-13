@@ -16,12 +16,19 @@ public class CategoryService : ICategoryService
     
     private const string key = "all_categories";
 
+    /// <summary>
+    /// Создаёт экземпляр <see cref="CategoryService"/>.
+    /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="cache">Кэш.</param>
+    /// <param name="logger">Логгер.</param>
     public CategoryService(ICategoryRepository repository, IDistributedCache cache, ILogger<CategoryService> logger)
     {
         _repository = repository;
         _cache = cache;
         _logger = logger;
     }
+    
     /// <inheritdoc />
     public async Task<Guid> CreateCategoryAsync(CreateCategoryRequest createCategoryRequest, CancellationToken cancellationToken)
     {

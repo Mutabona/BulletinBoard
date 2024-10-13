@@ -27,10 +27,9 @@ public class ImageRepository : IImageRepository
     }
     
     ///<inheritdoc/>
-    public async Task<Guid> AddAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)
+    public async Task<Guid> AddAsync(ImageDto image, CancellationToken cancellationToken)
     {
         var imageEntity = _mapper.Map<Image>(image);
-        imageEntity.BulletinId = bulletinId;
         return await _repository.AddAsync(imageEntity, cancellationToken);
     }
 

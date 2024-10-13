@@ -11,8 +11,9 @@ public interface IImageService
     /// <summary>
     /// Добавляет новое изображение.
     /// </summary>
-    /// <param name="request">Изображение.</param>
+    /// <param name="image">Изображение.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
+    /// <param name="bulletinId">Идентификатор объявления к которому принадлежит изображение.</param>
     /// <returns>Идентификатор добавленного изображения</returns>
     Task<Guid> AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken);
     

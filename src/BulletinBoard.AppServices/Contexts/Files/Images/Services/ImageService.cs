@@ -1,4 +1,5 @@
-﻿using BulletinBoard.AppServices.Contexts.Files.Images.Repositories;
+﻿using AutoMapper;
+using BulletinBoard.AppServices.Contexts.Files.Images.Repositories;
 using BulletinBoard.Contracts.Files.Images;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -10,18 +11,28 @@ public class ImageService : IImageService
 {
     private readonly IImageRepository _repository;
     private readonly ILogger<ImageService> _logger;
+    private readonly IMapper _mapper;
 
-    public ImageService(IImageRepository repository, ILogger<ImageService> logger)
+    /// <summary>
+    /// Создаёт экземпляр <see cref="ImageService"/>.
+    /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="logger">Логгер.</param>
+    /// <param name="mapper">Маппер.</param>
+    public ImageService(IImageRepository repository, ILogger<ImageService> logger, IMapper mapper)
     {
         _repository = repository;
         _logger = logger;
+        _mapper = mapper;
     }
 
     /// <inheritdoc />
     public async Task<Guid> AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken)
     {
         _logger.BeginScope("Добавление изображения к объявлению: {id}", bulletinId);
-        return await _repository.AddAsync(bulletinId, image, cancellationToken);
+        var imageEntity = _mapper.Map<ImageDto>(image);
+        imageEntity.BulletinId = bulletinId;
+        return await _repository.AddAsync(imageEntity, cancellationToken);
     }
 
     /// <inheritdoc />

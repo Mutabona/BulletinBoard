@@ -1,4 +1,5 @@
-﻿using BulletinBoard.AppServices.Contexts.Users.Repositories;
+﻿using AutoMapper;
+using BulletinBoard.AppServices.Contexts.Users.Repositories;
 using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.AppServices.Helpers;
 using BulletinBoard.Contracts.Emails;
@@ -15,13 +16,23 @@ public class UserService : IUserService
     private readonly IJwtService _jwtService;
     private readonly ILogger<UserService> _logger;
     private readonly IPublishEndpoint _publishEndpoint;
+    private readonly IMapper _mapper;
 
-    public UserService(IUserRepository repository, IJwtService jwtService, ILogger<UserService> logger, IPublishEndpoint publishEndpoint)
+    /// <summary>
+    /// Создаёт экземпляр <see cref="UserService"/>.
+    /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="jwtService">Сервис для создания jwt.</param>
+    /// <param name="logger">Логгер.</param>
+    /// <param name="publishEndpoint">Отправитель сообщений в шину.</param>
+    /// <param name="mapper">Маппер.</param>
+    public UserService(IUserRepository repository, IJwtService jwtService, ILogger<UserService> logger, IPublishEndpoint publishEndpoint, IMapper mapper)
     {
         _repository = repository;
         _jwtService = jwtService;
         _logger = logger;
         _publishEndpoint = publishEndpoint;
+        _mapper = mapper;
     }
     
     ///<inheritdoc/>
@@ -52,7 +63,9 @@ public class UserService : IUserService
         if (await IsUniqueEmailAsync(request.Email, cancellationToken))
         {
             request.Password = CryptoHelper.GetBase64Hash(request.Password);
-            var userId =  await _repository.AddAsync(request, cancellationToken);
+            var user = _mapper.Map<UserDto>(request);
+            user.Role = "User";
+            var userId =  await _repository.AddAsync(user, cancellationToken);
 
             await _publishEndpoint.Publish<UserRegistred>(new { email = request.Email }, cancellationToken);
             
@@ -60,7 +73,7 @@ public class UserService : IUserService
         }
         else
         {
-            throw new EmailAlreadyExistsException("Такая почта уже зарегистрирована.");
+            throw new EmailAlreadyExistsException();
         }
     }
 
@@ -77,7 +90,7 @@ public class UserService : IUserService
         }
         catch (EntityNotFoundException)
         {
-            throw new InvalidLoginDataException("Неверное имя пользователя или пароль.");
+            throw new InvalidLoginDataException();
         }
         
         return _jwtService.GetToken(request, user.Id, user.Role);

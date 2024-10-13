@@ -1,15 +1,12 @@
 ﻿namespace BulletinBoard.AppServices.Exceptions;
 
 /// <summary>
-/// Ошибка неверных данных для аутентификации в системе.
+/// Ошибка "Неверное имя пользователя или пароль".
 /// </summary>
-public class InvalidLoginDataException : HumanReadableException
+public class InvalidLoginDataException : Exception
 {
-    public InvalidLoginDataException(string humanReadableMessage) : base(humanReadableMessage)
+    public InvalidLoginDataException() : base("Неверное имя пользователя или пароль.")
     {
-    }
-
-    public InvalidLoginDataException(string message, string humanReadableMessage) : base(message, humanReadableMessage)
-    {
+        
     }
 }

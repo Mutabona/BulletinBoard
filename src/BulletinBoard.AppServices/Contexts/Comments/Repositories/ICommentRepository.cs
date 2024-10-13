@@ -10,12 +10,10 @@ public interface ICommentRepository
     /// <summary>
     /// Сохраняет комментарий.
     /// </summary>
-    /// <param name="bulletinId">Идентификатор объявления.</param>
-    /// <param name="authorId">Идентификатор автора.</param>
-    /// <param name="comment">Комментарий/</param>
+    /// <param name="comment">Комментарий./</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор созданного комментария.</returns>
-    Task<Guid> AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest comment, CancellationToken cancellationToken);
+    Task<Guid> AddCommentAsync(CommentDto comment, CancellationToken cancellationToken);
     
     /// <summary>
     /// Удаляет комментарий.

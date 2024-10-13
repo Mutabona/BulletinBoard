@@ -1,12 +1,12 @@
 ﻿namespace BulletinBoard.AppServices.Exceptions;
 
-public class EmailAlreadyExistsException : HumanReadableException
+/// <summary>
+/// Ошибка "Эта почта уже зарегистрирована".
+/// </summary>
+public class EmailAlreadyExistsException : Exception
 {
-    public EmailAlreadyExistsException(string humanReadableMessage) : base(humanReadableMessage)
+    public EmailAlreadyExistsException() : base("Эта почта уже зарегистрирована.")
     {
-    }
-
-    public EmailAlreadyExistsException(string message, string humanReadableMessage) : base(message, humanReadableMessage)
-    {
+        
     }
 }

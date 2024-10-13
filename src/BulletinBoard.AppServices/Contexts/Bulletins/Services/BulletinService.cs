@@ -1,4 +1,5 @@
-﻿using BulletinBoard.AppServices.Contexts.Bulletins.Builders;
+﻿using AutoMapper;
+using BulletinBoard.AppServices.Contexts.Bulletins.Builders;
 using BulletinBoard.AppServices.Contexts.Bulletins.Repositories;
 using BulletinBoard.AppServices.Contexts.Categories.Services;
 using BulletinBoard.Contracts.Bulletins;
@@ -13,14 +14,24 @@ public class BulletinService : IBulletinService
     private readonly IBulletinSpecificationBuilder _specificationBuilder;
     private readonly ICategoryService _categoryService;
     private readonly ILogger<BulletinService> _logger;
+    private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Создаёт экземпляр <see cref="BulletinService"/>.
+    /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="specificationBuilder">Билдер спецификаций.</param>
+    /// <param name="categoryService">Сервис для работы с категориями.</param>
+    /// <param name="logger">Логгер.</param>
+    /// <param name="mapper">Маппер.</param>
     public BulletinService(IBulletinRepository repository, IBulletinSpecificationBuilder specificationBuilder,
-        ICategoryService categoryService, ILogger<BulletinService> logger)
+        ICategoryService categoryService, ILogger<BulletinService> logger, IMapper mapper)
     {
         _repository = repository;
         _specificationBuilder = specificationBuilder;
         _categoryService = categoryService;
         _logger = logger;
+        _mapper = mapper;
     }
 
     /// <inheritdoc />
@@ -59,14 +70,22 @@ public class BulletinService : IBulletinService
         CancellationToken cancellationToken)
     {
         _logger.BeginScope("Создание объявления по запросу: {@Request}, пользователем с id: {id}", request, ownerId);
-        return await _repository.CreateAsync(ownerId, request, cancellationToken);
+        var bulletin = _mapper.Map<BulletinDto>(request);
+        bulletin.OwnerId = ownerId;
+        
+        return await _repository.CreateAsync(bulletin, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
         _logger.BeginScope("Обновление объявления с id: {id}, по запросу: {@Request}", bulletinId, request);
-        await _repository.UpdateAsync(bulletinId, request, cancellationToken);
+        var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);
+        bulletin.Title = request.Title;
+        bulletin.Description = request.Description;
+        bulletin.CategoryId = request.CategoryId.Value;
+        bulletin.Price = request.Price.Value;
+        await _repository.UpdateAsync(bulletin, cancellationToken);
     }
 
     /// <inheritdoc />

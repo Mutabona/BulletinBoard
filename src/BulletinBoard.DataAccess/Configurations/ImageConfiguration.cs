@@ -12,7 +12,7 @@ public class ImageConfiguration : IEntityTypeConfiguration<Image>
     public void Configure(EntityTypeBuilder<Image> builder)
     {
         builder
-            .ToTable("Images");
+            .ToTable("Image");
         
         builder
             .HasKey(x => x.Id);

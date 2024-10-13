@@ -27,10 +27,9 @@ public class UserRepository : IUserRepository
     }
     
     ///<inheritdoc/>
-    public async Task<Guid> AddAsync(RegisterUserRequest user, CancellationToken cancellationToken)
+    public async Task<Guid> AddAsync(UserDto user, CancellationToken cancellationToken)
     {
         var userEntity = _mapper.Map<User>(user);
-        userEntity.Role = "User";
         return await _repository.AddAsync(userEntity, cancellationToken);
     }
 

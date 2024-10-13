@@ -20,6 +20,7 @@ public class ByUserSpecification : Specification<Bulletin>
         _userId = userId;
     }
 
+    /// <inheritdoc />
     public override Expression<Func<Bulletin, bool>> PredicateExpression => 
         bulletin => bulletin.OwnerId <= _userId;
 }
