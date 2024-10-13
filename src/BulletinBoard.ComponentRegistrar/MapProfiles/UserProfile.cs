@@ -4,6 +4,9 @@ using BulletinBoard.Domain.Users.Entity;
 
 namespace BulletinBoard.ComponentRegistrar.MapProfiles;
 
+/// <summary>
+/// Профиль пользователя.
+/// </summary>
 public class UserProfile : Profile
 {
     public UserProfile()

@@ -31,6 +31,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BulletinBoard.ComponentRegistrar;
 
+/// <summary>
+/// Класс для регистрации компонентов в IoC-контейнере
+/// </summary>
 public static class Registrar
 {
     public static IServiceCollection AddServices(this IServiceCollection services)

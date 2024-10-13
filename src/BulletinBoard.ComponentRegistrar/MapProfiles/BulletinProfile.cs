@@ -4,6 +4,9 @@ using BulletinBoard.Domain.Bulletins.Entity;
 
 namespace BulletinBoard.ComponentRegistrar.MapProfiles;
 
+/// <summary>
+/// Профиль объявления.
+/// </summary>
 public class BulletinProfile : Profile
 {
     public BulletinProfile()

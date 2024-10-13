@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BulletinBoard.DataAccess.Configurations;
 
+/// <summary>
+/// Конфигурация объявления.
+/// </summary>
 public class BulletinConfiguration : IEntityTypeConfiguration<Bulletin>
 {
     public void Configure(EntityTypeBuilder<Bulletin> builder)

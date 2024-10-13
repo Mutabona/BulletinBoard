@@ -15,6 +15,11 @@ public class UserRepository : IUserRepository
     private readonly IRepository<User> _repository;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Создаёт экземпляр <see cref="UserRepository"/>.
+    /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="mapper">Маппер.</param>
     public UserRepository(IRepository<User> repository, IMapper mapper)
     {
         _repository = repository;

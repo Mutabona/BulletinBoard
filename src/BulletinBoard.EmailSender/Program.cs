@@ -10,16 +10,20 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
+        //Получение конфигурации из appsettings.json.
         var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
         var configuration = builder.Build();
+        
         var host = Host.CreateDefaultBuilder(args).Build();
         
+        //Настройка шины.
+        var rabbitMqSettings = configuration.GetSection("RabbitMq");
         var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
         {
-            cfg.Host(configuration.GetSection("RabbitMq").GetValue<string>("Host"), h =>
+            cfg.Host(rabbitMqSettings.GetValue<string>("Host"), h =>
             {
-                h.Username(configuration.GetSection("RabbitMq").GetValue<string>("Username"));
-                h.Password(configuration.GetSection("RabbitMq").GetValue<string>("Password"));
+                h.Username(rabbitMqSettings.GetValue<string>("Username"));
+                h.Password(rabbitMqSettings.GetValue<string>("Password"));
             });
             cfg.ReceiveEndpoint("SendEmail", e =>
             {
@@ -27,6 +31,7 @@ public class Program
             });
         });
         
+        //Запуск шины.
         await busControl.StartAsync(new CancellationToken());
         
         await host.RunAsync();

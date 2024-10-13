@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BulletinBoard.DataAccess.Configurations;
 
+/// <summary>
+/// Конфигурация комментария.
+/// </summary>
 public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)

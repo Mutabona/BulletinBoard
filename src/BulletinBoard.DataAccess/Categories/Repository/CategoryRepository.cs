@@ -14,6 +14,11 @@ public class CategoryRepository : ICategoryRepository
     private readonly IRepository<Category> _repository;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Создаёт экемпляр <see cref="CategoryRepository"/>.
+    /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="mapper">Маппер.</param>
     public CategoryRepository(IRepository<Category> repository, IMapper mapper)
     {
         _repository = repository;

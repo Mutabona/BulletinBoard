@@ -4,6 +4,9 @@ using BulletinBoard.Domain.Comments.Entity;
 
 namespace BulletinBoard.ComponentRegistrar.MapProfiles;
 
+/// <summary>
+/// Профиль комментария.
+/// </summary>
 public class CommentProfile : Profile
 {
     public CommentProfile()

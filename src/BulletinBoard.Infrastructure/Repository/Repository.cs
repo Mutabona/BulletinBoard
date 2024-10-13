@@ -8,9 +8,8 @@ namespace BulletinBoard.Infrastructure.Repository;
 ///<inheritdoc cref="IRepository{TEntity}"/>
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
 {
-    protected DbContext DbContext { get; }
-
-    protected DbSet<TEntity> DbSet { get; }
+    private DbContext DbContext { get; }
+    private DbSet<TEntity> DbSet { get; }
 
     /// <summary>
     /// Создаёт экземпляр <see cref="Repository"/>.

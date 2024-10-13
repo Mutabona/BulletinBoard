@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace BulletinBoard.ComponentRegistrar.MapProfiles;
 
+/// <summary>
+/// Профиль изображения.
+/// </summary>
 public class ImageProfile : Profile
 {
     public ImageProfile()

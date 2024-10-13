@@ -82,16 +82,17 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
 
+var rabbitMqSettings = builder.Configuration.GetSection("RabbitMq");
 builder.Services.AddMassTransit(mt =>
 {
     mt.AddConsumer<NotificationService>();
     mt.UsingRabbitMq((context, cfg) =>
     {
         //cfg.AutoStart = true;
-        cfg.Host(builder.Configuration.GetSection("RabbitMq").GetValue<string>("Host"), h =>
+        cfg.Host(rabbitMqSettings.GetValue<string>("Host"), h =>
         {
-            h.Username(builder.Configuration.GetSection("RabbitMq").GetValue<string>("Username"));
-            h.Password(builder.Configuration.GetSection("RabbitMq").GetValue<string>("Password"));
+            h.Username(rabbitMqSettings.GetValue<string>("Username"));
+            h.Password(rabbitMqSettings.GetValue<string>("Password"));
         });
         cfg.ConfigureEndpoints(context);
     });

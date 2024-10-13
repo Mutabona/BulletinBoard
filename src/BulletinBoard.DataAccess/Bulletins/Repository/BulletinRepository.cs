@@ -17,8 +17,10 @@ public class BulletinRepository : IBulletinRepository
     private readonly IMapper _mapper;
     
     /// <summary>
-    /// Инициализирует экземпляр <see cref="BulletinRepository"/>.
+    /// Создаёт экземпляр <see cref="BulletinRepository"/>.
     /// </summary>
+    /// <param name="repository">Репозиторий.</param>
+    /// <param name="mapper">Маппер.</param>
     public BulletinRepository(IRepository<Bulletin> repository, IMapper mapper)
     {
         _repository = repository;
