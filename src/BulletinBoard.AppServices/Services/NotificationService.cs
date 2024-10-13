@@ -15,6 +15,10 @@ namespace BulletinBoard.AppServices.Services;
 /// <param name="publishEndpoint">Отправитель сообщений в шину.</param>
 public class NotificationService(IUserService userService, IBulletinService bulletinService, ICommentService commentService, IPublishEndpoint publishEndpoint) : IConsumer<CommentAdded>, IConsumer<UserRegistred>, IConsumer<UserLoggedIn>
 {
+    /// <summary>
+    /// Обрабатывает событие добавления комментария.
+    /// </summary>
+    /// <param name="context">Контекст события.</param>
     public async Task Consume(ConsumeContext<CommentAdded> context)
     {
         var comment = await commentService.GetCommentByIdAsync(context.Message.Id, context.CancellationToken);
@@ -29,6 +33,10 @@ public class NotificationService(IUserService userService, IBulletinService bull
         }, context.CancellationToken);
     }
 
+    /// <summary>
+    /// Обрабатывает событие добавления пользователя.
+    /// </summary>
+    /// <param name="context">Контекст события.</param>
     public async Task Consume(ConsumeContext<UserRegistred> context)
     {
         await publishEndpoint.Publish<SendEmail>(new
@@ -39,6 +47,10 @@ public class NotificationService(IUserService userService, IBulletinService bull
         }, context.CancellationToken);
     }
 
+    /// <summary>
+    /// Обрабатывает событие входа в систему.
+    /// </summary>
+    /// <param name="context">Контекст события.</param>
     public async Task Consume(ConsumeContext<UserLoggedIn> context)
     {
         await publishEndpoint.Publish<SendEmail>(new

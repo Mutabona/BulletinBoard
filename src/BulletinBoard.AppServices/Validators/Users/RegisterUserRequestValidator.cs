@@ -26,16 +26,14 @@ public class RegisterUserRequestValidator : AbstractValidator<RegisterUserReques
             .WithMessage("Пароль не может быть пустым.")
             .MinimumLength(2)
             .MaximumLength(50);
-        
+
         RuleFor(x => x.Email)
             .NotEmpty()
             .WithMessage("Логин не может быть пустым.")
             .EmailAddress()
             .WithMessage("Некорректный адрес.")
             .MinimumLength(2)
-            .MaximumLength(50)
-            .Must(ValidEmail)
-            .WithMessage("Адрес уже зарегистрирован");
+            .MaximumLength(50);
 
         RuleFor(x => x.Name)
             .NotEmpty()
@@ -55,11 +53,5 @@ public class RegisterUserRequestValidator : AbstractValidator<RegisterUserReques
         if (Regex.IsMatch(phone, "[0-9]{11}")) return true;
 
         return false;
-    }
-
-    private bool ValidEmail(string? email)
-    {
-        if (string.IsNullOrEmpty(email)) return false;
-        return _userService.IsUniqueEmailAsync(email, CancellationToken.None).GetAwaiter().GetResult();
     }
 }

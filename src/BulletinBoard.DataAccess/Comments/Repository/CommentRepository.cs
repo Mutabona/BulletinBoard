@@ -13,11 +13,9 @@ namespace BulletinBoard.DataAccess.Comments.Repository;
 public class CommentRepository(IRepository<Comment> repository, IMapper mapper) : ICommentRepository
 {
     ///<inheritdoc/>
-    public async Task<Guid> AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest comment, CancellationToken cancellationToken)
+    public async Task<Guid> AddCommentAsync(CommentDto comment, CancellationToken cancellationToken)
     {
         var entity = mapper.Map<Comment>(comment);
-        entity.AuthorId = authorId;
-        entity.BulletinId = bulletinId;
         
         return await repository.AddAsync(entity, cancellationToken);
     }

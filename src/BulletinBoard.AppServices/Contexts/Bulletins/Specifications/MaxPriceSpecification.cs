@@ -20,6 +20,7 @@ public class MaxPriceSpecification : Specification<Bulletin>
         _maxPrice = maxPrice;
     }
 
+    /// <inheritdoc />
     public override Expression<Func<Bulletin, bool>> PredicateExpression => 
         bulletin => bulletin.Price <= _maxPrice;
 }

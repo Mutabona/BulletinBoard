@@ -60,7 +60,7 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     /// <returns></returns>
     [HttpDelete("{categoryId}")]
     [Authorize(Roles = "Admin")]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -69,7 +69,7 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
         logger.LogInformation("Удаление категории: {id}", categoryId);
         await categoryService.DeleteCategoryAsync(categoryId, cancellationToken);
 
-        return Ok();
+        return NoContent();
     }
 
     /// <summary>
@@ -83,14 +83,8 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)
     {
-        try
-        {
-            await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound("Категория не найдена.");
-        }
+        await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
+
         logger.LogInformation("Получение категории с подкатегориями: {id}", categoryId);
         var categories = await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
         

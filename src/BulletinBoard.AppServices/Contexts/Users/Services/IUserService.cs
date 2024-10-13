@@ -23,9 +23,9 @@ public interface IUserService
     Task<UserDto> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken);
     
     /// <summary>
-    /// Получает пользователя по логину.
+    /// Получает пользователя по почте.
     /// </summary>
-    /// <param name="login">Логин.</param>
+    /// <param name="email">Почта.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Модель пользователя.</returns>
     Task<UserDto> GetUserByEmailAsync(string email, CancellationToken cancellationToken);

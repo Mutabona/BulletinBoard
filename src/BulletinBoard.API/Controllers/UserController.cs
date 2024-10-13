@@ -26,6 +26,7 @@ public class UserController(IUserService userService, ILogger<UserController> lo
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteUser(Guid userId, CancellationToken cancellationToken)
     {
         logger.LogInformation("Удаление пользователя: {id}", userId);

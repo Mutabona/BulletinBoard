@@ -79,15 +79,7 @@ public class BulletinController(
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> UpdateBulletinAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
-        BulletinDto bulletin;
-        try
-        {
-            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound("Объявление не найдено.");
-        }
+        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         
         var userId = GetCurrentUserId();
         

@@ -44,20 +44,18 @@ public interface IBulletinRepository
     /// <summary>
     /// Создаёт объявление по модели запроса.
     /// </summary>
-    /// <param name="ownerId">Идентификатор владельца.</param>
     /// <param name="bulletin">Объявление.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор созданного объявления.</returns>
-    Task<Guid> CreateAsync(Guid ownerId, CreateBulletinRequest bulletin, CancellationToken cancellationToken);
+    Task<Guid> CreateAsync(BulletinDto bulletin, CancellationToken cancellationToken);
 
     /// <summary>
     /// Обновляет объявление.
     /// </summary>
-    /// <param name="bulletinId">Идентификатор объявления.</param>
-    /// <param name="request">Запрос на обновление.</param>
+    /// <param name="bulletin">Объявление.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
-    Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken);
+    Task UpdateAsync(BulletinDto bulletin, CancellationToken cancellationToken);
     
     /// <summary>
     /// Удаляет объявление по идентификатору..

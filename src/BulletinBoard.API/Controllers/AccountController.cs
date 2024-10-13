@@ -24,6 +24,7 @@ public class AccountController(IUserService userService, ILogger<UserController>
     [HttpPost("register")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Conflict)]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterUserRequest model, CancellationToken cancellationToken)
     {
         logger.LogInformation("Запрос на регистрацию: {@Request}", model);
@@ -41,19 +42,14 @@ public class AccountController(IUserService userService, ILogger<UserController>
     [HttpPost("login")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> LoginAsync([FromBody] LoginUserRequest model, CancellationToken cancellationToken)
     {
         string token;
         logger.LogInformation("Запрос на вход: {@Request}", model);
-        try
-        {
-            token = await userService.LoginAsync(model, cancellationToken);
-        }
-        catch (InvalidLoginDataException e)
-        {
-            return BadRequest(new { message = e.Message });
-        }
         
+            token = await userService.LoginAsync(model, cancellationToken);
+       
         return Ok(token);
     }
 }

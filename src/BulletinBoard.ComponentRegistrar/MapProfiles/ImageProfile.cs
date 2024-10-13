@@ -12,13 +12,14 @@ public class ImageProfile : Profile
 {
     public ImageProfile()
     {
-        CreateMap<IFormFile, Image>(MemberList.None)
+        CreateMap<IFormFile, ImageDto>(MemberList.None)
             .ForMember(s => s.Id, map => map.MapFrom(src => Guid.NewGuid()))
             .ForMember(s => s.Content, map => map.MapFrom(src => GetBytes(src)))
             .ForMember(s => s.ContentType, map => map.MapFrom(src => src.ContentType))
-            .ForMember(s => s.Length, map => map.MapFrom(src => src.Length))
-            .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
+            .ForMember(s => s.Length, map => map.MapFrom(src => src.Length));
             
+        CreateMap<ImageDto, Image>(MemberList.None)
+            .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
         
         CreateMap<Image, ImageDto>(MemberList.None);
     }

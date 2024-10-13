@@ -20,6 +20,7 @@ public class MinPriceSpecification : Specification<Bulletin>
         _minPrice = minPrice;
     }
     
+    /// <inheritdoc />
     public override Expression<Func<Bulletin, bool>> PredicateExpression => 
         bulletin => bulletin.Price >= _minPrice;
 }

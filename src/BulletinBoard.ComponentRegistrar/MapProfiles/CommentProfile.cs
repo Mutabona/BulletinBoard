@@ -11,9 +11,11 @@ public class CommentProfile : Profile
 {
     public CommentProfile()
     {
-        CreateMap<AddCommentRequest, Comment>(MemberList.None)
+        CreateMap<AddCommentRequest, CommentDto>(MemberList.None)
             .ForMember(x => x.Id, map => map.MapFrom(src => Guid.NewGuid()))
             .ForMember(x => x.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
+
+        CreateMap<CommentDto, Comment>(MemberList.None);
         
         CreateMap<Comment, CommentDto>()
             .ForMember(x => x.AuthorName, map => map.MapFrom(src => src.Author.Name));

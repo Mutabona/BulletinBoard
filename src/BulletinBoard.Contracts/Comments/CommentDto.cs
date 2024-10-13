@@ -6,6 +6,16 @@
 public class CommentDto
 {
     /// <summary>
+    /// Идентификатор.
+    /// </summary>
+    public Guid Id { get; set; }
+    
+    /// <summary>
+    /// Дата создания сущности.
+    /// </summary>
+    public DateTime? CreatedAt { get; set; }
+    
+    /// <summary>
     /// Идентификатор автора комментария.
     /// </summary>
     public Guid AuthorId { get; set; }

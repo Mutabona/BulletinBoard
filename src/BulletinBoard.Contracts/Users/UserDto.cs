@@ -38,5 +38,5 @@ public class UserDto
     /// <summary>
     /// Роль в системе.
     /// </summary>
-    public string Role { get; private set; }
+    public string Role { get; set; }
 }

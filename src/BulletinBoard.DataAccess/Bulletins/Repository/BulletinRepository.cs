@@ -76,24 +76,18 @@ public class BulletinRepository : IBulletinRepository
     }
 
     ///<inheritdoc/>
-    public async Task<Guid> CreateAsync(Guid ownerId, CreateBulletinRequest bulletin,
+    public async Task<Guid> CreateAsync(BulletinDto bulletin,
         CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<Bulletin>(bulletin);
-        entity.OwnerId = ownerId;
-        await _repository.AddAsync(entity, cancellationToken);
 
-        return entity.Id;
+        return await _repository.AddAsync(entity, cancellationToken);
     }
 
     ///<inheritdoc/>
-    public async Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
+    public async Task UpdateAsync(BulletinDto bulletinDto, CancellationToken cancellationToken)
     {
-        var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);
-        bulletin.Title = request.Title;
-        bulletin.Description = request.Description;
-        bulletin.CategoryId = request.CategoryId.Value;
-        bulletin.Price = request.Price.Value;
+        var bulletin = _mapper.Map<Bulletin>(bulletinDto);
         await _repository.UpdateAsync(bulletin, cancellationToken);
     }
 

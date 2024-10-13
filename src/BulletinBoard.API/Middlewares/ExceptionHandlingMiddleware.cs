@@ -68,17 +68,6 @@ public class ExceptionHandlingMiddleware
 
     private object CreateApiError(Exception exception, HttpContext context, IHostEnvironment environment)
     {
-        if (environment.IsDevelopment())
-        {
-            return new ApiError
-            {
-                Code = ((int)HttpStatusCode.InternalServerError).ToString(),
-                Message = exception.Message,
-                Description = exception.StackTrace,
-                TraceId = context.TraceIdentifier,
-            };
-        }
-        
         return exception switch
         {
             HumanReadableException humanReadableException => new HumanReadableError
@@ -94,10 +83,22 @@ public class ExceptionHandlingMiddleware
                 Message = "Сущность не была найдена.",
                 TraceId = context.TraceIdentifier,
             },
+            EmailAlreadyExistsException => new ApiError
+            {
+                Code = ((int)HttpStatusCode.Conflict).ToString(),
+                Message = "Эта почта уже зарегистрирована.",
+                TraceId = context.TraceIdentifier,
+            },
+            InvalidLoginDataException invalidLoginDataException => new ApiError
+            {
+                Code = ((int)HttpStatusCode.Unauthorized).ToString(),
+                Message = invalidLoginDataException.Message,
+                TraceId = context.TraceIdentifier,
+            },
             _ => new ApiError
             {
                 Code = ((int)HttpStatusCode.InternalServerError).ToString(),
-                Message = "Произошла непредвиденая ошибка.",
+                Message = "Произошла непредвиденная ошибка.",
                 TraceId = context.TraceIdentifier,
             }
         };
@@ -108,6 +109,8 @@ public class ExceptionHandlingMiddleware
         return exception switch
         {
             EntityNotFoundException => HttpStatusCode.NotFound,
+            InvalidLoginDataException => HttpStatusCode.Unauthorized,
+            EmailAlreadyExistsException => HttpStatusCode.Conflict,
             _ => HttpStatusCode.InternalServerError,
         };
     }

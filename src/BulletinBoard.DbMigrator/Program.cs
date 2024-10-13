@@ -17,7 +17,7 @@ public class Program
         
         await MigrateAsync(host.Services);
     }
-
+    
     private static async Task MigrateAsync(IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();

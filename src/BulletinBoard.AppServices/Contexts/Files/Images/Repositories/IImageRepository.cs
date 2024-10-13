@@ -11,11 +11,10 @@ public interface IImageRepository
     /// <summary>
     /// Сохраняет изображение.
     /// </summary>
-    /// <param name="bulletinId">Идентификатор объявления.</param>
     /// <param name="image">Изображение.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор изображения.</returns>
-    Task<Guid> AddAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken);
+    Task<Guid> AddAsync(ImageDto image, CancellationToken cancellationToken);
     
     /// <summary>
     /// Удаляет изображение по идентификатору.
