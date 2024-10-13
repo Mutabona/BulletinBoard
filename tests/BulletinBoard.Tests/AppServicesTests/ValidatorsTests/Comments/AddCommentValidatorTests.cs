@@ -26,6 +26,7 @@ public class AddCommentValidatorTests
     [Fact]
     public void ValidateAddComment_WithValidData_ShouldReturnTrue()
     {
+        //Arrange
         var text = _fixture.Create<string>();
 
         var source = _fixture
@@ -33,8 +34,10 @@ public class AddCommentValidatorTests
             .With(x => x.Text, text)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
         
+        //Assert
         result.IsValid.Should().BeTrue();
         result.ShouldNotHaveValidationErrorFor(x => x.Text);
     }
@@ -45,14 +48,17 @@ public class AddCommentValidatorTests
     [Fact]
     public void ValidateAddComment_WithInvalidData_ShouldReturnFalse()
     {
+        //Arrange
         var text = "";
         var source = new AddCommentRequest
         {
             Text = text,
         };
         
+        //Act
         var result = _validator.TestValidate(source);
         
+        //Assert
         result.IsValid.Should().BeFalse();
         result
             .ShouldHaveValidationErrorFor(x => x.Text)

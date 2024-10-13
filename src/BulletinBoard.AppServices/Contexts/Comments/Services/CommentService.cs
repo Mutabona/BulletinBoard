@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace BulletinBoard.AppServices.Contexts.Comments.Services;
 
 ///<inheritdoc cref="ICommentService"/>
-public class CommentService(ICommentRepository repository, ILogger<CommentService> logger, IMapper mapper, IPublishEndpoint publishEndpoint) : ICommentService
+public class CommentService(ICommentRepository repository, ILogger<CommentService> logger, IMapper mapper, IPublishEndpoint publishEndpoint, TimeProvider timeProvider) : ICommentService
 {
     /// <inheritdoc />
     public async Task<Guid> AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest request,
@@ -19,6 +19,8 @@ public class CommentService(ICommentRepository repository, ILogger<CommentServic
         var comment = mapper.Map<CommentDto>(request);
         comment.BulletinId = bulletinId;
         comment.AuthorId = authorId;
+        comment.Id = Guid.NewGuid();
+        comment.CreatedAt = timeProvider.GetUtcNow().DateTime;
         var commentId = await repository.AddCommentAsync(comment, cancellationToken);
 
         await publishEndpoint.Publish<CommentAdded>(new {id = commentId}, cancellationToken);

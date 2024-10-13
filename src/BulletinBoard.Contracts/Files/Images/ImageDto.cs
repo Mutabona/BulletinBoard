@@ -11,6 +11,11 @@ public class ImageDto
     public Guid Id { get; set; }
     
     /// <summary>
+    /// Дата добавления изображения.
+    /// </summary>
+    public DateTime CreatedAt { get; set; }
+    
+    /// <summary>
     /// Идентификатор объявления с изображением.
     /// </summary>
     public Guid BulletinId { get; set; }

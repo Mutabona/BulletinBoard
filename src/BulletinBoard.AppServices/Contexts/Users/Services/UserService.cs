@@ -17,6 +17,7 @@ public class UserService : IUserService
     private readonly ILogger<UserService> _logger;
     private readonly IPublishEndpoint _publishEndpoint;
     private readonly IMapper _mapper;
+    private readonly TimeProvider _timeProvider;
 
     /// <summary>
     /// Создаёт экземпляр <see cref="UserService"/>.
@@ -26,13 +27,15 @@ public class UserService : IUserService
     /// <param name="logger">Логгер.</param>
     /// <param name="publishEndpoint">Отправитель сообщений в шину.</param>
     /// <param name="mapper">Маппер.</param>
-    public UserService(IUserRepository repository, IJwtService jwtService, ILogger<UserService> logger, IPublishEndpoint publishEndpoint, IMapper mapper)
+    /// <param name="timeProvider">Провайдер для работы со временем.</param>
+    public UserService(IUserRepository repository, IJwtService jwtService, ILogger<UserService> logger, IPublishEndpoint publishEndpoint, IMapper mapper, TimeProvider timeProvider)
     {
         _repository = repository;
         _jwtService = jwtService;
         _logger = logger;
         _publishEndpoint = publishEndpoint;
         _mapper = mapper;
+        _timeProvider = timeProvider;
     }
     
     ///<inheritdoc/>
@@ -65,6 +68,8 @@ public class UserService : IUserService
             request.Password = CryptoHelper.GetBase64Hash(request.Password);
             var user = _mapper.Map<UserDto>(request);
             user.Role = "User";
+            user.Id = Guid.NewGuid();
+            user.CreatedAt = _timeProvider.GetUtcNow().DateTime;
             var userId =  await _repository.AddAsync(user, cancellationToken);
 
             await _publishEndpoint.Publish<UserRegistred>(new { email = request.Email }, cancellationToken);

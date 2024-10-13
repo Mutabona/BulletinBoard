@@ -11,16 +11,11 @@ namespace BulletinBoard.AppServices.Validators.Users;
 /// </summary>
 public class RegisterUserRequestValidator : AbstractValidator<RegisterUserRequest>
 {
-    private readonly IUserService _userService;
-    
     /// <summary>
     /// Создаёт экземпляр <see cref="RegisterUserRequestValidator"/>.
     /// </summary>
-    /// <param name="userService">Сервис для работы с пользователями.</param>
-    public RegisterUserRequestValidator(IUserService userService)
+    public RegisterUserRequestValidator()
     {
-        _userService = userService;
-        
         RuleFor(x => x.Password)
             .NotEmpty()
             .WithMessage("Пароль не может быть пустым.")

@@ -27,6 +27,7 @@ public class LoginUserRequestValidatorTests
     [Fact]
     public void ValidateLoginUserRequest_WithValidData_ShouldReturnTrue()
     {
+        //Arrange
         var email = "barabaz@gmail.com";
         var password = _fixture.Create<string>();
         
@@ -36,8 +37,10 @@ public class LoginUserRequestValidatorTests
             .With(x => x.Password, password)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
         
+        //Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Email);
         result.ShouldNotHaveValidationErrorFor(x => x.Password);
     }
@@ -48,6 +51,7 @@ public class LoginUserRequestValidatorTests
     [Fact]
     public void ValidateLoginUserRequest_WithInvalidEmail_ShouldReturnFalse()
     {
+        //Arrange
         var email = _fixture.Create<string>();
         var password = _fixture.Create<string>();
         
@@ -57,8 +61,10 @@ public class LoginUserRequestValidatorTests
             .With(x => x.Password, password)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Password);
         result.ShouldHaveValidationErrorFor(x => x.Email).WithErrorMessage("Некорректный адрес.");
     }
@@ -69,6 +75,7 @@ public class LoginUserRequestValidatorTests
     [Fact]
     public void ValidateLoginUserRequest_WithNullEmail_ShouldReturnFalse()
     {
+        //Arrange
         string email = null;
         var password = _fixture.Create<string>();
         
@@ -78,8 +85,10 @@ public class LoginUserRequestValidatorTests
             .With(x => x.Password, password)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
         
+        //Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Password);
         result.ShouldHaveValidationErrorFor(x => x.Email).WithErrorMessage("Логин не может быть пустым.");
     }
@@ -90,6 +99,7 @@ public class LoginUserRequestValidatorTests
     [Fact]
     public void ValidateLoginUserRequest_WithEmptyPassword_ShouldReturnFalse()
     {
+        //Arrange
         var email = "barabaz@gmail.com";
         string password = null;
         
@@ -99,8 +109,10 @@ public class LoginUserRequestValidatorTests
             .With(x => x.Password, password)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Email);
         result.ShouldHaveValidationErrorFor(x => x.Password).WithErrorMessage("Пароль не может быть пустым.");
     }
@@ -111,6 +123,7 @@ public class LoginUserRequestValidatorTests
     [Fact]
     public void ValidateLoginUserRequest_WithInvalidPassword_ShouldReturnFalse()
     {
+        //Arrange
         var email = "barabaz@gmail.com";
         string password = "1111";
         
@@ -120,8 +133,10 @@ public class LoginUserRequestValidatorTests
             .With(x => x.Password, password)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Email);
         result.ShouldHaveValidationErrorFor(x => x.Password);
     }

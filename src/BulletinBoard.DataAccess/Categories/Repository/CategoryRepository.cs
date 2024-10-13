@@ -26,7 +26,7 @@ public class CategoryRepository : ICategoryRepository
     }
     
     ///<inheritdoc/>
-    public async Task<Guid> AddCategoryAsync(CreateCategoryRequest category, CancellationToken cancellationToken)
+    public async Task<Guid> AddCategoryAsync(CategoryDto category, CancellationToken cancellationToken)
     {
         var categoryEntity = _mapper.Map<Category>(category);
         return await _repository.AddAsync(categoryEntity, cancellationToken);

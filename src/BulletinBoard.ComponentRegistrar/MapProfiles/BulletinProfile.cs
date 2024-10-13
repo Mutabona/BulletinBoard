@@ -11,9 +11,7 @@ public class BulletinProfile : Profile
 {
     public BulletinProfile()
     {
-        CreateMap<CreateBulletinRequest, BulletinDto>(MemberList.None)
-            .ForMember(s => s.Id, map => map.MapFrom(src => Guid.NewGuid()))
-            .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
+        CreateMap<CreateBulletinRequest, BulletinDto>(MemberList.None);
 
         CreateMap<BulletinDto, Bulletin>(MemberList.None);
 

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using AutoMapper;
 using BulletinBoard.AppServices.Contexts.Categories.Repositories;
 using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Categories;
@@ -13,6 +14,8 @@ public class CategoryService : ICategoryService
     private readonly ICategoryRepository _repository;
     private readonly IDistributedCache _cache;
     private readonly ILogger<CategoryService> _logger;
+    private readonly IMapper _mapper;
+    private readonly TimeProvider _timeProvider;
     
     private const string key = "all_categories";
 
@@ -22,18 +25,25 @@ public class CategoryService : ICategoryService
     /// <param name="repository">Репозиторий.</param>
     /// <param name="cache">Кэш.</param>
     /// <param name="logger">Логгер.</param>
-    public CategoryService(ICategoryRepository repository, IDistributedCache cache, ILogger<CategoryService> logger)
+    /// <param name="mapper">Маппер.</param>
+    /// <param name="timeProvider">Провайдер для работы со временем.</param>
+    public CategoryService(ICategoryRepository repository, IDistributedCache cache, ILogger<CategoryService> logger, IMapper mapper, TimeProvider timeProvider)
     {
         _repository = repository;
         _cache = cache;
         _logger = logger;
+        _mapper = mapper;
+        _timeProvider = timeProvider;
     }
     
     /// <inheritdoc />
     public async Task<Guid> CreateCategoryAsync(CreateCategoryRequest createCategoryRequest, CancellationToken cancellationToken)
     {
         _logger.BeginScope("Добавление категории: {@Request}", createCategoryRequest);
-        var categoryId = await _repository.AddCategoryAsync(createCategoryRequest, cancellationToken);
+        var category = _mapper.Map<CategoryDto>(createCategoryRequest);
+        category.Id = Guid.NewGuid();
+        category.CreatedAt = _timeProvider.GetUtcNow().DateTime;
+        var categoryId = await _repository.AddCategoryAsync(category, cancellationToken);
         _logger.LogInformation("Очистка кеша по ключу: {key}", key);
         await _cache.RemoveAsync(key, cancellationToken);
         return categoryId;

@@ -11,10 +11,8 @@ public class CategoryProfile : Profile
 {
     public CategoryProfile()
     {
-        CreateMap<CreateCategoryRequest, Category>(MemberList.None)
-            .ForMember(x => x.Id, map => map.MapFrom(src => Guid.NewGuid()))
-            .ForMember(s => s.CreatedAt, map => map.MapFrom(src => DateTime.UtcNow));
+        CreateMap<CreateCategoryRequest, CategoryDto>(MemberList.None);
         
-        CreateMap<Category, CategoryDto>(MemberList.None);
+        CreateMap<Category, CategoryDto>(MemberList.None).ReverseMap();
     }
 }

@@ -29,6 +29,7 @@ public class UpdateBulletinValidatorTests
     [Fact]
     public void ValidateCreateBulletinRequest_WithValidData_ShouldReturnTrue()
     {
+        //Arrange
         var title = _fixture.Create<string>();
         var description = _fixture.Create<string>();
         var price = _fixture.Create<decimal>();
@@ -45,8 +46,10 @@ public class UpdateBulletinValidatorTests
         _categoryServiceMock
             .Setup(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None)).ReturnsAsync(true);
 
+        //Act
         var result = _validator.TestValidate(source);
         
+        //Assert
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None), Times.Once);
         result.ShouldNotHaveValidationErrorFor(x => x.Title);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
@@ -60,6 +63,7 @@ public class UpdateBulletinValidatorTests
     [Fact]
     public void ValidateCreateBulletinRequest_WithNullCategoryId_ShouldReturnFalse()
     {
+        //Arrange
         var title = _fixture.Create<string>();
         var description = _fixture.Create<string>();
         var price = _fixture.Create<decimal>();
@@ -73,8 +77,10 @@ public class UpdateBulletinValidatorTests
             .With(x => x.CategoryId, categoryId)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Title);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
         result.ShouldNotHaveValidationErrorFor(x => x.Price);
@@ -87,6 +93,7 @@ public class UpdateBulletinValidatorTests
     [Fact]
     public void ValidateCreateBulletinRequest_WithInvalidCategoryId_ShouldReturnFalse()
     {
+        //Arrange
         var title = _fixture.Create<string>();
         var description = _fixture.Create<string>();
         var price = _fixture.Create<decimal>();
@@ -103,8 +110,10 @@ public class UpdateBulletinValidatorTests
         _categoryServiceMock
             .Setup(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None)).ReturnsAsync(false);
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None), Times.Once);
         result.ShouldNotHaveValidationErrorFor(x => x.Title);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
@@ -118,6 +127,7 @@ public class UpdateBulletinValidatorTests
     [Fact]
     public void ValidateCreateBulletinRequest_WithInvalidTitle_ShouldReturnFalse()
     {
+        //Arrange
         var title = "";
         string? description = null;
         var price = _fixture.Create<decimal>();
@@ -134,8 +144,10 @@ public class UpdateBulletinValidatorTests
         _categoryServiceMock
             .Setup(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None)).ReturnsAsync(true);
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Asser
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None), Times.Once);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
         result.ShouldNotHaveValidationErrorFor(x => x.Price);
@@ -149,6 +161,7 @@ public class UpdateBulletinValidatorTests
     [Fact]
     public void ValidateCreateBulletinRequest_WithInvalidPrice_ShouldReturnFalse()
     {
+        //Arrange
         var title = _fixture.Create<string>();
         string? description = null;
         var price = 0;
@@ -164,8 +177,10 @@ public class UpdateBulletinValidatorTests
         _categoryServiceMock
             .Setup(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None)).ReturnsAsync(true);
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None), Times.Once);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
         result.ShouldNotHaveValidationErrorFor(x => x.CategoryId);
@@ -179,6 +194,7 @@ public class UpdateBulletinValidatorTests
     [Fact]
     public void ValidateCreateBulletinRequest_WithNullPrice_ShouldReturnFalse()
     {
+        //Arrange
         var title = _fixture.Create<string>();
         string? description = null;
         decimal? price = null;
@@ -194,8 +210,10 @@ public class UpdateBulletinValidatorTests
         _categoryServiceMock
             .Setup(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None)).ReturnsAsync(true);
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(categoryId, CancellationToken.None), Times.Once);
         result.ShouldNotHaveValidationErrorFor(x => x.Description);
         result.ShouldNotHaveValidationErrorFor(x => x.CategoryId);

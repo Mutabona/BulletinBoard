@@ -15,6 +15,7 @@ public class BulletinService : IBulletinService
     private readonly ICategoryService _categoryService;
     private readonly ILogger<BulletinService> _logger;
     private readonly IMapper _mapper;
+    private readonly TimeProvider _timeProvider;
 
     /// <summary>
     /// Создаёт экземпляр <see cref="BulletinService"/>.
@@ -24,14 +25,16 @@ public class BulletinService : IBulletinService
     /// <param name="categoryService">Сервис для работы с категориями.</param>
     /// <param name="logger">Логгер.</param>
     /// <param name="mapper">Маппер.</param>
+    /// <param name="timeProvider">Провайдер времени.</param>
     public BulletinService(IBulletinRepository repository, IBulletinSpecificationBuilder specificationBuilder,
-        ICategoryService categoryService, ILogger<BulletinService> logger, IMapper mapper)
+        ICategoryService categoryService, ILogger<BulletinService> logger, IMapper mapper, TimeProvider timeProvider)
     {
         _repository = repository;
         _specificationBuilder = specificationBuilder;
         _categoryService = categoryService;
         _logger = logger;
         _mapper = mapper;
+        _timeProvider = timeProvider;
     }
 
     /// <inheritdoc />
@@ -72,6 +75,8 @@ public class BulletinService : IBulletinService
         _logger.BeginScope("Создание объявления по запросу: {@Request}, пользователем с id: {id}", request, ownerId);
         var bulletin = _mapper.Map<BulletinDto>(request);
         bulletin.OwnerId = ownerId;
+        bulletin.Id = Guid.NewGuid();
+        bulletin.CreatedAt = _timeProvider.GetUtcNow().DateTime;
         
         return await _repository.CreateAsync(bulletin, cancellationToken);
     }

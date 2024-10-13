@@ -12,6 +12,7 @@ public class ImageService : IImageService
     private readonly IImageRepository _repository;
     private readonly ILogger<ImageService> _logger;
     private readonly IMapper _mapper;
+    private readonly TimeProvider _timeProvider;
 
     /// <summary>
     /// Создаёт экземпляр <see cref="ImageService"/>.
@@ -19,11 +20,13 @@ public class ImageService : IImageService
     /// <param name="repository">Репозиторий.</param>
     /// <param name="logger">Логгер.</param>
     /// <param name="mapper">Маппер.</param>
-    public ImageService(IImageRepository repository, ILogger<ImageService> logger, IMapper mapper)
+    /// <param name="timeProvider">Провайдер для работы со временем.</param>
+    public ImageService(IImageRepository repository, ILogger<ImageService> logger, IMapper mapper, TimeProvider timeProvider)
     {
         _repository = repository;
         _logger = logger;
         _mapper = mapper;
+        _timeProvider = timeProvider;
     }
 
     /// <inheritdoc />
@@ -32,6 +35,8 @@ public class ImageService : IImageService
         _logger.BeginScope("Добавление изображения к объявлению: {id}", bulletinId);
         var imageEntity = _mapper.Map<ImageDto>(image);
         imageEntity.BulletinId = bulletinId;
+        imageEntity.Id = Guid.NewGuid();
+        imageEntity.CreatedAt = _timeProvider.GetUtcNow().DateTime;
         return await _repository.AddAsync(imageEntity, cancellationToken);
     }
 

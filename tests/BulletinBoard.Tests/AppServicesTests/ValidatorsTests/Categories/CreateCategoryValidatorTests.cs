@@ -30,6 +30,7 @@ public class CreateCategoryValidatorTests
     [Fact]
     public void Validate_ValidCreateCategory_ShouldReturnTrue()
     {
+        //Arrange
         var name = _fixture.Create<string>();
         var parentCategoryId = _fixture.Create<Guid>();
 
@@ -42,8 +43,10 @@ public class CreateCategoryValidatorTests
             .Setup(x => x.IsCategoryExistsAsync(parentCategoryId, CancellationToken.None)).ReturnsAsync(true);
 
 
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(parentCategoryId, CancellationToken.None), Times.Once);
         result.ShouldNotHaveValidationErrorFor(x => x.Name);
         result.ShouldNotHaveValidationErrorFor(x => x.ParentCategoryId);
@@ -56,6 +59,7 @@ public class CreateCategoryValidatorTests
     [Fact]
     public void Validate_InvalidParentCategoryId_ShouldReturnFalse()
     {
+        //Arrange
         var name = _fixture.Create<string>();
         var parentCategoryId = _fixture.Create<Guid>();
         
@@ -67,8 +71,10 @@ public class CreateCategoryValidatorTests
         _categoryServiceMock
             .Setup(x => x.IsCategoryExistsAsync(parentCategoryId, CancellationToken.None)).ReturnsAsync(false);
         
+        //Act
         var result = _validator.TestValidate(source);
 
+        //Assert
         _categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(parentCategoryId, CancellationToken.None), Times.Once);
         result.ShouldHaveValidationErrorFor(x => x.ParentCategoryId).WithErrorMessage("Неверная родительская категория.");
         result.ShouldNotHaveValidationErrorFor(x => x.Name);
@@ -81,6 +87,7 @@ public class CreateCategoryValidatorTests
     [Fact]
     public void Validate_InvalidName_ShouldReturnFalse()
     {
+        //Arrange
         var name = "";
         Guid? parentCategoryId = null;
         
@@ -89,9 +96,10 @@ public class CreateCategoryValidatorTests
             .With(x => x.ParentCategoryId, parentCategoryId)
             .Create();
         
+        //Act
         var result = _validator.TestValidate(source);
         
-        //_categoryServiceMock.Verify(x => x.IsCategoryExistsAsync(parentCategoryId.Value, CancellationToken.None), Times.Never);
+        //Assert
         result.ShouldHaveValidationErrorFor(x => x.Name);
         result.ShouldNotHaveValidationErrorFor(x => x.ParentCategoryId);
         result.IsValid.Should().BeFalse();

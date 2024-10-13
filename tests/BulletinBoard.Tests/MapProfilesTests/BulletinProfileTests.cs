@@ -8,6 +8,7 @@ using BulletinBoard.Domain.Comments.Entity;
 using BulletinBoard.Domain.Files.Images.Entity;
 using BulletinBoard.Domain.Users.Entity;
 using FluentAssertions;
+using Microsoft.Extensions.Time.Testing;
 
 namespace BulletinBoard.Tests.MapProfilesTests;
 
@@ -19,9 +20,12 @@ public class BulletinProfileTests
     private readonly MapperConfiguration _configurationProfider;
     private readonly IMapper _mapper;
     private readonly Fixture _fixture;
+    private readonly FakeTimeProvider _timeProvider;
     
     public BulletinProfileTests()
     {
+        _timeProvider = new FakeTimeProvider();
+        _timeProvider.SetUtcNow(DateTime.UtcNow);
         _configurationProfider = new MapperConfiguration(delegate(IMapperConfigurationExpression configure)
         {
             configure.AddProfile(new BulletinProfile());
@@ -37,13 +41,15 @@ public class BulletinProfileTests
     }
 
     [Fact]
-    public void BulletinProfile_CreateBulletinRequest_To_Bulletin()
+    public void BulletinProfile_CreateBulletinRequest_To_BulletinDto()
     {
+        //Arrange
         var title = _fixture.Create<string>();
         var description = _fixture.Create<string>();
         var categoryId = _fixture.Create<Guid>();
         var price = _fixture.Create<decimal>();
         price *= price; //Чтобы цена была всегда положительна.
+        var createdAt = _timeProvider.GetUtcNow().DateTime;
         
         var source = _fixture
             .Build<CreateBulletinRequest>()
@@ -53,8 +59,10 @@ public class BulletinProfileTests
             .With(x => x.CategoryId, categoryId)
             .Create();
         
-        var result = _mapper.Map<CreateBulletinRequest, Bulletin>(source);
+        //Act
+        var result = _mapper.Map<CreateBulletinRequest, BulletinDto>(source);
         
+        //Assert
         result.Should().NotBeNull();
         result.Should().BeEquivalentTo(
             new
@@ -63,6 +71,7 @@ public class BulletinProfileTests
                 description,
                 price,
                 categoryId,
+                createdAt
             },
             opt => opt.ExcludingMissingMembers());
     }
@@ -70,6 +79,7 @@ public class BulletinProfileTests
     [Fact]
     public void BulletinProfile_Bulletin_To_BulletinDto()
     {
+        //Arrange
         var id = _fixture.Create<Guid>();
         var title = _fixture.Create<string>();
         var description = _fixture.Create<string>();
@@ -109,8 +119,10 @@ public class BulletinProfileTests
             .With(x => x.Comments, new List<Comment>())
             .Create();
         
+        //Act
         var result = _mapper.Map<Bulletin, BulletinDto>(source);
         
+        //Assert
         result.Should().NotBeNull();
         result.Should().BeEquivalentTo(
             new
@@ -123,6 +135,49 @@ public class BulletinProfileTests
                 description,
                 categoryId,
                 category,
+                price,
+            },
+            opt => opt.ExcludingMissingMembers());
+    }
+
+    [Fact]
+    public void BulletinProfile_BulletinDto_To_Bulletin()
+    {
+        //Arrange
+        var id = _fixture.Create<Guid>();
+        var title = _fixture.Create<string>();
+        var description = _fixture.Create<string>();
+        var price = _fixture.Create<decimal>();
+        var createdAt = _fixture.Create<DateTime>();
+        var categoryId = _fixture.Create<Guid>();
+        var ownerId = _fixture.Create<Guid>();
+        price *= price; //Чтобы цена была всегда положительна.
+        
+        var source = _fixture
+            .Build<BulletinDto>()
+            .With(x => x.Id, id)
+            .With(x => x.CreatedAt, createdAt)
+            .With(x => x.OwnerId, ownerId)
+            .With(x => x.Title, title)
+            .With(x => x.Description, description)
+            .With(x => x.CategoryId, categoryId)
+            .With(x => x.Price, price)
+            .Create();
+        
+        //Act
+        var result = _mapper.Map<BulletinDto, Bulletin>(source);
+        
+        //Assert
+        result.Should().NotBeNull();
+        result.Should().BeEquivalentTo(
+            new
+            {
+                id,
+                createdAt,
+                ownerId,
+                title,
+                description,
+                categoryId,
                 price,
             },
             opt => opt.ExcludingMissingMembers());

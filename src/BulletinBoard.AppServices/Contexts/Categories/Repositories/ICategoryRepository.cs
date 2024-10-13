@@ -13,7 +13,7 @@ public interface ICategoryRepository
     /// <param name="category">Категория.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор созданной категории.</returns>
-    Task<Guid> AddCategoryAsync(CreateCategoryRequest category, CancellationToken cancellationToken);
+    Task<Guid> AddCategoryAsync(CategoryDto category, CancellationToken cancellationToken);
     
     /// <summary>
     /// Получение категории по айди.
