@@ -55,29 +55,8 @@ public class CommentController(ICommentService commentService, ILogger<CommentCo
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteCommentAsync(Guid bulletinId, Guid commentId, CancellationToken cancellationToken)
     {
-        try
-        {
-            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound("Объявление не найдено.");
-        }
-
-        CommentDto comment;
-        try
-        {
-            comment = await commentService.GetCommentByIdAsync(commentId, cancellationToken);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound("Комментарий не найден.");
-        }
-        
-        if (bulletinId != comment.BulletinId) return BadRequest();
-        
         logger.LogInformation("Удаление комментария: {commentId}, у объявления: {bulletinId}", commentId, bulletinId);
-        await commentService.DeleteCommentAsync(commentId, cancellationToken);
+        await commentService.DeleteCommentAsync(commentId, bulletinId, cancellationToken);
         return NoContent();
     }
 
@@ -92,15 +71,6 @@ public class CommentController(ICommentService commentService, ILogger<CommentCo
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetBulletinsCommentsAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        try
-        {
-            await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound("Объявление не найдено.");
-        }
-        
         logger.LogInformation("Поиск комментариев по объявлению: {id}", bulletinId);
         var comments = await commentService.GetByBulletinIdAsync(bulletinId, cancellationToken);
         

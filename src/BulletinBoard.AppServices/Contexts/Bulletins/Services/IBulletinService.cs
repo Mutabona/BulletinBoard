@@ -45,19 +45,21 @@ public interface IBulletinService
     /// <summary>
     /// Обновляет объявление.
     /// </summary>
+    /// <param name="userId">Идентификатор пользователя отправившего запрос.</param>
     /// <param name="request">Запрос на обновление объявления.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <param name="bulletinId">Идентификатор объявления.</param>
     /// <returns></returns>
-    Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken);
-    
+    Task UpdateAsync(Guid bulletinId, Guid userId, UpdateBulletinRequest request, CancellationToken cancellationToken);
+
     /// <summary>
     /// Удаляет объявление по идентификатору.
     /// </summary>
-    /// <param name="id">Идентификатор.</param>
+    /// <param name="bulletinId">Идентификатор объявления.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
-    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+    Task DeleteAsync(Guid bulletinId, Guid userId, CancellationToken cancellationToken);
     
     /// <summary>
     /// Получает все объявления.

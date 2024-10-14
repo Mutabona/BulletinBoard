@@ -83,8 +83,6 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)
     {
-        await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
-
         logger.LogInformation("Получение категории с подкатегориями: {id}", categoryId);
         var categories = await categoryService.GetCategoryWithSubcategoriesAsync(categoryId, cancellationToken);
         
@@ -100,6 +98,7 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     [ProducesResponseType(typeof(ICollection<CategoryDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllCategoriesAsync(CancellationToken cancellationToken)
     {
+        logger.LogInformation("Получение всех категорий.");
         var categories = await categoryService.GetAllCategoriesAsync(cancellationToken);
         
         return Ok(categories);

@@ -2,6 +2,8 @@
 using BulletinBoard.AppServices.Contexts.Bulletins.Builders;
 using BulletinBoard.AppServices.Contexts.Bulletins.Repositories;
 using BulletinBoard.AppServices.Contexts.Categories.Services;
+using BulletinBoard.AppServices.Contexts.Users.Services;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Bulletins;
 using Microsoft.Extensions.Logging;
 
@@ -16,6 +18,7 @@ public class BulletinService : IBulletinService
     private readonly ILogger<BulletinService> _logger;
     private readonly IMapper _mapper;
     private readonly TimeProvider _timeProvider;
+    private readonly IUserService _userService;
 
     /// <summary>
     /// Создаёт экземпляр <see cref="BulletinService"/>.
@@ -26,8 +29,9 @@ public class BulletinService : IBulletinService
     /// <param name="logger">Логгер.</param>
     /// <param name="mapper">Маппер.</param>
     /// <param name="timeProvider">Провайдер времени.</param>
+    /// <param name="userService">Сервис для работы с пользователями.</param>
     public BulletinService(IBulletinRepository repository, IBulletinSpecificationBuilder specificationBuilder,
-        ICategoryService categoryService, ILogger<BulletinService> logger, IMapper mapper, TimeProvider timeProvider)
+        ICategoryService categoryService, ILogger<BulletinService> logger, IMapper mapper, TimeProvider timeProvider, IUserService userService)
     {
         _repository = repository;
         _specificationBuilder = specificationBuilder;
@@ -35,6 +39,7 @@ public class BulletinService : IBulletinService
         _logger = logger;
         _mapper = mapper;
         _timeProvider = timeProvider;
+        _userService = userService;
     }
 
     /// <inheritdoc />
@@ -82,10 +87,11 @@ public class BulletinService : IBulletinService
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid bulletinId, Guid userId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
         _logger.BeginScope("Обновление объявления с id: {id}, по запросу: {@Request}", bulletinId, request);
         var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);
+        if (bulletin.OwnerId != userId) throw new ForbiddenException();
         bulletin.Title = request.Title;
         bulletin.Description = request.Description;
         bulletin.CategoryId = request.CategoryId.Value;
@@ -94,10 +100,13 @@ public class BulletinService : IBulletinService
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public async Task DeleteAsync(Guid bulletinId, Guid userId, CancellationToken cancellationToken)
     {
-        _logger.BeginScope("Удаление объявления: {id}", id);
-        await _repository.DeleteAsync(id, cancellationToken);
+        var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);
+        var user = await _userService.GetUserByIdAsync(userId, cancellationToken);
+        if (!(bulletin.OwnerId == user.Id || user.Role == "Admin")) throw new ForbiddenException();
+        _logger.BeginScope("Удаление объявления: {id}", bulletinId);
+        await _repository.DeleteAsync(bulletinId, cancellationToken);
     }
 
     /// <inheritdoc />

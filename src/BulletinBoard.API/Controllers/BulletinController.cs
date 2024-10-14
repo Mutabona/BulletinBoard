@@ -74,14 +74,10 @@ public class BulletinController(
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> UpdateBulletinAsync(Guid bulletinId, UpdateBulletinRequest request, CancellationToken cancellationToken)
     {
-        var bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        
         var userId = GetCurrentUserId();
         
-        if (bulletin.OwnerId != userId) return Forbid();
-        
         logger.LogInformation("Обновление объявления с id: {id}, по запросу: {@Request}", bulletinId, request);
-        await bulletinService.UpdateAsync(bulletinId, request, cancellationToken);
+        await bulletinService.UpdateAsync(bulletinId, userId, request, cancellationToken);
         
         return Ok();
     }
@@ -100,20 +96,9 @@ public class BulletinController(
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public async Task<IActionResult> DeleteBulletinAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
-        BulletinDto bulletin;
-        try
-        {
-            bulletin = await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        }
-        catch (EntityNotFoundException)
-        {
-            return NotFound("Объявление не найдено.");
-        }
-        
-        if (!(bulletin.OwnerId == GetCurrentUserId() || GetCurrentUserRole() == "Admin")) return Forbid();
-        
+        var userId = GetCurrentUserId();
         logger.LogInformation("Удаление объявления: {id}", bulletinId);
-        await bulletinService.DeleteAsync(bulletinId, cancellationToken);
+        await bulletinService.DeleteAsync(bulletinId, userId, cancellationToken);
         
         return NoContent();
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BulletinBoard.AppServices.Contexts.Bulletins.Services;
 using BulletinBoard.AppServices.Contexts.Comments.Repositories;
+using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.Contracts.Comments;
 using BulletinBoard.Contracts.Emails;
 using MassTransit;
@@ -9,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace BulletinBoard.AppServices.Contexts.Comments.Services;
 
 ///<inheritdoc cref="ICommentService"/>
-public class CommentService(ICommentRepository repository, 
+public class CommentService(
+    ICommentRepository repository, 
     ILogger<CommentService> logger, 
     IMapper mapper, 
     IPublishEndpoint publishEndpoint, 
@@ -36,8 +38,12 @@ public class CommentService(ICommentRepository repository,
     }
 
     /// <inheritdoc />
-    public async Task DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken)
+    public async Task DeleteCommentAsync(Guid commentId, Guid bulletinId, CancellationToken cancellationToken)
     {
+        var comment = await repository.GetCommentByIdAsync(commentId, cancellationToken);
+
+        if (comment.BulletinId != bulletinId) throw new ConflictException();
+        
         logger.BeginScope("Удаление комментария: {commentId}", commentId);
         await repository.DeleteCommentAsync(commentId, cancellationToken);
     }
@@ -46,6 +52,7 @@ public class CommentService(ICommentRepository repository,
     public async Task<ICollection<CommentDto>> GetByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)
     {
         logger.BeginScope("Поиск комментариев по объявлению: {id}", bulletinId);
+        await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         return await repository.GetCommentsByBulletinIdAsync(bulletinId, cancellationToken);
     }
 
