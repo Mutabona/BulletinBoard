@@ -31,4 +31,64 @@ public class ImageController(IImageService imageService, ILogger<ImageController
         
         return File(image.Content, image.ContentType);
     }
+    
+    /// <summary>
+    /// Добавляет изображение к объявлению.
+    /// </summary>
+    /// <param name="bulletinId">Идентификатор объявления.</param>
+    /// <param name="file">Изображение.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>Идентификатор добавленного изображения.</returns>
+    [Authorize]
+    [HttpPost("{bulletinId}")]
+    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+    public async Task<IActionResult> UploadImageAsync(Guid bulletinId, IFormFile file, CancellationToken cancellationToken)
+    {
+        var userId = GetCurrentUserId();
+        logger.LogInformation("Добавление изображения к объявлению: {id}", bulletinId);
+        var fileId = await imageService.AddImageAsync(bulletinId, userId, file, cancellationToken);
+        return StatusCode((int)HttpStatusCode.Created, fileId.ToString());
+    }
+
+    /// <summary>
+    /// Возвращает идентификаторы всех изображений по идентификатору объявления.
+    /// </summary>
+    /// <param name="bulletinId">Идентификатор объявления.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>Коллекция идентификаторов изображений.</returns>
+    [HttpGet("{bulletinId}/ids")]
+    [ProducesResponseType(typeof(ICollection<Guid>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> GetImagesAsync(Guid bulletinId, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Поиск изображений по объявлению: {id}", bulletinId);
+        var imageIds = await imageService.GetImageIdsByBulletinIdAsync(bulletinId, cancellationToken);
+        return Ok(imageIds);
+    }
+
+    /// <summary>
+    /// Удаляет изображение из объявления по идентификатору.
+    /// </summary>
+    /// <param name="imageId">Идентификатор изображения.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <param name="bulletinId">Идентификатор объявления с изображением.</param>
+    /// <returns></returns>
+    [Authorize]
+    [HttpDelete("{bulletinId}/{imageId}")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+    public async Task<IActionResult> DeleteAsync(Guid bulletinId, Guid imageId, CancellationToken cancellationToken)
+    {
+        var userId = GetCurrentUserId();
+        logger.LogInformation("Удаление изображения: {imageId}, объявления: {bulletinId}", imageId, bulletinId);
+        await imageService.DeleteImageAsync(bulletinId, imageId, userId, cancellationToken);
+        
+        return NoContent();
+    }
 }

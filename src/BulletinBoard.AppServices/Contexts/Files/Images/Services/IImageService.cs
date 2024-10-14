@@ -11,19 +11,22 @@ public interface IImageService
     /// <summary>
     /// Добавляет новое изображение.
     /// </summary>
+    /// <param name="userId">Идентификатор пользователя, который добавляет изображение.</param>
     /// <param name="image">Изображение.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <param name="bulletinId">Идентификатор объявления к которому принадлежит изображение.</param>
     /// <returns>Идентификатор добавленного изображения</returns>
-    Task<Guid> AddImageAsync(Guid bulletinId, IFormFile image, CancellationToken cancellationToken);
-    
+    Task<Guid> AddImageAsync(Guid bulletinId, Guid userId, IFormFile image, CancellationToken cancellationToken);
+
     /// <summary>
     /// Удаляет изображение.
     /// </summary>
+    /// <param name="bulletinId">Идентификатор объявления, к которому принадлежит изображение.</param>
     /// <param name="imageId">Идентификатор изображения.</param>
+    /// <param name="userId">Идентификатор пользователя отправившего запрос.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
-    Task DeleteImageAsync(Guid imageId, CancellationToken cancellationToken);
+    Task DeleteImageAsync(Guid bulletinId, Guid imageId, Guid userId, CancellationToken cancellationToken);
     
     /// <summary>
     /// Возвращает изображения по объявлению.

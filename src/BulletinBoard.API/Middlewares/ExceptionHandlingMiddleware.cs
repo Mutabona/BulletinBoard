@@ -95,6 +95,18 @@ public class ExceptionHandlingMiddleware
                 Message = invalidLoginDataException.Message,
                 TraceId = context.TraceIdentifier,
             },
+            ForbiddenException => new ApiError
+            {
+                Code = ((int)HttpStatusCode.Forbidden).ToString(),
+                Message = "Нет доступа.",
+                TraceId = context.TraceIdentifier,
+            },
+            ConflictException => new ApiError()
+            {
+                Code = ((int)HttpStatusCode.Conflict).ToString(),
+                Message = "Конфликт.",
+                TraceId = context.TraceIdentifier,
+            },
             _ => new ApiError
             {
                 Code = ((int)HttpStatusCode.InternalServerError).ToString(),
@@ -111,6 +123,8 @@ public class ExceptionHandlingMiddleware
             EntityNotFoundException => HttpStatusCode.NotFound,
             InvalidLoginDataException => HttpStatusCode.Unauthorized,
             EmailAlreadyExistsException => HttpStatusCode.Conflict,
+            ForbiddenException => HttpStatusCode.Forbidden,
+            ConflictException => HttpStatusCode.Conflict,
             _ => HttpStatusCode.InternalServerError,
         };
     }
