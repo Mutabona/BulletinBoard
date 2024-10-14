@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BulletinBoard.AppServices.Contexts.Bulletins.Services;
 using BulletinBoard.AppServices.Contexts.Comments.Repositories;
 using BulletinBoard.Contracts.Comments;
 using BulletinBoard.Contracts.Emails;
@@ -8,12 +9,18 @@ using Microsoft.Extensions.Logging;
 namespace BulletinBoard.AppServices.Contexts.Comments.Services;
 
 ///<inheritdoc cref="ICommentService"/>
-public class CommentService(ICommentRepository repository, ILogger<CommentService> logger, IMapper mapper, IPublishEndpoint publishEndpoint, TimeProvider timeProvider) : ICommentService
+public class CommentService(ICommentRepository repository, 
+    ILogger<CommentService> logger, 
+    IMapper mapper, 
+    IPublishEndpoint publishEndpoint, 
+    TimeProvider timeProvider,
+    IBulletinService bulletinService) : ICommentService
 {
     /// <inheritdoc />
     public async Task<Guid> AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest request,
         CancellationToken cancellationToken)
     {
+        await bulletinService.FindByIdAsync(bulletinId, cancellationToken);
         logger.BeginScope("Добавление комментария по запросу: {@Request}, к объявлению {id}, пользователем: {authorId}", request, bulletinId, authorId);
         
         var comment = mapper.Map<CommentDto>(request);

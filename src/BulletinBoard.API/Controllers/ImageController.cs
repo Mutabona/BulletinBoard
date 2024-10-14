@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BulletinBoard.API.Controllers;
 
 /// <summary>
-/// Файлы.
+/// Изображения.
 /// </summary>
 [ApiController]
 [Route("[controller]")]
