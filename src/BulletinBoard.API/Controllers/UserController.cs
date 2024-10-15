@@ -59,7 +59,7 @@ public class UserController(IUserService userService, ILogger<UserController> lo
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция моделей пользователя.</returns>
     [Authorize(Roles = "Admin")]
-    [HttpGet("all")]
+    [HttpGet]
     [ProducesResponseType(typeof(ICollection<UserDto>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

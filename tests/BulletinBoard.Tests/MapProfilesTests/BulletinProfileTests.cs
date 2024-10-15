@@ -135,6 +135,7 @@ public class BulletinProfileTests
                 description,
                 categoryId,
                 category,
+                categoryName,
                 price,
             },
             opt => opt.ExcludingMissingMembers());

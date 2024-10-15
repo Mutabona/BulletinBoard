@@ -60,7 +60,7 @@ public class BulletinController(
     }
 
     /// <summary>
-    /// Изменяет объявление по модели.
+    /// Изменяет объявление по модели запроса.
     /// </summary>
     /// <param name="request">Запрос на обновление объявления.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
@@ -121,7 +121,7 @@ public class BulletinController(
     }
 
     /// <summary>
-    /// Выполняет поиск объявлений по идентификатору категории (включая дочерние категории)
+    /// Выполняет поиск объявлений по идентификатору категории (включая дочерние категории).
     /// </summary>
     /// <param name="skip">Кол-во элементов для пропуска перед получением.</param>
     /// <param name="bulletinCategoryId">Идентификатор категории.</param>
@@ -143,7 +143,7 @@ public class BulletinController(
     /// </summary>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция объявлений.</returns>
-    [HttpGet("all")]
+    [HttpGet]
     [ProducesResponseType(typeof(ICollection<BulletinDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetBulletinsAsync(CancellationToken cancellationToken)
     {

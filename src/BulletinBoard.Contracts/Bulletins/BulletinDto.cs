@@ -12,7 +12,7 @@ public class BulletinDto
     /// <summary>
     /// Идентификатор.
     /// </summary>
-    public Guid? Id { get; set; }
+    public Guid Id { get; set; }
    
     /// <summary>
     /// Дата создания сущности.

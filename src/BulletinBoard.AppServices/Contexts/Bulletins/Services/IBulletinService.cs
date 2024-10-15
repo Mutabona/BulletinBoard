@@ -67,4 +67,13 @@ public interface IBulletinService
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция моделей объявлений.</returns>
     Task<ICollection<BulletinDto>> GetAllAsync(CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Проверяет является ли пользователь владельцем объявления.
+    /// </summary>
+    /// <param name="bulletinId">Идентификатор объявления.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <returns>True, если является, false, если не является.</returns>
+    Task<bool> IsUserBulletinsOwnerAsync(Guid bulletinId, Guid userId, CancellationToken cancellationToken);
 }

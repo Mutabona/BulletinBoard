@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/3)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/3)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (3/3)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (3/3)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -264,15 +264,16 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">15</div><div class="line-content">    /// Создаёт спецификацию отсечения по пользователю &lt;see cref=&quot;ByUserSpecification&quot;/&gt;.</div></div>
 <div class="line"><div class="line-number">16</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">    /// &lt;param name=&quot;userId&quot;&gt;Идентификатор пользователя.&lt;/param&gt;</div></div>
-<div class="line not-hit"><div class="line-number">18</div><div class="line-content">    <div data-hover-target=".s-499" data-activate-target=".s-499" class="statement s-499 not-hit"><div class="statement-info s-499"><div>Id: 499</div><div>Hits: 0</div></div>public ByUserSpecification(Guid userId)</div></div></div>
+<div class="line hit"><div class="line-number">18</div><div class="line-content">    <div data-hover-target=".s-503" data-activate-target=".s-503" class="statement s-503 hit"><div class="statement-info s-503"><div>Id: 503</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>public ByUserSpecification(Guid userId)</div></div></div>
 <div class="line"><div class="line-number">19</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-500" data-activate-target=".s-500" class="statement s-500 not-hit"><div class="statement-info s-500"><div>Id: 500</div><div>Hits: 0</div></div>_userId = userId;</div></div></div>
+<div class="line hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-504" data-activate-target=".s-504" class="statement s-504 hit"><div class="statement-info s-504"><div>Id: 504</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>_userId = userId;</div></div></div>
 <div class="line"><div class="line-number">21</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">22</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">    public override Expression&lt;Func&lt;Bulletin, bool&gt;&gt; PredicateExpression =&gt; </div></div>
-<div class="line not-hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-501" data-activate-target=".s-501" class="statement s-501 not-hit"><div class="statement-info s-501"><div>Id: 501</div><div>Hits: 0</div></div>bulletin =&gt; bulletin.OwnerId &lt;= _userId</div>;</div></div>
-<div class="line"><div class="line-number">25</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    public override Expression&lt;Func&lt;Bulletin, bool&gt;&gt; PredicateExpression =&gt; </div></div>
+<div class="line hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-505" data-activate-target=".s-505" class="statement s-505 hit"><div class="statement-info s-505"><div>Id: 505</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>bulletin =&gt; bulletin.OwnerId &lt;= _userId</div>;</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

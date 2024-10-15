@@ -81,7 +81,7 @@ public class BulletinService : IBulletinService
         var bulletin = _mapper.Map<BulletinDto>(request);
         bulletin.OwnerId = ownerId;
         bulletin.Id = Guid.NewGuid();
-        bulletin.CreatedAt = _timeProvider.GetUtcNow().DateTime;
+        bulletin.CreatedAt = _timeProvider.GetUtcNow().UtcDateTime;
         
         return await _repository.CreateAsync(bulletin, cancellationToken);
     }
@@ -114,5 +114,13 @@ public class BulletinService : IBulletinService
     {
         _logger.BeginScope("Получение всех объявлений");
         return await _repository.GetAllAsync(cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> IsUserBulletinsOwnerAsync(Guid bulletinId, Guid userId, CancellationToken cancellationToken)
+    {
+        var bulletin = await _repository.GetByIdAsync(bulletinId, cancellationToken);
+        if (bulletin.OwnerId != userId) return false;
+        return true;
     }
 }

@@ -235,10 +235,10 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/9)</td></tr>
-<tr><th>Statements Coverage</th><td class="red">0,00 % (0/9)</td></tr>
-<tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/7)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">0,00 % (0/7)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
 <h2>Code</h2>
@@ -262,7 +262,7 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">13</div><div class="line-content">[ApiController]</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">[Route(&quot;[controller]&quot;)]</div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">[ProducesResponseType((int)HttpStatusCode.InternalServerError)]</div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-92" data-activate-target=".s-92" class="statement s-92 not-hit"><div class="statement-info s-92"><div>Id: 92</div><div>Hits: 0</div></div>AccountController(IUserService userService, ILogger&lt;UserController&gt; logger)</div> : BaseController</div></div>
+<div class="line not-hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-109" data-activate-target=".s-109" class="statement s-109 not-hit"><div class="statement-info s-109"><div>Id: 109</div><div>Hits: 0</div></div>AccountController(IUserService userService, ILogger&lt;UserController&gt; logger)</div> : BaseController</div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">{</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">19</div><div class="line-content">    /// Регистрация пользователя.</div></div>
@@ -270,43 +270,38 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">21</div><div class="line-content">    /// &lt;param name=&quot;model&quot;&gt;Модель регистрации пользователя.&lt;/param&gt;</div></div>
 <div class="line"><div class="line-number">22</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены операции.&lt;/param&gt;</div></div>
 <div class="line"><div class="line-number">23</div><div class="line-content">    /// &lt;returns&gt;Идентификатор нового пользователя.&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">    [HttpPost(&quot;register&quot;)]</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    [HttpPost]</div></div>
 <div class="line"><div class="line-number">25</div><div class="line-content">    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]</div></div>
 <div class="line"><div class="line-number">26</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.BadRequest)]</div></div>
-<div class="line"><div class="line-number">27</div><div class="line-content">    public async Task&lt;IActionResult&gt; RegisterAsync([FromBody] RegisterUserRequest model, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">28</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-100" data-activate-target=".s-100" class="statement s-100 not-hit"><div class="statement-info s-100"><div>Id: 100</div><div>Hits: 0</div></div>logger.LogInformation(&quot;Запрос на регистрацию: {@Request}&quot;, model);</div></div></div>
-<div class="line not-hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-101" data-activate-target=".s-101" class="statement s-101 not-hit"><div class="statement-info s-101"><div>Id: 101</div><div>Hits: 0</div></div>var id = await userService.RegisterAsync(model, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">31</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-102" data-activate-target=".s-102" class="statement s-102 not-hit"><div class="statement-info s-102"><div>Id: 102</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created, id.ToString());</div></div></div>
-<div class="line"><div class="line-number">33</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">34</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">27</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Conflict)]</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    public async Task&lt;IActionResult&gt; RegisterAsync([FromBody] RegisterUserRequest model, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">29</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-113" data-activate-target=".s-113" class="statement s-113 not-hit"><div class="statement-info s-113"><div>Id: 113</div><div>Hits: 0</div></div>logger.LogInformation(&quot;Запрос на регистрацию: {@Request}&quot;, model);</div></div></div>
+<div class="line not-hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-114" data-activate-target=".s-114" class="statement s-114 not-hit"><div class="statement-info s-114"><div>Id: 114</div><div>Hits: 0</div></div>var id = await userService.RegisterAsync(model, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-115" data-activate-target=".s-115" class="statement s-115 not-hit"><div class="statement-info s-115"><div>Id: 115</div><div>Hits: 0</div></div>return StatusCode((int)HttpStatusCode.Created, id.ToString());</div></div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">35</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">36</div><div class="line-content">    /// Аутентификация пользователя</div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">    /// &lt;param name=&quot;model&quot;&gt;Запрос на аутентификацию.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">39</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
-<div class="line"><div class="line-number">40</div><div class="line-content">    /// &lt;returns&gt;JWT&lt;/returns&gt;</div></div>
-<div class="line"><div class="line-number">41</div><div class="line-content">    [HttpPost(&quot;login&quot;)]</div></div>
-<div class="line"><div class="line-number">42</div><div class="line-content">    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]</div></div>
-<div class="line"><div class="line-number">43</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.BadRequest)]</div></div>
-<div class="line"><div class="line-number">44</div><div class="line-content">    public async Task&lt;IActionResult&gt; LoginAsync([FromBody] LoginUserRequest model, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">45</div><div class="line-content">    {</div></div>
-<div class="line"><div class="line-number">46</div><div class="line-content">        string token;</div></div>
-<div class="line not-hit"><div class="line-number">47</div><div class="line-content">        <div data-hover-target=".s-93" data-activate-target=".s-93" class="statement s-93 not-hit"><div class="statement-info s-93"><div>Id: 93</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>logger.LogInformation(&quot;Запрос на вход: {@Request}&quot;, model);</div></div></div>
-<div class="line"><div class="line-number">48</div><div class="line-content">        try</div></div>
-<div class="line"><div class="line-number">49</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">50</div><div class="line-content">            <div data-hover-target=".s-96" data-activate-target=".s-96" class="statement s-96 not-hit"><div class="statement-info s-96"><div>Id: 96</div><div>Hits: 0</div></div>token = await userService.LoginAsync(model, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">51</div><div class="line-content">        }</div></div>
-<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-97" data-activate-target=".s-97" class="statement s-97 not-hit"><div class="statement-info s-97"><div>Id: 97</div><div>Hits: 0</div></div>catch (InvalidLoginDataException e)</div></div></div>
-<div class="line"><div class="line-number">53</div><div class="line-content">        {</div></div>
-<div class="line not-hit"><div class="line-number">54</div><div class="line-content">            <div data-hover-target=".s-98" data-activate-target=".s-98" class="statement s-98 not-hit"><div class="statement-info s-98"><div>Id: 98</div><div>Hits: 0</div></div>return BadRequest(new { message = e.Message });</div></div></div>
-<div class="line"><div class="line-number">55</div><div class="line-content">        }</div></div>
-<div class="line"><div class="line-number">56</div><div class="line-content">        </div></div>
-<div class="line not-hit"><div class="line-number">57</div><div class="line-content">        <div data-hover-target=".s-99" data-activate-target=".s-99" class="statement s-99 not-hit"><div class="statement-info s-99"><div>Id: 99</div><div>Hits: 0</div></div>return Ok(token);</div></div></div>
-<div class="line"><div class="line-number">58</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">59</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">    /// Аутентификация пользователя</div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    /// &lt;param name=&quot;model&quot;&gt;Запрос на аутентификацию.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    /// &lt;param name=&quot;cancellationToken&quot;&gt;Токен отмены.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    /// &lt;returns&gt;JWT&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">    [HttpPost(&quot;auth-token&quot;)]</div></div>
+<div class="line"><div class="line-number">43</div><div class="line-content">    [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]</div></div>
+<div class="line"><div class="line-number">44</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.BadRequest)]</div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]</div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">    public async Task&lt;IActionResult&gt; LoginAsync([FromBody] LoginUserRequest model, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content">        <div data-hover-target=".s-110" data-activate-target=".s-110" class="statement s-110 not-hit"><div class="statement-info s-110"><div>Id: 110</div><div>Hits: 0</div></div>logger.LogInformation(&quot;Запрос на вход: {@Request}&quot;, model);</div></div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content">        <div data-hover-target=".s-111" data-activate-target=".s-111" class="statement s-111 not-hit"><div class="statement-info s-111"><div>Id: 111</div><div>Hits: 0</div></div>var token = await userService.LoginAsync(model, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">       </div></div>
+<div class="line not-hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-112" data-activate-target=".s-112" class="statement s-112 not-hit"><div class="statement-info s-112"><div>Id: 112</div><div>Hits: 0</div></div>return Ok(token);</div></div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

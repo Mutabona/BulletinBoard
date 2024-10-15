@@ -235,10 +235,10 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/3)</td></tr>
-<tr><th>Statements Coverage</th><td class="red">0,00 % (0/3)</td></tr>
-<tr><th>Branch Coverage</th><td class="red">0,00 % (0/2)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (3/3)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">100,00 % (3/3)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">50,00 % (1/2)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
 <h2>Code</h2>
@@ -260,12 +260,12 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">11</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">12</div><div class="line-content">    /// Инициализирует экземпляр &lt;see cref=&quot;ExpressionSpecification{TEntity}&quot;/&gt;.</div></div>
 <div class="line"><div class="line-number">13</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line not-hit"><div class="line-number">14</div><div class="line-content">    <div data-hover-target=".s-343" data-activate-target=".s-343" class="statement s-343 not-hit"><div class="statement-info s-343"><div>Id: 343</div><div>Hits: 0</div></div>public ExpressionSpecification(Expression&lt;Func&lt;TEntity, bool&gt;&gt; expression)</div></div></div>
+<div class="line hit"><div class="line-number">14</div><div class="line-content">    <div data-hover-target=".s-297" data-activate-target=".s-297" class="statement s-297 hit"><div class="statement-info s-297"><div>Id: 297</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithEmptySearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>public ExpressionSpecification(Expression&lt;Func&lt;TEntity, bool&gt;&gt; expression)</div></div></div>
 <div class="line"><div class="line-number">15</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-344" data-activate-target=".s-344" class="statement s-344 not-hit"><div class="statement-info s-344"><div>Id: 344</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li></ul></div></div>PredicateExpression = expression ?? throw new ArgumentNullException(nameof(expression));</div></div></div>
+<div class="line partial"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-298" data-activate-target=".s-298" class="statement s-298 hit partial"><div class="statement-info s-298"><div>Id: 298</div><div>Hits: 2</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 2 hits</li></ul></div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithEmptySearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>PredicateExpression = expression ?? throw new ArgumentNullException(nameof(expression));</div></div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">    public override Expression&lt;Func&lt;TEntity, bool&gt;&gt; PredicateExpression { <div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 not-hit"><div class="statement-info s-347"><div>Id: 347</div><div>Hits: 0</div></div>get;</div> }</div></div>
+<div class="line hit"><div class="line-number">19</div><div class="line-content">    public override Expression&lt;Func&lt;TEntity, bool&gt;&gt; PredicateExpression { <div data-hover-target=".s-301" data-activate-target=".s-301" class="statement s-301 hit"><div class="statement-info s-301"><div>Id: 301</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithEmptySearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>get;</div> }</div></div>
 <div class="line"><div class="line-number">20</div><div class="line-content">}</div></div>
 </div>
 </body>

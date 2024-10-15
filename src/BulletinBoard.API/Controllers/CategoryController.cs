@@ -78,7 +78,7 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     /// <param name="categoryId">Идентификатор корневой категории.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция моделей категорий.</returns>
-    [HttpGet("{categoryId}/subcategories")]
+    [HttpGet("{categoryId}/with-subcategories")]
     [ProducesResponseType(typeof(ICollection<CategoryDto>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetCategoryWithSubcategoriesAsync(Guid categoryId, CancellationToken cancellationToken)
@@ -94,7 +94,7 @@ public class CategoryController(ICategoryService categoryService, ILogger<Catego
     /// </summary>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция категорий.</returns>
-    [HttpGet("all")]
+    [HttpGet]
     [ProducesResponseType(typeof(ICollection<CategoryDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllCategoriesAsync(CancellationToken cancellationToken)
     {

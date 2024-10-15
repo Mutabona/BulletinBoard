@@ -2,6 +2,7 @@
 using BulletinBoard.AppServices.Contexts.Users.Repositories;
 using BulletinBoard.AppServices.Exceptions;
 using BulletinBoard.AppServices.Helpers;
+using BulletinBoard.AppServices.Services;
 using BulletinBoard.Contracts.Emails;
 using BulletinBoard.Contracts.Users;
 using MassTransit;
@@ -69,10 +70,10 @@ public class UserService : IUserService
             var user = _mapper.Map<UserDto>(request);
             user.Role = "User";
             user.Id = Guid.NewGuid();
-            user.CreatedAt = _timeProvider.GetUtcNow().DateTime;
+            user.CreatedAt = _timeProvider.GetUtcNow().UtcDateTime;
             var userId =  await _repository.AddAsync(user, cancellationToken);
 
-            await _publishEndpoint.Publish<UserRegistred>(new { email = request.Email }, cancellationToken);
+            await _publishEndpoint.Publish<UserRegistred>(new UserRegistred(){ Email = request.Email }, cancellationToken);
             
             return userId;
         }
@@ -91,7 +92,7 @@ public class UserService : IUserService
         try
         {
             user = await _repository.LoginAsync(request, cancellationToken);
-            await _publishEndpoint.Publish<UserLoggedIn>(new { email = request.Email }, cancellationToken);
+            await _publishEndpoint.Publish<UserLoggedIn>(new UserLoggedIn{ Email = request.Email }, cancellationToken);
         }
         catch (EntityNotFoundException)
         {

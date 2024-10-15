@@ -8,15 +8,15 @@ public class SendEmail
     /// <summary>
     /// Получаетль сообщения.
     /// </summary>
-    public string receiver { get; set; }
+    public string Receiver { get; set; }
     
     /// <summary>
     /// Тема сообщения.
     /// </summary>
-    public string subject { get; set; }
+    public string Subject { get; set; }
     
     /// <summary>
     /// Сообщение.
     /// </summary>
-    public string text { get; set; }
+    public string Text { get; set; }
 }

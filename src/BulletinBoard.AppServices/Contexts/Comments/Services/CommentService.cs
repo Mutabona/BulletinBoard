@@ -29,21 +29,17 @@ public class CommentService(
         comment.BulletinId = bulletinId;
         comment.AuthorId = authorId;
         comment.Id = Guid.NewGuid();
-        comment.CreatedAt = timeProvider.GetUtcNow().DateTime;
+        comment.CreatedAt = timeProvider.GetUtcNow().UtcDateTime;
         var commentId = await repository.AddCommentAsync(comment, cancellationToken);
 
-        await publishEndpoint.Publish<CommentAdded>(new {id = commentId}, cancellationToken);
+        await publishEndpoint.Publish<CommentAdded>(new CommentAdded{Id = commentId}, cancellationToken);
         
         return commentId;
     }
 
     /// <inheritdoc />
-    public async Task DeleteCommentAsync(Guid commentId, Guid bulletinId, CancellationToken cancellationToken)
+    public async Task DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken)
     {
-        var comment = await repository.GetCommentByIdAsync(commentId, cancellationToken);
-
-        if (comment.BulletinId != bulletinId) throw new ConflictException();
-        
         logger.BeginScope("Удаление комментария: {commentId}", commentId);
         await repository.DeleteCommentAsync(commentId, cancellationToken);
     }

@@ -17,7 +17,6 @@ public class ImageService : IImageService
     private readonly IMapper _mapper;
     private readonly TimeProvider _timeProvider;
     private readonly IBulletinService _bulletinService;
-    private readonly IUserService _userService;
 
     /// <summary>
     /// Создаёт экземпляр <see cref="ImageService"/>.
@@ -27,41 +26,37 @@ public class ImageService : IImageService
     /// <param name="mapper">Маппер.</param>
     /// <param name="timeProvider">Провайдер для работы со временем.</param>
     /// <param name="bulletinService">Сервис для работы с объявлениями.</param>
-    /// <param name="userService">Сервис для работы с пользователями.</param>
-    public ImageService(IImageRepository repository, ILogger<ImageService> logger, IMapper mapper, TimeProvider timeProvider, IBulletinService bulletinService, IUserService userService)
+    public ImageService(IImageRepository repository, ILogger<ImageService> logger, IMapper mapper, TimeProvider timeProvider, IBulletinService bulletinService)
     {
         _repository = repository;
         _logger = logger;
         _mapper = mapper;
         _timeProvider = timeProvider;
         _bulletinService = bulletinService;
-        _userService = userService;
     }
 
     /// <inheritdoc />
     public async Task<Guid> AddImageAsync(Guid bulletinId, Guid userId, IFormFile image, CancellationToken cancellationToken)
     {
-        var bulletin = await _bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        var user = await _userService.GetUserByIdAsync(userId, cancellationToken);
-        if (bulletin.OwnerId != user.Id) throw new ForbiddenException();
+        var isUserOwner = await _bulletinService.IsUserBulletinsOwnerAsync(bulletinId, userId, cancellationToken);
+        if (!isUserOwner) throw new ForbiddenException();
         
         _logger.BeginScope("Добавление изображения к объявлению: {id}", bulletinId);
         var imageEntity = _mapper.Map<ImageDto>(image);
         imageEntity.BulletinId = bulletinId;
         imageEntity.Id = Guid.NewGuid();
-        imageEntity.CreatedAt = _timeProvider.GetUtcNow().DateTime;
+        imageEntity.CreatedAt = _timeProvider.GetUtcNow().UtcDateTime;
         return await _repository.AddAsync(imageEntity, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task DeleteImageAsync(Guid bulletinId, Guid imageId, Guid userId, CancellationToken cancellationToken)
+    public async Task DeleteImageAsync(Guid imageId, Guid userId, CancellationToken cancellationToken)
     {
-        var bulletin = await _bulletinService.FindByIdAsync(bulletinId, cancellationToken);
-        var user = await _userService.GetUserByIdAsync(userId, cancellationToken);
-        if (bulletin.OwnerId != user.Id) throw new ForbiddenException();
-        
         var image = await _repository.GetByIdAsync(imageId, cancellationToken);
-        if (image.BulletinId != bulletinId) throw new ConflictException();
+        var bulletin = await _bulletinService.FindByIdAsync(image.BulletinId, cancellationToken);
+        
+        var isUserOwner = await _bulletinService.IsUserBulletinsOwnerAsync(bulletin.Id, userId, cancellationToken);
+        if (!isUserOwner) throw new ForbiddenException();
         
         _logger.BeginScope("Удаление изображения: {imageId}", imageId);
         await _repository.DeleteAsync(imageId, cancellationToken);

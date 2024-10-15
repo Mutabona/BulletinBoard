@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/9)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/9)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (24/24)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (18/18)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -245,49 +245,73 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="legend">
 <label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
 <div class="code">
-<div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Comments.Repositories;</div></div>
-<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.Contracts.Comments;</div></div>
-<div class="line"><div class="line-number">3</div><div class="line-content">using Microsoft.Extensions.Logging;</div></div>
-<div class="line"><div class="line-number">4</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">1</div><div class="line-content">using AutoMapper;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Bulletins.Services;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Comments.Repositories;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.AppServices.Exceptions;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.Contracts.Comments;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">using BulletinBoard.Contracts.Emails;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">using MassTransit;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">using Microsoft.Extensions.Logging;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">5</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Comments.Services;</div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">10</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Comments.Services;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">///&lt;inheritdoc cref=&quot;ICommentService&quot;/&gt;</div></div>
-<div class="line not-hit"><div class="line-number">8</div><div class="line-content">public class <div data-hover-target=".s-445" data-activate-target=".s-445" class="statement s-445 not-hit"><div class="statement-info s-445"><div>Id: 445</div><div>Hits: 0</div></div>CommentService(ICommentRepository repository, ILogger&lt;CommentService&gt; logger)</div> : ICommentService</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">    public async Task&lt;Guid&gt; AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest request,</div></div>
-<div class="line"><div class="line-number">12</div><div class="line-content">        CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">13</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">14</div><div class="line-content">        <div data-hover-target=".s-446" data-activate-target=".s-446" class="statement s-446 not-hit"><div class="statement-info s-446"><div>Id: 446</div><div>Hits: 0</div></div>logger.BeginScope(&quot;Добавление комментария по запросу: {@Request}, к объявлению {id}, пользователем: {authorId}&quot;, request, bulletinId, authorId);</div></div></div>
-<div class="line not-hit"><div class="line-number">15</div><div class="line-content">        <div data-hover-target=".s-447" data-activate-target=".s-447" class="statement s-447 not-hit"><div class="statement-info s-447"><div>Id: 447</div><div>Hits: 0</div></div>return await repository.AddCommentAsync(bulletinId, authorId, request, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">17</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">12</div><div class="line-content">///&lt;inheritdoc cref=&quot;ICommentService&quot;/&gt;</div></div>
+<div class="line hit"><div class="line-number">13</div><div class="line-content">public class <div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit">CommentService(</div></div></div>
+<div class="line hit"><div class="line-number">14</div><div class="line-content"><div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit">    ICommentRepository repository, </div></div></div>
+<div class="line hit"><div class="line-number">15</div><div class="line-content"><div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit">    ILogger&lt;CommentService&gt; logger, </div></div></div>
+<div class="line hit"><div class="line-number">16</div><div class="line-content"><div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit">    IMapper mapper, </div></div></div>
+<div class="line hit"><div class="line-number">17</div><div class="line-content"><div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit">    IPublishEndpoint publishEndpoint, </div></div></div>
+<div class="line hit"><div class="line-number">18</div><div class="line-content"><div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit">    TimeProvider timeProvider,</div></div></div>
+<div class="line hit"><div class="line-number">19</div><div class="line-content"><div data-hover-target=".s-435" data-activate-target=".s-435" class="statement s-435 hit"><div class="statement-info s-435"><div>Id: 435</div><div>Hits: 4</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests..ctor: 4 hits</li></ul></div></div>    IBulletinService bulletinService)</div> : ICommentService</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    public async Task&lt;Guid&gt; AddCommentAsync(Guid bulletinId, Guid authorId, AddCommentRequest request,</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">        CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-436" data-activate-target=".s-436" class="statement s-436 hit"><div class="statement-info s-436"><div>Id: 436</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-437" data-activate-target=".s-437" class="statement s-437 hit"><div class="statement-info s-437"><div>Id: 437</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>logger.BeginScope(&quot;Добавление комментария по запросу: {@Request}, к объявлению {id}, пользователем: {authorId}&quot;, request, bulletinId, authorId);</div></div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-438" data-activate-target=".s-438" class="statement s-438 hit"><div class="statement-info s-438"><div>Id: 438</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>var comment = mapper.Map&lt;CommentDto&gt;(request);</div></div></div>
+<div class="line hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-439" data-activate-target=".s-439" class="statement s-439 hit"><div class="statement-info s-439"><div>Id: 439</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>comment.BulletinId = bulletinId;</div></div></div>
+<div class="line hit"><div class="line-number">30</div><div class="line-content">        <div data-hover-target=".s-440" data-activate-target=".s-440" class="statement s-440 hit"><div class="statement-info s-440"><div>Id: 440</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>comment.AuthorId = authorId;</div></div></div>
+<div class="line hit"><div class="line-number">31</div><div class="line-content">        <div data-hover-target=".s-441" data-activate-target=".s-441" class="statement s-441 hit"><div class="statement-info s-441"><div>Id: 441</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>comment.Id = Guid.NewGuid();</div></div></div>
+<div class="line hit"><div class="line-number">32</div><div class="line-content">        <div data-hover-target=".s-442" data-activate-target=".s-442" class="statement s-442 hit"><div class="statement-info s-442"><div>Id: 442</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>comment.CreatedAt = timeProvider.GetUtcNow().UtcDateTime;</div></div></div>
+<div class="line hit"><div class="line-number">33</div><div class="line-content">        <div data-hover-target=".s-443" data-activate-target=".s-443" class="statement s-443 hit"><div class="statement-info s-443"><div>Id: 443</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>var commentId = await repository.AddCommentAsync(comment, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">19</div><div class="line-content">    public async Task DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">20</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-448" data-activate-target=".s-448" class="statement s-448 not-hit"><div class="statement-info s-448"><div>Id: 448</div><div>Hits: 0</div></div>logger.BeginScope(&quot;Удаление комментария: {commentId}&quot;, commentId);</div></div></div>
-<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-449" data-activate-target=".s-449" class="statement s-449 not-hit"><div class="statement-info s-449"><div>Id: 449</div><div>Hits: 0</div></div>await repository.DeleteCommentAsync(commentId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">&nbsp;
+<div class="line hit"><div class="line-number">35</div><div class="line-content">        <div data-hover-target=".s-444" data-activate-target=".s-444" class="statement s-444 hit"><div class="statement-info s-444"><div>Id: 444</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>await publishEndpoint.Publish&lt;CommentAdded&gt;(new CommentAdded{Id = commentId}, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">37</div><div class="line-content">        <div data-hover-target=".s-445" data-activate-target=".s-445" class="statement s-445 hit"><div class="statement-info s-445"><div>Id: 445</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.AddCommentAsync_Should_Call_RepositoryMethod_And_PublishEndpoint_Async: 1 hit</li></ul></div></div>return commentId;</div></div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">25</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">26</div><div class="line-content">    public async Task&lt;ICollection&lt;CommentDto&gt;&gt; GetByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">27</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-450" data-activate-target=".s-450" class="statement s-450 not-hit"><div class="statement-info s-450"><div>Id: 450</div><div>Hits: 0</div></div>logger.BeginScope(&quot;Поиск комментариев по объявлению: {id}&quot;, bulletinId);</div></div></div>
-<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-451" data-activate-target=".s-451" class="statement s-451 not-hit"><div class="statement-info s-451"><div>Id: 451</div><div>Hits: 0</div></div>return await repository.GetCommentsByBulletinIdAsync(bulletinId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">30</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">31</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">40</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    public async Task DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">42</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">43</div><div class="line-content">        <div data-hover-target=".s-446" data-activate-target=".s-446" class="statement s-446 hit"><div class="statement-info s-446"><div>Id: 446</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.DeleteCommentAsync_Should_Call_RepositoryMethod_Async: 1 hit</li></ul></div></div>logger.BeginScope(&quot;Удаление комментария: {commentId}&quot;, commentId);</div></div></div>
+<div class="line hit"><div class="line-number">44</div><div class="line-content">        <div data-hover-target=".s-447" data-activate-target=".s-447" class="statement s-447 hit"><div class="statement-info s-447"><div>Id: 447</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.DeleteCommentAsync_Should_Call_RepositoryMethod_Async: 1 hit</li></ul></div></div>await repository.DeleteCommentAsync(commentId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">45</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">46</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">32</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">33</div><div class="line-content">    public async Task&lt;CommentDto&gt; GetCommentByIdAsync(Guid commentId, CancellationToken cancellationToken)</div></div>
-<div class="line"><div class="line-number">34</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">35</div><div class="line-content">        <div data-hover-target=".s-452" data-activate-target=".s-452" class="statement s-452 not-hit"><div class="statement-info s-452"><div>Id: 452</div><div>Hits: 0</div></div>logger.BeginScope(&quot;Поиск комментария: {id}&quot;, commentId);</div></div></div>
-<div class="line not-hit"><div class="line-number">36</div><div class="line-content">        <div data-hover-target=".s-453" data-activate-target=".s-453" class="statement s-453 not-hit"><div class="statement-info s-453"><div>Id: 453</div><div>Hits: 0</div></div>return await repository.GetCommentByIdAsync(commentId, cancellationToken);</div></div></div>
-<div class="line"><div class="line-number">37</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">38</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">47</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">48</div><div class="line-content">    public async Task&lt;ICollection&lt;CommentDto&gt;&gt; GetByBulletinIdAsync(Guid bulletinId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">50</div><div class="line-content">        <div data-hover-target=".s-448" data-activate-target=".s-448" class="statement s-448 hit"><div class="statement-info s-448"><div>Id: 448</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.GetByBulletinIdAsync_Should_Return_Comments: 1 hit</li></ul></div></div>logger.BeginScope(&quot;Поиск комментариев по объявлению: {id}&quot;, bulletinId);</div></div></div>
+<div class="line hit"><div class="line-number">51</div><div class="line-content">        <div data-hover-target=".s-449" data-activate-target=".s-449" class="statement s-449 hit"><div class="statement-info s-449"><div>Id: 449</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.GetByBulletinIdAsync_Should_Return_Comments: 1 hit</li></ul></div></div>await bulletinService.FindByIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line hit"><div class="line-number">52</div><div class="line-content">        <div data-hover-target=".s-450" data-activate-target=".s-450" class="statement s-450 hit"><div class="statement-info s-450"><div>Id: 450</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.GetByBulletinIdAsync_Should_Return_Comments: 1 hit</li></ul></div></div>return await repository.GetCommentsByBulletinIdAsync(bulletinId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">    public async Task&lt;CommentDto&gt; GetCommentByIdAsync(Guid commentId, CancellationToken cancellationToken)</div></div>
+<div class="line"><div class="line-number">57</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">58</div><div class="line-content">        <div data-hover-target=".s-451" data-activate-target=".s-451" class="statement s-451 hit"><div class="statement-info s-451"><div>Id: 451</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.GetCommentByIdAsync_Should_Return_Comment: 1 hit</li></ul></div></div>logger.BeginScope(&quot;Поиск комментария: {id}&quot;, commentId);</div></div></div>
+<div class="line hit"><div class="line-number">59</div><div class="line-content">        <div data-hover-target=".s-452" data-activate-target=".s-452" class="statement s-452 hit"><div class="statement-info s-452"><div>Id: 452</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Comments.Services.CommentServiceTests.GetCommentByIdAsync_Should_Return_Comment: 1 hit</li></ul></div></div>return await repository.GetCommentByIdAsync(commentId, cancellationToken);</div></div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

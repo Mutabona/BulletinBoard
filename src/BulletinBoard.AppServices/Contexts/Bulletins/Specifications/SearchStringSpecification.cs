@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using BulletinBoard.AppServices.Specifications;
-using BulletinBoard.Contracts.Bulletins;
 using BulletinBoard.Domain.Bulletins.Entity;
 
 namespace BulletinBoard.AppServices.Contexts.Bulletins.Specifications;

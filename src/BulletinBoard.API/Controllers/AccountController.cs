@@ -21,7 +21,7 @@ public class AccountController(IUserService userService, ILogger<UserController>
     /// <param name="model">Модель регистрации пользователя.</param>
     /// <param name="cancellationToken">Токен отмены операции.</param>
     /// <returns>Идентификатор нового пользователя.</returns>
-    [HttpPost("register")]
+    [HttpPost]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.Conflict)]
@@ -39,7 +39,7 @@ public class AccountController(IUserService userService, ILogger<UserController>
     /// <param name="model">Запрос на аутентификацию.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>JWT</returns>
-    [HttpPost("login")]
+    [HttpPost("auth-token")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

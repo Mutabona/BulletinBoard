@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/4)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/3)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (4/4)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (3/3)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -262,15 +262,15 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">12</div><div class="line-content">    /// &lt;summary&gt;</div></div>
 <div class="line"><div class="line-number">13</div><div class="line-content">    /// Инициализирует экземпляр &lt;see cref=&quot;ByCategorySpecification&quot;/&gt;.</div></div>
 <div class="line"><div class="line-number">14</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line not-hit"><div class="line-number">15</div><div class="line-content">    <div data-hover-target=".s-496" data-activate-target=".s-496" class="statement s-496 not-hit"><div class="statement-info s-496"><div>Id: 496</div><div>Hits: 0</div></div>public ByCategorySpecification(ICollection&lt;Guid?&gt; categoriesIds)</div></div></div>
+<div class="line hit"><div class="line-number">15</div><div class="line-content">    <div data-hover-target=".s-500" data-activate-target=".s-500" class="statement s-500 hit"><div class="statement-info s-500"><div>Id: 500</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithCategoriesIds_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Services.BulletinServiceTests.GetByCategoryAsync_ShouldReturnBulletins: 1 hit</li></ul></div></div>public ByCategorySpecification(ICollection&lt;Guid?&gt; categoriesIds)</div></div></div>
 <div class="line"><div class="line-number">16</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-497" data-activate-target=".s-497" class="statement s-497 not-hit"><div class="statement-info s-497"><div>Id: 497</div><div>Hits: 0</div></div>_categoriesIds = categoriesIds;</div></div></div>
+<div class="line hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-501" data-activate-target=".s-501" class="statement s-501 hit"><div class="statement-info s-501"><div>Id: 501</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithCategoriesIds_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Services.BulletinServiceTests.GetByCategoryAsync_ShouldReturnBulletins: 1 hit</li></ul></div></div>_categoriesIds = categoriesIds;</div></div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">19</div><div class="line-content">&nbsp;
 </div></div>
 <div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line not-hit"><div class="line-number">21</div><div class="line-content">    public override Expression&lt;Func&lt;Bulletin, bool&gt;&gt; PredicateExpression =&gt; <div data-hover-target=".s-498" data-activate-target=".s-498" class="statement s-498 not-hit">bulletin =&gt; </div></div></div>
-<div class="line not-hit"><div class="line-number">22</div><div class="line-content"><div data-hover-target=".s-498" data-activate-target=".s-498" class="statement s-498 not-hit"><div class="statement-info s-498"><div>Id: 498</div><div>Hits: 0</div></div>        _categoriesIds.Contains(bulletin.CategoryId)</div>;</div></div>
+<div class="line hit"><div class="line-number">21</div><div class="line-content">    public override Expression&lt;Func&lt;Bulletin, bool&gt;&gt; PredicateExpression =&gt; <div data-hover-target=".s-502" data-activate-target=".s-502" class="statement s-502 hit">bulletin =&gt; </div></div></div>
+<div class="line hit"><div class="line-number">22</div><div class="line-content"><div data-hover-target=".s-502" data-activate-target=".s-502" class="statement s-502 hit"><div class="statement-info s-502"><div>Id: 502</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithCategoriesIds_ShouldReturnSpecification: 1 hit</li></ul></div></div>        _categoriesIds.Contains(bulletin.CategoryId)</div>;</div></div>
 <div class="line"><div class="line-number">23</div><div class="line-content">}</div></div>
 </div>
 </body>

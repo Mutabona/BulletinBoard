@@ -235,7 +235,7 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
 <tr><th>Line Coverage</th><td class="red">0,00 % (0/6)</td></tr>
 <tr><th>Statements Coverage</th><td class="green">0,00 % (0/6)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
@@ -246,31 +246,33 @@ document.addEventListener('click', toggleTargetHandler);
 <label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
 <div class="code">
 <div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.DataAccess.Configurations;</div></div>
-<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.Domain.Bulletins.Entity;</div></div>
-<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.Domain.Categories.Entity;</div></div>
-<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Domain.Files.Images.Entity;</div></div>
-<div class="line"><div class="line-number">5</div><div class="line-content">using BulletinBoard.Domain.Users.Entity;</div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">using Microsoft.EntityFrameworkCore;</div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">2</div><div class="line-content">using Microsoft.EntityFrameworkCore;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">namespace BulletinBoard.DataAccess;</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">4</div><div class="line-content">namespace BulletinBoard.DataAccess;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">public class ApplicationDbContext : DbContext</div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">12</div><div class="line-content">    </div></div>
-<div class="line not-hit"><div class="line-number">13</div><div class="line-content">    public ApplicationDbContext(DbContextOptions options) : <div data-hover-target=".s-736" data-activate-target=".s-736" class="statement s-736 not-hit"><div class="statement-info s-736"><div>Id: 736</div><div>Hits: 0</div></div>base(options)</div> { }</div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">6</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">/// Контекст базы данных.</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">public class ApplicationDbContext : DbContext</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">    /// Создаёт экземпляр &lt;see cref=&quot;ApplicationDbContext&quot;/&gt;.</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">    /// &lt;param name=&quot;options&quot;&gt;Опции.&lt;/param&gt;</div></div>
+<div class="line not-hit"><div class="line-number">15</div><div class="line-content">    public ApplicationDbContext(DbContextOptions options) : <div data-hover-target=".s-776" data-activate-target=".s-776" class="statement s-776 not-hit"><div class="statement-info s-776"><div>Id: 776</div><div>Hits: 0</div></div>base(options)</div> { }</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">15</div><div class="line-content">    protected override void OnModelCreating(ModelBuilder modelBuilder)</div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-737" data-activate-target=".s-737" class="statement s-737 not-hit"><div class="statement-info s-737"><div>Id: 737</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new UserConfiguration());</div></div></div>
-<div class="line not-hit"><div class="line-number">18</div><div class="line-content">        <div data-hover-target=".s-738" data-activate-target=".s-738" class="statement s-738 not-hit"><div class="statement-info s-738"><div>Id: 738</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new BulletinConfiguration());</div></div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-739" data-activate-target=".s-739" class="statement s-739 not-hit"><div class="statement-info s-739"><div>Id: 739</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new CategoryConfiguration());</div></div></div>
-<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-740" data-activate-target=".s-740" class="statement s-740 not-hit"><div class="statement-info s-740"><div>Id: 740</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new ImageConfiguration());</div></div></div>
-<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-741" data-activate-target=".s-741" class="statement s-741 not-hit"><div class="statement-info s-741"><div>Id: 741</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new CommentConfiguration());</div></div></div>
-<div class="line"><div class="line-number">22</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    protected override void OnModelCreating(ModelBuilder modelBuilder)</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-777" data-activate-target=".s-777" class="statement s-777 not-hit"><div class="statement-info s-777"><div>Id: 777</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new UserConfiguration());</div></div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-778" data-activate-target=".s-778" class="statement s-778 not-hit"><div class="statement-info s-778"><div>Id: 778</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new BulletinConfiguration());</div></div></div>
+<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-779" data-activate-target=".s-779" class="statement s-779 not-hit"><div class="statement-info s-779"><div>Id: 779</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new CategoryConfiguration());</div></div></div>
+<div class="line not-hit"><div class="line-number">22</div><div class="line-content">        <div data-hover-target=".s-780" data-activate-target=".s-780" class="statement s-780 not-hit"><div class="statement-info s-780"><div>Id: 780</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new ImageConfiguration());</div></div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content">        <div data-hover-target=".s-781" data-activate-target=".s-781" class="statement s-781 not-hit"><div class="statement-info s-781"><div>Id: 781</div><div>Hits: 0</div></div>modelBuilder.ApplyConfiguration(new CommentConfiguration());</div></div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

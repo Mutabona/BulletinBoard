@@ -26,7 +26,7 @@ public class EmailSendingService : IConsumer<SendEmail>
     /// <param name="context">Контекст сообщения.</param>
     public async Task Consume(ConsumeContext<SendEmail> context)
     {
-        await SendEmailAsync(context.Message.receiver, context.Message.subject, context.Message.text);
+        await SendEmailAsync(context.Message.Receiver, context.Message.Subject, context.Message.Text);
     }
 
     /// <summary>

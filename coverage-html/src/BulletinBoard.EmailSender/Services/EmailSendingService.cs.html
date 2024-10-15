@@ -1,0 +1,315 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="red">0,00 % (0/14)</td></tr>
+<tr><th>Statements Coverage</th><td class="red">0,00 % (0/11)</td></tr>
+<tr><th>Branch Coverage</th><td class="red">0,00 % (0/11)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.Contracts.Emails;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using MassTransit;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using MimeKit;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using SmtpClient = MailKit.Net.Smtp.SmtpClient;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">namespace BulletinBoard.EmailSender.Services;</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// Сервис для рассылки почты.</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">public class EmailSendingService : IConsumer&lt;SendEmail&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    private const string smtpServer = &quot;smtp.mail.ru&quot;;</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">    private const int port = 465;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    private const bool useSsl = true;</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    private const string mailBoxAddress = &quot;noreply-bulletinboard@mail.ru&quot;;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    private const string mailBoxName = &quot;noreply-bulletinboard&quot;;</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    //Данные для аутентификации на smtp сервере.</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    private const string smtpUserName = &quot;noreply-bulletinboard&quot;;</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    private const string smtpPassword = &quot;JG83pYnzDXBnzh0HCUVP&quot;;</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    </div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    /// Получает сообщение из шины.</div></div>
+<div class="line"><div class="line-number">25</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    /// &lt;param name=&quot;context&quot;&gt;Контекст сообщения.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">    public async Task Consume(ConsumeContext&lt;SendEmail&gt; context)</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">29</div><div class="line-content">        <div data-hover-target=".s-1502" data-activate-target=".s-1502" class="statement s-1502 not-hit"><div class="statement-info s-1502"><div>Id: 1502</div><div>Hits: 0</div></div>await SendEmailAsync(context.Message.Receiver, context.Message.Subject, context.Message.Text);</div></div></div>
+<div class="line"><div class="line-number">30</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">31</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">32</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">33</div><div class="line-content">    /// Отправляет уведомление на почту.</div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">    /// &lt;param name=&quot;email&quot;&gt;Почта получателя.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    /// &lt;param name=&quot;subject&quot;&gt;Тема уведомления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">    /// &lt;param name=&quot;message&quot;&gt;Текст уведомления.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    private async Task SendEmailAsync(string email, string subject, string message)</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    {</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">        //Формировка сообщения</div></div>
+<div class="line not-hit"><div class="line-number">41</div><div class="line-content">        <div data-hover-target=".s-1503" data-activate-target=".s-1503" class="statement s-1503 not-hit"><div class="statement-info s-1503"><div>Id: 1503</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li><li>Branch 3: 0 hits</li><li>Branch 4: 0 hits</li><li>Branch 5: 0 hits</li><li>Branch 6: 0 hits</li></ul></div></div>using var emailMessage = new MimeMessage();</div></div></div>
+<div class="line not-hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-1504" data-activate-target=".s-1504" class="statement s-1504 not-hit"><div class="statement-info s-1504"><div>Id: 1504</div><div>Hits: 0</div></div>emailMessage.From.Add(new MailboxAddress(mailBoxName, mailBoxAddress));</div></div></div>
+<div class="line not-hit"><div class="line-number">43</div><div class="line-content">        <div data-hover-target=".s-1510" data-activate-target=".s-1510" class="statement s-1510 not-hit"><div class="statement-info s-1510"><div>Id: 1510</div><div>Hits: 0</div></div>emailMessage.To.Add(new MailboxAddress(&quot;&quot;, email));</div></div></div>
+<div class="line not-hit"><div class="line-number">44</div><div class="line-content">        <div data-hover-target=".s-1511" data-activate-target=".s-1511" class="statement s-1511 not-hit"><div class="statement-info s-1511"><div>Id: 1511</div><div>Hits: 0</div></div>emailMessage.Subject = subject;</div></div></div>
+<div class="line not-hit"><div class="line-number">45</div><div class="line-content">        <div data-hover-target=".s-1512" data-activate-target=".s-1512" class="statement s-1512 not-hit">emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)</div></div></div>
+<div class="line not-hit"><div class="line-number">46</div><div class="line-content"><div data-hover-target=".s-1512" data-activate-target=".s-1512" class="statement s-1512 not-hit">        {</div></div></div>
+<div class="line not-hit"><div class="line-number">47</div><div class="line-content"><div data-hover-target=".s-1512" data-activate-target=".s-1512" class="statement s-1512 not-hit">            Text = message</div></div></div>
+<div class="line not-hit"><div class="line-number">48</div><div class="line-content"><div data-hover-target=".s-1512" data-activate-target=".s-1512" class="statement s-1512 not-hit"><div class="statement-info s-1512"><div>Id: 1512</div><div>Hits: 0</div></div>        };</div></div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">        </div></div>
+<div class="line not-hit"><div class="line-number">50</div><div class="line-content">        using (<div data-hover-target=".s-1513" data-activate-target=".s-1513" class="statement s-1513 not-hit"><div class="statement-info s-1513"><div>Id: 1513</div><div>Hits: 0</div><div>Condition 1:<ul><li>Branch 1: 0 hits</li><li>Branch 2: 0 hits</li><li>Branch 3: 0 hits</li><li>Branch 4: 0 hits</li><li>Branch 5: 0 hits</li></ul></div></div>var client = new SmtpClient()</div>)</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">        {</div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">            //Подключение к smtp серверу.</div></div>
+<div class="line not-hit"><div class="line-number">53</div><div class="line-content">            <div data-hover-target=".s-1514" data-activate-target=".s-1514" class="statement s-1514 not-hit"><div class="statement-info s-1514"><div>Id: 1514</div><div>Hits: 0</div></div>await client.ConnectAsync(smtpServer, port, useSsl);</div></div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">            //Аутентификация на сервере.</div></div>
+<div class="line not-hit"><div class="line-number">55</div><div class="line-content">            <div data-hover-target=".s-1506" data-activate-target=".s-1506" class="statement s-1506 not-hit"><div class="statement-info s-1506"><div>Id: 1506</div><div>Hits: 0</div></div>await client.AuthenticateAsync(smtpUserName, smtpPassword);</div></div></div>
+<div class="line"><div class="line-number">56</div><div class="line-content">            //Отправлка сообщения.</div></div>
+<div class="line not-hit"><div class="line-number">57</div><div class="line-content">            <div data-hover-target=".s-1507" data-activate-target=".s-1507" class="statement s-1507 not-hit"><div class="statement-info s-1507"><div>Id: 1507</div><div>Hits: 0</div></div>await client.SendAsync(emailMessage);</div></div></div>
+<div class="line"><div class="line-number">58</div><div class="line-content">            //Отключение от сервера.</div></div>
+<div class="line not-hit"><div class="line-number">59</div><div class="line-content">            <div data-hover-target=".s-1508" data-activate-target=".s-1508" class="statement s-1508 not-hit"><div class="statement-info s-1508"><div>Id: 1508</div><div>Hits: 0</div></div>await client.DisconnectAsync(true);</div></div></div>
+<div class="line"><div class="line-number">60</div><div class="line-content">        }</div></div>
+<div class="line"><div class="line-number">61</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>

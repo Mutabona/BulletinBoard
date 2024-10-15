@@ -21,12 +21,11 @@ public interface IImageService
     /// <summary>
     /// Удаляет изображение.
     /// </summary>
-    /// <param name="bulletinId">Идентификатор объявления, к которому принадлежит изображение.</param>
     /// <param name="imageId">Идентификатор изображения.</param>
     /// <param name="userId">Идентификатор пользователя отправившего запрос.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
-    Task DeleteImageAsync(Guid bulletinId, Guid imageId, Guid userId, CancellationToken cancellationToken);
+    Task DeleteImageAsync(Guid imageId, Guid userId, CancellationToken cancellationToken);
     
     /// <summary>
     /// Возвращает изображения по объявлению.

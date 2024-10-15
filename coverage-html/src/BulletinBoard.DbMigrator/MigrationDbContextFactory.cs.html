@@ -235,7 +235,7 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
 <tr><th>Line Coverage</th><td class="red">0,00 % (0/6)</td></tr>
 <tr><th>Statements Coverage</th><td class="green">0,00 % (0/6)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
@@ -253,20 +253,28 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">5</div><div class="line-content">namespace BulletinBoard.DbMigrator;</div></div>
 <div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">public class MigrationDbContextFactory : IDesignTimeDbContextFactory&lt;MigrationDbContext&gt;</div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">    public MigrationDbContext CreateDbContext(string[] args)</div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">11</div><div class="line-content">        <div data-hover-target=".s-951" data-activate-target=".s-951" class="statement s-951 not-hit"><div class="statement-info s-951"><div>Id: 951</div><div>Hits: 0</div></div>var builder = new ConfigurationBuilder().AddJsonFile(&quot;appsettings.json&quot;, optional: false, reloadOnChange: true);</div></div></div>
-<div class="line not-hit"><div class="line-number">12</div><div class="line-content">        <div data-hover-target=".s-952" data-activate-target=".s-952" class="statement s-952 not-hit"><div class="statement-info s-952"><div>Id: 952</div><div>Hits: 0</div></div>var configuration = builder.Build();</div></div></div>
-<div class="line not-hit"><div class="line-number">13</div><div class="line-content">        <div data-hover-target=".s-953" data-activate-target=".s-953" class="statement s-953 not-hit"><div class="statement-info s-953"><div>Id: 953</div><div>Hits: 0</div></div>var connectionString = configuration.GetConnectionString(&quot;DbConnection&quot;);</div></div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">7</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// Фабрика для создания контекста миграции базы данных.</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">public class MigrationDbContextFactory : IDesignTimeDbContextFactory&lt;MigrationDbContext&gt;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    /// Создаёт экземпляр &lt;see cref=&quot;MigrationDbContext&quot;/&gt;.</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    /// &lt;param name=&quot;args&quot;&gt;&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    /// &lt;returns&gt;&lt;/returns&gt;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    public MigrationDbContext CreateDbContext(string[] args)</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    {</div></div>
+<div class="line not-hit"><div class="line-number">19</div><div class="line-content">        <div data-hover-target=".s-983" data-activate-target=".s-983" class="statement s-983 not-hit"><div class="statement-info s-983"><div>Id: 983</div><div>Hits: 0</div></div>var builder = new ConfigurationBuilder().AddJsonFile(&quot;appsettings.json&quot;, optional: false, reloadOnChange: true);</div></div></div>
+<div class="line not-hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-984" data-activate-target=".s-984" class="statement s-984 not-hit"><div class="statement-info s-984"><div>Id: 984</div><div>Hits: 0</div></div>var configuration = builder.Build();</div></div></div>
+<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-985" data-activate-target=".s-985" class="statement s-985 not-hit"><div class="statement-info s-985"><div>Id: 985</div><div>Hits: 0</div></div>var connectionString = configuration.GetConnectionString(&quot;DbConnection&quot;);</div></div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line not-hit"><div class="line-number">15</div><div class="line-content">        <div data-hover-target=".s-954" data-activate-target=".s-954" class="statement s-954 not-hit"><div class="statement-info s-954"><div>Id: 954</div><div>Hits: 0</div></div>var dbContextOptionsBuilder = new DbContextOptionsBuilder&lt;MigrationDbContext&gt;();</div></div></div>
-<div class="line not-hit"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-955" data-activate-target=".s-955" class="statement s-955 not-hit"><div class="statement-info s-955"><div>Id: 955</div><div>Hits: 0</div></div>dbContextOptionsBuilder.UseNpgsql(connectionString);</div></div></div>
-<div class="line not-hit"><div class="line-number">17</div><div class="line-content">        <div data-hover-target=".s-956" data-activate-target=".s-956" class="statement s-956 not-hit"><div class="statement-info s-956"><div>Id: 956</div><div>Hits: 0</div></div>return new MigrationDbContext(dbContextOptionsBuilder.Options);</div></div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">19</div><div class="line-content">}</div></div>
+<div class="line not-hit"><div class="line-number">23</div><div class="line-content">        <div data-hover-target=".s-986" data-activate-target=".s-986" class="statement s-986 not-hit"><div class="statement-info s-986"><div>Id: 986</div><div>Hits: 0</div></div>var dbContextOptionsBuilder = new DbContextOptionsBuilder&lt;MigrationDbContext&gt;();</div></div></div>
+<div class="line not-hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-987" data-activate-target=".s-987" class="statement s-987 not-hit"><div class="statement-info s-987"><div>Id: 987</div><div>Hits: 0</div></div>dbContextOptionsBuilder.UseNpgsql(connectionString);</div></div></div>
+<div class="line not-hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-988" data-activate-target=".s-988" class="statement s-988 not-hit"><div class="statement-info s-988"><div>Id: 988</div><div>Hits: 0</div></div>return new MigrationDbContext(dbContextOptionsBuilder.Options);</div></div></div>
+<div class="line"><div class="line-number">26</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

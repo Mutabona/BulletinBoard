@@ -25,11 +25,11 @@ public class NotificationService(IUserService userService, IBulletinService bull
         var bulletin = await bulletinService.FindByIdAsync(comment.BulletinId, context.CancellationToken);
         var bulletinOwner = await userService.GetUserByIdAsync(bulletin.OwnerId, context.CancellationToken);
         
-        await publishEndpoint.Publish<SendEmail>(new
+        await publishEndpoint.Publish<SendEmail>(new SendEmail
         {
-            receiver = bulletinOwner.Email,
-            subject = "Добавлен отзыв к объявлению: " + bulletin.Title,
-            text = "Текст отзыва: " + comment.Text,
+            Receiver = bulletinOwner.Email,
+            Subject = "Добавлен отзыв к объявлению: " + bulletin.Title,
+            Text = "Текст отзыва: " + comment.Text,
         }, context.CancellationToken);
     }
 
@@ -39,11 +39,11 @@ public class NotificationService(IUserService userService, IBulletinService bull
     /// <param name="context">Контекст события.</param>
     public async Task Consume(ConsumeContext<UserRegistred> context)
     {
-        await publishEndpoint.Publish<SendEmail>(new
+        await publishEndpoint.Publish<SendEmail>(new SendEmail
         {
-            receiver = context.Message.Email,
-            subject = "Регистрация в BulletinBoard",
-            text = "Спасибо за регистрацию в BulletinBoard! Если это не вы - соболезнуем.",
+            Receiver = context.Message.Email,
+            Subject = "Регистрация в BulletinBoard",
+            Text = "Спасибо за регистрацию в BulletinBoard! Если это не вы - соболезнуем.",
         }, context.CancellationToken);
     }
 
@@ -53,11 +53,11 @@ public class NotificationService(IUserService userService, IBulletinService bull
     /// <param name="context">Контекст события.</param>
     public async Task Consume(ConsumeContext<UserLoggedIn> context)
     {
-        await publishEndpoint.Publish<SendEmail>(new
+        await publishEndpoint.Publish<SendEmail>(new SendEmail
         {
-            receiver = context.Message.Email,
-            subject = "Вход в BulletinBoard",
-            text = "По вышей почте выполнен вход в BulletinBoard, если это не вы - соболезнуем.",
+            Receiver = context.Message.Email,
+            Subject = "Вход в BulletinBoard",
+            Text = "По вышей почте выполнен вход в BulletinBoard, если это не вы - соболезнуем.",
         }, context.CancellationToken);
     }
 }

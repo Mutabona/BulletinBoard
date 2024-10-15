@@ -20,11 +20,10 @@ public interface ICommentService
     /// <summary>
     /// Удаляет комментарий по идентификатору.
     /// </summary>
-    /// <param name="bulletinId">Идентификатор объявления с комментарием.</param>
     /// <param name="commentId">Идентификатор комментария.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns></returns>
-    Task DeleteCommentAsync(Guid commentId, Guid bulletinId, CancellationToken cancellationToken);
+    Task DeleteCommentAsync(Guid commentId, CancellationToken cancellationToken);
     
     /// <summary>
     /// Возвращает все комментарии по идентификатору объявления.

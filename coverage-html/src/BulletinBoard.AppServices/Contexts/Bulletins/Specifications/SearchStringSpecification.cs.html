@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="red">0,00 % (0/5)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">0,00 % (0/3)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (5/5)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (3/3)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -247,37 +247,36 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="code">
 <div class="line"><div class="line-number">1</div><div class="line-content">using System.Linq.Expressions;</div></div>
 <div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.AppServices.Specifications;</div></div>
-<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.Contracts.Bulletins;</div></div>
-<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Domain.Bulletins.Entity;</div></div>
-<div class="line"><div class="line-number">5</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.Domain.Bulletins.Entity;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">6</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Bulletins.Specifications;</div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">5</div><div class="line-content">namespace BulletinBoard.AppServices.Contexts.Bulletins.Specifications;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">/// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">9</div><div class="line-content">/// Спецификация поиска объявлений по поисковой строке.</div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">/// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">11</div><div class="line-content">public class SearchStringSpecification : Specification&lt;Bulletin&gt;</div></div>
-<div class="line"><div class="line-number">12</div><div class="line-content">{</div></div>
-<div class="line"><div class="line-number">13</div><div class="line-content">    private readonly string _searchString;</div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">7</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// Спецификация поиска объявлений по поисковой строке.</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">public class SearchStringSpecification : Specification&lt;Bulletin&gt;</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">    private readonly string _searchString;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">15</div><div class="line-content">    /// &lt;summary&gt;</div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">    /// Создаёт спецификацию поиска объявлений по поисковой строке &lt;see cref=&quot;SearchStringSpecification&quot;/&gt;.</div></div>
-<div class="line"><div class="line-number">17</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
-<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;param name=&quot;searchString&quot;&gt;Поисковая строка.&lt;/param&gt;</div></div>
-<div class="line not-hit"><div class="line-number">19</div><div class="line-content">    <div data-hover-target=".s-508" data-activate-target=".s-508" class="statement s-508 not-hit"><div class="statement-info s-508"><div>Id: 508</div><div>Hits: 0</div></div>public SearchStringSpecification(string searchString)</div></div></div>
-<div class="line"><div class="line-number">20</div><div class="line-content">    {</div></div>
-<div class="line not-hit"><div class="line-number">21</div><div class="line-content">        <div data-hover-target=".s-509" data-activate-target=".s-509" class="statement s-509 not-hit"><div class="statement-info s-509"><div>Id: 509</div><div>Hits: 0</div></div>_searchString = searchString;</div></div></div>
-<div class="line"><div class="line-number">22</div><div class="line-content">    }</div></div>
-<div class="line"><div class="line-number">23</div><div class="line-content">&nbsp;
+<div class="line"><div class="line-number">14</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">    /// Создаёт спецификацию поиска объявлений по поисковой строке &lt;see cref=&quot;SearchStringSpecification&quot;/&gt;.</div></div>
+<div class="line"><div class="line-number">16</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">    /// &lt;param name=&quot;searchString&quot;&gt;Поисковая строка.&lt;/param&gt;</div></div>
+<div class="line hit"><div class="line-number">18</div><div class="line-content">    <div data-hover-target=".s-512" data-activate-target=".s-512" class="statement s-512 hit"><div class="statement-info s-512"><div>Id: 512</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Services.BulletinServiceTests.SearchBulletinsAsync_ShouldReturnBulletins: 1 hit</li></ul></div></div>public SearchStringSpecification(string searchString)</div></div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">20</div><div class="line-content">        <div data-hover-target=".s-513" data-activate-target=".s-513" class="statement s-513 hit"><div class="statement-info s-513"><div>Id: 513</div><div>Hits: 2</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Services.BulletinServiceTests.SearchBulletinsAsync_ShouldReturnBulletins: 1 hit</li></ul></div></div>_searchString = searchString;</div></div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">24</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
-<div class="line"><div class="line-number">25</div><div class="line-content">    public override Expression&lt;Func&lt;Bulletin, bool&gt;&gt; PredicateExpression =&gt;</div></div>
-<div class="line not-hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-510" data-activate-target=".s-510" class="statement s-510 not-hit">bulletin =&gt;</div></div></div>
-<div class="line not-hit"><div class="line-number">27</div><div class="line-content"><div data-hover-target=".s-510" data-activate-target=".s-510" class="statement s-510 not-hit">            bulletin.Title.ToLower().Contains(_searchString.ToLower()) ||</div></div></div>
-<div class="line not-hit"><div class="line-number">28</div><div class="line-content"><div data-hover-target=".s-510" data-activate-target=".s-510" class="statement s-510 not-hit"><div class="statement-info s-510"><div>Id: 510</div><div>Hits: 0</div></div>            bulletin.Description.ToLower().Contains(_searchString.ToLower())</div>;</div></div>
-<div class="line"><div class="line-number">29</div><div class="line-content">}</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    /// &lt;inheritdoc /&gt;</div></div>
+<div class="line"><div class="line-number">24</div><div class="line-content">    public override Expression&lt;Func&lt;Bulletin, bool&gt;&gt; PredicateExpression =&gt;</div></div>
+<div class="line hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-514" data-activate-target=".s-514" class="statement s-514 hit">bulletin =&gt;</div></div></div>
+<div class="line hit"><div class="line-number">26</div><div class="line-content"><div data-hover-target=".s-514" data-activate-target=".s-514" class="statement s-514 hit">            bulletin.Title.ToLower().Contains(_searchString.ToLower()) ||</div></div></div>
+<div class="line hit"><div class="line-number">27</div><div class="line-content"><div data-hover-target=".s-514" data-activate-target=".s-514" class="statement s-514 hit"><div class="statement-info s-514"><div>Id: 514</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Bulletins.Builders.BulletinSpecificationBuilderTests.Build_WithSearchBulletinRequest_ShouldReturnSpecification: 1 hit</li></ul></div></div>            bulletin.Description.ToLower().Contains(_searchString.ToLower())</div>;</div></div>
+<div class="line"><div class="line-number">28</div><div class="line-content">}</div></div>
 </div>
 </body>
 </html>

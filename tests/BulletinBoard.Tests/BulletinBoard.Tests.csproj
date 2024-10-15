@@ -27,14 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="AppServicesTests\Contexts\Bulletins\Services\" />
-      <Folder Include="AppServicesTests\Contexts\Categories\Services\" />
-      <Folder Include="AppServicesTests\Contexts\Comments\" />
-      <Folder Include="AppServicesTests\Contexts\Files\" />
-      <Folder Include="AppServicesTests\Contexts\Users\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\BulletinBoard.AppServices\BulletinBoard.AppServices.csproj" />
       <ProjectReference Include="..\..\src\BulletinBoard.ComponentRegistrar\BulletinBoard.ComponentRegistrar.csproj" />
     </ItemGroup>

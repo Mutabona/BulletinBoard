@@ -42,7 +42,7 @@ public class CategoryService : ICategoryService
         _logger.BeginScope("Добавление категории: {@Request}", createCategoryRequest);
         var category = _mapper.Map<CategoryDto>(createCategoryRequest);
         category.Id = Guid.NewGuid();
-        category.CreatedAt = _timeProvider.GetUtcNow().DateTime;
+        category.CreatedAt = _timeProvider.GetUtcNow().UtcDateTime;
         var categoryId = await _repository.AddCategoryAsync(category, cancellationToken);
         _logger.LogInformation("Очистка кеша по ключу: {key}", key);
         await _cache.RemoveAsync(key, cancellationToken);

@@ -40,7 +40,7 @@ public class ImageController(IImageService imageService, ILogger<ImageController
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Идентификатор добавленного изображения.</returns>
     [Authorize]
-    [HttpPost("{bulletinId}")]
+    [HttpPost("/Bulletin/{bulletinId}/Image")]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
@@ -59,7 +59,7 @@ public class ImageController(IImageService imageService, ILogger<ImageController
     /// <param name="bulletinId">Идентификатор объявления.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     /// <returns>Коллекция идентификаторов изображений.</returns>
-    [HttpGet("{bulletinId}/ids")]
+    [HttpGet("/Bulletin/{bulletinId}/Image/ids")]
     [ProducesResponseType(typeof(ICollection<Guid>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetImagesAsync(Guid bulletinId, CancellationToken cancellationToken)
@@ -70,24 +70,22 @@ public class ImageController(IImageService imageService, ILogger<ImageController
     }
 
     /// <summary>
-    /// Удаляет изображение из объявления по идентификатору.
+    /// Удаляет изображение по идентификатору.
     /// </summary>
     /// <param name="imageId">Идентификатор изображения.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
-    /// <param name="bulletinId">Идентификатор объявления с изображением.</param>
     /// <returns></returns>
     [Authorize]
-    [HttpDelete("{bulletinId}/{imageId}")]
+    [HttpDelete("{imageId}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.Forbidden)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-    public async Task<IActionResult> DeleteAsync(Guid bulletinId, Guid imageId, CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteAsync(Guid imageId, CancellationToken cancellationToken)
     {
         var userId = GetCurrentUserId();
-        logger.LogInformation("Удаление изображения: {imageId}, объявления: {bulletinId}", imageId, bulletinId);
-        await imageService.DeleteImageAsync(bulletinId, imageId, userId, cancellationToken);
+        logger.LogInformation("Удаление изображения: {imageId}", imageId);
+        await imageService.DeleteImageAsync(imageId, userId, cancellationToken);
         
         return NoContent();
     }

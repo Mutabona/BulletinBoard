@@ -235,9 +235,9 @@ document.addEventListener('click', toggleTargetHandler);
 <body>
 <h2>Summary</h2>
 <table>
-<tr><th>Generated on</th><td>11.10.2024 5:30:41</td></tr>
-<tr><th>Line Coverage</th><td class="green">100,00 % (5/5)</td></tr>
-<tr><th>Statements Coverage</th><td class="green">100,00 % (5/5)</td></tr>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (3/3)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (3/3)</td></tr>
 <tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
 <tr><th>Threshold</th><td>90,00 %</td></tr>
 </table>
@@ -253,17 +253,16 @@ document.addEventListener('click', toggleTargetHandler);
 <div class="line"><div class="line-number">5</div><div class="line-content">namespace BulletinBoard.ComponentRegistrar.MapProfiles;</div></div>
 <div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
 </div></div>
-<div class="line"><div class="line-number">7</div><div class="line-content">public class UserProfile : Profile</div></div>
-<div class="line"><div class="line-number">8</div><div class="line-content">{</div></div>
-<div class="line hit"><div class="line-number">9</div><div class="line-content">    <div data-hover-target=".s-618" data-activate-target=".s-618" class="statement s-618 hit"><div class="statement-info s-618"><div>Id: 618</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 3 hits</li></ul></div></div>public UserProfile()</div></div></div>
-<div class="line"><div class="line-number">10</div><div class="line-content">    {</div></div>
-<div class="line hit"><div class="line-number">11</div><div class="line-content">        <div data-hover-target=".s-619" data-activate-target=".s-619" class="statement s-619 hit">CreateMap&lt;RegisterUserRequest, User&gt;(MemberList.None)</div></div></div>
-<div class="line hit"><div class="line-number">12</div><div class="line-content"><div data-hover-target=".s-619" data-activate-target=".s-619" class="statement s-619 hit">            .ForMember(s =&gt; s.Id, map =&gt; <div data-hover-target=".s-621" data-activate-target=".s-621" class="statement s-621 hit"><div class="statement-info s-621"><div>Id: 621</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 3 hits</li></ul></div></div>map.MapFrom(src =&gt; Guid.NewGuid())</div>)</div></div></div>
-<div class="line hit"><div class="line-number">13</div><div class="line-content"><div data-hover-target=".s-619" data-activate-target=".s-619" class="statement s-619 hit"><div class="statement-info s-619"><div>Id: 619</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 3 hits</li></ul></div></div>            .ForMember(s =&gt; s.CreatedAt, map =&gt; <div data-hover-target=".s-622" data-activate-target=".s-622" class="statement s-622 hit"><div class="statement-info s-622"><div>Id: 622</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 3 hits</li></ul></div></div>map.MapFrom(src =&gt; DateTime.UtcNow)</div>);</div></div></div>
-<div class="line"><div class="line-number">14</div><div class="line-content">        </div></div>
-<div class="line hit"><div class="line-number">15</div><div class="line-content">        <div data-hover-target=".s-620" data-activate-target=".s-620" class="statement s-620 hit"><div class="statement-info s-620"><div>Id: 620</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 3 hits</li></ul></div></div>CreateMap&lt;User, UserDto&gt;(MemberList.None);</div></div></div>
-<div class="line"><div class="line-number">16</div><div class="line-content">&nbsp;
-</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">/// Профиль пользователя.</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">public class UserProfile : Profile</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">{</div></div>
+<div class="line hit"><div class="line-number">12</div><div class="line-content">    <div data-hover-target=".s-642" data-activate-target=".s-642" class="statement s-642 hit"><div class="statement-info s-642"><div>Id: 642</div><div>Hits: 14</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Users.UserServiceTests..ctor: 10 hits</li><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 4 hits</li></ul></div></div>public UserProfile()</div></div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">14</div><div class="line-content">        <div data-hover-target=".s-643" data-activate-target=".s-643" class="statement s-643 hit"><div class="statement-info s-643"><div>Id: 643</div><div>Hits: 14</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Users.UserServiceTests..ctor: 10 hits</li><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 4 hits</li></ul></div></div>CreateMap&lt;RegisterUserRequest, UserDto&gt;(MemberList.None);</div></div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">16</div><div class="line-content">        <div data-hover-target=".s-644" data-activate-target=".s-644" class="statement s-644 hit"><div class="statement-info s-644"><div>Id: 644</div><div>Hits: 14</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Contexts.Users.UserServiceTests..ctor: 10 hits</li><li>BulletinBoard.Tests.MapProfilesTests.UserProfileTests..ctor: 4 hits</li></ul></div></div>CreateMap&lt;User, UserDto&gt;(MemberList.None).ReverseMap();</div></div></div>
 <div class="line"><div class="line-number">17</div><div class="line-content">    }</div></div>
 <div class="line"><div class="line-number">18</div><div class="line-content">}</div></div>
 </div>

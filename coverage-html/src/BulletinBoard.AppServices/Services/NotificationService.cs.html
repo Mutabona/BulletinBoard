@@ -1,0 +1,317 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 14px;
+    color: #24292e;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    background-color: #fafafa;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+tr.total {
+    font-weight: bold;
+}
+
+th.value {
+    text-align: center;
+}
+
+td.value {
+    text-align: right;
+}
+
+.green {
+    background-color: #e8f5e9;
+}
+
+.red {
+    background-color: #ffebee;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+a, a:visited, a:active {
+    color: #0078D4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend label {
+    vertical-align: middle;
+}
+
+.legend div {
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .legend div.hit {
+        background-color: #c8e6c9;
+    }
+
+    .legend div.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .legend div.partial {
+        background-color: #ffecb3;
+    }
+
+.legend div, .code {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.code {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.line {
+    position: relative;
+    white-space: pre;
+    padding-left: 40px;
+}
+
+.line-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-align: right;
+    background: #fff;
+    padding-right: 5px;
+    color: #555;
+}
+
+.hit-count {
+    display: inline-block;
+    width: 30px;
+    font-size: 10px;
+}
+
+.line-content {
+    padding-left: 5px;
+}
+
+.line.hit {
+    background-color: #e8f5e9;
+}
+
+.line.partial {
+    background-color: #fff8e1;
+}
+
+.line.not-hit {
+    background-color: #ffebee;
+}
+
+
+.statement {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    cursor: pointer;
+}
+
+    .statement.hit {
+        background-color: #c8e6c9;
+    }
+
+    .statement.partial {
+        background-color: #ffecb3;
+    }
+
+    .statement.not-hit {
+        background-color: #ffcdd2;
+    }
+
+    .statement.hit.hover, .statement.hit.active {
+        background-color: #a5d6a7;
+    }
+
+    .statement.not-hit.hover, .statement.not-hit.active {
+        background-color: #ef9a9a;
+    }
+
+    .statement.partial.hover, .statement.partial.active {
+        background-color: #ffe082;
+    }
+
+.statement-info {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 15px;
+    cursor: initial;
+}
+
+    .statement-info ul {
+        margin: 0;
+    }
+
+    .statement-info.active {
+        display: block;
+    }
+
+</style>
+<script>
+function hoverTargetHandler(e) {
+    if (e.target.dataset.hoverTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.hoverTarget);
+        if (e.type == 'mouseover')
+            elements.forEach(x => x.classList.add('hover'));
+        else if (e.type == 'mouseout')
+            elements.forEach(x => x.classList.remove('hover'));
+    }
+}
+document.addEventListener('mouseover', hoverTargetHandler);
+document.addEventListener('mouseout', hoverTargetHandler);
+
+function activateTargetHandler(e) {
+    document.querySelectorAll('.active')
+        .forEach(x => x.classList.remove('active'));
+
+    if (e.target.dataset.activateTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.activateTarget);
+        elements.forEach(x => x.classList.add('active'));
+    }
+}
+document.addEventListener('click', activateTargetHandler);
+
+function toggleTargetHandler(e) {
+    if (e.target.dataset.toggleTarget) {
+        let elements = document.querySelectorAll(e.target.dataset.toggleTarget);
+        elements.forEach(x => {
+            if (x.classList.contains(show)) {
+                x.classList.remove('show');
+                x.classList.add('hide');
+            } else {
+                x.classList.remove('hide');
+                x.classList.add('show');
+            }
+        });
+    }
+}
+document.addEventListener('click', toggleTargetHandler);
+
+</script>
+<body>
+<h2>Summary</h2>
+<table>
+<tr><th>Generated on</th><td>16.10.2024 1:04:17</td></tr>
+<tr><th>Line Coverage</th><td class="green">100,00 % (22/22)</td></tr>
+<tr><th>Statements Coverage</th><td class="green">100,00 % (7/7)</td></tr>
+<tr><th>Branch Coverage</th><td class="green">100,00 % (0/0)</td></tr>
+<tr><th>Threshold</th><td>90,00 %</td></tr>
+</table>
+<h2>Code</h2>
+<div class="legend">
+<label>Legend:</label><div class="hit">Covered</div><div class="partial">Partially covered</div><div class="not-hit">Not covered</div></div>
+<div class="code">
+<div class="line"><div class="line-number">1</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Bulletins.Services;</div></div>
+<div class="line"><div class="line-number">2</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Comments.Services;</div></div>
+<div class="line"><div class="line-number">3</div><div class="line-content">using BulletinBoard.AppServices.Contexts.Users.Services;</div></div>
+<div class="line"><div class="line-number">4</div><div class="line-content">using BulletinBoard.Contracts.Emails;</div></div>
+<div class="line"><div class="line-number">5</div><div class="line-content">using MassTransit;</div></div>
+<div class="line"><div class="line-number">6</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">7</div><div class="line-content">namespace BulletinBoard.AppServices.Services;</div></div>
+<div class="line"><div class="line-number">8</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">9</div><div class="line-content">/// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">10</div><div class="line-content">/// Сервис нотификации пользователей.</div></div>
+<div class="line"><div class="line-number">11</div><div class="line-content">/// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">12</div><div class="line-content">/// &lt;param name=&quot;userService&quot;&gt;Сервис для работы с пользователями.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">13</div><div class="line-content">/// &lt;param name=&quot;bulletinService&quot;&gt;Сервис для работы с объявлениями.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">14</div><div class="line-content">/// &lt;param name=&quot;commentService&quot;&gt;Сервис для работы с комментариями.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">15</div><div class="line-content">/// &lt;param name=&quot;publishEndpoint&quot;&gt;Отправитель сообщений в шину.&lt;/param&gt;</div></div>
+<div class="line hit"><div class="line-number">16</div><div class="line-content">public class <div data-hover-target=".s-343" data-activate-target=".s-343" class="statement s-343 hit"><div class="statement-info s-343"><div>Id: 343</div><div>Hits: 3</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests..ctor: 3 hits</li></ul></div></div>NotificationService(IUserService userService, IBulletinService bulletinService, ICommentService commentService, IPublishEndpoint publishEndpoint)</div> : IConsumer&lt;CommentAdded&gt;, IConsumer&lt;UserRegistred&gt;, IConsumer&lt;UserLoggedIn&gt;</div></div>
+<div class="line"><div class="line-number">17</div><div class="line-content">{</div></div>
+<div class="line"><div class="line-number">18</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">19</div><div class="line-content">    /// Обрабатывает событие добавления комментария.</div></div>
+<div class="line"><div class="line-number">20</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">21</div><div class="line-content">    /// &lt;param name=&quot;context&quot;&gt;Контекст события.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">22</div><div class="line-content">    public async Task Consume(ConsumeContext&lt;CommentAdded&gt; context)</div></div>
+<div class="line"><div class="line-number">23</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">24</div><div class="line-content">        <div data-hover-target=".s-344" data-activate-target=".s-344" class="statement s-344 hit"><div class="statement-info s-344"><div>Id: 344</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests.ConsumeCommentAdded_ShouldPublishEmail: 1 hit</li></ul></div></div>var comment = await commentService.GetCommentByIdAsync(context.Message.Id, context.CancellationToken);</div></div></div>
+<div class="line hit"><div class="line-number">25</div><div class="line-content">        <div data-hover-target=".s-345" data-activate-target=".s-345" class="statement s-345 hit"><div class="statement-info s-345"><div>Id: 345</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests.ConsumeCommentAdded_ShouldPublishEmail: 1 hit</li></ul></div></div>var bulletin = await bulletinService.FindByIdAsync(comment.BulletinId, context.CancellationToken);</div></div></div>
+<div class="line hit"><div class="line-number">26</div><div class="line-content">        <div data-hover-target=".s-346" data-activate-target=".s-346" class="statement s-346 hit"><div class="statement-info s-346"><div>Id: 346</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests.ConsumeCommentAdded_ShouldPublishEmail: 1 hit</li></ul></div></div>var bulletinOwner = await userService.GetUserByIdAsync(bulletin.OwnerId, context.CancellationToken);</div></div></div>
+<div class="line"><div class="line-number">27</div><div class="line-content">        </div></div>
+<div class="line hit"><div class="line-number">28</div><div class="line-content">        <div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 hit">await publishEndpoint.Publish&lt;SendEmail&gt;(new SendEmail</div></div></div>
+<div class="line hit"><div class="line-number">29</div><div class="line-content"><div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 hit">        {</div></div></div>
+<div class="line hit"><div class="line-number">30</div><div class="line-content"><div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 hit">            Receiver = bulletinOwner.Email,</div></div></div>
+<div class="line hit"><div class="line-number">31</div><div class="line-content"><div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 hit">            Subject = &quot;Добавлен отзыв к объявлению: &quot; + bulletin.Title,</div></div></div>
+<div class="line hit"><div class="line-number">32</div><div class="line-content"><div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 hit">            Text = &quot;Текст отзыва: &quot; + comment.Text,</div></div></div>
+<div class="line hit"><div class="line-number">33</div><div class="line-content"><div data-hover-target=".s-347" data-activate-target=".s-347" class="statement s-347 hit"><div class="statement-info s-347"><div>Id: 347</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests.ConsumeCommentAdded_ShouldPublishEmail: 1 hit</li></ul></div></div>        }, context.CancellationToken);</div></div></div>
+<div class="line"><div class="line-number">34</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">35</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">36</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">37</div><div class="line-content">    /// Обрабатывает событие добавления пользователя.</div></div>
+<div class="line"><div class="line-number">38</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">39</div><div class="line-content">    /// &lt;param name=&quot;context&quot;&gt;Контекст события.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">40</div><div class="line-content">    public async Task Consume(ConsumeContext&lt;UserRegistred&gt; context)</div></div>
+<div class="line"><div class="line-number">41</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">42</div><div class="line-content">        <div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 hit">await publishEndpoint.Publish&lt;SendEmail&gt;(new SendEmail</div></div></div>
+<div class="line hit"><div class="line-number">43</div><div class="line-content"><div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 hit">        {</div></div></div>
+<div class="line hit"><div class="line-number">44</div><div class="line-content"><div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 hit">            Receiver = context.Message.Email,</div></div></div>
+<div class="line hit"><div class="line-number">45</div><div class="line-content"><div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 hit">            Subject = &quot;Регистрация в BulletinBoard&quot;,</div></div></div>
+<div class="line hit"><div class="line-number">46</div><div class="line-content"><div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 hit">            Text = &quot;Спасибо за регистрацию в BulletinBoard! Если это не вы - соболезнуем.&quot;,</div></div></div>
+<div class="line hit"><div class="line-number">47</div><div class="line-content"><div data-hover-target=".s-348" data-activate-target=".s-348" class="statement s-348 hit"><div class="statement-info s-348"><div>Id: 348</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests.ConsumeUserRegistred_ShouldPublishEmail: 1 hit</li></ul></div></div>        }, context.CancellationToken);</div></div></div>
+<div class="line"><div class="line-number">48</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">49</div><div class="line-content">&nbsp;
+</div></div>
+<div class="line"><div class="line-number">50</div><div class="line-content">    /// &lt;summary&gt;</div></div>
+<div class="line"><div class="line-number">51</div><div class="line-content">    /// Обрабатывает событие входа в систему.</div></div>
+<div class="line"><div class="line-number">52</div><div class="line-content">    /// &lt;/summary&gt;</div></div>
+<div class="line"><div class="line-number">53</div><div class="line-content">    /// &lt;param name=&quot;context&quot;&gt;Контекст события.&lt;/param&gt;</div></div>
+<div class="line"><div class="line-number">54</div><div class="line-content">    public async Task Consume(ConsumeContext&lt;UserLoggedIn&gt; context)</div></div>
+<div class="line"><div class="line-number">55</div><div class="line-content">    {</div></div>
+<div class="line hit"><div class="line-number">56</div><div class="line-content">        <div data-hover-target=".s-349" data-activate-target=".s-349" class="statement s-349 hit">await publishEndpoint.Publish&lt;SendEmail&gt;(new SendEmail</div></div></div>
+<div class="line hit"><div class="line-number">57</div><div class="line-content"><div data-hover-target=".s-349" data-activate-target=".s-349" class="statement s-349 hit">        {</div></div></div>
+<div class="line hit"><div class="line-number">58</div><div class="line-content"><div data-hover-target=".s-349" data-activate-target=".s-349" class="statement s-349 hit">            Receiver = context.Message.Email,</div></div></div>
+<div class="line hit"><div class="line-number">59</div><div class="line-content"><div data-hover-target=".s-349" data-activate-target=".s-349" class="statement s-349 hit">            Subject = &quot;Вход в BulletinBoard&quot;,</div></div></div>
+<div class="line hit"><div class="line-number">60</div><div class="line-content"><div data-hover-target=".s-349" data-activate-target=".s-349" class="statement s-349 hit">            Text = &quot;По вышей почте выполнен вход в BulletinBoard, если это не вы - соболезнуем.&quot;,</div></div></div>
+<div class="line hit"><div class="line-number">61</div><div class="line-content"><div data-hover-target=".s-349" data-activate-target=".s-349" class="statement s-349 hit"><div class="statement-info s-349"><div>Id: 349</div><div>Hits: 1</div><div>Contexts:<ul><li>BulletinBoard.Tests.AppServicesTests.Services.NotificationServiceTests.ConsumeUserLoggedIn_ShouldPublishEmail: 1 hit</li></ul></div></div>        }, context.CancellationToken);</div></div></div>
+<div class="line"><div class="line-number">62</div><div class="line-content">    }</div></div>
+<div class="line"><div class="line-number">63</div><div class="line-content">}</div></div>
+</div>
+</body>
+</html>
